@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cienciométrik - Crear Cuenta</title>
+    <link rel="stylesheet" href="login.css"> <style>
+        /* Estilos adicionales para ajustar el tamaño del formulario de creación de cuenta */
+        .login-box {
+            max-width: 450px; /* Ajusta el ancho máximo para dar más espacio a los campos */
+            padding: 30px; /* Reduce un poco el padding si lo deseas */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Cienciométrik Login</h2>
+            <h1></h1>
+            <p>Solicitud de credendiales</p>
+            <br>
+            <form id="registroForm">
+                <div class="input-group">
+                    <label for="nombresApellidos">Nombres y Apellidos</label>
+                    <input type="text" id="nombresApellidos" placeholder="Ingrese sus nombres y apellidos" required>
+                </div>
+                <div class="input-group">
+                    <label for="cedula">Cédula</label>
+                    <input type="text" id="cedula" placeholder="Ingrese su número de cédula" required>
+                </div>
+                <div class="input-group">
+                    <label for="ficha">Ficha (Opcional)</label>
+                    <input type="text" id="ficha" placeholder="Ingrese su número de ficha (si aplica)">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Ingrese su correo electrónico" required>
+                </div>
+                <button type="submit" class="login-button">Enviar Solicitud</button>
+            </form>
+            <p class="create-account">
+              <a href="login.html">Volver a Iniciar Sesión</a>
+            </p>
+            <p class="create-account">
+               <a href="../index.html">Volver al inicio</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+            // Para agregar aquí la lógica para enviar los datos a un servidor si fuera necesario
+
+            // Muestra la ventana emergente
+            alert("Datos enviados correctamente, por favor espera a que se te asigne usuario y contraseña y recibirás un email con las indicaciones");
+
+            // Opcional: Reiniciar el formulario después de enviar
+            this.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cienciométrik - Iniciar Sesión</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Cienciométrik Login</h2>
+            <h1>Iniciar Sesión</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="Ingrese su correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" placeholder="Ingrese su contraseña" required>
+                </div>
+                <div class="options-group">
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">Olvidé la contraseña</a>
+                </div>
+                <button type="submit" class="login-button">Iniciar sesión</button>
+            </form>
+            <p class="create-account">
+                <a href="crear_cuenta.html"><br>Crear una cuenta</a>
+            </p>
+            <p class="create-account">
+                <a href="../index.html"><br>Volver al inicio</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Obtenemos el enlace de "Olvidé la contraseña"
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+        // Añadimos un escuchador de eventos para cuando se haga clic en el enlace
+        forgotPasswordLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el navegador siga el enlace por defecto
+
+            // Mostramos la ventana emergente con confirmación
+            const confirmarRedireccion = confirm("Serás redirigido a la página de recuperación de contraseña. ¿Deseas continuar?");
+
+            // Si el usuario confirma, redirigimos
+            if (confirmarRedireccion) {
+                window.location.href = "pass_rec.html";
+            }
+        });
+    </script>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos - Revista Cienciometrik</title>
+    <link rel="stylesheet" href="/CSS/styles.css">
+</head>
+<body>
+    <mi-header></mi-header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Panel de Navegación</h3>
+            <nav>
+                <ul>
+                    <li><i class="fas fa-home"></i><a href="index.html">Inicio</a></li>
+                    <li><a href="quienes_somos.html">Quiénes Somos</a></li>
+                    <li><a href="publicaciones.html">Publicaciones</a></li>
+                    <li><a href="autores.html">Autores</a></li>
+                    <li><a href="contactanos.html">Contáctanos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="section contact-hero">
+                <div class="contact-hero-content">
+                    <i class= "fas fa fa-phone-alt"></i>
+                    <h2>¡Hablemos de Ciencia!</h2>
+                    <p class="subtitle">¿Tienes una pregunta, una idea brillante o simplemente quieres saludar? ¡Estamos listos para conectar contigo!</p>
+                </div>
+            </section>
+
+            <section class="section contact-form-section">
+                <h2>Envíanos tu mensaje</h2>
+                <p>Completa este formulario y nos pondremos en contacto contigo lo antes posible. ¡Tu opinión y tus ideas son valiosas para nosotros!</p>
+                <form id="formulario-contacto" class="modern-form">
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-user icon"></i> Tu Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: María Rodríguez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" placeholder="Ej: tu.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo-consulta"><i class="fas fa-tag icon"></i> Tipo de Consulta:</label>
+                        <select id="tipo-consulta" name="tipo-consulta" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="consulta">Consulta general</option>
+                            <option value="colaboracion">Propuesta de colaboración</option>
+                            <option value="sugerencia">Sugerencia</option>
+                            <option value="soporte">Soporte técnico</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="asunto"><i class="fas fa-lightbulb icon"></i> Asunto:</label>
+                        <input type="text" id="asunto" name="asunto" placeholder="Ej: Duda sobre una publicación" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje"><i class="fas fa-comment-dots icon"></i> Tu Mensaje:</label>
+                        <textarea id="mensaje-input" name="mensaje" rows="6" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                    </button>
+                </form>
+                <div id="mensaje-contacto" class="mensaje"></div>
+            </section>
+
+            <section class="section contact-info-section">
+                <h2>¿Prefieres otros medios?</h2>
+                <p>También puedes encontrarnos aquí:</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope-open-text icon-large"></i>
+                        <h3>Correo Electrónico</h3>
+                        <p><a href="mailto:revista.cienciometrik@sena.edu.co">revista.cienciometrik@sena.edu.co</a></p>
+                        <p>¡Esperamos tu email!</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt icon-large"></i>
+                        <h3>Teléfono</h3>
+                        <p><a href="tel:+5741234567">+57 (4) 123 4567</a></p>
+                        <p>Llámanos en horario de oficina.</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt icon-large"></i>
+                        <h3>Nuestra Ubicación</h3>
+                        <p>Centro de Comercio, Regional Antioquia, SENA</p>
+                        <p>Medellín, Colombia</p>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <h3>¡Síguenos en redes!</h3>
+                    <p>Mantente al tanto de nuestras últimas publicaciones y novedades:</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon-link"><i class="facebook">F</i></a>
+                        <a href="#" class="social-icon-link"><i class="twitter">T</i></a>
+                        <a href="#" class="social-icon-link"><i class="linkedin">L</i></a>
+                        <a href="#" class="social-icon-link"><i class="instagram">iG</i></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <mi-footer></mi-footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formularioContacto = document.getElementById('formulario-contacto');
+            const mensajeContacto = document.getElementById('mensaje-contacto');
+            const mensajeInput = document.getElementById('mensaje-input'); // Renombrado para evitar conflicto con id="mensaje" del div
+
+            if (formularioContacto) {
+                formularioContacto.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const nombre = document.getElementById('nombre').value;
+                    const email = document.getElementById('email').value;
+                    const tipoConsulta = document.getElementById('tipo-consulta').value;
+                    const asunto = document.getElementById('asunto').value;
+                    const mensaje = mensajeInput.value; // Usar el nuevo nombre
+
+                    // Aquí iría tu lógica de envío real (Fetch API, Axios, etc.)
+                    // Por ejemplo, para un endpoint de Formspree o un servicio similar
+                    /*
+                    fetch('YOUR_FORMSPREE_ENDPOINT_HERE', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ nombre, email, tipoConsulta, asunto, mensaje })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) { // Check data structure based on your backend
+                            mensajeContacto.textContent = `¡Gracias, ${nombre}! Tu mensaje ha sido enviado con éxito.`;
+                            mensajeContacto.className = 'mensaje exito';
+                            formularioContacto.reset();
+                        } else {
+                            mensajeContacto.textContent = 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+                            mensajeContacto.className = 'mensaje error';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar el formulario:', error);
+                        mensajeContacto.textContent = 'Hubo un problema de conexión al enviar el mensaje.';
+                        mensajeContacto.className = 'mensaje error';
+                    });
+                    */
+
+                    // Simulación para demostración:
+                    mensajeContacto.textContent = `¡Gracias, ${nombre}! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.`;
+                    mensajeContacto.className = 'mensaje exito';
+                    formularioContacto.reset();
+                });
+            }
+        });
+    </script>
+    <script src="/Objects/header.js"></script>
+    <script src="/Objects/container.js"></script>
+    <script src="/Objects/footer.js"></script>
+    <script src="/Objects/script.js"></script>
+</body>
+</html>

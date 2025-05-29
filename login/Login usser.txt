@@ -1,0 +1,3 @@
+        "admin@sena.edu.co:admin123": "../admin_cemter/admin.html", 
+        "autor@sena.edu.co:autor123": "../admin_cemter/autor_panel.html",                   
+        "revisor@sena.edu.co:revisor123": "../admin_cemter/revisor.html" 

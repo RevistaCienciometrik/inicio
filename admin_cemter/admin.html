@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cienciométrik - Panel de Administración</title>
+    <link rel="stylesheet" href="/CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <mi-header></mi-header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Panel de Administrador</h3>
+            <nav>
+                <ul>
+                    <li>
+                        <i class="fas fa-list-alt"></i>
+                        <a href="#gestion-articulos" class="sidebar-link active">Gestión de Artículos</a> </li>
+                    <li>
+                        <i class="fas fa-file-upload"></i>
+                        <a href="#articulos-enviados" class="sidebar-link">Artículos Enviados por Autores</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-users-cog"></i>
+                        <a href="#gestion-usuarios" class="sidebar-link">Gestión de Usuarios</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-key"></i>
+                        <a href="#gestion-recuperacion" class="sidebar-link">Recuperación de Contraseñas</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-cogs"></i>
+                        <a href="#configuracion-general" class="sidebar-link">Configuración</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <a href="../index.html" class="logout-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="gestion-articulos" class="section admin-articles-section"> <h2>Gestión de Artículos</h2>
+                <div class="table-responsive">
+                    <table class="admin-articles-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Título del Artículo</th>
+                                <th>Autor</th>
+                                <th>Fecha Envío</th>
+                                <th>Estado Revisor</th>
+                                <th>Revisor Asignado</th>
+                                <th>Observ. Revisor</th>
+                                <th>Estado Admin</th>
+                                <th>Observ. Admin</th>
+                                <th>Estado Publicación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-article-id="1">
+                                <td data-label="ID">001</td>
+                                <td data-label="Título del Artículo">Impacto de la IA en la Educación del SENA</td>
+                                <td data-label="Autor">Juan Pérez</td>
+                                <td data-label="Fecha Envío">2024-04-15</td>
+                                <td data-label="Estado Revisor"><i class="fas fa-clock status-new" title="Nuevo / Pendiente de Asignación"></i></td>
+                                <td data-label="Revisor Asignado">
+                                    <select class="assign-revisor">
+                                        <option value="">Asignar...</option>
+                                        <option value="revisor1">María García</option>
+                                        <option value="revisor2">Carlos López</option>
+                                    </select>
+                                </td>
+                                <td data-label="Observ. Revisor"><a href="#" class="view-comments" data-comments="">Ver</a></td>
+                                <td data-label="Estado Admin"><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
+                                <td data-label="Observ. Admin"><a href="#" class="add-admin-comments" data-comments="">Añadir/Ver</a></td>
+                                <td data-label="Estado Publicación"><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button view-article-button" title="Ver Artículo Completo"><i class="fas fa-eye"></i></button>
+                                    <button class="action-button approve-admin-button" title="Aprobar para Publicación" disabled><i class="fas fa-check"></i></button>
+                                    <button class="action-button reject-admin-button" title="Rechazar Artículo"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-article-id="2">
+                                <td data-label="ID">002</td>
+                                <td data-label="Título del Artículo">Innovación en Energías Renovables Aplicada</td>
+                                <td data-label="Autor">Ana Gómez</td>
+                                <td data-label="Fecha Envío">2024-03-01</td>
+                                <td data-label="Estado Revisor"><i class="fas fa-hourglass-half status-in-review" title="En Revisión"></i></td>
+                                <td data-label="Revisor Asignado">
+                                    <select class="assign-revisor" disabled>
+                                        <option value="revisor1" selected>María García</option>
+                                        <option value="revisor2">Carlos López</option>
+                                    </select>
+                                </td>
+                                <td data-label="Observ. Revisor"><a href="#" class="view-comments" data-comments="Revisor está evaluando la pertinencia.">Ver</a></td>
+                                <td data-label="Estado Admin"><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
+                                <td data-label="Observ. Admin"><a href="#" class="add-admin-comments" data-comments="">Añadir/Ver</a></td>
+                                <td data-label="Estado Publicación"><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button view-article-button" title="Ver Artículo Completo"><i class="fas fa-eye"></i></button>
+                                    <button class="action-button approve-admin-button" title="Aprobar para Publicación" disabled><i class="fas fa-check"></i></button>
+                                    <button class="action-button reject-admin-button" title="Rechazar Artículo"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                             <tr data-article-id="3">
+                                <td data-label="ID">003</td>
+                                <td data-label="Título del Artículo">Metodologías Ágiles en el Desarrollo de Software</td>
+                                <td data-label="Autor">Luis Castro</td>
+                                <td data-label="Fecha Envío">2024-02-20</td>
+                                <td data-label="Estado Revisor"><i class="fas fa-check-circle status-revisor-approved" title="Aprobado por Revisor"></i></td>
+                                <td data-label="Revisor Asignado">
+                                    <select class="assign-revisor" disabled>
+                                        <option value="revisor2" selected>Carlos López</option>
+                                    </select>
+                                </td>
+                                <td data-label="Observ. Revisor"><a href="#" class="view-comments" data-comments="Artículo bien estructurado, recomienda publicación.">Ver</a></td>
+                                <td data-label="Estado Admin"><i class="fas fa-clock status-pending" title="Pendiente de Aprobación Admin"></i></td>
+                                <td data-label="Observ. Admin"><a href="#" class="add-admin-comments" data-comments="">Añadir/Ver</a></td>
+                                <td data-label="Estado Publicación"><i class="fas fa-hourglass-half status-pending-pub" title="Pendiente para Publicación"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button view-article-button" title="Ver Artículo Completo"><i class="fas fa-eye"></i></button>
+                                    <button class="action-button approve-admin-button" title="Aprobar para Publicación"><i class="fas fa-check"></i></button>
+                                    <button class="action-button reject-admin-button" title="Rechazar Artículo"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-article-id="4">
+                                <td data-label="ID">004</td>
+                                <td data-label="Título del Artículo">Uso de Blockchain en la Logística</td>
+                                <td data-label="Autor">Sofía Durán</td>
+                                <td data-label="Fecha Envío">2024-01-10</td>
+                                <td data-label="Estado Revisor"><i class="fas fa-times-circle status-revisor-rejected" title="Rechazado por Revisor"></i></td>
+                                <td data-label="Revisor Asignado">
+                                    <select class="assign-revisor" disabled>
+                                        <option value="revisor1" selected>María García</option>
+                                    </select>
+                                </td>
+                                <td data-label="Observ. Revisor"><a href="#" class="view-comments" data-comments="Falta profundidad en el análisis técnico.">Ver</a></td>
+                                <td data-label="Estado Admin"><i class="fas fa-clock status-pending" title="Pendiente de Decisión Admin"></i></td>
+                                <td data-label="Observ. Admin"><a href="#" class="add-admin-comments" data-comments="">Añadir/Ver</a></td>
+                                <td data-label="Estado Publicación"><i class="fas fa-times-circle status-not-published" title="No se publicará"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button view-article-button" title="Ver Artículo Completo"><i class="fas fa-eye"></i></button>
+                                    <button class="action-button approve-admin-button" title="Aprobar para Publicación" disabled><i class="fas fa-check"></i></button>
+                                    <button class="action-button reject-admin-button" title="Rechazar Artículo"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                             <tr data-article-id="5">
+                                <td data-label="ID">005</td>
+                                <td data-label="Título del Artículo">Impacto de la Realidad Aumentada en la Industria</td>
+                                <td data-label="Autor">Diego Torres</td>
+                                <td data-label="Fecha Envío">2023-12-05</td>
+                                <td data-label="Estado Revisor"><i class="fas fa-check-circle status-revisor-approved" title="Aprobado por Revisor"></i></td>
+                                <td data-label="Revisor Asignado">
+                                    <select class="assign-revisor" disabled>
+                                        <option value="revisor2" selected>Carlos López</option>
+                                    </select>
+                                </td>
+                                <td data-label="Observ. Revisor"><a href="#" class="view-comments" data-comments="Aprobado.">Ver</a></td>
+                                <td data-label="Estado Admin"><i class="fas fa-check-circle status-admin-approved" title="Aprobado por Administrador"></i></td>
+                                <td data-label="Observ. Admin"><a href="#" class="add-admin-comments" data-comments="Listo para la edición de Junio.">Ver</a></td>
+                                <td data-label="Estado Publicación"><i class="fas fa-check-circle status-ready-publish" title="Listo para Publicar"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button view-article-button" title="Ver Artículo Completo"><i class="fas fa-eye"></i></button>
+                                    <button class="action-button publish-button" title="Mover a Publicación"><i class="fas fa-share-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-article-id="6">
+                                <td data-label="ID">006</td>
+                                <td data-label="Título del Artículo">Emprendimiento Digital y el Rol del SENA</td>
+                                <td data-label="Autor">Elisa Rojas</td>
+                                <td data-label="Fecha Envío">2023-11-10</td>
+                                <td data-label="Estado Revisor"><i class="fas fa-check-circle status-revisor-approved" title="Aprobado por Revisor"></i></td>
+                                <td data-label="Revisor Asignado">
+                                    <select class="assign-revisor" disabled>
+                                        <option value="revisor1" selected>María García</option>
+                                    </select>
+                                </td>
+                                <td data-label="Observ. Revisor"><a href="#" class="view-comments" data-comments="Excelente contenido.">Ver</a></td>
+                                <td data-label="Estado Admin"><i class="fas fa-check-circle status-admin-approved" title="Aprobado por Administrador"></i></td>
+                                <td data-label="Observ. Admin"><a href="#" class="add-admin-comments" data-comments="Artículo publicado en la edición de Diciembre 2023.">Ver</a></td>
+                                <td data-label="Estado Publicación"><i class="fas fa-check-circle status-published" title="Publicado"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button view-article-button" title="Ver Artículo Completo"><i class="fas fa-eye"></i></button>
+                                    <button class="action-button view-published-button" title="Ver Artículo Publicado"><i class="fas fa-book-open"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="articulos-enviados" class="section hidden admin-submitted-articles-section">
+                <h2>Artículos Enviados por Autores</h2>
+                <p>Esta sección muestra los artículos enviados directamente por los autores a través de `autor_panel.html`.</p>
+                <div class="table-responsive">
+                    <table class="admin-submitted-articles-table">
+                        <thead>
+                            <tr>
+                                <th>ID Artículo</th>
+                                <th>Título del Artículo</th>
+                                <th>Autor</th>
+                                <th>Fecha de Envío</th>
+                                <th>Artículo Completo</th>
+                                <th>Observaciones Autor</th>
+                                <th>Estado Actual</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-article-id="SA001">
+                                <td data-label="ID Artículo">SA001</td>
+                                <td data-label="Título del Artículo">Optimización de Redes Neuronales con CUDA</td>
+                                <td data-label="Autor">Carlos Ruiz</td>
+                                <td data-label="Fecha de Envío">2024-05-20</td>
+                                <td data-label="Artículo Completo"><a href="#" class="download-article-button" title="Descargar Artículo"><i class="fas fa-download"></i> Descargar</a></td>
+                                <td data-label="Observaciones Autor"><a href="#" class="view-author-comments" data-comments="Artículo sobre computación de alto rendimiento.">Ver</a></td>
+                                <td data-label="Estado Actual"><i class="fas fa-hourglass-start status-new-submission" title="Recién Enviado / Pendiente de Asignación"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button assign-revisor-button" title="Asignar Revisor"><i class="fas fa-user-tag"></i></button>
+                                    <button class="action-button view-article-details-button" title="Ver Detalles"><i class="fas fa-info-circle"></i></button>
+                                    <button class="action-button reject-submission-button" title="Rechazar Envío Inicial"><i class="fas fa-times-circle"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-article-id="SA002">
+                                <td data-label="ID Artículo">SA002</td>
+                                <td data-label="Título del Artículo">Análisis de Sentimientos en Redes Sociales</td>
+                                <td data-label="Autor">Marta Sánchez</td>
+                                <td data-label="Fecha de Envío">2024-05-18</td>
+                                <td data-label="Artículo Completo"><a href="#" class="download-article-button" title="Descargar Artículo"><i class="fas fa-download"></i> Descargar</a></td>
+                                <td data-label="Observaciones Autor"><a href="#" class="view-author-comments" data-comments="Investigación de impacto social.">Ver</a></td>
+                                <td data-label="Estado Actual"><i class="fas fa-hourglass-half status-in-review" title="En Revisión"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button assign-revisor-button" title="Asignar Revisor" disabled><i class="fas fa-user-tag"></i></button>
+                                    <button class="action-button view-article-details-button" title="Ver Detalles"><i class="fas fa-info-circle"></i></button>
+                                    <button class="action-button reject-submission-button" title="Rechazar Envío Inicial" disabled><i class="fas fa-times-circle"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-article-id="SA003">
+                                <td data-label="ID Artículo">SA003</td>
+                                <td data-label="Título del Artículo">El Futuro de la Robótica Educativa</td>
+                                <td data-label="Autor">Roberto García</td>
+                                <td data-label="Fecha de Envío">2024-05-15</td>
+                                <td data-label="Artículo Completo"><a href="#" class="download-article-button" title="Descargar Artículo"><i class="fas fa-download"></i> Descargar</a></td>
+                                <td data-label="Observaciones Autor"><a href="#" class="view-author-comments" data-comments="Incluye prototipo desarrollado en SENA.">Ver</a></td>
+                                <td data-label="Estado Actual"><i class="fas fa-ban status-rejected-submission" title="Envío Rechazado"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button assign-revisor-button" title="Asignar Revisor" disabled><i class="fas fa-user-tag"></i></button>
+                                    <button class="action-button view-article-details-button" title="Ver Detalles"><i class="fas fa-info-circle"></i></button>
+                                    <button class="action-button reject-submission-button" title="Rechazar Envío Inicial" disabled><i class="fas fa-times-circle"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="gestion-usuarios" class="section hidden admin-users-section">
+                <h2>Gestión de Usuarios</h2>
+                <p>Aquí se gestionarán los autores y revisores del sistema.</p>
+                <div class="table-responsive">
+                    <table class="admin-users-table">
+                        <thead>
+                            <tr>
+                                <th>ID Usuario</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Fecha Registro</th>
+                                <th>Estado Cuenta</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-user-id="U001">
+                                <td data-label="ID Usuario">U001</td>
+                                <td data-label="Nombre Completo">Laura Vélez</td>
+                                <td data-label="Email">laura.velez@example.com</td>
+                                <td data-label="Rol">Autor</td>
+                                <td data-label="Fecha Registro">2024-05-10</td>
+                                <td data-label="Estado Cuenta"><i class="fas fa-user-plus status-new-user" title="Nuevo Registro"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button activate-user-button" title="Activar Usuario"><i class="fas fa-user-check"></i></button>
+                                    <button class="action-button deactivate-user-button" title="Desactivar Usuario"><i class="fas fa-user-slash"></i></button>
+                                    <button class="action-button delete-user-button" title="Eliminar Usuario"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="action-button edit-user-button" title="Editar Usuario"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-user-id="U002">
+                                <td data-label="ID Usuario">U002</td>
+                                <td data-label="Nombre Completo">Pedro Rivas</td>
+                                <td data-label="Email">pedro.rivas@example.com</td>
+                                <td data-label="Rol">Revisor</td>
+                                <td data-label="Fecha Registro">2023-11-20</td>
+                                <td data-label="Estado Cuenta"><i class="fas fa-user-check status-active-user" title="Activo"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button activate-user-button" title="Activar Usuario" disabled><i class="fas fa-user-check"></i></button>
+                                    <button class="action-button deactivate-user-button" title="Desactivar Usuario"><i class="fas fa-user-slash"></i></button>
+                                    <button class="action-button delete-user-button" title="Eliminar Usuario"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="action-button edit-user-button" title="Editar Usuario"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-user-id="U003">
+                                <td data-label="ID Usuario">U003</td>
+                                <td data-label="Nombre Completo">Gabriela Soto</td>
+                                <td data-label="Email">gabriela.soto@example.com</td>
+                                <td data-label="Rol">Autor</td>
+                                <td data-label="Fecha Registro">2024-01-05</td>
+                                <td data-label="Estado Cuenta"><i class="fas fa-user-slash status-inactive-user" title="Inactivo"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button activate-user-button" title="Activar Usuario"><i class="fas fa-user-check"></i></button>
+                                    <button class="action-button deactivate-user-button" title="Desactivar Usuario" disabled><i class="fas fa-user-slash"></i></button>
+                                    <button class="action-button delete-user-button" title="Eliminar Usuario"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="action-button edit-user-button" title="Editar Usuario"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="gestion-recuperacion" class="section hidden admin-recovery-section">
+                <h2>Gestión de Recuperación de Contraseñas</h2>
+                <p>Aquí se gestionarán las solicitudes de recuperación de contraseñas enviadas desde `pass_rec.html`.</p>
+                <div class="table-responsive">
+                    <table class="admin-recovery-table">
+                        <thead>
+                            <tr>
+                                <th>ID Solicitud</th>
+                                <th>Email Solicitante</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Estado Solicitud</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-request-id="R001">
+                                <td data-label="ID Solicitud">R001</td>
+                                <td data-label="Email Solicitante">usuario1@example.com</td>
+                                <td data-label="Fecha Solicitud">2024-05-18 10:30</td>
+                                <td data-label="Estado Solicitud"><i class="fas fa-hourglass-half status-pending-request" title="Pendiente"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button process-recovery-button" title="Procesar Solicitud"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-button reject-recovery-button" title="Rechazar Solicitud"><i class="fas fa-ban"></i></button>
+                                    <button class="action-button view-recovery-details-button" title="Ver Detalles"><i class="fas fa-info-circle"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-request-id="R002">
+                                <td data-label="ID Solicitud">R002</td>
+                                <td data-label="Email Solicitante">usuario2@example.com</td>
+                                <td data-label="Fecha Solicitud">2024-05-15 14:00</td>
+                                <td data-label="Estado Solicitud"><i class="fas fa-check-circle status-processed-request" title="Procesada"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button process-recovery-button" title="Procesar Solicitud" disabled><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-button reject-recovery-button" title="Rechazar Solicitud" disabled><i class="fas fa-ban"></i></button>
+                                    <button class="action-button view-recovery-details-button" title="Ver Detalles"><i class="fas fa-info-circle"></i></button>
+                                </td>
+                            </tr>
+                            <tr data-request-id="R003">
+                                <td data-label="ID Solicitud">R003</td>
+                                <td data-label="Email Solicitante">usuario3@example.com</td>
+                                <td data-label="Fecha Solicitud">2024-05-12 09:15</td>
+                                <td data-label="Estado Solicitud"><i class="fas fa-times-circle status-rejected-request" title="Rechazada"></i></td>
+                                <td data-label="Acciones" class="actions-cell">
+                                    <button class="action-button process-recovery-button" title="Procesar Solicitud" disabled><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-button reject-recovery-button" title="Rechazar Solicitud" disabled><i class="fas fa-ban"></i></button>
+                                    <button class="action-button view-recovery-details-button" title="Ver Detalles"><i class="fas fa-info-circle"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="configuracion-general" class="section hidden">
+                <h2>Configuración General</h2>
+                <p>Opciones de configuración de la revista y el sistema.</p>
+                </section>
+
+            <div class="navigation-buttons">
+                <button class="button-link home" onclick="window.scrollTo(0, 0);">
+                <i class="fas fa-arrow-up"></i> Volver Arriba
+                </button>
+                <a href="../index.html" class="button-link logout">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <mi-footer></mi-footer>
+
+    <script src="/Objects/header.js"></script>
+    <script src="/Objects/container.js"></script>
+    <script src="/Objects/footer.js"></script>
+    <script src="/Objects/script.js"></script>
+    <script>
+        // Función para mostrar/ocultar secciones
+        function showSection(sectionId) {
+            // Quita la clase 'active' de todos los enlaces del sidebar
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Oculta todas las secciones
+            document.querySelectorAll('.main-content .section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Muestra la sección deseada
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                // Añade la clase 'active' al enlace del sidebar correspondiente
+                const correspondingLink = document.querySelector(`.sidebar-link[href="#${sectionId}"]`);
+                if (correspondingLink) {
+                    correspondingLink.classList.add('active');
+                }
+            } else {
+                console.warn(`Sección con ID '${sectionId}' no encontrada.`);
+            }
+        }
+
+        // Event Listeners para el menú lateral
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarNav = document.querySelector('aside .sidebar nav ul');
+            if (sidebarNav) {
+                sidebarNav.addEventListener('click', function(event) {
+                    let targetElement = event.target;
+
+                    // Asegurarse de que el clic fue en un 'a' o en un 'i' dentro de un 'a'
+                    if (targetElement.tagName === 'I' && targetElement.parentNode.tagName === 'A') {
+                        targetElement = targetElement.parentNode;
+                    }
+
+                    if (targetElement.tagName === 'A' && targetElement.classList.contains('sidebar-link')) {
+                        event.preventDefault();
+                        const href = targetElement.getAttribute('href');
+                        const sectionId = href.substring(1);
+                        showSection(sectionId);
+                    }
+                });
+            } else {
+                console.error("No se encontró el elemento 'aside .sidebar nav ul'.");
+            }
+
+            // Mostrar la sección de gestión de artículos por defecto al cargar
+            // Usar el ID de la primera sección. Si no hay active en HTML, esta línea lo mostrará.
+            // Si ya hay un active en HTML, esta línea lo reconfirmará.
+            showSection('gestion-articulos');
+
+            // --- Tus simulaciones de interacción para los botones del administrador ---
+            // Función para mostrar comentarios (Artículos)
+            document.querySelectorAll('.admin-articles-table .view-comments').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const comments = this.getAttribute('data-comments');
+                    const commentText = comments ? comments : "No hay comentarios para mostrar.";
+                    alert('Comentarios: ' + commentText);
+                });
+            });
+
+            // Función para añadir/editar comentarios de administrador (Artículos)
+            document.querySelectorAll('.admin-articles-table .add-admin-comments').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    let currentComments = this.getAttribute('data-comments') || '';
+                    const newComments = prompt('Añadir o editar comentarios del administrador:', currentComments);
+                    if (newComments !== null) {
+                        this.setAttribute('data-comments', newComments);
+                        alert('Comentarios actualizados.');
+                    }
+                });
+            });
+
+            // Simulación de asignación de revisor (Artículos)
+            document.querySelectorAll('.admin-articles-table .assign-revisor').forEach(select => {
+                select.addEventListener('change', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    const selectedRevisor = this.value;
+                    const selectedRevisorName = this.options[this.selectedIndex].text;
+
+                    if (selectedRevisor) {
+                        alert(`Artículo ${articleId} asignado a ${selectedRevisorName} para revisión.`);
+                        this.disabled = true;
+                        const statusCell = this.closest('td').previousElementSibling;
+                        statusCell.innerHTML = '<i class="fas fa-hourglass-half status-in-review" title="En Revisión"></i>';
+                    } else {
+                        alert(`Desasignado revisor del artículo ${articleId}.`);
+                    }
+                });
+            });
+
+            // Simulación de aprobación de admin (Artículos)
+            document.querySelectorAll('.admin-articles-table .approve-admin-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    const confirmApproval = confirm(`¿Está seguro de aprobar el artículo ${articleId} para publicación?`);
+                    if (confirmApproval) {
+                        alert(`Artículo ${articleId} aprobado por el administrador. Listo para el proceso de publicación.`);
+                        const row = this.closest('tr');
+                        const statusAdminIcon = row.querySelector('[data-label="Estado Admin"] i');
+                        if (statusAdminIcon) {
+                            statusAdminIcon.className = 'fas fa-check-circle status-admin-approved';
+                            statusAdminIcon.title = "Aprobado por Administrador";
+                        }
+                        const statusPubIcon = row.querySelector('[data-label="Estado Publicación"] i');
+                        if (statusPubIcon) {
+                            statusPubIcon.className = 'fas fa-check-circle status-ready-publish';
+                            statusPubIcon.title = "Listo para Publicar";
+                        }
+                        this.disabled = true;
+                        const rejectButton = row.querySelector('.reject-admin-button');
+                        if (rejectButton) rejectButton.disabled = true;
+
+                        let publishButton = row.querySelector('.publish-button');
+                        if (!publishButton) {
+                            publishButton = document.createElement('button');
+                            publishButton.className = 'action-button publish-button';
+                            publishButton.title = 'Mover a Publicación';
+                            publishButton.innerHTML = '<i class="fas fa-share-square"></i>';
+                            publishButton.addEventListener('click', function() {
+                                alert(`Artículo ${articleId} movido al proceso de publicación.`);
+                                this.disabled = true;
+                                if (statusPubIcon) {
+                                    statusPubIcon.className = 'fas fa-check-circle status-published';
+                                    statusPubIcon.title = "Publicado";
+                                }
+                                const viewPublishedButton = document.createElement('button');
+                                viewPublishedButton.className = 'action-button view-published-button';
+                                viewPublishedButton.title = 'Ver Artículo Publicado';
+                                viewPublishedButton.innerHTML = '<i class="fas fa-book-open"></i>';
+                                viewPublishedButton.addEventListener('click', function() {
+                                    alert(`Simulando vista del artículo publicado ${articleId}.`);
+                                });
+                                this.parentNode.appendChild(viewPublishedButton);
+                                this.remove();
+                            });
+                            const actionsCell = row.querySelector('.actions-cell');
+                            if (actionsCell) {
+                                const existingRejectButton = actionsCell.querySelector('.reject-admin-button');
+                                if (existingRejectButton) {
+                                    actionsCell.insertBefore(publishButton, existingRejectButton);
+                                } else {
+                                    actionsCell.appendChild(publishButton);
+                                }
+                            }
+                        }
+                        this.remove();
+                    }
+                });
+            });
+
+            // Simulación de rechazo de admin (Artículos)
+            document.querySelectorAll('.admin-articles-table .reject-admin-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    const reason = prompt('Ingrese el motivo del rechazo para el artículo ' + articleId + ':');
+                    if (reason) {
+                        alert(`Artículo ${articleId} rechazado por el administrador. Motivo: ${reason}`);
+                        const row = this.closest('tr');
+                        const statusAdminIcon = row.querySelector('[data-label="Estado Admin"] i');
+                        if (statusAdminIcon) {
+                            statusAdminIcon.className = 'fas fa-times-circle status-admin-rejected';
+                            statusAdminIcon.title = "Rechazado por Administrador";
+                        }
+                        const statusPubIcon = row.querySelector('[data-label="Estado Publicación"] i');
+                        if (statusPubIcon) {
+                            statusPubIcon.className = 'fas fa-times-circle status-not-published';
+                            statusPubIcon.title = "No se publicará";
+                        }
+                        this.disabled = true;
+                        const approveButton = row.querySelector('.approve-admin-button');
+                        if (approveButton) approveButton.disabled = true;
+                        const adminCommentsLink = row.querySelector('.add-admin-comments');
+                        if (adminCommentsLink) {
+                            adminCommentsLink.setAttribute('data-comments', `Rechazado: ${reason}`);
+                            adminCommentsLink.textContent = 'Ver';
+                        }
+                    }
+                });
+            });
+
+            // Simulación de ver artículo completo (esto abriría un modal o una nueva página)
+            document.querySelectorAll('.admin-articles-table .view-article-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    alert(`Simulando vista del artículo completo ${articleId}. Aquí se mostraría el contenido del artículo.`);
+                });
+            });
+
+            // --- Simulación de interacción para los Artículos Enviados por Autores ---
+            document.querySelectorAll('.admin-submitted-articles-table .download-article-button').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    alert(`Simulando descarga del artículo ${articleId}.`);
+                });
+            });
+
+            document.querySelectorAll('.admin-submitted-articles-table .view-author-comments').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const comments = this.getAttribute('data-comments');
+                    const commentText = comments ? comments : "No hay observaciones del autor.";
+                    alert('Observaciones del Autor: ' + commentText);
+                });
+            });
+
+            document.querySelectorAll('.admin-submitted-articles-table .assign-revisor-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    const confirmAssign = confirm(`¿Desea asignar este artículo (${articleId}) a un revisor para iniciar el proceso de revisión?`);
+                    if (confirmAssign) {
+                        const revisorName = prompt('Ingrese el nombre del revisor a asignar (Ej: María García, Carlos López):');
+                        if (revisorName) {
+                            alert(`Artículo ${articleId} asignado a ${revisorName} para revisión.`);
+                            const row = this.closest('tr');
+                            const statusIcon = row.querySelector('[data-label="Estado Actual"] i');
+                            if (statusIcon) {
+                                statusIcon.className = 'fas fa-hourglass-half status-in-review';
+                                statusIcon.title = 'En Revisión';
+                            }
+                            this.disabled = true;
+                            const rejectSubmissionButton = row.querySelector('.reject-submission-button');
+                            if (rejectSubmissionButton) rejectSubmissionButton.disabled = true;
+                        } else {
+                            alert('Asignación cancelada.');
+                        }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-submitted-articles-table .reject-submission-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    const reason = prompt(`Ingrese el motivo para rechazar el envío inicial del artículo ${articleId}:`);
+                    if (reason) {
+                        alert(`Envío del artículo ${articleId} rechazado. Motivo: ${reason}`);
+                        const row = this.closest('tr');
+                        const statusIcon = row.querySelector('[data-label="Estado Actual"] i');
+                        if (statusIcon) {
+                            statusIcon.className = 'fas fa-ban status-rejected-submission';
+                            statusIcon.title = 'Envío Rechazado';
+                        }
+                        this.disabled = true;
+                        const assignRevisorButton = row.querySelector('.assign-revisor-button');
+                        if (assignRevisorButton) assignRevisorButton.disabled = true;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-submitted-articles-table .view-article-details-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const articleId = this.closest('tr').getAttribute('data-article-id');
+                    alert(`Simulando vista de detalles para el artículo enviado ${articleId}.`);
+                });
+            });
+
+            // --- Simulación de interacción para la Gestión de Usuarios ---
+            document.querySelectorAll('.admin-users-table .activate-user-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.closest('tr').getAttribute('data-user-id');
+                    const confirmActivate = confirm(`¿Está seguro de activar al usuario ${userId}?`);
+                    if (confirmActivate) {
+                        alert(`Usuario ${userId} activado.`);
+                        const row = this.closest('tr');
+                        const statusIcon = row.querySelector('[data-label="Estado Cuenta"] i');
+                        if (statusIcon) {
+                            statusIcon.className = 'fas fa-user-check status-active-user';
+                            statusIcon.title = 'Activo';
+                        }
+                        this.disabled = true;
+                        const deactivateButton = row.querySelector('.deactivate-user-button');
+                        if (deactivateButton) deactivateButton.disabled = false;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-users-table .deactivate-user-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.closest('tr').getAttribute('data-user-id');
+                    const confirmDeactivate = confirm(`¿Está seguro de desactivar al usuario ${userId}?`);
+                    if (confirmDeactivate) {
+                        alert(`Usuario ${userId} desactivado.`);
+                        const row = this.closest('tr');
+                        const statusIcon = row.querySelector('[data-label="Estado Cuenta"] i');
+                        if (statusIcon) {
+                            statusIcon.className = 'fas fa-user-slash status-inactive-user';
+                            statusIcon.title = 'Inactivo';
+                        }
+                        this.disabled = true;
+                        const activateButton = row.querySelector('.activate-user-button');
+                        if (activateButton) activateButton.disabled = false;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-users-table .delete-user-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.closest('tr').getAttribute('data-user-id');
+                    const confirmDelete = confirm(`¿Está seguro de eliminar al usuario ${userId}? Esta acción es irreversible.`);
+                    if (confirmDelete) {
+                        alert(`Usuario ${userId} eliminado.`);
+                        this.closest('tr').remove();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-users-table .edit-user-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.closest('tr').getAttribute('data-user-id');
+                    alert(`Simulando la edición del usuario ${userId}.`);
+                });
+            });
+
+            // --- Simulación de interacción para la Gestión de Recuperación de Contraseñas ---
+            document.querySelectorAll('.admin-recovery-table .process-recovery-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const requestId = this.closest('tr').getAttribute('data-request-id');
+                    const confirmProcess = confirm(`¿Está seguro de procesar la solicitud de recuperación ${requestId}? Esto enviaría un correo electrónico al usuario.`);
+                    if (confirmProcess) {
+                        alert(`Solicitud ${requestId} procesada. Se ha enviado un correo de recuperación.`);
+                        const row = this.closest('tr');
+                        const statusIcon = row.querySelector('[data-label="Estado Solicitud"] i');
+                        if (statusIcon) {
+                            statusIcon.className = 'fas fa-check-circle status-processed-request';
+                            statusIcon.title = 'Procesada';
+                        }
+                        this.disabled = true;
+                        const rejectRecoveryButton = row.querySelector('.reject-recovery-button');
+                        if (rejectRecoveryButton) rejectRecoveryButton.disabled = true;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-recovery-table .reject-recovery-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const requestId = this.closest('tr').getAttribute('data-request-id');
+                    const reason = prompt(`Ingrese el motivo del rechazo para la solicitud ${requestId}:`);
+                    if (reason) {
+                        alert(`Solicitud ${requestId} rechazada. Motivo: ${reason}`);
+                        const row = this.closest('tr');
+                        const statusIcon = row.querySelector('[data-label="Estado Solicitud"] i');
+                        if (statusIcon) {
+                            statusIcon.className = 'fas fa-times-circle status-rejected-request';
+                            statusIcon.title = 'Rechazada';
+                        }
+                        this.disabled = true;
+                        const processRecoveryButton = row.querySelector('.process-recovery-button');
+                        if (processRecoveryButton) processRecoveryButton.disabled = true;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.admin-recovery-table .view-recovery-details-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const requestId = this.closest('tr').getAttribute('data-request-id');
+                    alert(`Simulando vista de detalles para la solicitud ${requestId}.`);
+                });
+            });
+
+            // Cerrar Sesión
+            document.querySelector('.logout-link').addEventListener('click', function(event) {
+                // Lógica de cerrar sesión si fuera necesario antes de redirigir.
+            });
+        });
+    </script>
+</body>
+</html>

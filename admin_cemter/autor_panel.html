@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cienciométrik - Área de Autores SENA</title>
+    <link rel="stylesheet" href="/CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="autor_panel.css"> </head>
+<body>
+    <mi-header></mi-header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Panel de Autor</h3>
+            <nav>
+                <ul>
+                    <li>
+                        <i class="fas fa-user"></i>
+                        <a href="#info-personal">Mi Información</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-upload"></i>
+                        <a href="#subir-articulo">Subir Nuevo Artículo</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-list-alt"></i> <a href="#articulos-subidos">Mis Artículos</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <a href="../index.html" class="logout-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="info-personal" class="section author-info">
+                <h2>Hola!</h2>
+                <h3>Mis Datos de Identificación</h3>
+                <p><strong>Nombres y Apellidos:</strong> [Nombre del Autor Aquí]</p>
+                <p><strong>Cédula:</strong> [Cédula del Autor Aquí]</p>
+                <p><strong>Ficha:</strong> [Ficha del Autor Aquí (si aplica)]</p>
+                <p><strong>Correo electrónico:</strong> [Correo del Autor Aquí]</p>
+                <br>
+                <h3>¡Bienvenid@ a la sección de Autores del Sena!</h3>
+            </section>
+
+            <section id="subir-articulo" class="section article-form">
+                <h2>Subir Nuevo Artículo</h2>
+                <form id="uploadArticleForm" action="/admin_center/revisor.html" method="POST">
+                    <div class="input-group">
+                        <label for="tituloArticulo">Título del Artículo</label>
+                        <input type="text" id="tituloArticulo" name="tituloArticulo" placeholder="Ingrese el título completo del artículo" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="fechaArticulo">Fecha del Artículo</label>
+                        <input type="date" id="fechaArticulo" name="fechaArticulo" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="articuloCompleto">Artículo Completo</label>
+                        <textarea id="articuloCompleto" name="articuloCompleto" placeholder="Pegue aquí el contenido completo de su artículo..." required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="observacionesArticulo">Observaciones (Opcional)</label>
+                        <textarea id="observacionesArticulo" name="observacionesArticulo" placeholder="Cualquier nota o comentario adicional para el revisor..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Artículo</button>
+                </form>
+            </section>
+
+            <section id="articulos-subidos" class="section articles-list">
+                <h2>Mis Artículos</h2>
+                <div class="table-responsive">
+                    <table class="articles-table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Fecha Envío</th>
+                                <th>Revisor</th>
+                                <th>Admin</th>
+                                <th>Publicar</th>
+                                <th>Observaciones</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Impacto de la IA en la Educación del SENA</td>
+                                <td>2024-04-15</td>
+                                <td><i class="fas fa-clock status-pending" title="Pendiente de Revisión"></i></td>
+                                <td><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
+                                <td><i class="fas fa-hourglass-half status-na" title="Pendiente de aprobación"></i></td>
+                                <td><a href="#" class="view-observations" data-observations="Artículo en primera revisión.">Ver</a></td>
+                                <td class="actions-cell">
+                                    <button class="action-button edit-button" title="Corregir Artículo"><i class="fas fa-edit"></i></button>
+                                    <button class="action-button delete-button" title="Borrar Artículo"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Innovación en Energías Renovables Aplicada en Proyectos SENA</td>
+                                <td>2024-03-01</td>
+                                <td><i class="fas fa-check-circle status-approved" title="Aprobado por Revisor"></i></td>
+                                <td><i class="fas fa-clock status-pending" title="Pendiente de Aprobación por Admin"></i></td>
+                                <td><i class="fas fa-hourglass-half status-pending-pub" title="Pendiente para Publicación"></i></td>
+                                <td><a href="#" class="view-observations" data-observations="Revisor aprobó. Esperando confirmación de administración.">Ver</a></td>
+                                <td class="actions-cell">
+                                    <button class="action-button edit-button" title="Corregir Artículo"><i class="fas fa-edit"></i></button>
+                                    <button class="action-button delete-button" title="Borrar Artículo"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Metodologías Ágiles en el Desarrollo de Software: Un Enfoque SENA</td>
+                                <td>2024-02-20</td>
+                                <td><i class="fas fa-times-circle status-rejected" title="Rechazado por Revisor"></i></td>
+                                <td><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
+                                <td><i class="fas fa-times-circle status-na" title="No será publicado"></i></td>
+                                <td><a href="#" class="view-observations" data-observations="Necesita revisión de fuentes y formato.">Ver</a></td>
+                                <td class="actions-cell">
+                                    <button class="action-button edit-button" title="Corregir Artículo"><i class="fas fa-edit"></i></button>
+                                    <button class="action-button delete-button" title="Borrar Artículo"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Emprendimiento Digital y el Rol del SENA en Colombia</td>
+                                <td>2023-11-10</td>
+                                <td><i class="fas fa-check-circle status-approved" title="Aprobado por Revisor"></i></td>
+                                <td><i class="fas fa-check-circle status-approved" title="Aprobado por Administrador"></i></td>
+                                <td><i class="fas fa-check-circle status-published" title="Publicado"></i></td>
+                                <td><a href="#" class="view-observations" data-observations="Artículo publicado en la edición de Diciembre 2023.">Ver</a></td>
+                                <td class="actions-cell">
+                                    <button class="action-button view-button" title="Ver Artículo Publicado"><i class="fas fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <button class="button-link home" onclick="window.scrollTo(0, 0);">
+                <i class="fas fa-arrow-up"></i> Volver Arriba
+                </button>
+                <a href="../index.html" class="button-link logout">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <mi-footer></mi-footer>
+
+    <script src="/Objects/header.js"></script>
+    <script src="/Objects/container.js"></script>
+    <script src="/Objects/footer.js"></script>
+    <script src="/Objects/script.js"></script>
+    <script>
+        // Script para el enlace de cerrar sesión en el sidebar
+        document.querySelector('.logout-link').addEventListener('click', function(event) {
+            // Lógica de cerrar sesión del lado del cliente (si la hubiera)
+        });
+
+        // Script para mostrar un mensaje al enviar el formulario (puedes reemplazarlo por lógica de backend)
+        document.getElementById('uploadArticleForm').addEventListener('submit', function(event) {
+            alert("Artículo enviado con éxito. Será redirigido a la página del revisor (simulado).");
+        });
+
+        // Script para mostrar observaciones
+        document.querySelectorAll('.view-observations').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Evita que el enlace salte a otra parte
+                const observations = this.getAttribute('data-observations');
+                alert('Observaciones: ' + observations);
+            });
+        });
+
+        // Lógica para botones de acción (simulados, se conectarían al backend)
+        document.querySelectorAll('.action-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.title; // "Corregir Artículo", "Borrar Artículo", "Ver Artículo Publicado"
+                const row = this.closest('tr');
+                const title = row.querySelector('td:first-child').textContent;
+
+                alert(`Acción "${action}" solicitada para el artículo: "${title}". (Esta acción se conectaría con tu backend)`);
+            });
+        });
+    </script>
+</body>
+</html>

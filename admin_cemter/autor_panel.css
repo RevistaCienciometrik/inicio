@@ -1,0 +1,339 @@
+/* autor_panel.css */
+
+/* Estilos específicos para la sección de autores, ajustando el layout */
+.author-info {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.author-info h3 {
+    color: #003057;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.author-info p {
+    margin-bottom: 8px;
+    font-size: 1em;
+    color: #555;
+}
+
+.author-info strong {
+    color: #333;
+}
+
+/* Estilos para el formulario de subida de artículos (asociados a .article-form) */
+.article-form .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.article-form .input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333; /* Color de texto para labels en fondo claro */
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.article-form .input-group input[type="text"],
+.article-form .input-group input[type="date"],
+.article-form .input-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0; /* Fondo claro para los campos */
+    color: #333;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+    resize: vertical; /* Permite redimensionar el textarea verticalmente */
+    min-height: 120px; /* Altura mínima para el textarea del artículo */
+}
+
+.article-form .input-group input:focus,
+.article-form .input-group textarea:focus {
+    border-color: #003057; /* Borde oscuro al enfocar */
+    background-color: #fff;
+}
+
+.article-form .input-group input::placeholder,
+.article-form .input-group textarea::placeholder {
+    color: #888;
+}
+
+.article-form .submit-button {
+    width: auto; /* Ancho automático para este botón */
+    padding: 12px 25px;
+    background-color: #003057; /* Color principal de Cienciométrik */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 48, 87, 0.2);
+    display: block; /* Para centrarlo si es necesario */
+    margin: 20px auto 0 auto; /* Centra el botón si es de bloque */
+}
+
+.article-form .submit-button:hover {
+    background-color: #002040;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 48, 87, 0.3);
+}
+
+.article-form .submit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 48, 87, 0.2);
+}
+
+
+/* ESTILOS PARA LA SECCIÓN "MIS ARTÍCULOS" (nueva clase: .articles-list) */
+.articles-list { /* Estilos generales para esta sección si los necesita, como padding o margin */
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.articles-list h2 {
+    color: #003057;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Estilos para la tabla de artículos */
+.table-responsive {
+    overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.articles-table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    background-color: #fff;
+}
+
+.articles-table th,
+.articles-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.articles-table th {
+    background-color: #003057; /* Color principal de Cienciométrik */
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.articles-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo para filas pares */
+}
+
+.articles-table tbody tr:hover {
+    background-color: #f0f0f0; /* Resaltar fila al pasar el mouse */
+}
+
+/* Estilos para los iconos de estado */
+.articles-table .status-pending {
+    color: #ffc107; /* Amarillo para pendiente */
+}
+
+.articles-table .status-approved {
+    color: #28a745; /* Verde para aprobado */
+}
+
+.articles-table .status-rejected {
+    color: #dc3545; /* Rojo para rechazado */
+}
+
+.articles-table .status-na {
+    color: #6c757d; /* Gris para no aplica */
+}
+
+.articles-table .status-pending-pub {
+    color: #17a2b8; /* Azul claro para pendiente de publicación */
+}
+
+.articles-table .status-published {
+    color: #003057; /* Azul oscuro para publicado */
+}
+
+/* Estilos para los botones de acción */
+.articles-table .actions-cell {
+    white-space: nowrap; /* Evita que los botones se envuelvan */
+}
+
+.articles-table .action-button {
+    background: none;
+    border: none;
+    color: #003057;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.articles-table .action-button:hover {
+    color: #0056b3;
+}
+
+.articles-table .action-button.edit-button {
+    color: #007bff; /* Azul para editar */
+}
+
+.articles-table .action-button.edit-button:hover {
+    color: #0056b3;
+}
+
+.articles-table .action-button.delete-button {
+    color: #dc3545; /* Rojo para borrar */
+}
+
+.articles-table .action-button.delete-button:hover {
+    color: #c82333;
+}
+
+.articles-table .action-button.view-button {
+    color: #6c757d; /* Gris para ver */
+}
+
+.articles-table .action-button.view-button:hover {
+    color: #5a6268;
+}
+
+.articles-table .view-observations {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.articles-table .view-observations:hover {
+    color: #0056b3;
+}
+
+/* Estilos para los botones de navegación */
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 20px; /* Espacio entre botones */
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Separador visual */
+}
+
+.navigation-buttons .button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigation-buttons .button-link.home {
+    background-color: #f0f0f0;
+    color: #003057;
+    border: 1px solid #ddd;
+}
+
+.navigation-buttons .button-link.home:hover {
+    background-color: #e0e0e0;
+    color: #002040;
+}
+
+.navigation-buttons .button-link.logout {
+    background-color: #dc3545; /* Rojo para cerrar sesión */
+    color: #fff;
+    border: 1px solid #dc3545;
+}
+
+.navigation-buttons .button-link.logout:hover {
+    background-color: #c82333;
+}
+
+/* Media queries para responsividad (asegurarse de que estén bien, la tabla tiene su propia responsividad) */
+@media screen and (max-width: 768px) {
+    .navigation-buttons {
+        flex-direction: column; /* Apila los botones en pantallas pequeñas */
+        align-items: center;
+        gap: 15px;
+    }
+    .article-form .submit-button {
+        width: 100%; /* Botón de envío a ancho completo en móvil */
+    }
+
+    /* Reglas para la tabla en móvil (ya deberían estar bien, solo reconfirma) */
+    .articles-table {
+        display: block;
+        width: 100%;
+    }
+
+    .articles-table thead,
+    .articles-table tbody,
+    .articles-table th,
+    .articles-table td,
+    .articles-table tr {
+        display: block;
+    }
+
+    .articles-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .articles-table tr {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    .articles-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* Espacio para el label simulado */
+        text-align: right;
+    }
+
+    .articles-table td:before {
+        content: attr(data-label); /* Usa el atributo data-label para mostrar el encabezado */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #003057;
+    }
+
+    /* Añadir data-label a cada td para la responsividad de la tabla */
+    .articles-table td:nth-of-type(1):before { content: "Título:"; }
+    .articles-table td:nth-of-type(2):before { content: "Fecha Envío:"; }
+    .articles-table td:nth-of-type(3):before { content: "Revisor:"; }
+    .articles-table td:nth-of-type(4):before { content: "Admin:"; }
+    .articles-table td:nth-of-type(5):before { content: "Publicar:"; }
+    .articles-table td:nth-of-type(6):before { content: "Observaciones:"; }
+    .articles-table td:nth-of-type(7):before { content: "Acciones:"; }
+}
