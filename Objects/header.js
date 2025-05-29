@@ -111,7 +111,7 @@ class MiHeader extends HTMLElement {
                     <br><br>
                         <img src="Objects/logos_png/revista_blanco.png" alt="Logo SENA" class="logo" / >
                         
-                        <img src="/Objects/logos_png/sena_blanco.png" alt="Logo Revista" class="logo" />
+                        <img src="Objects/logos_png/sena_blanco.png" alt="Logo Revista" class="logo" />
                     </div>
                     <nav class="menu">
                         <a href="index.html">Inicio</a>
