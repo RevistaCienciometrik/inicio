@@ -109,9 +109,9 @@ class MiHeader extends HTMLElement {
                 <div class="header-top">
                     <div class="logo-container">
                     <br><br>
-                        <img src="/Images/LOGOS PNG-Cienciométrik/Logo SENA blanco.png" alt="Logo SENA" class="logo" / >
+                        <img src="Logo SENA blanco.png" alt= Logo SENA" class="logo" / >
                         
-                        <img src="../Images/LOGOS PNG-Cienciométrik/Logo cienciometrik blanco.png" alt="Logo Revista" class="logo" />
+                        <img src="Logo cienciometrik blanco.png" alt="Logo Revista" class="logo" />
                     </div>
                     <nav class="menu">
                         <a href="../index.html">Inicio</a>
