@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cienciométrik - Editar Contenido del Sitio</title>
+    <link rel="stylesheet" href="admin_edit_index.css">
+
+<body>
+    <mi-header></mi-header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Panel de Administrador</h3>
+            <nav>
+                <ul>
+                    <li>
+                        <i class="fas fa-list-alt"></i>
+                        <a href="admin.html" class="sidebar-link">Gestión Principal</a> </li>
+                    <li>
+                        <i class="fas fa-edit"></i>
+                        <a href="#editar-contenido-web" class="sidebar-link active">Editar Contenido Web</a>
+                    </li>
+                    </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="logout-link">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section id="editar-contenido-web" class="admin-section">
+                <h3>Sección de edución del contenido de la Página Principal (index.html)</h3>
+
+                <div class="button-group-top">
+                    <button id="saveAllChanges" class="button-primary"><i class="fas fa-save"></i> Guardar Todos los Cambios</button>
+                    <button id="resetChanges" class="button-danger"><i class="fas fa-undo"></i> Restablecer Contenido Original</button>
+                    <a href="../index.html" target="_blank" class="button-secondary"><i class="fas fa-external-link-alt"></i> Ver Sitio Público local</a>
+                    <a href="https://revistacienciometrik.github.io/RevistaCienciometrik/" target="_blank" class="button-secondary"><i class="fas fa-external-link-alt"></i> Ver Sitio GH</a>
+                </div>
+
+                <div class="edit-section">
+                    <h4>Sección: Banner y Bienvenida</h4>
+                    <div class="form-group">
+                        <label for="adminAnimatedImageSrc">URL Imagen Banner Animada (src):</label>
+                        <input type="text" id="adminAnimatedImageSrc" class="admin-input" placeholder="ej: images/PNG-Cienciometrik/cienciometrik.png">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPortadaImagenSrc">URL Imagen de Portada (src):</label>
+                        <input type="text" id="adminPortadaImagenSrc" class="admin-input" placeholder="ej: images/Portada.png">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminVolumenRevistaText">Texto Botón "Último Volumen":</label>
+                        <input type="text" id="adminVolumenRevistaText" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminVolumenRevistaHref">URL Botón "Último Volumen" (href):</label>
+                        <input type="text" id="adminVolumenRevistaHref" class="admin-input" placeholder="ej: Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminTituloInicio">Título de Bienvenida:</label>
+                        <input type="text" id="adminTituloInicio" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminParrafoInicio">Párrafo de Bienvenida:</label>
+                        <textarea id="adminParrafoInicio" class="admin-textarea"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminVideoIndexSrc">URL del Video de Bienvenida (src):</label>
+                        <input type="text" id="adminVideoIndexSrc" class="admin-input" placeholder="ej: vids/vid1.mp4">
+                    </div>
+                </div>
+
+                <div class="edit-section">
+                    <h4>Sección: Historia de la Revista</h4>
+                    <div class="form-group">
+                        <label for="adminTituloHistoria">Título de Historia:</label>
+                        <input type="text" id="adminTituloHistoria" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminParrafoHistoria">Párrafo de Historia:</label>
+                        <textarea id="adminParrafoHistoria" class="admin-textarea"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminConvocatoriasTitulo">Título de Convocatorias:</label>
+                        <input type="text" id="adminConvocatoriasTitulo" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminConvocatoriasCont">Contenido de Convocatorias (HTML):</label>
+                        <textarea id="adminConvocatoriasCont" class="admin-textarea" rows="10"></textarea>
+                        <small>Edita los elementos de la lista directamente en HTML. Ejemplo: `&lt;li&gt;Elemento&lt;/li&gt;`</small>
+                    </div>
+                </div>
+
+                <div class="edit-section">
+                    <h4>Sección: Línea de Tiempo</h4>
+                    <div class="form-group">
+                        <label for="adminLineaTiempoTitulo">Título de Línea de Tiempo:</label>
+                        <input type="text" id="adminLineaTiempoTitulo" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminLineaTiempoList">Contenido de Línea de Tiempo (HTML):</label>
+                        <textarea id="adminLineaTiempoList" class="admin-textarea" rows="10"></textarea>
+                        <small>Edita los elementos de la lista directamente en HTML.</small>
+                    </div>
+                </div>
+
+                <div class="edit-section">
+                    <h4>Sección: Enfoque de la Revista</h4>
+                    <div class="form-group">
+                        <label for="adminTituloEnfoque">Título de Enfoque:</label>
+                        <input type="text" id="adminTituloEnfoque" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminParrafoEnfoque">Párrafo de Enfoque:</label>
+                        <textarea id="adminParrafoEnfoque" class="admin-textarea"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPLineasEnfoque">Título de Líneas que recibe la revista:</label>
+                        <input type="text" id="adminPLineasEnfoque" class="admin-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminLinesListEnfoque">Contenido de Líneas de la Revista (HTML):</label>
+                        <textarea id="adminLinesListEnfoque" class="admin-textarea" rows="10"></textarea>
+                        <small>Edita los elementos de la lista directamente en HTML.</small>
+                    </div>
+                </div>
+
+                <div class="edit-section">
+                    <h4>Sección: Panel de Navegación</h4>
+                    <div class="form-group">
+                        <label for="adminNavPanelTitle">Título del Panel de Navegación:</label>
+                        <input type="text" id="adminNavPanelTitle" class="admin-input">
+                    </div>
+                    </div>
+
+            </section>
+        </main>
+    </div>
+
+    <mi-footer></mi-footer>
+
+    <script src="header_admin.js"></script>
+    <script src="../Objects/container.js"></script>
+    <script src="footer_admin.js"></script>
+    <script src="../Objects/script.js"></script>
+    <script src="../JS/contentloader.js"></script> 
+    <script src="../js/admin_edit_index.js"></script>
+
+</body>
+</html>

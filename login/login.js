@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const users = {
         "admin@sena.edu.co:admin123": "../admin_cemter/admin.html", 
         "autor@sena.edu.co:autor123": "../admin_cemter/autor_panel.html",                   
-        "revisor@sena.edu.co:revisor123": "../admin_cemter/revisor.html"    
+        "revisor@sena.edu.co:revisor123": "../admin_cemter/revisor.html",
+        "editorweb@sena.edu.co:editor123": "../admin_cemter/admin_edit_index.html"    
     };
 
     // Event listener o evento de escucha/acción: para el formulario de login
