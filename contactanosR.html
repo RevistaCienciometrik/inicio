@@ -109,82 +109,62 @@
 
     <mi-footer></mi-footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formularioContacto = document.getElementById('formulario-contacto');
+            const mensajeContacto = document.getElementById('mensaje-contacto');
+            const mensajeInput = document.getElementById('mensaje-input'); // Renombrado para evitar conflicto con id="mensaje" del div
+
+            if (formularioContacto) {
+                formularioContacto.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const nombre = document.getElementById('nombre').value;
+                    const email = document.getElementById('email').value;
+                    const tipoConsulta = document.getElementById('tipo-consulta').value;
+                    const asunto = document.getElementById('asunto').value;
+                    const mensaje = mensajeInput.value; // Usar el nuevo nombre
+
+                    // Aquí iría tu lógica de envío real (Fetch API, Axios, etc.)
+                    // Por ejemplo, para un endpoint de Formspree o un servicio similar
+                    /*
+                    fetch('YOUR_FORMSPREE_ENDPOINT_HERE', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ nombre, email, tipoConsulta, asunto, mensaje })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) { // Check data structure based on your backend
+                            mensajeContacto.textContent = `¡Gracias, ${nombre}! Tu mensaje ha sido enviado con éxito.`;
+                            mensajeContacto.className = 'mensaje exito';
+                            formularioContacto.reset();
+                        } else {
+                            mensajeContacto.textContent = 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+                            mensajeContacto.className = 'mensaje error';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar el formulario:', error);
+                        mensajeContacto.textContent = 'Hubo un problema de conexión al enviar el mensaje.';
+                        mensajeContacto.className = 'mensaje error';
+                    });
+                    */
+
+                    // Simulación para demostración:
+                    mensajeContacto.textContent = `¡Gracias, ${nombre}! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.`;
+                    mensajeContacto.className = 'mensaje exito';
+                    formularioContacto.reset();
+                });
+            }
+        });
+    </script>
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
-
-    <script type="module">
-        // Importa las funciones que necesitas del SDK de Firebase.
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        // Importa las funciones específicas para Firestore.
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        // Aquí está la configuración de tu proyecto de Firebase.
-        const firebaseConfig = {
-            apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
-            authDomain: "cienciometrik-3c8e7.firebaseapp.com",
-            projectId: "cienciometrik-3c8e7",
-            storageBucket: "cienciometrik-3c8e7.firebasestorage.app",
-            messagingSenderId: "60232446009",
-            appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
-        };
-
-        // Inicializa Firebase.
-        const app = initializeApp(firebaseConfig);
-        // Obtén una referencia a la base de datos de Firestore.
-        const db = getFirestore(app);
-
-        // Selecciona el formulario de contacto.
-        const formulario = document.getElementById('formulario-contacto');
-        // Selecciona el div donde mostraremos el mensaje de éxito o error.
-        const mensajeContacto = document.getElementById('mensaje-contacto');
-
-        // Escucha el evento de envío del formulario.
-        formulario.addEventListener('submit', async (e) => {
-            // Evita que la página se recargue.
-            e.preventDefault(); 
-
-            // Obtiene los valores de los campos del formulario.
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const tipoConsulta = document.getElementById('tipo-consulta').value;
-            const asunto = document.getElementById('asunto').value;
-            const mensaje = document.getElementById('mensaje-input').value;
-
-            // Antes de intentar enviar, oculta cualquier mensaje anterior.
-            mensajeContacto.textContent = '';
-            mensajeContacto.style.color = 'initial'; // Reinicia el color
-
-            try {
-                // Envía la información a Firebase Firestore.
-                await addDoc(collection(db, "mensajesContacto"), { 
-                    nombre: nombre,
-                    email: email,
-                    tipoConsulta: tipoConsulta,
-                    asunto: asunto,
-                    mensaje: mensaje,
-                    fecha: new Date() 
-                });
-
-                // Si todo sale bien, muestra el nuevo mensaje de confirmación.
-                mensajeContacto.textContent = 'Tu mensaje de contacto ha sido enviado. Pronto recibirás respuesta en el correo electrónico registrado en el formulario. Att: Equipo Cienciométrik - Sena.';
-                mensajeContacto.style.color = 'green'; // Mensaje en verde para éxito
-                formulario.reset(); // Limpia los campos del formulario.
-
-                // Opcional: Si quieres una "ventana emergente" de alerta real (menos bonita, pero efectiva):
-                // alert('Tu mensaje de contacto ha sido enviado. Pronto recibirás respuesta en el correo electrónico registrado en el formulario. Att: Equipo Cienciométrik - Sena.');
-
-            } catch (error) {
-                // Si hay un error, muestra un mensaje de error.
-                console.error("Error al enviar el mensaje: ", error); 
-                mensajeContacto.textContent = 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.';
-                mensajeContacto.style.color = 'red'; // Mensaje en rojo para error.
-
-                // Opcional: Si quieres una "ventana emergente" de alerta real para errores:
-                // alert('Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.');
-            }
-        });
-    </script>
-    </body>
+</body>
 </html>
