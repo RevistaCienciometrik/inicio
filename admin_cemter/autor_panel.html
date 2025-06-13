@@ -22,128 +22,104 @@
                     <li><a href="../autores.html"><i class="fas fa-pen-nib"></i> Autores</a></li>
                     <li><a href="../contactanos.html"><i class="fas fa-address-book"></i> Contáctanos</a></li>
                     <li><a href="#enviar-articulo"><i class="fas fa-paper-plane"></i> Enviar Artículo</a></li>
-                    <li><a href="#mis-articulos"><i class="fas fa-list-alt"></i> Mis Artículos</a></li>
-                    <li><a href="#articulos-eliminados"><i class="fas fa-trash-alt"></i> Artículos Eliminados</a></li>
-                    <li><a href="#observaciones-sugerencias"><i class="fas fa-comment-dots"></i> Observaciones</a></li>
+                    <li><a href="#mis-articulos"><i class="fas fa-file-alt"></i> Mis Artículos</a></li>
+                    <li><a href="#observaciones"><i class="fas fa-comment-dots"></i> Observaciones</a></li>
                     <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
-            <section class="section autores-hero">
-                <div class="autores-hero-content">
-                    <i class="fas fa-feather-alt autores-icon"></i>
+            <section class="section author-hero">
+                <div class="author-hero-content">
+                    <i class="fas fa-user-edit author-icon"></i>
                     <h2>¡Bienvenido, Autor de la Ciencia!</h2>
-                    <p class="subtitle">En esta sección, podrás enviar tu valioso artículo para ser parte de la Revista Cienciométrik. ¡Esperamos tus contribuciones!</p>
+                    <p class="subtitle">Envía tus contribuciones, sigue el estado de tus artículos y participa activamente en el proceso de revisión.</p>
                 </div>
             </section>
 
-            <section id="enviar-articulo" class="section article-submission-section">
-                <h2>Envía tu Artículo</h2>
-                <p>Completa el siguiente formulario con los detalles de tu artículo. Una vez enviado, será evaluado por nuestro equipo.</p>
-                <form id="formulario-articulo" class="modern-form">
+            <section id="enviar-articulo" class="section submit-article-section">
+                <h2><i class="fas fa-paper-plane"></i> Enviar Nuevo Artículo</h2>
+                <p>Completa este formulario para enviar tu artículo a revisión.</p>
+                <form id="submission-form" class="modern-form">
                     <div class="form-group">
-                        <label for="autor-nombre"><i class="fas fa-user icon"></i> Tu Nombre Completo:</label>
-                        <input type="text" id="autor-nombre" name="autorNombre" placeholder="Ej: Juan Pérez" required>
+                        <label for="tituloArticulo"><i class="fas fa-heading icon"></i> Título del Artículo:</label>
+                        <input type="text" id="tituloArticulo" required>
                     </div>
                     <div class="form-group">
-                        <label for="autor-email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
-                        <input type="email" id="autor-email" name="autorEmail" placeholder="Ej: tu.correo@example.com" required>
+                        <label for="autorNombre"><i class="fas fa-user icon"></i> Tu Nombre Completo:</label>
+                        <input type="text" id="autorNombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="autor-telefono"><i class="fas fa-phone icon"></i> Tu Teléfono (Opcional):</label>
-                        <input type="tel" id="autor-telefono" name="autorTelefono" placeholder="Ej: +57 3XX XXX XXXX">
+                        <label for="autorEmail"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
+                        <input type="email" id="autorEmail" required>
                     </div>
                     <div class="form-group">
-                        <label for="titulo-articulo"><i class="fas fa-heading icon"></i> Título del Artículo:</label>
-                        <input type="text" id="titulo-articulo" name="tituloArticulo" placeholder="Ingrese el título completo del artículo" required>
+                        <label for="contenidoArticulo"><i class="fas fa-file-alt icon"></i> Contenido del Artículo:</label>
+                        <textarea id="contenidoArticulo" rows="15" required placeholder="Pega o escribe aquí el contenido completo de tu artículo..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="fecha-envio"><i class="fas fa-calendar-alt icon"></i> Fecha de Envío (Deseada):</label>
-                        <input type="date" id="fecha-envio" name="fechaEnvio" required>
+                        <label for="observaciones"><i class="fas fa-comment-alt icon"></i> Observaciones Adicionales (opcional):</label>
+                        <textarea id="observaciones" rows="5" placeholder="Cualquier nota, aclaración o mensaje para los revisores..."></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="contenido-articulo"><i class="fas fa-file-alt icon"></i> Artículo Completo:</label>
-                        <textarea id="contenido-articulo" name="contenidoArticulo" rows="15" placeholder="Pega aquí el contenido completo de tu artículo..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="observaciones"><i class="fas fa-comment-dots icon"></i> Observaciones para el Equipo (Opcional):</label>
-                        <textarea id="observaciones" name="observaciones" rows="6" placeholder="Cualquier nota o comentario adicional para el revisor..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">
-                        <i class="fas fa-paper-plane"></i> Enviar Artículo
-                    </button>
+                    <button type="submit" class="submit-button"><i class="fas fa-upload"></i> Enviar Artículo</button>
+                    <div id="mensaje-envio" class="mensaje"></div>
                 </form>
-                <div id="mensaje-envio-articulo" class="mensaje"></div>
             </section>
 
             <section id="mis-articulos" class="section my-articles-section">
-                <h2><i class="fas fa-list-alt"></i> Mis Artículos Enviados</h2>
-                <p>Aquí puedes ver el estado de tus artículos y gestionarlos.</p>
-                <div class="form-group search-bar">
-                    <label for="search-autor-email"><i class="fas fa-search icon"></i> Introduce tu Correo Electrónico para ver tus artículos:</label>
-                    <input type="email" id="search-autor-email" placeholder="tu.correo@example.com">
+                <h2><i class="fas fa-file-alt"></i> Mis Artículos Enviados</h2>
+                <p>Consulta el estado de tus artículos y las revisiones.</p>
+                <div class="search-bar">
+                    <label for="search-autor-email"><i class="fas fa-envelope icon"></i> Ingresa tu Correo Electrónico para ver tus artículos:</label>
+                    <input type="email" id="search-autor-email" placeholder="tu_correo@example.com" required>
                     <button id="btn-buscar-articulos" class="submit-button small-button">
-                        <i class="fas fa-sync-alt"></i> Actualizar Artículos
+                        <i class="fas fa-search"></i> Buscar Mis Artículos
+                    </button>
+                    <button id="btn-limpiar-busqueda" class="button-secondary small-button">
+                        <i class="fas fa-eraser"></i> Limpiar Búsqueda
                     </button>
                 </div>
-                
-                <div id="lista-articulos" class="articles-list">
-                    <p class="loading-message">Por favor, introduce tu correo y haz clic en "Actualizar Artículos" para ver tus envíos.</p>
+                <div id="lista-mis-articulos" class="articles-list">
+                    <p class="loading-message">Ingresa tu correo electrónico y haz clic en "Buscar Mis Artículos" para verlos aquí.</p>
                 </div>
                 <div id="mensaje-mis-articulos" class="mensaje"></div>
             </section>
 
-            <section id="articulos-eliminados" class="section deleted-articles-section">
-                <h2 class="deleted-section-header"><i class="fas fa-trash-alt"></i> Artículos Eliminados (Ocultos)</h2>
-                <p>Estos son los artículos que has marcado como eliminados. Puedes restaurarlos si lo deseas.</p>
-                <div id="lista-articulos-eliminados" class="articles-list deleted-list">
-                    <p class="loading-message">Por favor, introduce tu correo en la sección de "Mis Artículos Enviados" y haz clic en "Actualizar Artículos" para ver tus envíos ocultos.</p>
-                </div>
-                <div id="mensaje-articulos-eliminados" class="mensaje"></div>
-            </section>
-
-            <section id="observaciones-sugerencias" class="section feedback-submission-section">
-                <h2><i class="fas fa-comment-alt"></i> Envíanos tus Observaciones o Sugerencias</h2>
-                <p>¿Tienes comentarios sobre el proceso de revisión, sugerencias para la revista o alguna solicitud específica?</p>
-                <form id="formulario-observaciones" class="modern-form">
+            <section id="observaciones" class="section observations-section">
+                <h2><i class="fas fa-comment-dots"></i> Envíanos tus Observaciones</h2>
+                <p>Tus comentarios son importantes para mejorar nuestra revista.</p>
+                <form id="observations-form" class="modern-form">
                     <div class="form-group">
-                        <label for="feedback-email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
-                        <input type="email" id="feedback-email" name="feedbackEmail" placeholder="Tu correo de contacto" required>
+                        <label for="observation-name"><i class="fas fa-user icon"></i> Tu Nombre:</label>
+                        <input type="text" id="observation-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="feedback-asunto"><i class="fas fa-lightbulb icon"></i> Asunto:</label>
-                        <input type="text" id="feedback-asunto" name="feedbackAsunto" placeholder="Ej: Sugerencia para revisión, Duda sobre artículo X" required>
+                        <label for="observation-email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
+                        <input type="email" id="observation-email" required>
                     </div>
                     <div class="form-group">
-                        <label for="feedback-mensaje"><i class="fas fa-comment-dots icon"></i> Tu Mensaje:</label>
-                        <textarea id="feedback-mensaje" name="feedbackMensaje" rows="8" placeholder="Escribe aquí tus observaciones, solicitudes o sugerencias..." required></textarea>
+                        <label for="observation-message"><i class="fas fa-comment-dots icon"></i> Tu Observación/Sugerencia:</label>
+                        <textarea id="observation-message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="submit-button">
-                        <i class="fas fa-paper-plane"></i> Enviar Observación
-                    </button>
+                    <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Enviar Observación</button>
+                    <div id="mensaje-observaciones" class="mensaje"></div>
                 </form>
-                <div id="mensaje-observaciones" class="mensaje"></div>
             </section>
-
         </main>
     </div>
 
     <mi-footer></mi-footer>
 
     <script src="header_admin.js"></script>
-    <script src="Objects/container.js"></script>
+    <script src="../Objects/container.js"></script>
     <script src="footer_admin.js"></script>
-    <script src="Objects/script.js"></script>
+    <script src="../Objects/script.js?v=1.0"></script> 
 
     <script type="module">
-        // Importa las funciones que necesitas del SDK de Firebase.
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        // Importa las funciones específicas para Firestore.
-        import { getFirestore, collection, addDoc, updateDoc, doc, query, where, getDocs, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        // Aquí está la configuración de tu proyecto de Firebase.
+        import { getFirestore, collection, addDoc, query, where, getDocs, doc, updateDoc, serverTimestamp, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        
         const firebaseConfig = {
             apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
             authDomain: "cienciometrik-3c8e7.firebaseapp.com",
@@ -153,168 +129,264 @@
             appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
         };
 
-        // Inicializa Firebase.
         const app = initializeApp(firebaseConfig);
-        // Obtén una referencia a la base de datos de Firestore.
         const db = getFirestore(app);
 
         // --- REFERENCIAS A ELEMENTOS DEL DOM ---
-        const formularioArticulo = document.getElementById('formulario-articulo');
-        const mensajeEnvioArticulo = document.getElementById('mensaje-envio-articulo');
-        const listaArticulos = document.getElementById('lista-articulos');
-        const mensajeMisArticulos = document.getElementById('mensaje-mis-articulos');
-        const listaArticulosEliminados = document.getElementById('lista-articulos-eliminados');
-        const mensajeArticulosEliminados = document.getElementById('mensaje-articulos-eliminados');
-        const formularioObservaciones = document.getElementById('formulario-observaciones');
-        const mensajeObservaciones = document.getElementById('mensaje-observaciones');
+        const submissionForm = document.getElementById('submission-form');
+        const tituloArticuloInput = document.getElementById('tituloArticulo');
+        const autorNombreInput = document.getElementById('autorNombre');
+        const autorEmailInput = document.getElementById('autorEmail');
+        const contenidoArticuloInput = document.getElementById('contenidoArticulo');
+        const observacionesInput = document.getElementById('observaciones');
+        const mensajeEnvio = document.getElementById('mensaje-envio');
 
-        // Nuevos elementos para la búsqueda de artículos
         const searchAutorEmailInput = document.getElementById('search-autor-email');
         const btnBuscarArticulos = document.getElementById('btn-buscar-articulos');
+        const btnLimpiarBusqueda = document.getElementById('btn-limpiar-busqueda');
+        const listaMisArticulos = document.getElementById('lista-mis-articulos');
+        const mensajeMisArticulos = document.getElementById('mensaje-mis-articulos');
 
-        // Variable para almacenar el email del autor después de la búsqueda
-        let autorEmailConsultado = ""; 
+        const observationsForm = document.getElementById('observations-form');
+        const observationNameInput = document.getElementById('observation-name');
+        const observationEmailInput = document.getElementById('observation-email');
+        const observationMessageInput = document.getElementById('observation-message');
+        const mensajeObservaciones = document.getElementById('mensaje-observaciones');
 
-        // --- FUNCIÓN PARA CARGAR ARTÍCULOS ---
-        async function cargarArticulos(emailAutor, mostrarOcultos = false) {
-            const containerId = mostrarOcultos ? 'lista-articulos-eliminados' : 'lista-articulos';
-            const messageId = mostrarOcultos ? 'mensaje-articulos-eliminados' : 'mensaje-mis-articulos';
-            const container = document.getElementById(containerId);
-            const messageDiv = document.getElementById(messageId);
+        let autorEmailConsultado = ''; // Variable para almacenar el email del autor consultado
 
-            container.innerHTML = '<p class="loading-message">Cargando artículos...</p>';
-            messageDiv.textContent = ''; // Limpiar mensajes anteriores
-            messageDiv.style.color = 'initial';
+        // --- MANEJADOR DE ENVÍO DE ARTÍCULO ---
+        submissionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            mensajeEnvio.textContent = 'Enviando artículo...';
+            mensajeEnvio.style.color = 'blue';
 
-            if (!emailAutor) {
-                container.innerHTML = `<p class="no-articles-message">Por favor, introduce tu correo electrónico para ver tus artículos.</p>`;
+            const tituloArticulo = tituloArticuloInput.value.trim();
+            const autorNombre = autorNombreInput.value.trim();
+            const autorEmail = autorEmailInput.value.trim();
+            const contenidoArticulo = contenidoArticuloInput.value.trim();
+            const observaciones = observacionesInput.value.trim();
+
+            if (!tituloArticulo || !autorNombre || !autorEmail || !contenidoArticulo) {
+                mensajeEnvio.textContent = 'Por favor, completa todos los campos obligatorios.';
+                mensajeEnvio.style.color = 'red';
                 return;
             }
 
             try {
-                // Consulta artículos para el email del autor, filtrando por estado de oculto
+                await addDoc(collection(db, "articulosEnviados"), {
+                    tituloArticulo,
+                    autorNombre,
+                    autorEmail,
+                    contenidoArticulo,
+                    observaciones,
+                    fechaEnvioFirebase: serverTimestamp(), // Fecha de subida del autor
+                    fechaRecepcionFirebase: serverTimestamp(), // Asume que se recibe al instante
+                    aprobadoRevisor: null, // Inicialmente nulo (pendiente de revisión)
+                    comentariosRevisor: '', // Inicialmente vacío
+                    respuestaAutorAComentarios: '', // Nuevo campo para respuesta del autor
+                    estado: 'Pendiente de Revisión',
+                    oculto: false // Para ocultar o mostrar artículos según necesidad del revisor
+                });
+
+                mensajeEnvio.textContent = 'Artículo enviado exitosamente. ¡Gracias por tu contribución!';
+                mensajeEnvio.style.color = 'green';
+                submissionForm.reset(); // Limpiar el formulario después del envío
+                // Si el email actual coincide con el consultado, recargar sus artículos
+                if (autorEmail === autorEmailConsultado) {
+                    await cargarArticulos(autorEmailConsultado);
+                }
+
+            } catch (error) {
+                console.error("Error al enviar el artículo: ", error);
+                mensajeEnvio.textContent = `Error al enviar el artículo: ${error.message}. Por favor, inténtalo de nuevo.`;
+                mensajeEnvio.style.color = 'red';
+            }
+        });
+
+        // --- FUNCIÓN PARA CARGAR ARTÍCULOS DEL AUTOR ---
+        async function cargarArticulos(email, oculto = false) {
+            mensajeMisArticulos.textContent = 'Cargando tus artículos...';
+            mensajeMisArticulos.style.color = 'blue';
+            listaMisArticulos.innerHTML = ''; // Limpiar lista anterior
+
+            try {
                 const q = query(
                     collection(db, "articulosEnviados"),
-                    where("autorEmail", "==", emailAutor),
-                    where("oculto", "==", mostrarOcultos),
-                    orderBy("fechaRecepcionFirebase", "desc") // Ordenar por fecha, los más recientes primero
+                    where("autorEmail", "==", email),
+                    where("oculto", "==", oculto) // Filtra por el campo 'oculto'
                 );
                 const querySnapshot = await getDocs(q);
 
                 if (querySnapshot.empty) {
-                    container.innerHTML = `<p class="no-articles-message">No tienes artículos ${mostrarOcultos ? 'eliminados' : 'enviados'} aún para este correo.</p>`;
+                    mensajeMisArticulos.textContent = `No se encontraron artículos${oculto ? ' ocultos' : ''} para este correo electrónico.`;
+                    mensajeMisArticulos.style.color = 'orange';
                     return;
                 }
 
                 let htmlContent = '';
-                querySnapshot.forEach((doc) => {
+                querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    const docId = doc.id; // ID del documento para operaciones de eliminación/restauración
-
-                    // Formato de fecha
-                    const fechaRecepcion = data.fechaRecepcionFirebase ? new Date(data.fechaRecepcionFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
+                    const docId = doc.id;
+                    const fechaEnvio = data.fechaEnvioFirebase && data.fechaEnvioFirebase.seconds ? new Date(data.fechaEnvioFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
+                    const fechaRecepcion = data.fechaRecepcionFirebase && data.fechaRecepcionFirebase.seconds ? new Date(data.fechaRecepcionFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
+                    const fechaRevision = data.fechaRevisionRevisor && data.fechaRevisionRevisor.seconds ? new Date(data.fechaRevisionRevisor.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
                     
-                    // Iconos de aprobación
-                    const aprobadoRevisor = data.aprobadoRevisor !== undefined ? data.aprobadoRevisor : null;
-                    const aprobadoAdmin = data.aprobadoAdmin !== undefined ? data.aprobadoAdmin : null;
+                    let estadoClase;
+                    let estadoTexto;
+                    if (data.aprobadoRevisor === true) {
+                        estadoClase = 'status-aprobado';
+                        estadoTexto = 'Aprobado por Revisor';
+                    } else if (data.aprobadoRevisor === false) {
+                        estadoClase = 'status-rechazado';
+                        estadoTexto = 'Rechazado por Revisor';
+                    } else {
+                        estadoClase = 'status-pendiente-de-revision';
+                        estadoTexto = 'Pendiente de Revisión';
+                    }
 
-                    const iconoRevisor = aprobadoRevisor === true ? '<i class="fas fa-check-circle approved"></i>' : (aprobadoRevisor === false ? '<i class="fas fa-times-circle rejected"></i>' : '<i class="fas fa-question-circle pending"></i>');
-                    const textoRevisor = aprobadoRevisor === true ? 'Aprobado por Revisor' : (aprobadoRevisor === false ? 'Rechazado por Revisor' : 'Pendiente de Revisor');
-
-                    const iconoAdmin = aprobadoAdmin === true ? '<i class="fas fa-check-circle approved"></i>' : (aprobadoAdmin === false ? '<i class="fas fa-times-circle rejected"></i>' : (aprobadoAdmin === null ? '<i class="fas fa-question-circle pending"></i>' : 'Pendiente de Administrador')); // Usar null para pendiente
-                    const textoAdmin = aprobadoAdmin === true ? 'Aprobado por Administrador' : (aprobadoAdmin === false ? 'Rechazado por Administrador' : 'Pendiente de Administrador');
+                    // Determinar si el artículo es editable (solo si está rechazado)
+                    const isEditable = data.aprobadoRevisor === false; // Solo editable si está rechazado
 
                     htmlContent += `
-                        <div class="article-card ${mostrarOcultos ? 'deleted-card' : ''}">
+                        <div class="article-card">
                             <h3>${data.tituloArticulo || 'Título no disponible'}</h3>
-                            <p><strong>Fecha Envío:</strong> ${data.fechaEnvio || 'N/A'}</p>
-                            <p><strong>Fecha Recepción:</strong> ${fechaRecepcion}</p>
-                            <p><strong>Estado:</strong> <span class="status-${(data.estado || 'desconocido').toLowerCase().replace(/ /g, '-')}">${data.estado || 'Desconocido'}</span></p>
-                            <div class="approval-status">
-                                <p><strong>Revisor:</strong> ${iconoRevisor} ${textoRevisor}</p>
-                                <p><strong>Administrador:</strong> ${iconoAdmin} ${textoAdmin}</p>
-                            </div>
+                            <p><strong>Estado:</strong> <span class="${estadoClase}">${estadoTexto}</span></p>
+                            <p><strong>Fecha Envío:</strong> ${fechaEnvio}</p>
+                            ${data.fechaRecepcionFirebase ? `<p><strong>Fecha Recepción en Firebase:</strong> ${fechaRecepcion}</p>` : ''}
+                            ${data.fechaRevisionRevisor ? `<p><strong>Fecha Última Revisión:</strong> ${fechaRevision}</p>` : ''}
+                            ${data.oculto ? `<p><strong>Visibilidad:</strong> <span class="status-rechazado">Oculto</span></p>` : ''}
+                            
                             <div class="article-actions">
                                 <button class="view-article-btn" data-id="${docId}">
-                                    <i class="fas fa-eye"></i> Ver Artículo
+                                    <i class="fas fa-eye"></i> Ver Contenido
                                 </button>
-                                ${!mostrarOcultos ? `
-                                    <button class="delete-article-btn" data-id="${docId}">
-                                        <i class="fas fa-trash"></i> Eliminar (Ocultar)
+                                ${isEditable ? `
+                                    <button class="edit-article-btn" data-id="${docId}">
+                                        <i class="fas fa-edit"></i> Editar Artículo
                                     </button>
-                                ` : `
-                                    <button class="restore-article-btn" data-id="${docId}">
-                                        <i class="fas fa-undo"></i> Restaurar
-                                    </button>
-                                `}
+                                ` : ''}
+                                <button class="delete-article-btn" data-id="${docId}">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
                             </div>
+
                             <div id="full-article-${docId}" class="full-article-content" style="display:none;">
                                 <h4>Contenido Completo:</h4>
-                                <pre>${data.contenidoArticulo || 'Contenido no disponible'}</pre>
-                                ${data.observaciones ? `<h4>Observaciones:</h4><p>${data.observaciones}</p>` : ''}
-                                <button class="close-article-btn"><i class="fas fa-times"></i> Cerrar</button>
+                                <textarea id="edit-content-${docId}" rows="15" ${!isEditable ? 'readonly' : ''}>${data.contenidoArticulo || 'Contenido no disponible'}</textarea>
+                                
+                                <h4>Título:</h4>
+                                <input type="text" id="edit-title-${docId}" value="${data.tituloArticulo || ''}" ${!isEditable ? 'readonly' : ''}>
+                                
+                                <h4>Observaciones del Autor:</h4>
+                                <textarea id="edit-observaciones-${docId}" rows="5" ${!isEditable ? 'readonly' : ''}>${data.observaciones || ''}</textarea>
+
+                                ${data.comentariosRevisor ? `
+                                    <h4>Comentarios del Revisor:</h4>
+                                    <div class="revisor-comment-box">
+                                        <p>${data.comentariosRevisor}</p>
+                                    </div>
+                                ` : ''}
+
+                                <h4>Tu Respuesta al Revisor:</h4>
+                                <textarea id="author-response-${docId}" rows="5" placeholder="Escribe aquí tu respuesta a los comentarios del revisor...">${data.respuestaAutorAComentarios || ''}</textarea>
+                                
+                                <div class="review-actions">
+                                    ${isEditable ? `
+                                        <button class="save-edit-btn" data-id="${docId}"><i class="fas fa-save"></i> Guardar Cambios</button>
+                                    ` : ''}
+                                    <button class="save-response-btn" data-id="${docId}"><i class="fas fa-reply"></i> Guardar Respuesta</button>
+                                    <button class="close-article-btn"><i class="fas fa-times"></i> Cerrar</button>
+                                </div>
+                                <div id="mensaje-articulo-${docId}" class="mensaje"></div>
                             </div>
                         </div>
                     `;
                 });
-                container.innerHTML = htmlContent;
+                listaMisArticulos.innerHTML = htmlContent;
+                mensajeMisArticulos.textContent = ''; // Limpiar mensaje de carga
 
-                // Añadir listeners para los botones de "Ver Artículo" y "Cerrar"
-                container.querySelectorAll('.view-article-btn').forEach(button => {
+                // --- Añadir Event Listeners para los botones de artículo ---
+                listaMisArticulos.querySelectorAll('.view-article-btn').forEach(button => {
                     button.addEventListener('click', (event) => {
                         const articleId = event.currentTarget.dataset.id;
                         const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
                         if (fullArticleDiv) {
                             fullArticleDiv.style.display = 'block';
-                            event.currentTarget.style.display = 'none'; // Oculta el botón "Ver"
+                            event.currentTarget.style.display = 'none'; // Ocultar "Ver Contenido"
+                            // No es necesario precargar el contenido aquí, ya está en el textarea
                         }
                     });
                 });
 
-                container.querySelectorAll('.close-article-btn').forEach(button => {
+                listaMisArticulos.querySelectorAll('.close-article-btn').forEach(button => {
                     button.addEventListener('click', (event) => {
                         const fullArticleDiv = event.currentTarget.closest('.full-article-content');
                         if (fullArticleDiv) {
                             const articleId = fullArticleDiv.id.replace('full-article-', '');
                             fullArticleDiv.style.display = 'none';
-                            const viewButton = document.querySelector(`.view-article-btn[data-id="${articleId}"]`);
+                            const viewButton = listaMisArticulos.querySelector(`.view-article-btn[data-id="${articleId}"]`);
                             if (viewButton) {
-                                viewButton.style.display = 'inline-block'; // Muestra el botón "Ver"
+                                viewButton.style.display = 'inline-block';
                             }
                         }
                     });
                 });
 
-                // Añadir listeners para los botones de "Eliminar" (ocultar)
-                container.querySelectorAll('.delete-article-btn').forEach(button => {
-                    button.addEventListener('click', async (event) => {
-                        const docId = event.currentTarget.dataset.id;
-                        if (confirm('¿Estás seguro de que quieres eliminar (ocultar) este artículo?')) {
-                            await updateEstadoArticulo(docId, true, 'mensaje-mis-articulos');
+                listaMisArticulos.querySelectorAll('.edit-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const articleId = event.currentTarget.dataset.id;
+                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                        if (fullArticleDiv) {
+                            fullArticleDiv.style.display = 'block';
+                            event.currentTarget.style.display = 'none'; // Ocultar "Editar Artículo"
                         }
                     });
                 });
 
-                // Añadir listeners para los botones de "Restaurar"
-                container.querySelectorAll('.restore-article-btn').forEach(button => {
+                listaMisArticulos.querySelectorAll('.save-edit-btn').forEach(button => {
                     button.addEventListener('click', async (event) => {
                         const docId = event.currentTarget.dataset.id;
-                        if (confirm('¿Estás seguro de que quieres restaurar este artículo?')) {
-                            await updateEstadoArticulo(docId, false, 'mensaje-articulos-eliminados');
+                        const newTitle = document.getElementById(`edit-title-${docId}`).value;
+                        const newContent = document.getElementById(`edit-content-${docId}`).value;
+                        const newObservaciones = document.getElementById(`edit-observaciones-${docId}`).value;
+                        
+                        if (confirm('¿Estás seguro de que quieres guardar los cambios en el artículo y reenviarlo para revisión?')) {
+                            await updateArticleAndResubmit(docId, newTitle, newContent, newObservaciones, `mensaje-articulo-${docId}`);
                         }
                     });
                 });
+
+                listaMisArticulos.querySelectorAll('.save-response-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const authorResponse = document.getElementById(`author-response-${docId}`).value;
+                        
+                        if (confirm('¿Estás seguro de que quieres guardar tu respuesta al revisor?')) {
+                            await updateAuthorResponse(docId, authorResponse, `mensaje-articulo-${docId}`);
+                        }
+                    });
+                });
+
+                listaMisArticulos.querySelectorAll('.delete-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        if (confirm('¿Estás seguro de que quieres eliminar este artículo? Esta acción no se puede deshacer.')) {
+                            await deleteArticle(docId, `mensaje-articulo-${docId}`);
+                        }
+                    });
+                });
+
 
             } catch (error) {
-                console.error("Error al cargar los artículos: ", error);
-                messageDiv.textContent = `Error al cargar los artículos: ${error.message}. Por favor, verifica tu conexión a Firebase y asegúrate de que los índices necesarios estén creados en Cloud Firestore.`;
-                messageDiv.style.color = 'red';
-                container.innerHTML = '<p class="error-message">Hubo un error al cargar tus artículos.</p>';
+                console.error("Error al cargar los artículos del autor: ", error);
+                mensajeMisArticulos.textContent = `Error al cargar tus artículos: ${error.message}. Asegúrate de tener conexión a Firebase y reglas de seguridad adecuadas.`;
+                mensajeMisArticulos.style.color = 'red';
             }
         }
 
-        // --- FUNCIÓN PARA ACTUALIZAR EL ESTADO 'oculto' DE UN ARTÍCULO ---
-        async function updateEstadoArticulo(docId, ocultar, messageDivId) {
+        // --- FUNCIÓN PARA ACTUALIZAR EL ARTÍCULO Y REENVIAR A REVISIÓN ---
+        async function updateArticleAndResubmit(docId, newTitle, newContent, newObservaciones, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
             messageDiv.textContent = '';
             messageDiv.style.color = 'initial';
@@ -322,93 +394,102 @@
             try {
                 const articleRef = doc(db, "articulosEnviados", docId);
                 await updateDoc(articleRef, {
-                    oculto: ocultar
+                    tituloArticulo: newTitle,
+                    contenidoArticulo: newContent,
+                    observaciones: newObservaciones,
+                    aprobadoRevisor: null, // Vuelve a pendiente de revisión
+                    comentariosRevisor: '', // Borra comentarios anteriores si el autor edita
+                    fechaRecepcionFirebase: serverTimestamp(), // Actualiza la fecha de recepción (re-envío)
+                    estado: 'Pendiente de Revisión - Reenvío' // Nuevo estado para indicar reenvío
                 });
 
-                messageDiv.textContent = `Artículo ${ocultar ? 'ocultado' : 'restaurado'} exitosamente.`;
+                messageDiv.textContent = 'Artículo actualizado y reenviado para revisión exitosamente.';
                 messageDiv.style.color = 'green';
-                // Recargar ambas listas para reflejar los cambios usando el email consultado actualmente
-                await cargarArticulos(autorEmailConsultado, false); // Cargar artículos activos
-                await cargarArticulos(autorEmailConsultado, true);  // Cargar artículos eliminados
+                await cargarArticulos(autorEmailConsultado); // Recargar la lista para reflejar cambios
 
             } catch (error) {
-                console.error(`Error al ${ocultar ? 'ocultar' : 'restaurar'} el artículo: `, error);
-                messageDiv.textContent = `Hubo un error al ${ocultar ? 'ocultar' : 'restaurar'} el artículo: ${error.message}`;
+                console.error("Error al actualizar el artículo y reenviar: ", error);
+                messageDiv.textContent = `Error al actualizar el artículo: ${error.message}`;
                 messageDiv.style.color = 'red';
             }
         }
 
-        // --- EVENTO DE ENVÍO DE ARTÍCULO ---
-        formularioArticulo.addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-
-            const autorNombre = document.getElementById('autor-nombre').value;
-            const autorEmail = document.getElementById('autor-email').value;
-            const autorTelefono = document.getElementById('autor-telefono').value;
-            const tituloArticulo = document.getElementById('titulo-articulo').value;
-            const fechaEnvio = document.getElementById('fecha-envio').value;
-            const contenidoArticulo = document.getElementById('contenido-articulo').value;
-            const observaciones = document.getElementById('observaciones').value;
-
-            mensajeEnvioArticulo.textContent = '';
-            mensajeEnvioArticulo.style.color = 'initial';
+        // --- FUNCIÓN PARA SOLO ACTUALIZAR LA RESPUESTA DEL AUTOR ---
+        async function updateAuthorResponse(docId, authorResponse, messageDivId) {
+            const messageDiv = document.getElementById(messageDivId);
+            messageDiv.textContent = '';
+            messageDiv.style.color = 'initial';
 
             try {
-                await addDoc(collection(db, "articulosEnviados"), { 
-                    autorNombre: autorNombre,
-                    autorEmail: autorEmail,
-                    autorTelefono: autorTelefono,
-                    tituloArticulo: tituloArticulo,
-                    fechaEnvio: fechaEnvio,
-                    contenidoArticulo: contenidoArticulo,
-                    observaciones: observaciones,
-                    fechaRecepcionFirebase: serverTimestamp(),
-                    estado: "Pendiente de Revisión", // Estado inicial
-                    aprobadoRevisor: null, // null = pendiente, true = aprobado, false = rechazado
-                    aprobadoAdmin: null, // null = pendiente, true = aprobado, false = rechazado
-                    oculto: false // Nuevo campo para la "eliminación suave"
+                const articleRef = doc(db, "articulosEnviados", docId);
+                await updateDoc(articleRef, {
+                    respuestaAutorAComentarios: authorResponse,
                 });
 
-                mensajeEnvioArticulo.textContent = 'Tu artículo ha sido enviado para revisión. ¡Gracias por tu contribución a la Revista Cienciométrik!';
-                mensajeEnvioArticulo.style.color = 'green';
-                formularioArticulo.reset();
-                // Si el email de envío coincide con el email consultado, actualizar la lista
-                if (autorEmail === autorEmailConsultado) {
-                    await cargarArticulos(autorEmailConsultado, false); 
-                }
+                messageDiv.textContent = 'Tu respuesta ha sido guardada exitosamente.';
+                messageDiv.style.color = 'green';
+                // No es necesario recargar toda la lista, solo el mensaje.
 
             } catch (error) {
-                console.error("Error al enviar el artículo: ", error); 
-                mensajeEnvioArticulo.textContent = 'Hubo un error al enviar tu artículo. Por favor, inténtalo de nuevo.';
-                mensajeEnvioArticulo.style.color = 'red';
+                console.error("Error al guardar la respuesta del autor: ", error);
+                messageDiv.textContent = `Error al guardar tu respuesta: ${error.message}`;
+                messageDiv.style.color = 'red';
             }
-        });
+        }
 
-        // --- EVENTO DE ENVÍO DE OBSERVACIONES / SUGERENCIAS ---
-        formularioObservaciones.addEventListener('submit', async (e) => {
+
+        // --- FUNCIÓN PARA ELIMINAR ARTÍCULO ---
+        async function deleteArticle(docId, messageDivId) {
+            const messageDiv = document.getElementById(messageDivId);
+            messageDiv.textContent = '';
+            messageDiv.style.color = 'initial';
+
+            try {
+                await updateDoc(doc(db, "articulosEnviados", docId), {
+                    oculto: true // En lugar de eliminar, lo marcamos como oculto
+                });
+                messageDiv.textContent = 'Artículo marcado como oculto exitosamente.';
+                messageDiv.style.color = 'green';
+                // Recargar solo los artículos no ocultos
+                await cargarArticulos(autorEmailConsultado, false); 
+            } catch (error) {
+                console.error("Error al eliminar el artículo: ", error);
+                messageDiv.textContent = `Error al eliminar el artículo: ${error.message}`;
+                messageDiv.style.color = 'red';
+            }
+        }
+
+
+        // --- MANEJADOR DE ENVÍO DE OBSERVACIONES ---
+        observationsForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            mensajeObservaciones.textContent = 'Enviando observación...';
+            mensajeObservaciones.style.color = 'blue';
 
-            const feedbackEmail = document.getElementById('feedback-email').value;
-            const feedbackAsunto = document.getElementById('feedback-asunto').value;
-            const feedbackMensaje = document.getElementById('feedback-mensaje').value;
+            const name = observationNameInput.value.trim();
+            const email = observationEmailInput.value.trim();
+            const message = observationMessageInput.value.trim();
 
-            mensajeObservaciones.textContent = '';
-            mensajeObservaciones.style.color = 'initial';
+            if (!name || !email || !message) {
+                mensajeObservaciones.textContent = 'Por favor, completa todos los campos.';
+                mensajeObservaciones.style.color = 'red';
+                return;
+            }
 
             try {
                 await addDoc(collection(db, "observacionesAutores"), {
-                    autorEmail: feedbackEmail,
-                    asunto: feedbackAsunto,
-                    mensaje: feedbackMensaje,
-                    fechaEnvio: serverTimestamp()
+                    name,
+                    email,
+                    message,
+                    timestamp: serverTimestamp()
                 });
 
-                mensajeObservaciones.textContent = 'Tu observación/sugerencia ha sido enviada con éxito. ¡Agradecemos tu feedback!';
+                mensajeObservaciones.textContent = 'Observación enviada exitosamente. ¡Gracias!';
                 mensajeObservaciones.style.color = 'green';
-                formularioObservaciones.reset();
+                observationsForm.reset();
             } catch (error) {
-                console.error("Error al enviar la observación/sugerencia: ", error);
-                mensajeObservaciones.textContent = `Hubo un error al enviar tu observación/sugerencia: ${error.message}. Asegúrate de tener conexión y reglas de Firebase correctas para 'observacionesAutores'.`;
+                console.error("Error al enviar la observación: ", error);
+                mensajeObservaciones.textContent = `Error al enviar la observación/sugerencia: ${error.message}. Asegúrate de tener conexión y reglas de Firebase correctas para 'observacionesAutores'.`;
                 mensajeObservaciones.style.color = 'red';
             }
         });
@@ -419,18 +500,22 @@
             if (email) {
                 autorEmailConsultado = email; // Guarda el email consultado
                 await cargarArticulos(autorEmailConsultado, false); // Cargar artículos no ocultos
-                await cargarArticulos(autorEmailConsultado, true);  // Cargar artículos ocultos
             } else {
                 alert("Por favor, introduce un correo electrónico para buscar tus artículos.");
             }
         });
 
+        btnLimpiarBusqueda.addEventListener('click', async () => {
+            searchAutorEmailInput.value = '';
+            listaMisArticulos.innerHTML = '<p class="loading-message">Ingresa tu correo electrónico y haz clic en "Buscar Mis Artículos" para verlos aquí.</p>';
+            mensajeMisArticulos.textContent = '';
+            autorEmailConsultado = '';
+        });
+
+
         // --- CARGA INICIAL DE ARTÍCULOS AL CARGAR LA PÁGINA (VACÍA AL PRINCIPIO) ---
         // La carga inicial se disparará solo cuando el usuario ingrese un email y haga clic en el botón.
         document.addEventListener('DOMContentLoaded', () => {
-            // Puedes establecer un valor inicial para el input de búsqueda si lo deseas,
-            // por ejemplo, si tienes un usuario logueado en una sesión real.
-            // searchAutorEmailInput.value = "correo_del_usuario_logueado@example.com";
             // No llamar a cargarArticulos aquí para que el usuario deba buscar.
         });
 

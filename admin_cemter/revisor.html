@@ -106,7 +106,7 @@
     <script src="header_admin.js"></script>
     <script src="../Objects/container.js"></script>
     <script src="footer_admin.js"></script>
-    <script src="../Objects/script.js?v=1.8"></script> 
+    <script src="../Objects/script.js?v=1.9"></script> 
 
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase.
@@ -136,13 +136,11 @@
         const mensajeHistorial = document.getElementById('mensaje-historial'); 
         const searchForm = document.getElementById('search-form');
         const searchQueryInput = document.getElementById('search-query');
-        // const searchDateInput = document.getElementById('search-date-input'); // Removido
         const listaArticulosBusqueda = document.getElementById('lista-articulos-busqueda');
         const mensajeBusqueda = document.getElementById('mensaje-busqueda');
         const filterPendingTime = document.getElementById('filter-pending-time');
         const filterHistoryTime = document.getElementById('filter-history-time');
         const searchTextButton = document.getElementById('search-text-button');
-        // const searchDateButton = document.getElementById('search-date-button'); // Removido
         const clearSearchButton = document.getElementById('clear-search-button');
 
 
@@ -169,7 +167,7 @@
             messageElement,
             sectionType = 'pending', // 'pending', 'history', 'search'
             filterPeriod = 'all', // 'all', 'day', 'week', 'month', 'year', 'none'
-            searchTerm = '' // Removido searchDate
+            searchTerm = ''
         ) {
             containerElement.innerHTML = '<p class="loading-message">Cargando artículos...</p>';
             messageElement.textContent = '';
@@ -281,7 +279,7 @@
                         estadoTexto = 'Rechazado por Revisor';
                     } else {
                         estadoClase = 'status-pendiente-de-revision';
-                        estadoTexto = 'Pendiente de Revisión';
+                        estadoTexto = data.estado || 'Pendiente de Revisión'; // Usa el estado del documento o el valor por defecto
                     }
 
                     const isApprovedByRevisor = data.aprobadoRevisor === true;
@@ -323,10 +321,24 @@
                             <div id="full-article-${docId}" class="full-article-content" style="display:none;">
                                 <h4>Contenido Completo:</h4>
                                 <pre>${data.contenidoArticulo || 'Contenido no disponible'}</pre>
-                                ${data.observaciones ? `<h4>Observaciones del Autor:</h4><p>${data.observaciones}</p>` : ''}
-                                <h4>Comentarios del Revisor:</h4>
+                                ${data.observaciones ? `<h4>Observaciones del Autor (Envío Inicial):</h4><p>${data.observaciones}</p>` : ''}
+                                
+                                ${data.comentariosRevisor ? `
+                                    <h4>Tus Comentarios (Revisor):</h4>
+                                    <div class="revisor-comment-box">
+                                        <p>${data.comentariosRevisor}</p>
+                                    </div>
+                                ` : ''}
+
+                                ${data.respuestaAutorAComentarios ? `
+                                    <h4>Respuesta del Autor:</h4>
+                                    <div class="author-response-box">
+                                        <p>${data.respuestaAutorAComentarios}</p>
+                                    </div>
+                                ` : ''}
+
                                 <div class="form-group review-comment-group">
-                                    <label for="revisor-comment-${docId}"><i class="fas fa-comment-alt icon"></i> Tu Comentario:</label>
+                                    <label for="revisor-comment-${docId}"><i class="fas fa-comment-alt icon"></i> Tu Comentario (Actual):</label>
                                     <textarea id="revisor-comment-${docId}" rows="5" placeholder="Escribe tus comentarios sobre el artículo aquí...">${data.comentariosRevisor || ''}</textarea>
                                 </div>
                                 <div class="review-actions">
@@ -393,7 +405,7 @@
                 
                 // Botón Editar Comentario (solo en historial/búsqueda) - si se desea editar el comentario sin cambiar el estado
                 containerElement.querySelectorAll('.edit-comment-btn').forEach(button => {
-                    button.addEventListener('click', async (event) => {
+                    button.addEventListener('click', (event) => { // Cambiado a 'click'
                         const docId = event.currentTarget.dataset.id;
                         const fullArticleDiv = document.getElementById(`full-article-${docId}`);
                         if (fullArticleDiv) {
@@ -529,5 +541,3 @@
     </script>
 </body>
 </html>
-
-<!-- REVISOR CON BACKEND OK -->
