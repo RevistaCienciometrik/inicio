@@ -1,43 +1,51 @@
+/* autores.css */
+
+/*
+   Asegúrate de que styles.css se cargue ANTES de autores.css
+   para que las variables CSS como --primary-color, --vibrant-green,
+   --translucent-blue-bg, etc., estén disponibles aquí.
+*/
+
 /* --- Estilos para las Tarjetas de Artículo --- */
 .articles-list {
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .article-card {
-    background-color: #ffffff;
+    background-color: #ffffff; /* Las tarjetas siguen siendo blancas para contraste */
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px var(--shadow-light);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px var(--shadow-light);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
-    overflow: hidden; /* Asegura que el contenido no se desborde */
+    overflow: hidden;
 }
 
 .article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--shadow-medium);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px var(--shadow-medium);
 }
 
 .article-card h3 {
     color: var(--primary-color);
     margin-top: 0;
-    margin-bottom: 12px;
-    font-size: 1.6em;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.7em;
+    border-bottom: 2px solid var(--dark-bg); /* Línea más gruesa y contrastante */
+    padding-bottom: 12px;
 }
 
 .article-card p {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: #555;
-    font-size: 1em;
+    font-size: 1.05em;
 }
 
-/* Estilos de estado */
+/* Estilos de estado (usando el verde vivo) */
 .status-aprobado {
-    color: var(--accent-color);
+    color: var(--vibrant-green); /* ¡Verde vivo para aprobado! */
     font-weight: 700;
 }
 
@@ -52,80 +60,117 @@
 }
 
 .article-actions {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    border-top: 1px solid #f0f0f0;
-    padding-top: 20px;
+    gap: 15px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 25px;
 }
 
 .article-actions button {
-    padding: 10px 18px;
-    font-size: 0.9em;
-    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 0.95em;
+    border-radius: 6px;
+    /* Estos botones heredarán los estilos generales de `styles.css`,
+       pero puedes sobrescribir si necesitas un color específico aquí. */
 }
+
+/* Botones específicos si se necesitan colores distintos a los generales */
+.article-actions .edit-article-btn {
+    background-color: var(--secondary-color); /* Azul */
+}
+.article-actions .edit-article-btn:hover {
+    background-color: #2980b9;
+}
+.article-actions .delete-article-btn {
+    background-color: var(--danger-color); /* Rojo */
+}
+.article-actions .delete-article-btn:hover {
+    background-color: #c0392b;
+}
+.article-actions .add-response-btn {
+    background-color: var(--vibrant-green); /* ¡Verde vivo para añadir respuesta! */
+}
+.article-actions .add-response-btn:hover {
+    background-color: #219d59;
+}
+.article-actions .save-edit-btn {
+    background-color: var(--vibrant-green); /* Verde vivo para guardar */
+}
+.article-actions .save-edit-btn:hover {
+    background-color: #219d59;
+}
+.article-actions .restore-article-btn {
+    background-color: var(--warning-color); /* Naranja para restaurar */
+}
+.article-actions .restore-article-btn:hover {
+    background-color: #e68a00;
+}
+
 
 /* --- Contenido Completo del Artículo (Expandido) --- */
 .full-article-content {
-    background-color: var(--dark-bg);
-    border-top: 1px solid var(--border-color);
-    margin-top: 25px;
-    padding: 30px;
-    border-radius: 0 0 10px 10px;
-    box-shadow: inset 0 2px 8px var(--shadow-light);
+    background-color: var(--translucent-blue-bg); /* Fondo azul claro transparente para el contenido expandido */
+    border-top: 2px solid var(--secondary-color); /* Borde superior azul vibrante */
+    margin-top: 30px;
+    padding: 35px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.08); /* Sombra interna más pronunciada */
 }
 
 .full-article-content h4 {
     color: var(--primary-color);
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.3em;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 8px;
+    margin-top: 35px;
+    margin-bottom: 18px;
+    font-size: 1.4em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
 }
 
 .full-article-content textarea,
 .full-article-content input[type="text"] {
     width: 100%;
-    padding: 15px;
-    border: 1px solid #ccc;
+    padding: 16px;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    font-size: 1em;
+    font-size: 1.05em;
     line-height: 1.6;
-    background-color: #fff;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff; /* Fondo blanco para campos editables */
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .full-article-content textarea:focus,
 .full-article-content input[type="text"]:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 12px rgba(52, 152, 219, 0.3);
+    border-color: var(--vibrant-green); /* Borde verde vivo al enfocar */
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.4); /* Sombra verde viva al enfocar */
     outline: none;
+    background-color: #fafff2; /* Fondo muy claro verdoso al enfocar */
 }
 
 .full-article-content textarea[readonly],
 .full-article-content input[readonly] {
-    background-color: #eceff1; /* Fondo gris claro para campos no editables */
-    border: 1px solid #dcdcdc;
-    cursor: not-allowed;
-    color: #777;
+    background-color: var(--dark-bg); /* Fondo más contrastante para campos de solo lectura */
+    border: 1px solid #c9d0d6; /* Borde más oscuro para lectura */
+    cursor: default;
+    color: #666;
     box-shadow: none;
 }
 
 /* --- Comentarios del Revisor y Respuesta del Autor --- */
 .revisor-comment-box {
-    background-color: #e6f7ff; /* Azul claro */
+    background-color: #e6f7ff; /* Azul claro original, pero ahora con borde más fuerte */
     border: 1px solid #b3e0ff;
-    border-left: 6px solid var(--secondary-color); /* Borde izquierdo distintivo */
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 15px;
-    margin-bottom: 25px;
+    border-left: 8px solid var(--secondary-color); /* Borde izquierdo más grueso y vibrante */
+    border-radius: 10px;
+    padding: 22px;
+    margin-top: 20px;
+    margin-bottom: 30px;
     font-style: italic;
     color: #444;
-    line-height: 1.5;
+    line-height: 1.6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .revisor-comment-box p {
@@ -135,48 +180,50 @@
 .review-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 30px;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 15px;
+    margin-top: 35px;
+    justify-content: flex-end;
 }
 
-/* --- Estilos para la Conversación de Comentarios (si se implementa) --- */
+/* --- Estilos para la Conversación de Comentarios (con las variables) --- */
 .conversation-history-box {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fcfcfc;
-    margin-top: 25px;
-    max-height: 350px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 25px;
+    background-color: var(--dark-bg); /* Un gris azulado más oscuro para el fondo */
+    margin-top: 30px;
+    max-height: 400px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .conversation-message {
-    padding: 12px 18px;
-    border-radius: 8px;
-    line-height: 1.5;
+    padding: 15px 20px;
+    border-radius: 10px;
+    line-height: 1.6;
     word-wrap: break-word;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .conversation-message strong {
-    font-size: 0.95em;
-    color: #666;
+    font-size: 1em;
+    color: var(--primary-color);
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .conversation-message p {
     margin: 0;
-    color: #333;
+    color: var(--text-color);
 }
 
 .revisor-message {
     background-color: #e6f7ff;
     border: 1px solid #b3e0ff;
+    border-left: 6px solid var(--secondary-color); /* Borde izquierdo vibrante */
     align-self: flex-start;
     max-width: 90%;
 }
@@ -184,50 +231,75 @@
 .author-message {
     background-color: #e8ffe8;
     border: 1px solid #b3ffb3;
+    border-right: 6px solid var(--vibrant-green); /* Borde derecho verde vivo */
     align-self: flex-end;
     max-width: 90%;
 }
 
-/* --- Artículos Ocultos (desde autores.css original) --- */
+/* --- Artículos Ocultos (sección de visualización) --- */
 .article-card.hidden-article-card {
     opacity: 0.6;
-    border: 1px dashed #a0a0a0;
-    background-color: #f5f5f5;
+    border: 2px dashed #a0a0a0;
+    background-color: #f0f0f0;
     order: 1;
-    pointer-events: none; /* Deshabilita interacciones si no quieres que se pueda hacer click */
-}
-
-.article-card.hidden-article-card .view-article-btn {
-    pointer-events: auto; /* Permite ver el contenido aunque esté oculto */
-}
-
-/* Ocultar botones de acción específicos para artículos ocultos en la sección principal */
-.article-card.hidden-article-card .delete-article-btn,
-.article-card.hidden-article-card .edit-article-btn,
-.article-card.hidden-article-card .save-edit-btn,
-.article-card.hidden-article-card .save-response-btn {
-    display: none;
-}
-
-/* Mostrar el botón de restaurar solo en las tarjetas ocultas (si se implementa) */
-.article-card:not(.hidden-article-card) .restore-article-btn {
-    display: none;
+    /* Los botones de acción específicos para hidden-article-card se gestionan en styles.css o globalmente */
 }
 
 .hidden-articles-section {
-    margin-top: 40px;
-    background-color: #fff8e1;
-    border: 1px solid #ffe0b2;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px var(--shadow-light);
+    margin-top: 50px;
+    background-color: #fffaf0; /* Fondo más cremoso */
+    border: 1px solid var(--warning-color);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
 }
 
 .hidden-articles-section h2 {
     color: var(--warning-color);
     border-bottom: 2px solid #ffcc80;
-    padding-bottom: 12px;
-    margin-bottom: 25px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+/* --- Search Bar del Autor --- */
+/* (Este es el search-bar específico para buscar por email en el panel de autor) */
+.search-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: var(--translucent-blue-bg); /* Fondo azul claro transparente */
+    border-radius: 10px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar label {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar input[type="email"] {
+    flex-grow: 1;
+    min-width: 250px;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar input[type="email"]:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+    outline: none;
 }
 
 /* --- Responsividad Específica del Panel de Autor --- */
@@ -248,33 +320,39 @@
         font-size: 0.9em;
     }
     .full-article-content {
-        padding: 20px;
+        padding: 25px;
     }
     .full-article-content h4 {
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
     .full-article-content textarea,
     .full-article-content input[type="text"] {
         padding: 12px;
     }
-    .review-actions {
-        flex-direction: column;
-        gap: 10px;
+    .conversation-history-box {
+        padding: 20px;
+        max-height: 300px;
+        gap: 12px;
     }
-    .review-actions button {
+    .conversation-message {
+        padding: 12px 15px;
+    }
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-bar input[type="email"] {
+        min-width: unset;
         width: 100%;
     }
-    .revisor-comment-box {
-        padding: 15px;
+    .search-bar label {
+        width: 100%;
+        text-align: center;
     }
 }
 
 @media (max-width: 480px) {
     .article-card h3 {
         font-size: 1.2em;
-    }
-    .full-article-content textarea,
-    .full-article-content input[type="text"] {
-        font-size: 0.9em;
     }
 }
