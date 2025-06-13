@@ -1,0 +1,318 @@
+/* autores.css */
+
+/* Estilos específicos para la sección de bienvenida de Autores (hero) */
+.autores-hero {
+    background: linear-gradient(135deg, #005f73 0%, #0a9396 100%); /* Degradado de azules/verdes */
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.autores-hero-content .autores-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    animation: bounceIn 1s ease-out; /* Asumiendo que bounceIn está definido o importado */
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.autores-hero-content h2 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.autores-hero-content .subtitle {
+    font-size: 1.2em;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Estilos para la sección de envío de artículos (form) */
+.article-submission-section,
+.my-articles-section,
+.deleted-articles-section,
+.feedback-submission-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px; /* Espacio entre secciones */
+}
+
+h2 {
+    color: #003057;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el icono y el texto */
+}
+
+h2 .fas {
+    color: #008394; /* Color para los iconos en los títulos */
+}
+
+/* Estilos para el formulario moderno (ya deberían estar en styles.css o los que copiaste) */
+/* .modern-form, .form-group, label, input, textarea, button.submit-button, .mensaje */
+/* Si no están, cópialos desde la solución anterior o asegúrate que styles.css los maneje */
+
+
+/* --- Estilos para la lista de artículos --- */
+.articles-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo con columnas mínimas de 300px */
+}
+
+.article-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative; /* Para posicionar el full-article-content */
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-card h3 {
+    color: #005f73;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+.article-card p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.article-card .status-pendiente-de-revision { color: #f39c12; font-weight: bold; }
+.article-card .status-aprobado { color: #27ae60; font-weight: bold; }
+.article-card .status-rechazado { color: #e74c3c; font-weight: bold; }
+
+.approval-status {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
+
+.approval-status p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.approval-status .fas {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.approval-status .approved { color: #27ae60; }
+.approval-status .rejected { color: #e74c3c; }
+.approval-status .pending { color: #f1c40f; }
+
+.article-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+}
+
+.article-actions button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.view-article-btn {
+    background-color: #008394;
+    color: white;
+}
+.view-article-btn:hover { background-color: #006b7a; }
+
+.delete-article-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+.delete-article-btn:hover { background-color: #c0392b; }
+
+.restore-article-btn {
+    background-color: #3498db;
+    color: white;
+}
+.restore-article-btn:hover { background-color: #2980b9; }
+
+/* Estilos para el contenido completo del artículo (cuando se muestra) */
+.full-article-content {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    font-size: 0.9em;
+    line-height: 1.8;
+}
+
+.full-article-content h4 {
+    color: #003057;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.full-article-content pre {
+    background-color: #eef;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap; /* Mantiene saltos de línea y envuelve texto */
+    word-wrap: break-word; /* Rompe palabras largas */
+    border: 1px solid #dde;
+    max-height: 400px; /* Limita la altura para evitar scrolls muy largos */
+    overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+}
+
+.full-article-content .close-article-btn {
+    background-color: #6c757d;
+    color: white;
+    margin-top: 15px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.full-article-content .close-article-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Estilos para la sección de artículos eliminados */
+.deleted-articles-section {
+    background-color: #f0f0f0; /* Un gris más oscuro para la sección */
+    border: 1px solid #e0e0e0;
+}
+
+.deleted-section-header {
+    color: #6c757d; /* Color de título gris */
+}
+
+.deleted-articles-section .article-card {
+    background-color: #e9e9e9; /* Fondo gris para las tarjetas eliminadas */
+    border-color: #d0d0d0;
+    opacity: 0.7; /* Ligeramente transparentes */
+    filter: grayscale(80%); /* Efecto de blanco y negro */
+}
+
+.deleted-articles-section .article-card:hover {
+    opacity: 1; /* Al pasar el mouse, recupera la opacidad */
+    filter: grayscale(0%); /* Y el color */
+    transform: none; /* No se eleva tanto como los activos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.deleted-articles-section .article-card h3,
+.deleted-articles-section .article-card p {
+    color: #777; /* Texto en gris más oscuro */
+}
+
+.deleted-articles-section .article-actions {
+    justify-content: center; /* Centrar el botón de restaurar */
+}
+
+/* Mensajes de feedback */
+.loading-message,
+.no-articles-message,
+.error-message {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    padding: 20px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+
+/* Media Queries para responsividad (similares a styles.css) */
+@media (max-width: 768px) {
+    .autores-hero {
+        padding: 40px 15px;
+    }
+
+    .autores-hero-content h2 {
+        font-size: 2em;
+    }
+
+    .autores-hero-content .subtitle {
+        font-size: 1em;
+    }
+
+    .article-submission-section,
+    .my-articles-section,
+    .deleted-articles-section,
+    .feedback-submission-section {
+        padding: 20px;
+    }
+
+    .modern-form .submit-button {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+
+    .articles-list {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    }
+
+    .article-card {
+        padding: 15px;
+    }
+
+    .article-card h3 {
+        font-size: 1.2em;
+    }
+
+    .article-actions button {
+        font-size: 0.85em;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .autores-hero-content h2 {
+        font-size: 1.8em;
+    }
+    .autores-hero-content .autores-icon {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}

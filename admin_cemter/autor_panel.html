@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cienciométrik - Área de Autores SENA</title>
+    <title>Autores - Revista Cienciometrik</title>
     <link rel="stylesheet" href="../CSS/styles.css">
-    <link rel="stylesheet" href="autor_panel.css"> 
+    <link rel="stylesheet" href="autores.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <mi-header></mi-header>
@@ -15,175 +16,424 @@
             <h3>Panel de Autor</h3>
             <nav>
                 <ul>
-                    <li>
-                        <i class="fas fa-user"></i>
-                        <a href="#info-personal">Mi Información</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-upload"></i>
-                        <a href="#subir-articulo">Subir Nuevo Artículo</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-list-alt"></i> <a href="#articulos-subidos">Mis Artículos</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-sign-out-alt"></i>
-                        <a href="../index.html" class="logout-link">Cerrar Sesión</a>
-                    </li>
+                    <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="../quienes_somos.html"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
+                    <li><a href="../publicaciones.html"><i class="fas fa-book-open"></i> Publicaciones</a></li>
+                    <li><a href="../autores.html"><i class="fas fa-pen-nib"></i> Autores</a></li>
+                    <li><a href="../contactanos.html"><i class="fas fa-address-book"></i> Contáctanos</a></li>
+                    <li><a href="#enviar-articulo"><i class="fas fa-paper-plane"></i> Enviar Artículo</a></li>
+                    <li><a href="#mis-articulos"><i class="fas fa-list-alt"></i> Mis Artículos</a></li>
+                    <li><a href="#articulos-eliminados"><i class="fas fa-trash-alt"></i> Artículos Eliminados</a></li>
+                    <li><a href="#observaciones-sugerencias"><i class="fas fa-comment-dots"></i> Observaciones</a></li>
+                    <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
-            <section id="info-personal" class="section author-info">
-                <h2>Hola!</h2>
-                <h3>Mis Datos de Identificación</h3>
-                <p><strong>Nombres y Apellidos:</strong> [Nombre del Autor Aquí]</p>
-                <p><strong>Cédula:</strong> [Cédula del Autor Aquí]</p>
-                <p><strong>Ficha:</strong> [Ficha del Autor Aquí (si aplica)]</p>
-                <p><strong>Correo electrónico:</strong> [Correo del Autor Aquí]</p>
-                <br>
-                <h3>¡Bienvenid@ a la sección de Autores del Sena!</h3>
-            </section>
-
-            <section id="subir-articulo" class="section article-form">
-                <h2>Subir Nuevo Artículo</h2>
-                <form id="uploadArticleForm" action="admin_center/revisor.html" method="POST">
-                    <div class="input-group">
-                        <label for="tituloArticulo">Título del Artículo</label>
-                        <input type="text" id="tituloArticulo" name="tituloArticulo" placeholder="Ingrese el título completo del artículo" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="fechaArticulo">Fecha del Artículo</label>
-                        <input type="date" id="fechaArticulo" name="fechaArticulo" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="articuloCompleto">Artículo Completo</label>
-                        <textarea id="articuloCompleto" name="articuloCompleto" placeholder="Pegue aquí el contenido completo de su artículo..." required></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label for="observacionesArticulo">Observaciones (Opcional)</label>
-                        <textarea id="observacionesArticulo" name="observacionesArticulo" placeholder="Cualquier nota o comentario adicional para el revisor..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Enviar Artículo</button>
-                </form>
-            </section>
-
-            <section id="articulos-subidos" class="section articles-list">
-                <h2>Mis Artículos</h2>
-                <div class="table-responsive">
-                    <table class="articles-table">
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Fecha Envío</th>
-                                <th>Revisor</th>
-                                <th>Admin</th>
-                                <th>Publicar</th>
-                                <th>Observaciones</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Impacto de la IA en la Educación del SENA</td>
-                                <td>2024-04-15</td>
-                                <td><i class="fas fa-clock status-pending" title="Pendiente de Revisión"></i></td>
-                                <td><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
-                                <td><i class="fas fa-hourglass-half status-na" title="Pendiente de aprobación"></i></td>
-                                <td><a href="#" class="view-observations" data-observations="Artículo en primera revisión.">Ver</a></td>
-                                <td class="actions-cell">
-                                    <button class="action-button edit-button" title="Corregir Artículo"><i class="fas fa-edit"></i></button>
-                                    <button class="action-button delete-button" title="Borrar Artículo"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Innovación en Energías Renovables Aplicada en Proyectos SENA</td>
-                                <td>2024-03-01</td>
-                                <td><i class="fas fa-check-circle status-approved" title="Aprobado por Revisor"></i></td>
-                                <td><i class="fas fa-clock status-pending" title="Pendiente de Aprobación por Admin"></i></td>
-                                <td><i class="fas fa-hourglass-half status-pending-pub" title="Pendiente para Publicación"></i></td>
-                                <td><a href="#" class="view-observations" data-observations="Revisor aprobó. Esperando confirmación de administración.">Ver</a></td>
-                                <td class="actions-cell">
-                                    <button class="action-button edit-button" title="Corregir Artículo"><i class="fas fa-edit"></i></button>
-                                    <button class="action-button delete-button" title="Borrar Artículo"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Metodologías Ágiles en el Desarrollo de Software: Un Enfoque SENA</td>
-                                <td>2024-02-20</td>
-                                <td><i class="fas fa-times-circle status-rejected" title="Rechazado por Revisor"></i></td>
-                                <td><i class="fas fa-minus-circle status-na" title="No aplica aún"></i></td>
-                                <td><i class="fas fa-times-circle status-na" title="No será publicado"></i></td>
-                                <td><a href="#" class="view-observations" data-observations="Necesita revisión de fuentes y formato.">Ver</a></td>
-                                <td class="actions-cell">
-                                    <button class="action-button edit-button" title="Corregir Artículo"><i class="fas fa-edit"></i></button>
-                                    <button class="action-button delete-button" title="Borrar Artículo"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Emprendimiento Digital y el Rol del SENA en Colombia</td>
-                                <td>2023-11-10</td>
-                                <td><i class="fas fa-check-circle status-approved" title="Aprobado por Revisor"></i></td>
-                                <td><i class="fas fa-check-circle status-approved" title="Aprobado por Administrador"></i></td>
-                                <td><i class="fas fa-check-circle status-published" title="Publicado"></i></td>
-                                <td><a href="#" class="view-observations" data-observations="Artículo publicado en la edición de Diciembre 2023.">Ver</a></td>
-                                <td class="actions-cell">
-                                    <button class="action-button view-button" title="Ver Artículo Publicado"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            </tbody>
-                    </table>
+            <section class="section autores-hero">
+                <div class="autores-hero-content">
+                    <i class="fas fa-feather-alt autores-icon"></i>
+                    <h2>¡Bienvenido, Autor de la Ciencia!</h2>
+                    <p class="subtitle">En esta sección, podrás enviar tu valioso artículo para ser parte de la Revista Cienciométrik. ¡Esperamos tus contribuciones!</p>
                 </div>
             </section>
 
-            <div class="navigation-buttons">
-                <button class="button-link home" onclick="window.scrollTo(0, 0);">
-                <i class="fas fa-arrow-up"></i> Volver Arriba
-                </button>
-                <a href="../index.html" class="button-link logout">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                </a>
-            </div>
+            <section id="enviar-articulo" class="section article-submission-section">
+                <h2>Envía tu Artículo</h2>
+                <p>Completa el siguiente formulario con los detalles de tu artículo. Una vez enviado, será evaluado por nuestro equipo.</p>
+                <form id="formulario-articulo" class="modern-form">
+                    <div class="form-group">
+                        <label for="autor-nombre"><i class="fas fa-user icon"></i> Tu Nombre Completo:</label>
+                        <input type="text" id="autor-nombre" name="autorNombre" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="autor-email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
+                        <input type="email" id="autor-email" name="autorEmail" placeholder="Ej: tu.correo@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="autor-telefono"><i class="fas fa-phone icon"></i> Tu Teléfono (Opcional):</label>
+                        <input type="tel" id="autor-telefono" name="autorTelefono" placeholder="Ej: +57 3XX XXX XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="titulo-articulo"><i class="fas fa-heading icon"></i> Título del Artículo:</label>
+                        <input type="text" id="titulo-articulo" name="tituloArticulo" placeholder="Ingrese el título completo del artículo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha-envio"><i class="fas fa-calendar-alt icon"></i> Fecha de Envío (Deseada):</label>
+                        <input type="date" id="fecha-envio" name="fechaEnvio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contenido-articulo"><i class="fas fa-file-alt icon"></i> Artículo Completo:</label>
+                        <textarea id="contenido-articulo" name="contenidoArticulo" rows="15" placeholder="Pega aquí el contenido completo de tu artículo..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="observaciones"><i class="fas fa-comment-dots icon"></i> Observaciones para el Equipo (Opcional):</label>
+                        <textarea id="observaciones" name="observaciones" rows="6" placeholder="Cualquier nota o comentario adicional para el revisor..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i> Enviar Artículo
+                    </button>
+                </form>
+                <div id="mensaje-envio-articulo" class="mensaje"></div>
+            </section>
+
+            <section id="mis-articulos" class="section my-articles-section">
+                <h2><i class="fas fa-list-alt"></i> Mis Artículos Enviados</h2>
+                <p>Aquí puedes ver el estado de tus artículos y gestionarlos.</p>
+                <div class="form-group search-bar">
+                    <label for="search-autor-email"><i class="fas fa-search icon"></i> Introduce tu Correo Electrónico para ver tus artículos:</label>
+                    <input type="email" id="search-autor-email" placeholder="tu.correo@example.com">
+                    <button id="btn-buscar-articulos" class="submit-button small-button">
+                        <i class="fas fa-sync-alt"></i> Actualizar Artículos
+                    </button>
+                </div>
+                
+                <div id="lista-articulos" class="articles-list">
+                    <p class="loading-message">Por favor, introduce tu correo y haz clic en "Actualizar Artículos" para ver tus envíos.</p>
+                </div>
+                <div id="mensaje-mis-articulos" class="mensaje"></div>
+            </section>
+
+            <section id="articulos-eliminados" class="section deleted-articles-section">
+                <h2 class="deleted-section-header"><i class="fas fa-trash-alt"></i> Artículos Eliminados (Ocultos)</h2>
+                <p>Estos son los artículos que has marcado como eliminados. Puedes restaurarlos si lo deseas.</p>
+                <div id="lista-articulos-eliminados" class="articles-list deleted-list">
+                    <p class="loading-message">Por favor, introduce tu correo en la sección de "Mis Artículos Enviados" y haz clic en "Actualizar Artículos" para ver tus envíos ocultos.</p>
+                </div>
+                <div id="mensaje-articulos-eliminados" class="mensaje"></div>
+            </section>
+
+            <section id="observaciones-sugerencias" class="section feedback-submission-section">
+                <h2><i class="fas fa-comment-alt"></i> Envíanos tus Observaciones o Sugerencias</h2>
+                <p>¿Tienes comentarios sobre el proceso de revisión, sugerencias para la revista o alguna solicitud específica?</p>
+                <form id="formulario-observaciones" class="modern-form">
+                    <div class="form-group">
+                        <label for="feedback-email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
+                        <input type="email" id="feedback-email" name="feedbackEmail" placeholder="Tu correo de contacto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-asunto"><i class="fas fa-lightbulb icon"></i> Asunto:</label>
+                        <input type="text" id="feedback-asunto" name="feedbackAsunto" placeholder="Ej: Sugerencia para revisión, Duda sobre artículo X" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-mensaje"><i class="fas fa-comment-dots icon"></i> Tu Mensaje:</label>
+                        <textarea id="feedback-mensaje" name="feedbackMensaje" rows="8" placeholder="Escribe aquí tus observaciones, solicitudes o sugerencias..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i> Enviar Observación
+                    </button>
+                </form>
+                <div id="mensaje-observaciones" class="mensaje"></div>
+            </section>
+
         </main>
     </div>
 
     <mi-footer></mi-footer>
 
     <script src="header_admin.js"></script>
-    <script src="/Objects/container.js"></script>
+    <script src="Objects/container.js"></script>
     <script src="footer_admin.js"></script>
-    <script src="/Objects/script.js"></script>
-    <script>
-        // Script para el enlace de cerrar sesión en el sidebar
-        document.querySelector('.logout-link').addEventListener('click', function(event) {
-            // Lógica de cerrar sesión del lado del cliente (si la hubiera)
+    <script src="Objects/script.js"></script>
+
+    <script type="module">
+        // Importa las funciones que necesitas del SDK de Firebase.
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        // Importa las funciones específicas para Firestore.
+        import { getFirestore, collection, addDoc, updateDoc, doc, query, where, getDocs, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Aquí está la configuración de tu proyecto de Firebase.
+        const firebaseConfig = {
+            apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
+            authDomain: "cienciometrik-3c8e7.firebaseapp.com",
+            projectId: "cienciometrik-3c8e7",
+            storageBucket: "cienciometrik-3c8e7.firebasestorage.app",
+            messagingSenderId: "60232446009",
+            appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
+        };
+
+        // Inicializa Firebase.
+        const app = initializeApp(firebaseConfig);
+        // Obtén una referencia a la base de datos de Firestore.
+        const db = getFirestore(app);
+
+        // --- REFERENCIAS A ELEMENTOS DEL DOM ---
+        const formularioArticulo = document.getElementById('formulario-articulo');
+        const mensajeEnvioArticulo = document.getElementById('mensaje-envio-articulo');
+        const listaArticulos = document.getElementById('lista-articulos');
+        const mensajeMisArticulos = document.getElementById('mensaje-mis-articulos');
+        const listaArticulosEliminados = document.getElementById('lista-articulos-eliminados');
+        const mensajeArticulosEliminados = document.getElementById('mensaje-articulos-eliminados');
+        const formularioObservaciones = document.getElementById('formulario-observaciones');
+        const mensajeObservaciones = document.getElementById('mensaje-observaciones');
+
+        // Nuevos elementos para la búsqueda de artículos
+        const searchAutorEmailInput = document.getElementById('search-autor-email');
+        const btnBuscarArticulos = document.getElementById('btn-buscar-articulos');
+
+        // Variable para almacenar el email del autor después de la búsqueda
+        let autorEmailConsultado = ""; 
+
+        // --- FUNCIÓN PARA CARGAR ARTÍCULOS ---
+        async function cargarArticulos(emailAutor, mostrarOcultos = false) {
+            const containerId = mostrarOcultos ? 'lista-articulos-eliminados' : 'lista-articulos';
+            const messageId = mostrarOcultos ? 'mensaje-articulos-eliminados' : 'mensaje-mis-articulos';
+            const container = document.getElementById(containerId);
+            const messageDiv = document.getElementById(messageId);
+
+            container.innerHTML = '<p class="loading-message">Cargando artículos...</p>';
+            messageDiv.textContent = ''; // Limpiar mensajes anteriores
+            messageDiv.style.color = 'initial';
+
+            if (!emailAutor) {
+                container.innerHTML = `<p class="no-articles-message">Por favor, introduce tu correo electrónico para ver tus artículos.</p>`;
+                return;
+            }
+
+            try {
+                // Consulta artículos para el email del autor, filtrando por estado de oculto
+                const q = query(
+                    collection(db, "articulosEnviados"),
+                    where("autorEmail", "==", emailAutor),
+                    where("oculto", "==", mostrarOcultos),
+                    orderBy("fechaRecepcionFirebase", "desc") // Ordenar por fecha, los más recientes primero
+                );
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    container.innerHTML = `<p class="no-articles-message">No tienes artículos ${mostrarOcultos ? 'eliminados' : 'enviados'} aún para este correo.</p>`;
+                    return;
+                }
+
+                let htmlContent = '';
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const docId = doc.id; // ID del documento para operaciones de eliminación/restauración
+
+                    // Formato de fecha
+                    const fechaRecepcion = data.fechaRecepcionFirebase ? new Date(data.fechaRecepcionFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
+                    
+                    // Iconos de aprobación
+                    const aprobadoRevisor = data.aprobadoRevisor !== undefined ? data.aprobadoRevisor : null;
+                    const aprobadoAdmin = data.aprobadoAdmin !== undefined ? data.aprobadoAdmin : null;
+
+                    const iconoRevisor = aprobadoRevisor === true ? '<i class="fas fa-check-circle approved"></i>' : (aprobadoRevisor === false ? '<i class="fas fa-times-circle rejected"></i>' : '<i class="fas fa-question-circle pending"></i>');
+                    const textoRevisor = aprobadoRevisor === true ? 'Aprobado por Revisor' : (aprobadoRevisor === false ? 'Rechazado por Revisor' : 'Pendiente de Revisor');
+
+                    const iconoAdmin = aprobadoAdmin === true ? '<i class="fas fa-check-circle approved"></i>' : (aprobadoAdmin === false ? '<i class="fas fa-times-circle rejected"></i>' : (aprobadoAdmin === null ? '<i class="fas fa-question-circle pending"></i>' : 'Pendiente de Administrador')); // Usar null para pendiente
+                    const textoAdmin = aprobadoAdmin === true ? 'Aprobado por Administrador' : (aprobadoAdmin === false ? 'Rechazado por Administrador' : 'Pendiente de Administrador');
+
+                    htmlContent += `
+                        <div class="article-card ${mostrarOcultos ? 'deleted-card' : ''}">
+                            <h3>${data.tituloArticulo || 'Título no disponible'}</h3>
+                            <p><strong>Fecha Envío:</strong> ${data.fechaEnvio || 'N/A'}</p>
+                            <p><strong>Fecha Recepción:</strong> ${fechaRecepcion}</p>
+                            <p><strong>Estado:</strong> <span class="status-${(data.estado || 'desconocido').toLowerCase().replace(/ /g, '-')}">${data.estado || 'Desconocido'}</span></p>
+                            <div class="approval-status">
+                                <p><strong>Revisor:</strong> ${iconoRevisor} ${textoRevisor}</p>
+                                <p><strong>Administrador:</strong> ${iconoAdmin} ${textoAdmin}</p>
+                            </div>
+                            <div class="article-actions">
+                                <button class="view-article-btn" data-id="${docId}">
+                                    <i class="fas fa-eye"></i> Ver Artículo
+                                </button>
+                                ${!mostrarOcultos ? `
+                                    <button class="delete-article-btn" data-id="${docId}">
+                                        <i class="fas fa-trash"></i> Eliminar (Ocultar)
+                                    </button>
+                                ` : `
+                                    <button class="restore-article-btn" data-id="${docId}">
+                                        <i class="fas fa-undo"></i> Restaurar
+                                    </button>
+                                `}
+                            </div>
+                            <div id="full-article-${docId}" class="full-article-content" style="display:none;">
+                                <h4>Contenido Completo:</h4>
+                                <pre>${data.contenidoArticulo || 'Contenido no disponible'}</pre>
+                                ${data.observaciones ? `<h4>Observaciones:</h4><p>${data.observaciones}</p>` : ''}
+                                <button class="close-article-btn"><i class="fas fa-times"></i> Cerrar</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = htmlContent;
+
+                // Añadir listeners para los botones de "Ver Artículo" y "Cerrar"
+                container.querySelectorAll('.view-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const articleId = event.currentTarget.dataset.id;
+                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                        if (fullArticleDiv) {
+                            fullArticleDiv.style.display = 'block';
+                            event.currentTarget.style.display = 'none'; // Oculta el botón "Ver"
+                        }
+                    });
+                });
+
+                container.querySelectorAll('.close-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const fullArticleDiv = event.currentTarget.closest('.full-article-content');
+                        if (fullArticleDiv) {
+                            const articleId = fullArticleDiv.id.replace('full-article-', '');
+                            fullArticleDiv.style.display = 'none';
+                            const viewButton = document.querySelector(`.view-article-btn[data-id="${articleId}"]`);
+                            if (viewButton) {
+                                viewButton.style.display = 'inline-block'; // Muestra el botón "Ver"
+                            }
+                        }
+                    });
+                });
+
+                // Añadir listeners para los botones de "Eliminar" (ocultar)
+                container.querySelectorAll('.delete-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        if (confirm('¿Estás seguro de que quieres eliminar (ocultar) este artículo?')) {
+                            await updateEstadoArticulo(docId, true, 'mensaje-mis-articulos');
+                        }
+                    });
+                });
+
+                // Añadir listeners para los botones de "Restaurar"
+                container.querySelectorAll('.restore-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        if (confirm('¿Estás seguro de que quieres restaurar este artículo?')) {
+                            await updateEstadoArticulo(docId, false, 'mensaje-articulos-eliminados');
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error("Error al cargar los artículos: ", error);
+                messageDiv.textContent = `Error al cargar los artículos: ${error.message}. Por favor, verifica tu conexión a Firebase y asegúrate de que los índices necesarios estén creados en Cloud Firestore.`;
+                messageDiv.style.color = 'red';
+                container.innerHTML = '<p class="error-message">Hubo un error al cargar tus artículos.</p>';
+            }
+        }
+
+        // --- FUNCIÓN PARA ACTUALIZAR EL ESTADO 'oculto' DE UN ARTÍCULO ---
+        async function updateEstadoArticulo(docId, ocultar, messageDivId) {
+            const messageDiv = document.getElementById(messageDivId);
+            messageDiv.textContent = '';
+            messageDiv.style.color = 'initial';
+
+            try {
+                const articleRef = doc(db, "articulosEnviados", docId);
+                await updateDoc(articleRef, {
+                    oculto: ocultar
+                });
+
+                messageDiv.textContent = `Artículo ${ocultar ? 'ocultado' : 'restaurado'} exitosamente.`;
+                messageDiv.style.color = 'green';
+                // Recargar ambas listas para reflejar los cambios usando el email consultado actualmente
+                await cargarArticulos(autorEmailConsultado, false); // Cargar artículos activos
+                await cargarArticulos(autorEmailConsultado, true);  // Cargar artículos eliminados
+
+            } catch (error) {
+                console.error(`Error al ${ocultar ? 'ocultar' : 'restaurar'} el artículo: `, error);
+                messageDiv.textContent = `Hubo un error al ${ocultar ? 'ocultar' : 'restaurar'} el artículo: ${error.message}`;
+                messageDiv.style.color = 'red';
+            }
+        }
+
+        // --- EVENTO DE ENVÍO DE ARTÍCULO ---
+        formularioArticulo.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const autorNombre = document.getElementById('autor-nombre').value;
+            const autorEmail = document.getElementById('autor-email').value;
+            const autorTelefono = document.getElementById('autor-telefono').value;
+            const tituloArticulo = document.getElementById('titulo-articulo').value;
+            const fechaEnvio = document.getElementById('fecha-envio').value;
+            const contenidoArticulo = document.getElementById('contenido-articulo').value;
+            const observaciones = document.getElementById('observaciones').value;
+
+            mensajeEnvioArticulo.textContent = '';
+            mensajeEnvioArticulo.style.color = 'initial';
+
+            try {
+                await addDoc(collection(db, "articulosEnviados"), { 
+                    autorNombre: autorNombre,
+                    autorEmail: autorEmail,
+                    autorTelefono: autorTelefono,
+                    tituloArticulo: tituloArticulo,
+                    fechaEnvio: fechaEnvio,
+                    contenidoArticulo: contenidoArticulo,
+                    observaciones: observaciones,
+                    fechaRecepcionFirebase: serverTimestamp(),
+                    estado: "Pendiente de Revisión", // Estado inicial
+                    aprobadoRevisor: null, // null = pendiente, true = aprobado, false = rechazado
+                    aprobadoAdmin: null, // null = pendiente, true = aprobado, false = rechazado
+                    oculto: false // Nuevo campo para la "eliminación suave"
+                });
+
+                mensajeEnvioArticulo.textContent = 'Tu artículo ha sido enviado para revisión. ¡Gracias por tu contribución a la Revista Cienciométrik!';
+                mensajeEnvioArticulo.style.color = 'green';
+                formularioArticulo.reset();
+                // Si el email de envío coincide con el email consultado, actualizar la lista
+                if (autorEmail === autorEmailConsultado) {
+                    await cargarArticulos(autorEmailConsultado, false); 
+                }
+
+            } catch (error) {
+                console.error("Error al enviar el artículo: ", error); 
+                mensajeEnvioArticulo.textContent = 'Hubo un error al enviar tu artículo. Por favor, inténtalo de nuevo.';
+                mensajeEnvioArticulo.style.color = 'red';
+            }
         });
 
-        // Script para mostrar un mensaje al enviar el formulario (puedes reemplazarlo por lógica de backend)
-        document.getElementById('uploadArticleForm').addEventListener('submit', function(event) {
-            alert("Artículo enviado con éxito. Será redirigido a la página del revisor (simulado).");
+        // --- EVENTO DE ENVÍO DE OBSERVACIONES / SUGERENCIAS ---
+        formularioObservaciones.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const feedbackEmail = document.getElementById('feedback-email').value;
+            const feedbackAsunto = document.getElementById('feedback-asunto').value;
+            const feedbackMensaje = document.getElementById('feedback-mensaje').value;
+
+            mensajeObservaciones.textContent = '';
+            mensajeObservaciones.style.color = 'initial';
+
+            try {
+                await addDoc(collection(db, "observacionesAutores"), {
+                    autorEmail: feedbackEmail,
+                    asunto: feedbackAsunto,
+                    mensaje: feedbackMensaje,
+                    fechaEnvio: serverTimestamp()
+                });
+
+                mensajeObservaciones.textContent = 'Tu observación/sugerencia ha sido enviada con éxito. ¡Agradecemos tu feedback!';
+                mensajeObservaciones.style.color = 'green';
+                formularioObservaciones.reset();
+            } catch (error) {
+                console.error("Error al enviar la observación/sugerencia: ", error);
+                mensajeObservaciones.textContent = `Hubo un error al enviar tu observación/sugerencia: ${error.message}. Asegúrate de tener conexión y reglas de Firebase correctas para 'observacionesAutores'.`;
+                mensajeObservaciones.style.color = 'red';
+            }
         });
 
-        // Script para mostrar observaciones
-        document.querySelectorAll('.view-observations').forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Evita que el enlace salte a otra parte
-                const observations = this.getAttribute('data-observations');
-                alert('Observaciones: ' + observations);
-            });
+        // --- EVENTO DEL BOTÓN DE BÚSQUEDA DE ARTÍCULOS ---
+        btnBuscarArticulos.addEventListener('click', async () => {
+            const email = searchAutorEmailInput.value.trim();
+            if (email) {
+                autorEmailConsultado = email; // Guarda el email consultado
+                await cargarArticulos(autorEmailConsultado, false); // Cargar artículos no ocultos
+                await cargarArticulos(autorEmailConsultado, true);  // Cargar artículos ocultos
+            } else {
+                alert("Por favor, introduce un correo electrónico para buscar tus artículos.");
+            }
         });
 
-        // Lógica para botones de acción (simulados, se conectarían al backend)
-        document.querySelectorAll('.action-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const action = this.title; // "Corregir Artículo", "Borrar Artículo", "Ver Artículo Publicado"
-                const row = this.closest('tr');
-                const title = row.querySelector('td:first-child').textContent;
-
-                alert(`Acción "${action}" solicitada para el artículo: "${title}". (Esta acción se conectaría con tu backend)`);
-            });
+        // --- CARGA INICIAL DE ARTÍCULOS AL CARGAR LA PÁGINA (VACÍA AL PRINCIPIO) ---
+        // La carga inicial se disparará solo cuando el usuario ingrese un email y haga clic en el botón.
+        document.addEventListener('DOMContentLoaded', () => {
+            // Puedes establecer un valor inicial para el input de búsqueda si lo deseas,
+            // por ejemplo, si tienes un usuario logueado en una sesión real.
+            // searchAutorEmailInput.value = "correo_del_usuario_logueado@example.com";
+            // No llamar a cargarArticulos aquí para que el usuario deba buscar.
         });
+
     </script>
 </body>
 </html>
