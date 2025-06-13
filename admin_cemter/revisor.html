@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cienciométrik - Panel de Revisor</title>
+    <title>Revisor - Revista Cienciometrik</title>
     <link rel="stylesheet" href="../CSS/styles.css">
-    <link rel="stylesheet" href="revisor.css">
+    <link rel="stylesheet" href="./revisor.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <mi-header></mi-header>
@@ -15,292 +16,516 @@
             <h3>Panel de Revisor</h3>
             <nav>
                 <ul>
-                    <li>
-                        <i class="fas fa-eye"></i>
-                        <a href="#revision-articulos" class="sidebar-link active">Artículos Pendientes de Revisión</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-double"></i>
-                        <a href="#articulos-revisados" class="sidebar-link">Historial de Artículos Revisados</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-sign-out-alt"></i>
-                        <a href="../index.html" class="logout-link">Cerrar Sesión</a>
-                    </li>
-                    </ul>
+                    <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="../quienes_somos.html"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
+                    <li><a href="../publicaciones.html"><i class="fas fa-book-open"></i> Publicaciones</a></li>
+                    <li><a href="../autores.html"><i class="fas fa-pen-nib"></i> Autores</a></li>
+                    <li><a href="../contactanos.html"><i class="fas fa-address-book"></i> Contáctanos</a></li>
+                    <li><a href="#articulos-pendientes"><i class="fas fa-hourglass-half"></i> Artículos Pendientes</a></li>
+                    <li><a href="#historial-revisiones"><i class="fas fa-history"></i> Historial de Revisiones</a></li> 
+                    <li><a href="#buscar-articulos"><i class="fas fa-search"></i> Buscar Artículos</a></li>
+                    <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
             </nav>
         </aside>
 
         <main class="main-content">
-            <section id="bienvenida" class="revisor-section">
-                <h2>Hola! <span id="revisor-nombre"> [Nombre del Revisor]</span></h2>
-                <p>Aquí puedes gestionar y evaluar los artículos enviados por los autores. Tu labor es fundamental para asegurar la calidad y rigurosidad de las publicaciones en Cienciométrik.</p>
-                <p>Utiliza esta interfaz para:</p>
-                <ul>
-                    <li>Revisar el contenido de los artículos.</li>
-                    <li>Añadir observaciones detalladas para los autores.</li>
-                    <li>Aprobar artículos para la revisión final por el administrador.</li>
-                    <li>Rechazar artículos que no cumplan con los estándares, indicando los motivos.</li>
-                </ul>
-            </section>
-
-            <section id="revision-articulos" class="revisor-section">
-                <h3>Artículos Pendientes de Revisión</h3>
-                <p>A continuación, encontrarás los artículos que han sido enviados y están a la espera de tu evaluación.</p>
-
-                <div class="table-container">
-                    <table class="revisor-table">
-                        <thead>
-                            <tr>
-                                <th>Título del Artículo</th>
-                                <th>Autor</th>
-                                <th>Fecha de Envío</th>
-                                <th>Estado Actual</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-article-id="art001">
-                                <td data-label="Título del Artículo">Importancia de la Minería de Datos en la Cienciometría</td>
-                                <td data-label="Autor">Dr. Juan Pérez</td>
-                                <td data-label="Fecha de Envío">2024-05-15</td>
-                                <td data-label="Estado Actual">
-                                    <span class="status status-pending">Pendiente de Revisión</span>
-                                </td>
-                                <td data-label="Acciones" class="actions">
-                                    <button class="button-primary view-article-button" title="Ver Artículo Completo">
-                                        <i class="fas fa-file-alt"></i> Ver
-                                    </button>
-                                    <button class="button-secondary add-observations-button" title="Añadir Observaciones">
-                                        <i class="fas fa-comment-dots"></i> Observaciones
-                                    </button>
-                                    <button class="button-success approve-button" title="Aprobar para Admin">
-                                        <i class="fas fa-check"></i> Aprobar
-                                    </button>
-                                    <button class="button-danger reject-button" title="Rechazar Artículo">
-                                        <i class="fas fa-times"></i> Rechazar
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr data-article-id="art002">
-                                <td data-label="Título del Artículo">Análisis Bibliométrico de Publicaciones sobre IA en Colombia</td>
-                                <td data-label="Autor">Lic. Ana Gómez</td>
-                                <td data-label="Fecha de Envío">2024-05-18</td>
-                                <td data-label="Estado Actual">
-                                    <span class="status status-pending">Pendiente de Revisión</span>
-                                </td>
-                                <td data-label="Acciones" class="actions">
-                                    <button class="button-primary view-article-button" title="Ver Artículo Completo">
-                                        <i class="fas fa-file-alt"></i> Ver
-                                    </button>
-                                    <button class="button-secondary add-observations-button" title="Añadir Observaciones">
-                                        <i class="fas fa-comment-dots"></i> Observaciones
-                                    </button>
-                                    <button class="button-success approve-button" title="Aprobar para Admin">
-                                        <i class="fas fa-check"></i> Aprobar
-                                    </button>
-                                    <button class="button-danger reject-button" title="Rechazar Artículo">
-                                        <i class="fas fa-times"></i> Rechazar
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                    </table>
+            <section class="section revisor-hero">
+                <div class="revisor-hero-content">
+                    <i class="fas fa-glasses revisor-icon"></i>
+                    <h2>¡Bienvenido, Revisor de la Ciencia!</h2>
+                    <p class="subtitle">Tu labor es crucial para mantener la calidad y el rigor de nuestra revista. Revisa los artículos enviados y comparte tus valiosos comentarios.</p>
                 </div>
             </section>
 
-            <section id="articulos-revisados" class="revisor-section">
-                <h3>Historial de Artículos Revisados</h3>
-                <p>Aquí puedes consultar los artículos que ya has procesado.</p>
-                <div class="table-container">
-                    <table class="revisor-table">
-                        <thead>
-                            <tr>
-                                <th>Título del Artículo</th>
-                                <th>Autor</th>
-                                <th>Fecha de Revisión</th>
-                                <th>Mi Veredicto</th>
-                                <th>Observaciones</th>
-                                <th>Estado Final (Admin)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-article-id="art003">
-                                <td data-label="Título del Artículo">Metodologías de Evaluación de Impacto Científico</td>
-                                <td data-label="Autor">Dr. Carlos López</td>
-                                <td data-label="Fecha de Revisión">2024-05-10</td>
-                                <td data-label="Mi Veredicto">
-                                    <span class="status status-approved"><i class="fas fa-check-circle"></i> Aprobado</span>
-                                </td>
-                                <td data-label="Observaciones">
-                                    <button class="button-info view-observations-button" data-observations="Revisado y aprobado. Buena estructura, faltan algunas referencias.">Ver</button>
-                                </td>
-                                <td data-label="Estado Final (Admin)">
-                                    <span class="status status-pending">Pendiente de Admin</span>
-                                </td>
-                            </tr>
-                            <tr data-article-id="art004">
-                                <td data-label="Título del Artículo">Desafíos de la Ciencia Abierta en Latinoamérica</td>
-                                <td data-label="Autor">M.Sc. Laura Fernández</td>
-                                <td data-label="Fecha de Revisión">2024-05-08</td>
-                                <td data-label="Mi Veredicto">
-                                    <span class="status status-rejected"><i class="fas fa-times-circle"></i> Rechazado</span>
-                                </td>
-                                <td data-label="Observaciones">
-                                    <button class="button-info view-observations-button" data-observations="Temática interesante pero la metodología no está clara y faltan datos de soporte. Requiere revisión profunda.">Ver</button>
-                                </td>
-                                <td data-label="Estado Final (Admin)">
-                                    <span class="status status-rejected">Rechazado por Revisor</span>
-                                </td>
-                            </tr>
-                            <tr data-article-id="art005">
-                                <td data-label="Título del Artículo">Indicadores Bibliométricos para la Evaluación de Revistas</td>
-                                <td data-label="Autor">Dra. Sofía Vargas</td>
-                                <td data-label="Fecha de Revisión">2024-05-01</td>
-                                <td data-label="Mi Veredicto">
-                                    <span class="status status-approved"><i class="fas fa-check-circle"></i> Aprobado</span>
-                                </td>
-                                <td data-label="Observaciones">
-                                    <button class="button-info view-observations-button" data-observations="Artículo de excelente calidad, recomendado para publicación.">Ver</button>
-                                </td>
-                                <td data-label="Estado Final (Admin)">
-                                    <span class="status status-published"><i class="fas fa-globe"></i> Publicado</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                    </table>
+            <section id="articulos-pendientes" class="section pending-articles-section">
+                <h2><i class="fas fa-hourglass-half"></i> Artículos Pendientes de Revisión</h2>
+                <p>Aquí encontrarás los artículos que aún no han sido aprobados o desaprobados por un revisor.</p>
+                <div class="filter-controls">
+                    <label for="filter-pending-time">Ver por:</label>
+                    <select id="filter-pending-time" class="modern-select">
+                        <option value="all">Todos</option>
+                        <option value="day">Último Día</option>
+                        <option value="week">Última Semana</option>
+                        <option value="month">Último Mes</option>
+                        <option value="year">Último Año</option>
+                    </select>
                 </div>
+                <div id="lista-articulos-pendientes" class="articles-list">
+                    <p class="loading-message">Cargando artículos pendientes...</p>
+                </div>
+                <div id="mensaje-pendientes" class="mensaje"></div>
             </section>
 
-            <div class="button-group-bottom">
-                <button class="button-secondary back-to-top" onclick="window.scrollTo(0, 0);">
-                    <i class="fas fa-arrow-up"></i> Volver Arriba
-                </button>
-                <a href="#" class="logout-button button-danger">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                </a>
-            </div>
+            <section id="historial-revisiones" class="section history-articles-section">
+                <h2><i class="fas fa-history"></i> Historial de Artículos Revisados</h2>
+                <p>Aquí puedes ver el historial de todos los artículos que ya han pasado por un proceso de revisión.</p>
+                <div class="filter-controls">
+                    <label for="filter-history-time">Ver por:</label>
+                    <select id="filter-history-time" class="modern-select">
+                        <option value="none" selected>- Selecciona un campo -</option>
+                        <option value="all">Todos</option>
+                        <option value="day">Último Día</option>
+                        <option value="week">Última Semana</option>
+                        <option value="month">Último Mes</option>
+                        <option value="year">Último Año</option>
+                    </select>
+                </div>
+                <div id="lista-historial-revisiones" class="articles-list">
+                    <p class="loading-message">Selecciona un filtro para ver el historial.</p>
+                </div>
+                <div id="mensaje-historial" class="mensaje"></div>
+            </section>
+
+            <section id="buscar-articulos" class="section search-articles-section">
+                <h2><i class="fas fa-search"></i> Buscar Artículos</h2>
+                <p>Busca artículos específicos por título, nombre de autor o correo electrónico del autor.</p>
+                <form id="search-form" class="modern-form search-bar">
+                    <div class="form-group">
+                        <label for="search-query"><i class="fas fa-keyboard icon"></i> Buscar por Título, Autor o Email:</label>
+                        <input type="text" id="search-query" placeholder="Ej: Inteligencia Artificial, Juan Pérez, autor@example.com">
+                    </div>
+                    <button type="submit" class="submit-button small-button" id="search-text-button">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                    <button type="button" class="button-secondary small-button" id="clear-search-button" style="margin-top: 15px;">
+                        <i class="fas fa-eraser"></i> Limpiar Búsqueda
+                    </button>
+                </form>
+                <div id="lista-articulos-busqueda" class="articles-list">
+                    <p class="loading-message">Introduce tu búsqueda y haz clic en el botón.</p>
+                </div>
+                <div id="mensaje-busqueda" class="mensaje"></div>
+            </section>
+
         </main>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Placeholder para el nombre del revisor (se llenaría con datos del backend)
-            const revisorNameElement = document.getElementById('revisor-nombre');
-            if (revisorNameElement) {
-                // Simulación: en un caso real, esto vendría de una sesión o API
-                revisorNameElement.textContent = "Andrea Restrepo";
-            }
-
-            // Manejo de la navegación de la barra lateral
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                    const targetId = this.getAttribute('href').substring(1);
-                    document.querySelectorAll('.revisor-section').forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    document.getElementById(targetId).style.display = 'block';
-                });
-            });
-
-            // Asegurarse de que la sección activa se muestre al cargar
-            const activeLink = document.querySelector('.sidebar-link.active');
-            if (activeLink) {
-                const targetId = activeLink.getAttribute('href').substring(1);
-                document.getElementById(targetId).style.display = 'block';
-            } else {
-                // Por defecto, mostrar la sección de bienvenida o la primera sección de la lista
-                document.getElementById('bienvenida').style.display = 'block';
-            }
-
-            // Funcionalidad de los botones de acción para artículos pendientes
-            document.querySelectorAll('.revisor-table .view-article-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const articleId = this.closest('tr').getAttribute('data-article-id');
-                    alert(`Simulando vista del artículo ${articleId}. Aquí se abriría un visor o se redirigiría a la página del artículo.`);
-                });
-            });
-
-            document.querySelectorAll('.revisor-table .add-observations-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const articleId = this.closest('tr').getAttribute('data-article-id');
-                    const observations = prompt(`Añade tus observaciones para el artículo ${articleId}:`);
-                    if (observations) {
-                        alert(`Observaciones guardadas para el artículo ${articleId}: "${observations}"`);
-                        // Aquí enviarías las observaciones al backend y actualizarías el estado si es necesario
-                    }
-                });
-            });
-
-            document.querySelectorAll('.revisor-table .approve-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const row = this.closest('tr');
-                    const articleId = row.getAttribute('data-article-id');
-                    if (confirm(`¿Estás seguro de aprobar el artículo ${articleId} para revisión del administrador?`)) {
-                        alert(`Artículo ${articleId} aprobado para revisión de administrador.`);
-                        // Actualizar el estado visualmente
-                        const statusSpan = row.querySelector('.status');
-                        statusSpan.className = 'status status-approved-revisor';
-                        statusSpan.innerHTML = '<i class="fas fa-check-circle"></i> Aprobado para Admin';
-                        // Deshabilitar botones de acción después de aprobar/rechazar
-                        row.querySelectorAll('.approve-button, .reject-button').forEach(btn => btn.disabled = true);
-                        // También podrías mover la fila a la sección de "Historial de Artículos Revisados"
-                    }
-                });
-            });
-
-            document.querySelectorAll('.revisor-table .reject-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const row = this.closest('tr');
-                    const articleId = row.getAttribute('data-article-id');
-                    const reason = prompt(`Indica el motivo del rechazo para el artículo ${articleId}:`);
-                    if (reason) {
-                        if (confirm(`¿Estás seguro de rechazar el artículo ${articleId}? Motivo: "${reason}"`)) {
-                            alert(`Artículo ${articleId} rechazado. Motivo: "${reason}"`);
-                            // Actualizar el estado visualmente
-                            const statusSpan = row.querySelector('.status');
-                            statusSpan.className = 'status status-rejected';
-                            statusSpan.innerHTML = '<i class="fas fa-times-circle"></i> Rechazado por Revisor';
-                            // Deshabilitar botones de acción después de aprobar/rechazar
-                            row.querySelectorAll('.approve-button, .reject-button').forEach(btn => btn.disabled = true);
-                            // También podrías mover la fila a la sección de "Historial de Artículos Revisados"
-                        }
-                    } else {
-                        alert("Debes proporcionar un motivo para rechazar el artículo.");
-                    }
-                });
-            });
-
-            // Funcionalidad para ver observaciones en el historial
-            document.querySelectorAll('.revisor-table .view-observations-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const observations = this.getAttribute('data-observations');
-                    alert('Observaciones: ' + observations);
-                });
-            });
-
-            // Cerrar Sesión (simulado)
-            document.querySelectorAll('.logout-link, .logout-button').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    // Aquí iría la lógica real para cerrar la sesión (limpiar cookies, tokens, etc.)
-                    alert("Has cerrado sesión. Redirigiendo a la página de inicio...");
-                    window.location.href = "/index.html"; // O la página de login
-                });
-            });
-        });
-    </script>
-
-        <mi-footer></mi-footer>
+    <mi-footer></mi-footer>
 
     <script src="header_admin.js"></script>
-    <script src="/Objects/container.js"></script>
+    <script src="../Objects/container.js"></script>
     <script src="footer_admin.js"></script>
-    <script src="/Objects/script.js"></script>
+    <script src="../Objects/script.js?v=1.8"></script> 
 
+    <script type="module">
+        // Importa las funciones que necesitas del SDK de Firebase.
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        // Importa las funciones específicas para Firestore.
+        import { getFirestore, collection, updateDoc, doc, query, where, getDocs, serverTimestamp, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        
+        // Aquí está la configuración de tu proyecto de Firebase.
+        const firebaseConfig = {
+            apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
+            authDomain: "cienciometrik-3c8e7.firebaseapp.com",
+            projectId: "cienciometrik-3c8e7",
+            storageBucket: "cienciometrik-3c8e7.firebasestorage.app",
+            messagingSenderId: "60232446009",
+            appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
+        };
+
+        // Inicializa Firebase.
+        const app = initializeApp(firebaseConfig);
+        // Obtén una referencia a la base de datos de Firestore.
+        const db = getFirestore(app);
+
+        // --- REFERENCIAS A ELEMENTOS DEL DOM ---
+        const listaArticulosPendientes = document.getElementById('lista-articulos-pendientes');
+        const mensajePendientes = document.getElementById('mensaje-pendientes');
+        const listaHistorialRevisiones = document.getElementById('lista-historial-revisiones');
+        const mensajeHistorial = document.getElementById('mensaje-historial'); 
+        const searchForm = document.getElementById('search-form');
+        const searchQueryInput = document.getElementById('search-query');
+        // const searchDateInput = document.getElementById('search-date-input'); // Removido
+        const listaArticulosBusqueda = document.getElementById('lista-articulos-busqueda');
+        const mensajeBusqueda = document.getElementById('mensaje-busqueda');
+        const filterPendingTime = document.getElementById('filter-pending-time');
+        const filterHistoryTime = document.getElementById('filter-history-time');
+        const searchTextButton = document.getElementById('search-text-button');
+        // const searchDateButton = document.getElementById('search-date-button'); // Removido
+        const clearSearchButton = document.getElementById('clear-search-button');
+
+
+        // --- FUNCIÓN PARA CALCULAR FECHAS PARA FILTRADO TEMPORAL ---
+        function getDateFilter(period) {
+            const now = new Date();
+            let startDate = null;
+            if (period === 'day') { 
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+            } else if (period === 'week') {
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+            } else if (period === 'month') {
+                startDate = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+            } else if (period === 'year') { 
+                startDate = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+            }
+            // Convertir a Timestamp para comparación con Firestore
+            return startDate ? Timestamp.fromDate(startDate) : null;
+        }
+
+        // --- FUNCIÓN PARA CARGAR Y MOSTRAR ARTÍCULOS ---
+        async function cargarArticulosRevisor(
+            containerElement,
+            messageElement,
+            sectionType = 'pending', // 'pending', 'history', 'search'
+            filterPeriod = 'all', // 'all', 'day', 'week', 'month', 'year', 'none'
+            searchTerm = '' // Removido searchDate
+        ) {
+            containerElement.innerHTML = '<p class="loading-message">Cargando artículos...</p>';
+            messageElement.textContent = '';
+            messageElement.style.color = 'initial';
+
+            // Comportamiento inicial para Historial
+            if (sectionType === 'history' && filterPeriod === 'none') {
+                containerElement.innerHTML = '<p class="loading-message">Selecciona un filtro para ver el historial.</p>';
+                messageElement.textContent = '';
+                return;
+            }
+
+            let q;
+            const articlesRef = collection(db, "articulosEnviados");
+            let queries = [];
+            let orderByField = "fechaRecepcionFirebase"; // Campo de orden predeterminado para la mayoría de los casos
+
+            // Lógica para filtrar por tipo de sección (pendiente o historial)
+            if (sectionType === 'pending') {
+                queries.push(where("aprobadoRevisor", "==", null)); 
+            } else if (sectionType === 'history') {
+                queries.push(where("aprobadoRevisor", "!=", null)); 
+            }
+            // Si sectionType es 'search', no añadimos un filtro de estado aquí para permitir buscar en todos.
+
+            // Lógica de filtrado de fecha para secciones de pendientes/historial
+            const effectiveStartDate = getDateFilter(filterPeriod);
+            if (effectiveStartDate) {
+                queries.push(where("fechaRecepcionFirebase", ">=", effectiveStartDate));
+            }
+            // orderByField ya es "fechaRecepcionFirebase" por defecto.
+
+            // Lógica de búsqueda por texto (título, autor, email)
+            if (sectionType === 'search' && searchTerm) {
+                // Si parece un email, busca por email exacto
+                if (searchTerm.includes('@')) { 
+                    queries.push(where("autorEmail", "==", searchTerm));
+                } else {
+                    // Para búsqueda por título o autor, haremos el filtro en el cliente
+                    // Firestore no soporta "LIKE" o búsquedas parciales de texto eficientemente
+                    // sin herramientas externas como Algolia o ElasticSearch.
+                    // Aquí simplemente obtenemos todos los documentos y filtramos.
+                    // Para grandes volúmenes de datos, esto no es escalable.
+                }
+            }
+
+            // Construir la consulta con orden. Se necesita un orderBy para range filters.
+            // Para la búsqueda de texto que no es email exacto, simplemente ordenamos por fechaRecepcionFirebase
+            // ya que el filtrado de texto completo se hará en el cliente.
+            q = query(articlesRef, ...queries, orderBy(orderByField, "desc"));
+
+            try {
+                const querySnapshot = await getDocs(q);
+                let articlesToShow = [];
+
+                if (sectionType === 'search' && searchTerm && !searchTerm.includes('@')) {
+                    const lowerSearchTerm = searchTerm.toLowerCase();
+                    querySnapshot.forEach(doc => {
+                        const data = doc.data();
+                        if (
+                            (data.tituloArticulo && data.tituloArticulo.toLowerCase().includes(lowerSearchTerm)) ||
+                            (data.autorNombre && data.autorNombre.toLowerCase().includes(lowerSearchTerm)) 
+                        ) {
+                            articlesToShow.push({ id: doc.id, ...data });
+                        }
+                    });
+                } else { 
+                    // Si no hay término de búsqueda general (o si la búsqueda ya fue por email exacto),
+                    // mostramos todos los resultados obtenidos de la consulta Firestore.
+                    querySnapshot.forEach(doc => {
+                        articlesToShow.push({ id: doc.id, ...doc.data() });
+                    });
+                }
+
+                if (articlesToShow.length === 0) {
+                    const periodMap = {
+                        'day': 'del último día',
+                        'week': 'de la última semana',
+                        'month': 'del último mes',
+                        'year': 'del último año',
+                        'all': ''
+                    };
+                    let sectionMessage = '';
+                    if (sectionType === 'pending') {
+                        sectionMessage = 'pendientes de revisión';
+                    } else if (sectionType === 'history') {
+                        sectionMessage = 'en el historial de revisiones';
+                    } else if (sectionType === 'search') {
+                        sectionMessage = 'que coincidan con tu búsqueda'; 
+                    }
+                    containerElement.innerHTML = `<p class="no-articles-message">No hay artículos ${sectionMessage} ${periodMap[filterPeriod] || ''}.</p>`;
+                    return;
+                }
+
+                let htmlContent = '';
+                articlesToShow.forEach((data) => {
+                    const docId = data.id;
+                    const fechaRecepcion = data.fechaRecepcionFirebase && data.fechaRecepcionFirebase.seconds ? new Date(data.fechaRecepcionFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
+                    const fechaEnvio = data.fechaEnvioFirebase && data.fechaEnvioFirebase.seconds ? new Date(data.fechaEnvioFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A'; // Usar fechaEnvioFirebase
+                    const fechaRevision = data.fechaRevisionRevisor && data.fechaRevisionRevisor.seconds ? new Date(data.fechaRevisionRevisor.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
+                    
+                    let estadoClase;
+                    let estadoTexto;
+                    if (data.aprobadoRevisor === true) {
+                        estadoClase = 'status-aprobado';
+                        estadoTexto = 'Aprobado por Revisor';
+                    } else if (data.aprobadoRevisor === false) {
+                        estadoClase = 'status-rechazado';
+                        estadoTexto = 'Rechazado por Revisor';
+                    } else {
+                        estadoClase = 'status-pendiente-de-revision';
+                        estadoTexto = 'Pendiente de Revisión';
+                    }
+
+                    const isApprovedByRevisor = data.aprobadoRevisor === true;
+                    const isRejectedByRevisor = data.aprobadoRevisor === false;
+
+                    htmlContent += `
+                        <div class="article-card">
+                            <h3>${data.tituloArticulo || 'Título no disponible'}</h3>
+                            <p><strong>Autor:</strong> ${data.autorNombre || 'N/A'}</p>
+                            <p><strong>Email:</strong> ${data.autorEmail || 'N/A'}</p>
+                            <p><strong>Fecha Envío Autor:</strong> ${fechaEnvio}</p>
+                            <p><strong>Fecha Recepción:</strong> ${fechaRecepcion}</p>
+                            <p><strong>Estado Revisión:</strong> <span class="${estadoClase}">${estadoTexto}</span></p>
+                            
+                            ${sectionType === 'history' || sectionType === 'search' ? `
+                                <p><strong>Fecha Revisión:</strong> ${fechaRevision}</p>
+                                <p><strong>Veredicto:</strong> ${estadoTexto}</p>
+                                <p><strong>Comentarios Revisor:</strong> ${data.comentariosRevisor || 'N/A'}</p>
+                            ` : ''}
+
+                            <div class="article-actions">
+                                <button class="view-article-btn" data-id="${docId}">
+                                    <i class="fas fa-eye"></i> Ver Artículo
+                                </button>
+                                ${!isApprovedByRevisor && !isRejectedByRevisor && sectionType === 'pending' ? `
+                                    <button class="approve-article-btn" data-id="${docId}">
+                                        <i class="fas fa-check"></i> Aprobar
+                                    </button>
+                                    <button class="reject-article-btn" data-id="${docId}">
+                                        <i class="fas fa-times"></i> Rechazar
+                                    </button>
+                                ` : ''}
+                                ${sectionType === 'history' || sectionType === 'search' ? `
+                                    <button class="edit-comment-btn" data-id="${docId}">
+                                        <i class="fas fa-edit"></i> Editar Comentario
+                                    </button>
+                                ` : ''}
+                            </div>
+                            <div id="full-article-${docId}" class="full-article-content" style="display:none;">
+                                <h4>Contenido Completo:</h4>
+                                <pre>${data.contenidoArticulo || 'Contenido no disponible'}</pre>
+                                ${data.observaciones ? `<h4>Observaciones del Autor:</h4><p>${data.observaciones}</p>` : ''}
+                                <h4>Comentarios del Revisor:</h4>
+                                <div class="form-group review-comment-group">
+                                    <label for="revisor-comment-${docId}"><i class="fas fa-comment-alt icon"></i> Tu Comentario:</label>
+                                    <textarea id="revisor-comment-${docId}" rows="5" placeholder="Escribe tus comentarios sobre el artículo aquí...">${data.comentariosRevisor || ''}</textarea>
+                                </div>
+                                <div class="review-actions">
+                                    <button class="save-comment-btn" data-id="${docId}"><i class="fas fa-save"></i> Guardar Comentario</button>
+                                    <button class="close-article-btn"><i class="fas fa-times"></i> Cerrar</button>
+                                </div>
+                                <div id="mensaje-revision-${docId}" class="mensaje"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                containerElement.innerHTML = htmlContent;
+
+                // Añadir listeners para los botones (se mantiene la lógica)
+                containerElement.querySelectorAll('.view-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const articleId = event.currentTarget.dataset.id;
+                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                        if (fullArticleDiv) {
+                            fullArticleDiv.style.display = 'block';
+                            event.currentTarget.style.display = 'none'; // Ocultar el botón "Ver Artículo"
+                            const commentArea = fullArticleDiv.querySelector(`#revisor-comment-${articleId}`);
+                            if (commentArea) {
+                                commentArea.value = articlesToShow.find(a => a.id === articleId).comentariosRevisor || '';
+                            }
+                        }
+                    });
+                });
+
+                containerElement.querySelectorAll('.close-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const fullArticleDiv = event.currentTarget.closest('.full-article-content');
+                        if (fullArticleDiv) {
+                            const articleId = fullArticleDiv.id.replace('full-article-', '');
+                            fullArticleDiv.style.display = 'none';
+                            const viewButton = containerElement.querySelector(`.view-article-btn[data-id="${articleId}"]`);
+                            if (viewButton) {
+                                viewButton.style.display = 'inline-block';
+                            }
+                        }
+                    });
+                });
+
+                // Botones Aprobar/Rechazar (solo en sección pendiente)
+                containerElement.querySelectorAll('.approve-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const comment = document.getElementById(`revisor-comment-${docId}`).value;
+                        if (confirm('¿Estás seguro de que quieres APROBAR este artículo?')) {
+                            await updateEstadoRevision(docId, true, comment, `mensaje-revision-${docId}`);
+                        }
+                    });
+                });
+
+                containerElement.querySelectorAll('.reject-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const comment = document.getElementById(`revisor-comment-${docId}`).value;
+                        if (confirm('¿Estás seguro de que quieres RECHAZAR este artículo? Se recomienda añadir un comentario explicando los motivos.')) {
+                            await updateEstadoRevision(docId, false, comment, `mensaje-revision-${docId}`);
+                        }
+                    });
+                });
+                
+                // Botón Editar Comentario (solo en historial/búsqueda) - si se desea editar el comentario sin cambiar el estado
+                containerElement.querySelectorAll('.edit-comment-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const fullArticleDiv = document.getElementById(`full-article-${docId}`);
+                        if (fullArticleDiv) {
+                            fullArticleDiv.style.display = 'block'; 
+                            const commentArea = fullArticleDiv.querySelector(`#revisor-comment-${docId}`);
+                            commentArea.value = articlesToShow.find(a => a.id === docId).comentariosRevisor || '';
+                        }
+                    });
+                });
+
+
+                containerElement.querySelectorAll('.save-comment-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const comment = document.getElementById(`revisor-comment-${docId}`).value;
+                        if (confirm('¿Estás seguro de que quieres guardar este comentario?')) {
+                            await updateComment(docId, comment, `mensaje-revision-${docId}`);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error("Error al cargar los artículos para el revisor: ", error);
+                messageElement.textContent = `Error al cargar los artículos: ${error.message}. Por favor, verifica tu conexión a Firebase y asegúrate de que los índices necesarios estén creados en Cloud Firestore.`;
+                messageElement.style.color = 'red';
+                containerElement.innerHTML = '<p class="error-message">Hubo un error al cargar los artículos.</p>';
+            }
+        }
+
+        // --- FUNCIÓN PARA ACTUALIZAR EL ESTADO DE REVISIÓN Y AÑADIR COMENTARIOS ---
+        async function updateEstadoRevision(docId, aprobado, comentario, messageDivId) {
+            const messageDiv = document.getElementById(messageDivId);
+            messageDiv.textContent = '';
+            messageDiv.style.color = 'initial';
+
+            try {
+                const articleRef = doc(db, "articulosEnviados", docId);
+                const updateData = {
+                    aprobadoRevisor: aprobado,
+                    comentariosRevisor: comentario,
+                    fechaRevisionRevisor: serverTimestamp(),
+                    estado: aprobado ? "Aprobado por Revisor" : "Rechazado por Revisor"
+                };
+                await updateDoc(articleRef, updateData);
+
+                messageDiv.textContent = `Artículo ${aprobado ? 'aprobado' : 'rechazado'} y comentario guardado exitosamente.`;
+                messageDiv.style.color = 'green';
+                // Recargar las secciones relevantes para reflejar los cambios
+                // Cargamos la sección de pendientes siempre con 'all' para que muestre datos
+                await cargarArticulosRevisor(listaArticulosPendientes, mensajePendientes, 'pending', 'all'); 
+                // La sección de historial se carga con el valor actual del filtro
+                await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', filterHistoryTime.value);
+                // Si la búsqueda está activa, recargar también esa sección
+                if (searchQueryInput.value) { 
+                    await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', searchQueryInput.value);
+                }
+
+            } catch (error) {
+                console.error(`Error al actualizar el estado del artículo: `, error);
+                messageDiv.textContent = `Hubo un error al actualizar el artículo: ${error.message}`;
+                messageDiv.style.color = 'red';
+            }
+        }
+
+        // --- FUNCIÓN PARA SÓLO GUARDAR COMENTARIOS SIN CAMBIAR ESTADO ---
+        async function updateComment(docId, comentario, messageDivId) {
+            const messageDiv = document.getElementById(messageDivId);
+            messageDiv.textContent = '';
+            messageDiv.style.color = 'initial';
+
+            try {
+                const articleRef = doc(db, "articulosEnviados", docId);
+                await updateDoc(articleRef, {
+                    comentariosRevisor: comentario,
+                });
+
+                messageDiv.textContent = `Comentario guardado exitosamente.`;
+                messageDiv.style.color = 'green';
+                // Recargar las secciones relevantes para reflejar los cambios
+                await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', filterHistoryTime.value);
+                // Si la búsqueda está activa, recargar también esa sección
+                if (searchQueryInput.value) { 
+                    await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', searchQueryInput.value);
+                }
+
+            } catch (error) {
+                console.error(`Error al guardar el comentario: `, error);
+                messageDiv.textContent = `Hubo un error al guardar el comentario: ${error.message}`;
+                messageDiv.style.color = 'red';
+            }
+        }
+
+        // --- INICIALIZACIÓN DE CARGA DE ARTÍCULOS ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Cargar artículos pendientes con "all" por defecto al inicio
+            await cargarArticulosRevisor(listaArticulosPendientes, mensajePendientes, 'pending', 'all');
+            
+            // La sección de búsqueda inicia vacía
+            listaArticulosBusqueda.innerHTML = '<p class="loading-message">Introduce tu búsqueda y haz clic en el botón.</p>';
+            
+            // El historial de revisiones inicia con "none" y el mensaje de selección
+            filterHistoryTime.value = 'none'; // Asegurarse de que el valor por defecto sea 'none'
+            await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', 'none'); 
+        });
+
+
+        // Eventos de filtrado por tiempo 
+        filterPendingTime.addEventListener('change', async (event) => {
+            await cargarArticulosRevisor(listaArticulosPendientes, mensajePendientes, 'pending', event.target.value);
+        });
+
+        filterHistoryTime.addEventListener('change', async (event) => {
+            await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', event.target.value);
+        });
+
+        searchTextButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const searchTerm = searchQueryInput.value.trim();
+            await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', searchTerm);
+        });
+
+        clearSearchButton.addEventListener('click', async () => {
+            searchQueryInput.value = '';
+            await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', '');
+        });
+
+        searchQueryInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchTextButton.click();
+            }
+        });
+    </script>
 </body>
 </html>
-
