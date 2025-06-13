@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cienciométrik - Panel de Administración</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <mi-header></mi-header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Panel de Administrador</h3>
+            <nav>
+                <ul>
+                    <li>
+                        <i class="fas fa-list-alt"></i>
+                        <a href="#gestion-articulos" class="sidebar-link active">Gestión de Artículos</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-upload"></i>
+                        <a href="#articulos-enviados" class="sidebar-link">Artículos Enviados por Autores</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope-open-text"></i>
+                        <a href="#mensajes-contacto-admin" class="sidebar-link">Mensajes de Contacto</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-paper-plane"></i>
+                        <a href="#envio-mensajes-admin" class="sidebar-link">Enviar Mensajes a Autores</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-users-cog"></i>
+                        <a href="#gestion-usuarios" class="sidebar-link">Gestión de Usuarios</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-key"></i>
+                        <a href="#gestion-recuperacion" class="sidebar-link">Recuperación de Contraseñas</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-cogs"></i>
+                        <a href="#configuracion-general" class="sidebar-link">Configuración</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <a href="../index.html" class="logout-link">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="gestion-articulos" class="section admin-articles-section">
+                <h2>Gestión de Artículos</h2>
+                <p>Gestiona el estado de los artículos y su asignación a revisores.</p>
+
+                <div class="filter-group">
+                    <label for="filter-author">Filtrar por Autor:</label>
+                    <select id="filter-author">
+                        <option value="">Todos los autores</option>
+                        <option value="Juan Perez">Juan Pérez</option>
+                        <option value="Ana Gomez">Ana Gómez</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-articles-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Título del Artículo</th>
+                                <th>Autor</th>
+                                <th>Fecha Envío</th>
+                                <th>Estado Revisor</th>
+                                <th>Revisor Asignado</th>
+                                <th>Observ. Revisor</th>
+                                <th>Estado Admin</th>
+                                <th>Observ. Admin</th>
+                                <th>Estado Publicación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="articulos-enviados" class="section hidden admin-submitted-articles-section">
+                <h2>Artículos Enviados por Autores</h2>
+                <p>Esta sección muestra los artículos enviados directamente por los autores.</p>
+                <div class="table-responsive">
+                    <table class="admin-submitted-articles-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID Artículo</th>
+                                <th>Título del Artículo</th>
+                                <th>Autor</th>
+                                <th>Fecha de Envío</th>
+                                <th>Artículo Completo</th>
+                                <th>Observaciones Autor</th>
+                                <th>Estado Actual</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="mensajes-contacto-admin" class="section hidden admin-messages-section">
+                <h2>Mensajes de Contacto Recibidos</h2>
+                <p>Aquí puedes ver los mensajes enviados por los usuarios a través del formulario de "Contáctanos".</p>
+                <div class="table-responsive">
+                    <table class="admin-contact-messages-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID Mensaje</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Tipo de Consulta</th>
+                                <th>Asunto</th>
+                                <th>Mensaje</th>
+                                <th>Fecha Envío</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactMessagesTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="envio-mensajes-admin" class="section hidden admin-form-section">
+                <h2>Enviar Mensajes a Autores / General</h2>
+                <p>Usa este formulario para enviar comunicaciones importantes o feedback a los autores.</p>
+                <form id="form-admin-message" class="admin-form">
+                    <div class="input-group">
+                        <label for="admin-message-recipient-type">Tipo de Destinatario:</label>
+                        <select id="admin-message-recipient-type" name="recipientType" required>
+                            <option value="">Selecciona...</option>
+                            <option value="todos">Todos los autores</option>
+                            <option value="autor-especifico">Autor Específico (por email)</option>
+                            <option value="revisor-especifico">Revisor Específico (por email)</option>
+                            <option value="general">Mensaje General (sin destinatario específico)</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="admin-recipient-email-group" style="display: none;">
+                        <label for="admin-recipient-email">Email del Destinatario:</label>
+                        <input type="email" id="admin-recipient-email" name="recipientEmail" placeholder="ejemplo@correo.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="admin-message-subject">Asunto del Mensaje:</label>
+                        <input type="text" id="admin-message-subject" name="subject" placeholder="Asunto del comunicado" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="admin-message-content">Contenido del Mensaje:</label>
+                        <textarea id="admin-message-content" name="content" rows="8" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    </div>
+                    <button type="submit" class="button-primary">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                    </button>
+                    <div id="admin-message-status" class="message-status"></div>
+                </form>
+            </section>
+
+
+            <section id="gestion-usuarios" class="section hidden admin-users-section">
+                <h2>Gestión de Usuarios</h2>
+                <p>Aquí se gestionarán los autores y revisores del sistema.</p>
+                <div class="table-responsive">
+                    <table class="admin-users-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID Usuario</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Fecha Registro</th>
+                                <th>Estado Cuenta</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="gestion-recuperacion" class="section hidden admin-recovery-section">
+                <h2>Gestión de Recuperación de Contraseñas</h2>
+                <p>Aquí se gestionarán las solicitudes de recuperación de contraseñas enviadas.</p>
+                <div class="table-responsive">
+                    <table class="admin-recovery-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID Solicitud</th>
+                                <th>Email Solicitante</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Estado Solicitud</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="configuracion-general" class="section hidden">
+                <h2>Configuración General</h2>
+                <p>Opciones de configuración de la revista y el sistema.</p>
+            </section>
+
+            <div class="navigation-buttons">
+                <button class="button-link home" onclick="window.scrollTo(0, 0);">
+                    <i class="fas fa-arrow-up"></i> Volver Arriba
+                </button>
+                <a href="../index.html" class="button-link logout">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <mi-footer></mi-footer>
+
+    <script src="header_admin.js" type="module"></script>
+    <script src="/Objects/container.js" type="module"></script>
+    <script src="footer_admin.js" type="module"></script>
+    <script src="/Objects/script.js" type="module"></script>
+    <script src="admin_messages.js" type="module"></script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+COPIAREVISTA/
+├── .vscode/
+├── admin_cemter/
+│   ├── admin_edit_index.css
+│   ├── admin_edit_index.html
+│   ├── admin_messages.js
+│   ├── admin.css
+│   ├── admin.html
+│   ├── adminBU.css
+│   ├── adminBU.html
+│   ├── autor_panel.html
+│   ├── autores.css
+│   ├── footer_admin.js
+│   ├── header_admin.js
+│   ├── Logo cienciometrik blanco.png
+│   ├── Logo cienciometrik negro.png
+│   ├── Logo SENA blanco.png
+│   ├── Logo SENA negro.png
+│   ├── revisor_styles.css
+│   ├── revisor.css
+│   └── revisor.html
+├── CSS/
+│   └── styles.css
+├── Docs/
+│   ├── MANUAL_IDENTIDAD_VISUAL_SENA_2024....pdf
+│   ├── Paleta de colores utilizada - Revista Ciencio....pdf
+│   ├── Revista CienciometriK_Vol. 2 N°. 3 2024.pdf
+│   ├── REVISTA_CIENCIOMETRIK_VOLUMEN 2 N° ....pdf
+│   └── REVISTA_CienciometriK_1-1-3.pdf
+├── images/
+├── js/
+│   ├── admin_edit_index.js
+│   ├── contentloader.js
+│   └── firebase-config.js
+├── login/
+│   ├── crear_cuenta.html
+│   ├── Login usser.txt
+│   ├── login.css
+│   ├── login.html
+│   ├── login.js
+│   └── pass_rec.html
+├── Objects/
+│   ├── logos_png/
+│   ├── container.js
+│   ├── footer.js
+│   ├── header.js
+│   └── script.js
+├── vids/
+│   ├── vid1.mp4
+│   └── vid2.mp4
+├── .gitattributes
+├── autores.html
+├── contactanos.html
+├── contactanosR.html
+├── index.html
+├── new_html.txt
+├── noticias.html
+├── otro.html
+├── panel.txt
+├── publicaciones.html
+├── quienes_somos.html
+└── Sincionization.txt.txt
