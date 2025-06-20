@@ -1,0 +1,793 @@
+/* autor_panel.css */
+
+/*
+   Asegúrate de que styles.css (si existe y tiene variables globales) se cargue ANTES de autor_panel.css
+   para que las variables CSS como --primary-color, --vibrant-green,
+   --translucent-blue-bg, etc., estén disponibles aquí.
+
+   Para este ejemplo, asumo que las variables de admin.css y revisor.css son las que utilizaremos como base.
+*/
+
+:root {
+    --primary-color: #237482; /* Azul verdoso */
+    --secondary-color: #1a5c68; /* Tono más oscuro de primary-color */
+    --accent-color: #00bcd4;   /* Un azul cian para acentos */
+    --text-dark: #333;
+    --text-light: #f8f8f8;
+    --bg-light: #f4f7f6;
+    --bg-card: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --success-color: #28a745;   /* Verde para éxito */
+    --warning-color: #ffc107;   /* Amarillo para advertencia/pendiente */
+    --danger-color: #dc3545;    /* Rojo para peligro/rechazado */
+    --info-color: #17a2b8;      /* Azul para información */
+    --gray-color: #6c757d;      /* Gris general */
+    --header-height: 70px; /* **IMPORTANTE**: Define la altura de tu cabecera. Ajusta este valor si es diferente. */
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Layout Principal --- */
+.container {
+    display: flex;
+    gap: 30px;
+    max-width: 1500px;
+    margin: 30px auto;
+    padding: 0 20px;
+    flex: 1;
+    align-items: flex-start;
+}
+
+/* --- Barra Lateral (Sidebar) --- */
+.sidebar {
+    width: 280px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--header-height) + 30px);
+    height: fit-content;
+    z-index: 1000;
+    transform: translateZ(0); /* Para asegurar el sticky en algunos navegadores */
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--text-light);
+    font-size: 1.6em;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.sidebar h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 10px;
+    font-size: 1.1em;
+    color: var(--accent-color);
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background-color: var(--secondary-color);
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar nav ul li a.active {
+    background-color: var(--secondary-color);
+    border-left: 5px solid var(--accent-color);
+    padding-left: 10px;
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* --- ESTILOS GENERALES DE SECCIONES DE AUTOR --- */
+.section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    margin-bottom: 0; /* Asegura que el margen gap del main-content controle el espacio */
+}
+
+.section h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.section h2 .fas {
+    color: var(--secondary-color);
+    font-size: 1.4em;
+}
+
+/* --- Hero Section del Autor --- */
+.autor-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.autor-hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.autor-hero h2 {
+    color: #fff;
+    font-size: 2.5em;
+    margin-bottom: 12px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.autor-hero .autor-icon {
+    font-size: 3.5em;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.autor-hero .subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* --- Estilos de las Tarjetas de Artículo del Autor --- */
+.articles-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.article-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.article-card h3 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.article-card p {
+    margin-bottom: 7px;
+    font-size: 0.9em;
+    color: var(--text-dark);
+}
+
+.article-card p strong {
+    color: var(--secondary-color);
+}
+
+/* Status Badges para Autor */
+.status-pendiente,
+.status-enviado,
+.status-en-revision,
+.status-aprobado,
+.status-rechazado,
+.status-observaciones {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.85em;
+    display: inline-block;
+    margin-left: 5px;
+    text-transform: capitalize;
+}
+.status-pendiente { background-color: var(--warning-color); color: #fff; }
+.status-enviado { background-color: #6c757d; color: #fff; }
+.status-en-revision { background-color: var(--info-color); color: #fff; }
+.status-aprobado { background-color: var(--success-color); color: #fff; }
+.status-rechazado { background-color: var(--danger-color); color: #fff; }
+.status-observaciones { background-color: #fd7e14; color: #fff; }
+
+/* Acciones del Artículo */
+.article-actions {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.article-actions button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.article-actions button i {
+    font-size: 1.05em;
+}
+
+.view-article-btn { background-color: var(--info-color); color: #fff; }
+.view-article-btn:hover { background-color: #118aa6; transform: translateY(-2px); }
+
+.upload-button {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+.upload-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+.send-button {
+    background-color: var(--success-color);
+    color: #fff;
+}
+.send-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.edit-article-btn { background-color: var(--primary-color); color: #fff; }
+.edit-article-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+.delete-article-btn { background-color: var(--danger-color); color: #fff; }
+.delete-article-btn:hover { background-color: #c82333; transform: translateY(-2px); }
+
+.respond-btn { background-color: var(--info-color); color: #fff; }
+.respond-btn:hover { background-color: #118aa6; transform: translateY(-2px); }
+
+/* --- Contenido Completo del Artículo (Desplegable) --- */
+.full-article-content {
+    background-color: var(--bg-light);
+    border-top: 1px dashed var(--border-color);
+    padding: 25px;
+    margin-top: 18px;
+    border-radius: 8px;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.full-article-content h4 {
+    color: var(--primary-color);
+    font-size: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 7px;
+}
+
+.full-article-content pre {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    white-space: pre-wrap; /* Permite que el texto se envuelva */
+    word-wrap: break-word; /* Asegura el salto de palabra en cadenas largas */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    color: #333;
+    border: 1px solid #ddd;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.full-article-content p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.revisor-comment-box,
+.author-response-box {
+    background-color: #f9f9f9;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.revisor-comment-box {
+    border-left: 5px solid var(--accent-color); /* Comentarios del revisor, color de acento */
+}
+
+.author-response-box {
+    border-left: 5px solid var(--info-color); /* Respuesta del autor, color de información */
+}
+
+.revisor-comment-box p,
+.author-response-box p {
+    margin: 0;
+    font-style: italic;
+    color: #444;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.form-group.article-submit-group,
+.form-group.observation-response-group {
+    margin-top: 20px;
+}
+
+.form-group.article-submit-group label,
+.form-group.observation-response-group label {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.article-submit-group input[type="text"],
+.article-submit-group input[type="email"],
+.article-submit-group textarea,
+.observation-response-group textarea {
+    min-height: 100px; /* Ajustado el alto mínimo */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Formularios y Controles de Filtro/Búsqueda - ESTILOS MEJORADOS --- */
+.filter-controls,
+.search-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 25px 30px; /* Aumentado el padding para más espacio */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco ligeramente translúcido */
+    border: 1px solid rgba(224, 224, 224, 0.5); /* Borde más suave, usando el valor de --border-color */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada y suave */
+    backdrop-filter: blur(3px); /* Efecto de desenfoque tipo velo (puede no verse en todos los navegadores) */
+    -webkit-backdrop-filter: blur(3px); /* Prefijo para Safari */
+    transition: all 0.3s ease; /* Transición para interacciones */
+}
+
+.filter-controls:hover,
+.search-bar:hover {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12); /* Sombra ligeramente más intensa al pasar el ratón */
+}
+
+.filter-controls label,
+.search-bar label {
+    font-weight: 600; /* Ligeramente más negrita */
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Aumentado el espacio entre icono y texto */
+    font-size: 1.05em; /* Ligeramente más grande */
+    opacity: 0.9; /* Pequeña opacidad para un look más suave */
+}
+
+.modern-select,
+.modern-form input[type="text"],
+.modern-form textarea {
+    padding: 12px 18px; /* Aumentado el padding interno */
+    border: 1px solid rgba(224, 224, 224, 0.7); /* Borde más suave y ligeramente translúcido */
+    border-radius: 10px; /* Bordes más redondeados */
+    font-size: 1.05em; /* Ligeramente más grande */
+    color: var(--text-dark);
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo ligeramente translúcido para los inputs */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    flex-grow: 1;
+    min-width: 220px; /* Ligeramente aumentado el min-width */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
+}
+
+.modern-select:focus,
+.modern-form input[type="text"]:focus,
+.modern-form textarea:focus {
+    border-color: var(--accent-color); /* Borde de color de acento al enfocar */
+    box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.25), inset 0 1px 4px rgba(0, 0, 0, 0.08); /* Sombra de enfoque más suave */
+    outline: none;
+    background-color: #fff; /* Fondo blanco sólido al enfocar */
+}
+
+.modern-form textarea {
+    min-height: 120px; /* Asegura un buen espacio para la escritura */
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.form-group {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Aumentado el espacio entre label e input */
+}
+
+.form-group .icon {
+    color: var(--primary-color);
+    font-size: 1.2em; /* Ligeramente más grande */
+    opacity: 0.8; /* Pequeña opacidad */
+}
+
+.search-bar {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+}
+
+.search-bar button {
+    width: auto;
+    align-self: flex-end; /* Centra el botón de búsqueda */
+    margin-top: 15px;
+}
+
+/* Buttons for forms/actions - ESTILOS MEJORADOS */
+.submit-button, .button-secondary {
+    padding: 14px 25px; /* Más padding para botones más grandes */
+    border: none;
+    border-radius: 10px; /* Más redondeados */
+    font-size: 1.05em; /* Ligeramente más grandes */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transición para sombra */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Más espacio entre icono y texto */
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra inicial para botones */
+}
+
+.submit-button { background-color: var(--primary-color); color: var(--text-light); }
+.submit-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px); /* Efecto de "levantar" más pronunciado */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra más intensa al pasar el ratón */
+}
+
+.button-secondary { background-color: var(--gray-color); color: var(--text-light); }
+.button-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.small-button {
+    padding: 12px 20px; /* Ajuste para botones pequeños */
+    font-size: 0.95em;
+    border-radius: 8px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        margin: 20px;
+        padding: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .sidebar h3 {
+        margin-bottom: 20px;
+        font-size: 1.6em;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 0;
+    }
+
+    .sidebar nav ul li a {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        text-align: center;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 120px;
+    }
+
+    .sidebar nav ul li a i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .sidebar nav ul li a.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent-color);
+        padding-left: 15px;
+    }
+
+    .main-content {
+        padding: 0 20px;
+        gap: 25px;
+    }
+
+    .autor-hero {
+        padding: 35px 20px;
+    }
+
+    .autor-hero h2 {
+        font-size: 2.2em;
+    }
+
+    .autor-hero .autor-icon {
+        font-size: 3.5em;
+    }
+
+    .autor-hero .subtitle {
+        font-size: 1.1em;
+    }
+
+    .section {
+        padding: 25px;
+    }
+
+    .section h2 {
+        font-size: 1.8em;
+        gap: 8px;
+    }
+
+    .article-card {
+        padding: 18px;
+    }
+
+    .article-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .article-actions button {
+        width: 100%;
+        padding: 9px;
+        font-size: 0.85em;
+    }
+    .full-article-content {
+        padding: 20px;
+    }
+    .full-article-content h4 {
+        font-size: 1.2em;
+    }
+    .full-article-content pre,
+    .full-article-content textarea {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+    .form-group.article-submit-group {
+        gap: 10px;
+    }
+    .form-group.article-submit-group label {
+        align-self: flex-start;
+    }
+    .submit-button, .button-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px; /* Ajuste para responsividad */
+    }
+    /* Responsive ajustes para los formularios mejorados */
+    .filter-controls,
+    .search-bar {
+        padding: 20px 25px; /* Ajusta el padding para pantallas más pequeñas */
+    }
+    .modern-select,
+    .modern-form input[type="text"],
+    .modern-form textarea {
+        min-width: unset; /* Permite que se encoja más */
+        padding: 10px 15px; /* Ajusta el padding para pantallas más pequeñas */
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0 15px;
+    }
+    .section h2 {
+        font-size: 1.6em;
+    }
+    .article-card h3 {
+        font-size: 1.3em;
+    }
+    .article-card p {
+        font-size: 0.9em;
+    }
+    .full-article-content {
+        padding: 15px;
+    }
+    .full-article-content h4 {
+        font-size: 1.1em;
+    }
+    .full-article-content pre,
+    .full-article-content textarea {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+    .filter-controls,
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-controls label,
+    .search-bar label {
+        align-self: flex-start;
+    }
+    .modern-select,
+    .modern-form input[type="text"],
+    .modern-form textarea {
+        width: 100%;
+        min-width: unset; /* Permite que se encoja más */
+    }
+    .search-bar button {
+        width: 100%;
+        align-self: stretch;
+        margin-top: 10px;
+    }
+    .submit-button, .button-secondary {
+        padding: 10px 18px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin: 10px;
+    }
+    .main-content {
+        padding: 0 10px;
+    }
+    .section h2 {
+        font-size: 1.4em;
+        gap: 5px;
+    }
+    .autor-hero h2 {
+        font-size: 2em;
+    }
+    .autor-hero .autor-icon {
+        font-size: 3em;
+    }
+    .autor-hero .subtitle {
+        font-size: 1em;
+    }
+    .sidebar nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .sidebar nav ul li a {
+        font-size: 0.9em;
+        padding: 10px 15px;
+        flex-direction: row;
+        justify-content: flex-start;
+        min-width: unset;
+    }
+    .sidebar nav ul li a i {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+    .sidebar nav ul li a.active {
+        border-bottom: none;
+        border-left: 5px solid var(--accent-color);
+    }
+    .article-card {
+        padding: 15px;
+    }
+    .article-card h3 {
+        font-size: 1.2em;
+    }
+    .article-card p {
+        font-size: 0.88em;
+    }
+    .article-actions button {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+    .full-article-content {
+        padding: 15px;
+    }
+    .full-article-content h4 {
+        font-size: 1.1em;
+    }
+    .full-article-content pre,
+    .full-article-content textarea {
+        font-size: 0.8em;
+    }
+    .submit-button, .button-secondary {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+}

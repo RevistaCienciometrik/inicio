@@ -1,417 +1,750 @@
 /* revisor.css */
 
 /*
-   Asegúrate de que styles.css se cargue ANTES de revisor.css
+   Asegúrate de que styles.css (si existe y tiene variables globales) se cargue ANTES de revisor.css
    para que las variables CSS como --primary-color, --vibrant-green,
    --translucent-blue-bg, etc., estén disponibles aquí.
+
+   Para este ejemplo, asumo que las variables de admin.css son las que utilizaremos.
 */
 
-/* --- ESTILOS GENERALES DE SECCIONES DE REVISOR --- */
-.revisor-section {
-    background-color: #ffffff; /* Las secciones mantienen un fondo blanco para el contenido */
-    border: 1px solid var(--border-color);
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px var(--shadow-light);
-    margin-bottom: 35px;
+:root {
+    --primary-color: #237482; /* Azul verdoso */
+    --secondary-color: #1a5c68; /* Tono más oscuro de primary-color */
+    --accent-color: #00bcd4;   /* Un azul cian para acentos */
+    --text-dark: #333;
+    --text-light: #f8f8f8;
+    --bg-light: #f4f7f6;
+    --bg-card: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --success-color: #28a745;   /* Verde para éxito */
+    --warning-color: #ffc107;   /* Amarillo para advertencia/pendiente */
+    --danger-color: #dc3545;    /* Rojo para peligro/rechazado */
+    --info-color: #17a2b8;      /* Azul para información */
+    --gray-color: #6c757d;      /* Gris general */
+    --header-height: 70px; /* **IMPORTANTE**: Define la altura de tu cabecera. Ajusta este valor si es diferente. */
 }
 
-.revisor-section h2 {
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Añadido para el layout principal */
+    flex-direction: column; /* Apila el header y el contenedor principal */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
+}
+
+/* --- Layout Principal --- */
+.container {
+    display: flex;
+    gap: 30px;
+    max-width: 1500px;
+    margin: 30px auto; /* Aumentado el margen superior para más espacio */
+    padding: 0 20px;
+    flex: 1; /* Permite que el contenedor ocupe el espacio restante */
+    align-items: flex-start; /* Alinea los elementos al inicio (arriba) */
+}
+
+/* --- Barra Lateral (Sidebar) --- */
+.sidebar {
+    width: 280px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--header-height) + 30px); /* Ajuste: Espacio entre el header y el sidebar */
+    height: fit-content; /* Permite que el sidebar tome la altura necesaria de su contenido */
+    /* Opcional: Si el contenido del sidebar es MUY largo, puedes limitar su altura y permitir scroll interno */
+    /* max-height: calc(100vh - var(--header-height) - 60px); */ /* Ajusta 60px para el top y un posible bottom margin */
+    /* overflow-y: auto; */ /* Activa el scroll interno si max-height se excede */
+    z-index: 1000;
+    transform: translateZ(0);
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin-top: 0; /* Asegurar que no haya margen superior adicional */
+    margin-bottom: 25px; /* Ligeramente reducido para compactar */
+    color: var(--text-light);
+    font-size: 1.6em; /* Ligeramente más pequeño para mejor ajuste */
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 12px; /* Ligeramente reducido */
+}
+
+.sidebar h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Asegurar que no haya margen superior en la lista */
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px; /* Ligeramente reducido */
+}
+
+.sidebar nav ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Ligeramente reducido */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1em; /* Ligeramente más pequeño */
+    font-weight: 500;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 10px; /* Ligeramente reducido */
+    font-size: 1.1em; /* Ligeramente más pequeño */
+    color: var(--accent-color);
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul ul li a.active {
+    background-color: var(--secondary-color);
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar nav ul li a.active {
+    background-color: var(--secondary-color);
+    border-left: 5px solid var(--accent-color);
+    padding-left: 10px; /* Ajusta el padding por el borde */
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    flex-grow: 1; /* Permite que el contenido principal ocupe todo el espacio restante */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* --- ESTILOS GENERALES DE SECCIONES DE REVISOR --- */
+.section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    margin-bottom: 0; /* Gestionamos los gaps con flexbox en main-content */
+}
+
+.section h2 {
     color: var(--primary-color);
-    margin-bottom: 25px;
-    font-size: 2.3em;
-    border-bottom: 2px solid var(--dark-bg);
-    padding-bottom: 12px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.revisor-section h2 .fas {
-    color: var(--secondary-color);
-    font-size: 1.6em;
-}
-
-.revisor-section h3 {
-    color: var(--primary-color);
-    margin-bottom: 18px;
-    font-size: 1.7em;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
+    justify-content: center; /* Centra el título y el icono */
     gap: 10px;
 }
 
-.revisor-section h3 .fas {
-    color: var(--accent-color); /* Se puede usar accent-color o secondary-color aquí */
-    font-size: 1.2em;
+.section h2 .fas {
+    color: var(--secondary-color);
+    font-size: 1.4em;
 }
 
-.revisor-section p {
+/* --- Hero Section del Revisor --- */
+.revisor-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 25px;
+    border-radius: 12px;
+    /* margin-bottom: 35px; remueve esto ya que main-content gestiona el gap */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    display: flex; /* Para centrar el contenido verticalmente si es necesario */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.revisor-hero-content {
+    max-width: 700px; /* Aumentado ligeramente para mejor lectura */
+    margin: 0 auto;
+}
+
+.revisor-hero h2 {
+    color: #fff;
+    font-size: 2.5em;
     margin-bottom: 12px;
-    line-height: 1.6;
-    color: var(--text-color);
+    border-bottom: none;
+    padding-bottom: 0;
+    /* Ya está centrado por las propiedades flex del .revisor-hero */
 }
 
-/* --- Estilos para las Tarjetas de Artículo de Revisor --- */
+.revisor-hero .revisor-icon {
+    font-size: 3.5em; /* Ligeramente más grande */
+    margin-bottom: 18px;
+    display: block;
+}
+
+.revisor-hero .subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* --- Estilos de las Tarjetas de Artículo --- */
 .articles-list {
-    margin-top: 30px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajustado minmax para más espacio */
 }
 
 .article-card {
-    background-color: #ffffff; /* Las tarjetas de artículo son blancas */
+    background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 25px;
-    box-shadow: 0 6px 20px var(--shadow-light);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px var(--shadow-light);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .article-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 30px var(--shadow-medium);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
 }
 
-.article-card h4 {
+.article-card h3 {
     color: var(--primary-color);
+    font-size: 1.4em;
     margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.5em;
-    border-bottom: 2px solid var(--dark-bg);
-    padding-bottom: 12px;
+    margin-bottom: 10px; /* Ligeramente reducido el margen inferior para compactar */
+    line-height: 1.3; /* Asegura que el texto no se superponga */
 }
 
 .article-card p {
-    margin-bottom: 10px;
-    color: #555;
-    font-size: 1.05em;
+    margin-bottom: 7px;
+    font-size: 0.9em;
+    color: var(--text-dark);
 }
 
-/* Estado del artículo (colores específicos) */
-.status-aprobado {
-    color: var(--vibrant-green); /* ¡Verde vivo para aprobado! */
-    font-weight: 700;
+.article-card p strong {
+    color: var(--secondary-color);
 }
 
+/* Status Badges */
+.status-pendiente-de-revision,
+.status-aprobado,
 .status-rechazado {
-    color: var(--danger-color);
-    font-weight: 700;
+    padding: 4px 10px; /* Ligeramente aumentado */
+    border-radius: 5px; /* Ligeramente aumentado */
+    font-weight: bold;
+    font-size: 0.85em; /* Ligeramente aumentado */
+    display: inline-block;
+    margin-left: 5px; /* Ligeramente aumentado */
 }
+.status-pendiente-de-revision { background-color: var(--warning-color); color: #fff; }
+.status-aprobado { background-color: var(--success-color); color: #fff; }
+.status-rechazado { background-color: var(--danger-color); color: #fff; }
 
-.status-pendiente-de-revision {
-    color: var(--warning-color);
-    font-weight: 700;
-}
-
-/* Acciones en la tarjeta (botones) */
+/* Acciones del Artículo */
 .article-actions {
-    margin-top: 25px;
+    margin-top: 18px;
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 25px;
+    gap: 10px; /* Ligeramente aumentado el gap */
     justify-content: flex-end;
 }
 
-.article-actions button {
-    padding: 12px 20px;
-    font-size: 0.95em;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.article-actions button,
+.review-actions button {
+    padding: 10px 18px; /* Ligeramente aumentado */
+    border: none;
+    border-radius: 8px; /* Ligeramente aumentado */
+    cursor: pointer;
+    font-size: 0.9em; /* Ligeramente aumentado */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Ligeramente aumentado */
 }
 
-/* Botones específicos para el revisor (usando colores claros y vibrantes) */
-.approve-btn {
-    background-color: var(--vibrant-green); /* Verde vivo */
-}
-.approve-btn:hover {
-    background-color: #219d59;
+.article-actions button i,
+.review-actions button i {
+    font-size: 1.05em; /* Ligeramente aumentado */
 }
 
-.reject-btn {
-    background-color: var(--danger-color);
-}
-.reject-btn:hover {
-    background-color: #c0392b;
-}
+.view-article-btn { background-color: var(--info-color); color: #fff; }
+.view-article-btn:hover { background-color: #118aa6; transform: translateY(-2px); }
 
-.view-article-btn {
-    background-color: var(--secondary-color);
-}
-.view-article-btn:hover {
-    background-color: #2980b9;
-}
+.approve-article-btn { background-color: var(--success-color); color: #fff; }
+.approve-article-btn:hover { background-color: #218838; transform: translateY(-2px); }
 
-/* --- Contenido Detallado del Artículo (Modal/Expandido) --- */
+.reject-article-btn { background-color: var(--danger-color); color: #fff; }
+.reject-article-btn:hover { background-color: #c82333; transform: translateY(-2px); }
+
+.edit-comment-btn { background-color: var(--primary-color); color: #fff; }
+.edit-comment-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+.save-comment-btn { background-color: var(--primary-color); color: #fff; }
+.save-comment-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+.close-article-btn { background-color: var(--gray-color); color: #fff; }
+.close-article-btn:hover { background-color: #5a6268; transform: translateY(-2px); }
+
+/* --- Contenido Completo del Artículo (Desplegable) --- */
 .full-article-content {
-    background-color: var(--translucent-blue-bg); /* Fondo azul claro transparente */
-    border-top: 2px solid var(--secondary-color); /* Borde superior azul vibrante */
-    margin-top: 30px;
-    padding: 35px;
-    border-radius: 0 0 12px 12px;
-    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.08);
+    background-color: var(--bg-light);
+    border-top: 1px dashed var(--border-color);
+    padding: 25px;
+    margin-top: 18px;
+    border-radius: 8px;
+    max-height: 500px; /* Aumentado max-height para dar más espacio */
+    overflow-y: auto;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .full-article-content h4 {
     color: var(--primary-color);
-    margin-top: 35px;
-    margin-bottom: 18px;
-    font-size: 1.4em;
+    font-size: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 12px;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
+    padding-bottom: 7px;
 }
 
-.full-article-content p.meta-info {
-    font-size: 0.95em;
-    color: #777;
-    margin-bottom: 25px;
-    border-bottom: 1px dashed var(--border-color);
-    padding-bottom: 12px;
-}
-
-.full-article-content textarea,
-.full-article-content input[type="text"] {
-    width: 100%;
-    padding: 16px;
-    border: 1px solid var(--border-color);
+.full-article-content pre {
+    background-color: #f0f0f0;
+    padding: 15px; /* Ligeramente aumentado */
     border-radius: 8px;
-    font-size: 1.05em;
-    line-height: 1.6;
-    background-color: #ffffff;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    white-space: pre-wrap; /* Permite que el texto se envuelva */
+    word-wrap: break-word; /* Asegura el salto de palabra en cadenas largas */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em; /* Ligeramente aumentado */
+    color: #333;
+    border: 1px solid #ddd;
+    max-height: 250px; /* Aumentado max-height */
+    overflow-y: auto;
 }
 
-.full-article-content textarea:focus,
-.full-article-content input[type="text"]:focus {
-    border-color: var(--vibrant-green); /* Borde verde vivo al enfocar */
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.4); /* Sombra verde vivo al enfocar */
-    outline: none;
-    background-color: #fafff2; /* Fondo muy claro verdoso al enfocar */
+.full-article-content p {
+    font-size: 0.95em; /* Ligeramente aumentado */
+    color: #555;
+    margin-bottom: 10px; /* Ligeramente aumentado */
 }
 
-.full-article-content textarea[readonly],
-.full-article-content input[readonly] {
-    background-color: var(--dark-bg); /* Fondo más contrastante para campos de solo lectura */
-    border: 1px solid #c9d0d6;
-    cursor: default;
-    color: #666;
-    box-shadow: none;
-}
-
-/* Controles de revisión y envío */
-.review-controls {
-    margin-top: 35px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: flex-end;
-}
-
-.review-controls .button {
-    padding: 14px 28px;
-    font-size: 1.05em;
-}
-
-.review-controls .response-area {
-    width: 100%;
+.revisor-comment-box,
+.author-response-box {
+    background-color: #f9f9f9;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--accent-color);
+    padding: 15px; /* Ligeramente aumentado */
+    border-radius: 8px;
     margin-bottom: 15px;
 }
 
-/* --- Estilos para la Conversación de Comentarios (con las variables) --- */
-.conversation-history-box {
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 25px;
-    background-color: var(--dark-bg); /* Un gris azulado más oscuro para el fondo */
-    margin-top: 30px;
-    max-height: 400px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.conversation-message {
-    padding: 15px 20px;
-    border-radius: 10px;
-    line-height: 1.6;
-    word-wrap: break-word;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.conversation-message strong {
-    font-size: 1em;
-    color: var(--primary-color);
-    display: block;
-    margin-bottom: 8px;
-}
-
-.conversation-message p {
+.revisor-comment-box p,
+.author-response-box p {
     margin: 0;
-    color: var(--text-color);
+    font-style: italic;
+    color: #444;
+    word-wrap: break-word; /* Asegura que los comentarios se ajusten */
+    white-space: pre-wrap; /* Mantiene saltos de línea y espacios, pero permite el ajuste */
+    line-height: 1.5; /* Mejora la legibilidad */
 }
 
-.revisor-message {
-    background-color: #e6f7ff;
-    border: 1px solid #b3e0ff;
-    border-left: 6px solid var(--secondary-color); /* Borde izquierdo vibrante */
-    align-self: flex-start;
-    max-width: 90%;
+.author-response-box {
+    border-left-color: var(--info-color);
 }
 
-.author-message {
-    background-color: #e8ffe8;
-    border: 1px solid #b3ffb3;
-    border-right: 6px solid var(--vibrant-green); /* Borde derecho verde vivo */
-    align-self: flex-end;
-    max-width: 90%;
+.form-group.review-comment-group {
+    margin-top: 20px;
 }
 
-/* --- Estilos para el artículo oculto en el panel de revisor (similar al autor) --- */
-.article-card.hidden-article-card {
-    opacity: 0.6;
-    border: 2px dashed #a0a0a0;
-    background-color: #f0f0f0;
-    order: 1;
-    /* Los botones de acción específicos para hidden-article-card se gestionan en styles.css o globalmente */
+.form-group.review-comment-group label {
+    font-size: 1em; /* Ligeramente aumentado para visibilidad */
+    margin-bottom: 5px;
 }
 
-.hidden-articles-section {
-    margin-top: 50px;
-    background-color: #fffaf0; /* Fondo más cremoso */
-    border: 1px solid var(--warning-color);
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px var(--shadow-light);
+.review-comment-group textarea {
+    min-height: 120px; /* Aumentado el alto mínimo */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
 }
 
-.hidden-articles-section h2 {
-    color: var(--warning-color);
-    border-bottom: 2px solid #ffcc80;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
-    text-align: left;
-    justify-content: flex-start;
+.review-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
-/* --- Filtrado y Búsqueda --- */
-.filter-controls, .search-controls {
+/* --- Formularios y Controles de Filtro --- */
+.filter-controls,
+.search-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     align-items: center;
-    margin-bottom: 30px;
-    padding: 25px;
-    background-color: var(--translucent-blue-bg); /* Fondo azul claro transparente */
+    gap: 15px; /* Ligeramente aumentado el gap */
+    margin-bottom: 25px;
+    padding: 20px; /* Ligeramente aumentado */
+    background-color: var(--bg-light);
     border-radius: 10px;
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
 }
 
-.filter-controls label, .search-controls label {
-    font-weight: 600;
-    color: var(--primary-color);
+.filter-controls label,
+.search-bar label {
+    font-weight: bold;
+    color: var(--secondary-color);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px; /* Ligeramente aumentado */
+    font-size: 1em; /* Ligeramente aumentado */
 }
 
-.filter-controls select, .search-controls input[type="text"] {
-    padding: 12px;
+.modern-select,
+.modern-form input[type="text"],
+.modern-form textarea {
+    padding: 10px 15px; /* Ligeramente aumentado */
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1em;
-    min-width: 180px;
+    border-radius: 8px; /* Ligeramente aumentado */
+    font-size: 1em; /* Ligeramente aumentado */
+    color: var(--text-dark);
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     flex-grow: 1;
-    background-color: #ffffff;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    min-width: 200px; /* Aumentado el min-width */
 }
 
-.filter-controls select:focus, .search-controls input[type="text"]:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+.modern-select:focus,
+.modern-form input[type="text"]:focus,
+.modern-form textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3); /* Ligeramente aumentado el shadow */
     outline: none;
-    background-color: var(--translucent-blue-bg); /* Fondo azul claro transparente al enfocar */
 }
 
-/* --- Responsividad Específica del Panel de Revisor --- */
-@media (max-width: 768px) {
-    .revisor-section {
+.form-group {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Ligeramente aumentado */
+}
+
+.form-group .icon {
+    color: var(--primary-color);
+    font-size: 1.1em; /* Ligeramente aumentado */
+}
+
+.search-bar {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+}
+
+.search-bar button {
+    width: auto;
+    align-self: flex-end;
+    margin-top: 15px; /* Ligeramente aumentado */
+}
+
+/* Buttons for forms/actions */
+.submit-button, .button-secondary {
+    padding: 12px 22px; /* Ligeramente aumentado */
+    border: none;
+    border-radius: 8px; /* Ligeramente aumentado */
+    font-size: 1em; /* Ligeramente aumentado */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Ligeramente aumentado */
+    justify-content: center;
+}
+
+.submit-button { background-color: var(--primary-color); color: #fff; }
+.submit-button:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+.button-secondary { background-color: var(--gray-color); color: #fff; }
+.button-secondary:hover { background-color: #5a6268; transform: translateY(-2px); }
+
+.small-button {
+    padding: 10px 18px; /* Ligeramente aumentado */
+    font-size: 0.9em; /* Ligeramente aumentado */
+}
+
+/* --- Mensajes --- */
+.mensaje {
+    margin-top: 20px; /* Ligeramente aumentado */
+    padding: 15px 20px; /* Ligeramente aumentado */
+    border-radius: 8px; /* Ligeramente aumentado */
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #fff;
+}
+
+.mensaje.show { opacity: 1; }
+
+.mensaje[style*="green"] { background-color: var(--success-color); }
+.mensaje[style*="red"] { background-color: var(--danger-color); }
+
+.loading-message,
+.no-articles-message {
+    text-align: center;
+    color: var(--gray-color);
+    font-style: italic;
+    padding: 20px; /* Ligeramente aumentado */
+    font-size: 1.05em; /* Ligeramente aumentado */
+}
+
+.error-message {
+    color: var(--danger-color);
+    text-align: center;
+    font-weight: bold;
+    padding: 20px; /* Ligeramente aumentado */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        margin: 20px; /* Ajuste del margen */
+        padding: 0; /* Eliminar padding horizontal si el margin ya lo cubre */
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static; /* Cambia a estático en pantallas pequeñas */
+        margin-bottom: 20px;
+        padding: 20px; /* Ajuste del padding */
+        border-radius: 10px; /* Asegura un border-radius completo */
+        max-height: none; /* Elimina la altura máxima */
+        overflow-y: visible; /* Elimina el scroll interno forzado */
+    }
+
+    .sidebar h3 {
+        margin-bottom: 20px;
+        font-size: 1.6em;
+    }
+
+    .sidebar nav ul {
+        display: flex; /* Para poner los elementos de navegación en fila */
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+        justify-content: center; /* Centra los elementos */
+        gap: 10px; /* Espacio entre los elementos */
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 0; /* Elimina el margen inferior */
+    }
+
+    .sidebar nav ul li a {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        text-align: center; /* Centra el texto en el botón */
+        flex-direction: column; /* Icono y texto apilados */
+        gap: 5px; /* Espacio entre icono y texto */
+        min-width: 120px; /* Ancho mínimo para cada botón de menú */
+    }
+
+    .sidebar nav ul li a i {
+        margin-right: 0; /* Elimina margen derecho del icono */
+        margin-bottom: 5px; /* Añade un pequeño margen inferior al icono */
+    }
+
+    .sidebar nav ul li a.active {
+        border-left: none; /* Elimina el borde izquierdo */
+        border-bottom: 3px solid var(--accent-color); /* Indicador de sección activa en la parte inferior */
+        padding-left: 15px; /* Restaura el padding original */
+    }
+
+    .main-content {
+        padding: 0 20px; /* Asegura un padding horizontal */
+        gap: 25px; /* Ajuste del gap */
+    }
+
+    .revisor-hero {
+        padding: 35px 20px;
+    }
+
+    .revisor-hero h2 {
+        font-size: 2.2em;
+    }
+
+    .revisor-hero .revisor-icon {
+        font-size: 3.5em;
+    }
+
+    .revisor-hero .subtitle {
+        font-size: 1.1em;
+    }
+
+    .section {
         padding: 25px;
     }
-    .revisor-section h2 {
+
+    .section h2 {
         font-size: 1.8em;
+        gap: 8px;
     }
-    .revisor-section h3 {
-        font-size: 1.4em;
-    }
+
     .article-card {
-        padding: 20px;
+        padding: 18px;
     }
-    .article-card h4 {
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0 15px; /* Reducido el padding */
+    }
+    .section h2 {
+        font-size: 1.6em;
+    }
+    .article-card h3 {
         font-size: 1.3em;
     }
     .article-actions {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
     .article-actions button {
         width: 100%;
-        padding: 10px;
-        font-size: 0.9em;
+        padding: 9px;
+        font-size: 0.85em; /* Ligeramente ajustado */
     }
     .full-article-content {
-        padding: 25px;
+        padding: 20px;
     }
     .full-article-content h4 {
-        font-size: 1.2em;
+        font-size: 1.2em; /* Ajustado */
     }
-    .full-article-content textarea,
-    .full-article-content input[type="text"] {
-        padding: 12px;
-    }
-    .review-controls {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .review-controls .button {
-        padding: 12px 20px;
-    }
-    .conversation-history-box {
-        padding: 20px;
-        max-height: 300px;
-        gap: 12px;
-    }
-    .conversation-message {
-        padding: 12px 15px;
-    }
-    .filter-controls, .search-controls {
-        gap: 10px;
-        padding: 20px;
-    }
-    .filter-controls select, .search-controls input[type="text"] {
+    .full-article-content pre,
+    .full-article-content textarea {
         padding: 10px;
+        font-size: 0.85em; /* Ajustado */
+    }
+    .review-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .review-actions button {
+        width: 100%;
+        padding: 10px 18px;
+    }
+    .filter-controls,
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-controls label,
+    .search-bar label {
+        align-self: flex-start;
+    }
+    .filter-controls select,
+    .search-bar input {
+        width: 100%;
+    }
+    .search-bar button {
+        width: 100%;
+        align-self: stretch;
     }
 }
 
-@media (max-width: 480px) {
-    .revisor-section h2 {
-        font-size: 1.5em;
+@media (max-width: 576px) {
+    .container {
+        margin: 10px; /* Ajustado el margen */
     }
-    .revisor-section h3 {
-        font-size: 1.2em;
+    .main-content {
+        padding: 0 10px;
     }
-    .article-card h4 {
+    .section h2 {
+        font-size: 1.4em; /* Reducido un poco más */
+        gap: 5px;
+    }
+    .revisor-hero h2 {
+        font-size: 2em; /* Ajustado */
+    }
+    .revisor-hero .revisor-icon {
+        font-size: 3em; /* Ajustado */
+    }
+    .revisor-hero .subtitle {
+        font-size: 1em; /* Ajustado */
+    }
+    .sidebar nav ul {
+        flex-direction: column; /* Vuelven a ser columnas para más espacio */
+        align-items: stretch; /* Se estiran para ocupar el ancho */
+    }
+    .sidebar nav ul li a {
+        font-size: 0.9em;
+        padding: 10px 15px;
+        flex-direction: row; /* Icono y texto de nuevo en fila */
+        justify-content: flex-start; /* Alineados a la izquierda */
+        min-width: unset; /* Eliminar ancho mínimo */
+    }
+    .sidebar nav ul li a i {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+    .sidebar nav ul li a.active {
+        border-bottom: none; /* Elimina borde inferior */
+        border-left: 5px solid var(--accent-color); /* Restaura el borde izquierdo */
+    }
+    .article-card {
+        padding: 15px; /* Ajustado el padding */
+    }
+    .article-card h3 {
+        font-size: 1.2em; /* Ajustado */
+    }
+    .article-card p {
+        font-size: 0.88em; /* Ajustado */
+    }
+    .article-actions button {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+    .full-article-content {
+        padding: 15px; /* Ajustado el padding */
+    }
+    .full-article-content h4 {
         font-size: 1.1em;
+    }
+    .full-article-content pre,
+    .full-article-content textarea {
+        font-size: 0.8em;
+    }
+    .submit-button, .button-secondary {
+        padding: 10px 15px;
+        font-size: 0.9em;
     }
 }

@@ -1,49 +1,94 @@
-/* admin.css */
+/* admin.css - Estilos Modernos y Diferenciados */
 
-/* --- ESTILOS GENERALES (Copiados de styles.css para mantener la consistencia) --- */
+/* --- Variables CSS para colores y tipografía (Opcional pero recomendado) --- */
+:root {
+    --primary-color: #237482; /* Azul verdoso, similar al original pero como base */
+    --secondary-color: #1a5c68; /* Tono más oscuro de primary-color */
+    --accent-color: #00bcd4;   /* Un azul cian para acentos */
+    --text-dark: #333;
+    --text-light: #f8f8f8;
+    --bg-light: #f4f7f6;
+    --bg-card: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --success-color: #28a745;   /* Verde para éxito */
+    --warning-color: #ffc107;   /* Amarillo para advertencia/pendiente */
+    --danger-color: #dc3545;    /* Rojo para peligro/rechazado */
+    --info-color: #17a2b8;      /* Azul para información */
+    --gray-color: #6c757d;      /* Gris general */
+    --light-gray-color: #f0f0f0; /* Gris muy claro */
+    --dark-gray-color: #5a6268;  /* Gris oscuro */
+    /* Define la altura de tu cabecera si la conoces o la calculas con JS */
+    --header-height: 160px; /* **AJUSTA ESTE VALOR** a la altura real de tu <mi-header> */
+}
+
+/* --- Base y Reseteo --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+html {
+    scroll-behavior: smooth; /* Habilita el desplazamiento suave para toda la página */
 }
 
-/* --- CONTENIDO PRINCIPAL Y BARRA LATERAL (Copiados de styles.css para la consistencia) --- */
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Layout del Contenedor Principal --- */
 .container {
     display: flex;
-    padding: 10px;
     gap: 30px;
     max-width: 1500px;
     margin: 20px auto;
+    padding: 0 20px; /* Padding para evitar que el contenido toque los bordes en pantallas grandes */
 }
 
+/* --- Barra Lateral (Sidebar) --- */
 .sidebar {
-    width: 250px;
-    background-color: #237482;
-    border: 1px solid #ddd;
-    padding: 20px;
-    position: sticky;
-    top: calc(var(--header-height, 0px) + 235px); /* Ajusta este valor dinámicamente si tienes la altura del header, o usa un valor fijo como 80px a 200 */
-    height: fit-content;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    width: 280px; /* Un poco más de ancho */
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 30px 20px;
+    border-radius: 12px; /* Más redondeado */
+    box-shadow: 0 8px 20px var(--shadow-medium); /* Sombra más pronunciada */
     flex-shrink: 0;
-    z-index: 999; /* Asegura que esté por encima de otros elementos al hacer scroll */
+    position: sticky;
+    top: calc(var(--header-height) + 60px); /* Ajuste de movimiento al hacer scroll */
+    height: fit-content;
+    z-index: 1000; /* Asegura que esté por encima */
+    transform: translateZ(0); /* Pequeña optimización para renderizado */
 }
 
 .sidebar h3 {
-    color: #fff;
-    margin-bottom: 20px;
     text-align: center;
-    font-size: 1.5em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 10px;
+    margin-bottom: 35px;
+    color: var(--text-light);
+    font-size: 1.8em; /* Más grande */
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.sidebar h3::after { /* Línea decorativa */
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
 }
 
 .sidebar nav ul {
@@ -52,297 +97,534 @@ body {
 }
 
 .sidebar nav ul li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .sidebar nav ul li a {
-    color: #fff;
+    color: var(--text-light);
     text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    display: flex;
+    display: flex; /* Para alinear icono y texto */
     align-items: center;
-    gap: 10px;
-}
-
-.sidebar nav ul li a:hover {
-    background-color: #1a5c68; /* Tono más oscuro al pasar el ratón */
+    padding: 12px 18px;
+    border-radius: 8px; /* Bordes más suaves */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.05em;
+    font-weight: 500;
 }
 
 .sidebar nav ul li a i {
-    width: 20px; /* Ancho fijo para los iconos */
-    text-align: center;
+    margin-right: 12px;
+    font-size: 1.2em;
+    color: var(--accent-color); /* Color de acento para los iconos */
 }
 
+.sidebar nav ul li a:hover,
+.sidebar nav ul ul li a.active {
+    background-color: var(--secondary-color);
+    transform: translateX(5px); /* Pequeño desplazamiento al pasar el ratón */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-/* MAIN CONTENT */
+.sidebar nav ul li a.active {
+    background-color: var(--secondary-color);
+    border-left: 5px solid var(--accent-color); /* Indicador de sección activa */
+    padding-left: 13px; /* Ajusta el padding por el borde */
+}
+
+/* --- Contenido Principal (Main Content) --- */
 .main-content {
-    flex-grow: 1; /* Ocupa el espacio restante */
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    flex-grow: 1;
+    background-color: var(--bg-card);
+    padding: 40px; /* Más padding */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
 }
 
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 40px; /* Más espacio entre secciones */
+    padding-bottom: 30px; /* Padding inferior para el borde del título */
+    position: relative;
+    scroll-margin-top: calc(var(--header-height) + 20px); /* Ajuste: Deja espacio para el header fijo al hacer scroll */
 }
 
+/* Títulos de Sección (Diferenciación) */
 .section h2 {
-    color: #237482;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 2.2em; /* Más grande */
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px; /* Más espacio debajo del título */
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--accent-color); /* Borde más grueso y de acento */
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Sombra suave para el texto */
 }
 
 .section h2 i {
-    color: #1a5c68;
+    font-size: 1.1em; /* Ajusta el tamaño del icono con el título */
+    color: var(--accent-color);
 }
 
-/* --- FILTROS DE MENSAJES --- */
-.message-filters, .date-filters {
+/* --- Estilos de Filtros --- */
+.message-filters, .date-filters, .article-filters, .observation-filters {
+    margin-bottom: 30px; /* Más espacio debajo de los filtros */
+    padding: 20px;
+    background-color: var(--light-gray-color);
+    border-radius: 10px; /* Más redondeado */
+    border: 1px solid var(--border-color);
     display: flex;
-    flex-wrap: wrap; /* Permite que los botones se envuelvan en líneas nuevas */
-    gap: 10px;
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
+    flex-wrap: wrap;
+    gap: 12px; /* Espacio entre botones */
     align-items: center;
+    box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .filter-group-title {
-    font-weight: bold;
-    color: #555;
+    font-weight: 600;
+    color: var(--primary-color);
     margin-right: 15px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.message-filters button,
-.date-filters button {
-    background-color: #e0e0e0;
-    color: #333;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 1.05em;
+}
+
+/* Estilo Base de Botones de Filtro */
+.message-filters button,
+.date-filters button,
+.article-filters button,
+.observation-filters button {
+    background-color: #dbe4eb; /* Gris azulado suave */
+    color: var(--text-dark);
+    border: none;
+    padding: 12px 18px; /* Más padding */
+    border-radius: 8px; /* Más redondeado */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0.95em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0; /* Evita que los botones se encojan */
 }
 
 .message-filters button:hover,
-.date-filters button:hover {
-    background-color: #d0d0d0;
+.date-filters button:hover,
+.article-filters button:hover,
+.observation-filters button:hover {
+    background-color: #c9d6e2;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-light);
 }
 
 .message-filters button.active,
-.date-filters button.active {
-    background-color: #237482;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.date-filters button.active,
+.article-filters button.active,
+.observation-filters button.active {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px); /* Ligeramente elevado */
 }
 
-.message-filters button.active:hover,
-.date-filters button.active:hover {
-    background-color: #1a5c68;
-}
-
-/* --- LISTA DE MENSAJES --- */
-.message-list {
+/* --- Estilos para Tarjetas (Mensajes, Artículos, Observaciones) --- */
+.message-list, .articles-list, .observations-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; /* Más espacio entre tarjetas */
 }
 
-.message-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-left: 5px solid #237482; /* Borde izquierdo para no leídos/todos */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+.message-card, .article-card, .observation-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: 6px solid var(--primary-color); /* Borde inicial de primary-color */
+    padding: 25px; /* Más padding */
+    border-radius: 10px; /* Más redondeado */
+    box-shadow: 0 4px 12px var(--shadow-light);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
 }
 
-.message-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.message-card:hover, .article-card:hover, .observation-card:hover {
+    transform: translateY(-5px); /* Mayor elevación al pasar el ratón */
+    box-shadow: 0 8px 20px var(--shadow-medium);
 }
 
-.message-card h3 {
-    color: #237482;
-    margin-bottom: 10px;
-    font-size: 1.2em;
+/* Colores de Estado para Mensajes */
+.message-card.unread { border-left-color: var(--warning-color); } /* Naranja para no leído */
+.message-card.read { border-left-color: var(--success-color); } /* Verde para leído */
+.message-card.deleted {
+    border-left-color: var(--danger-color); /* Rojo para eliminado */
+    opacity: 0.8;
+    background-color: #fcebeb; /* Fondo claro para eliminados */
+}
+
+/* Colores de Estado para Artículos */
+.article-card.status-pending { border-left-color: var(--warning-color); } /* Naranja para pendiente */
+.article-card.status-approved { border-left-color: var(--success-color); } /* Verde para aprobado */
+.article-card.status-rejected { border-left-color: var(--danger-color); } /* Rojo para rechazado */
+.article-card.status-hidden {
+    border-left-color: var(--gray-color); /* Gris para oculto */
+    opacity: 0.8;
+    background-color: #f8f8f8; /* Fondo claro para ocultos */
+}
+
+/* Colores de Estado para Observaciones */
+.observation-card.unread { border-left-color: var(--warning-color); } /* Naranja para no leída */
+.observation-card.read { border-left-color: var(--success-color); } /* Verde para leída */
+
+
+.message-header, .article-header, .observation-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-}
-
-.message-card p {
-    margin-bottom: 8px;
-    line-height: 1.5;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.message-card p strong {
-    color: #555;
-}
-
-.message-content {
-    background-color: #f0f0f0;
-    border-left: 3px solid #ccc;
-    padding: 10px 15px;
-    margin-top: 15px;
     margin-bottom: 15px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+.message-header h3, .article-header h3, .observation-header h3 {
+    margin: 0;
+    font-size: 1.4em; /* Más grande */
+    color: var(--primary-color);
+    flex-grow: 1;
+    font-weight: 600;
+}
+
+.message-status, .article-status, .observation-status {
+    font-size: 0.85em;
+    font-weight: bold;
+    padding: 6px 10px;
     border-radius: 5px;
-    font-style: italic;
-    color: #666;
+    color: white;
+    margin-left: 15px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+.message-card.unread .message-status, .observation-card.unread .observation-status { background-color: var(--warning-color); }
+.message-card.read .message-status, .observation-card.read .observation-status { background-color: var(--success-color); }
+.message-card.deleted .message-status { background-color: var(--danger-color); }
+
+.article-card.status-pending .article-status { background-color: var(--warning-color); }
+.article-card.status-approved .article-status { background-color: var(--success-color); }
+.article-card.status-rejected .article-status { background-color: var(--danger-color); }
+.article-card.status-hidden .article-status { background-color: var(--gray-color); }
+
+.message-date, .article-date, .observation-date {
+    font-size: 0.8em;
+    color: var(--dark-gray-color);
+    margin-left: 15px;
+    white-space: nowrap;
+}
+
+.message-meta p, .article-meta p {
+    margin: 6px 0;
+    color: var(--gray-color);
+    font-size: 0.95em;
+}
+
+.message-body p, .observation-body p {
+    margin-top: 20px;
+    color: var(--text-dark);
+    line-height: 1.7;
     white-space: pre-wrap; /* Para respetar saltos de línea del mensaje */
     word-wrap: break-word; /* Para asegurar que las palabras largas se rompan */
 }
 
-.message-meta {
-    font-size: 0.85em;
-    color: #777;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.message-meta p {
-    margin-bottom: 0; /* Elimina el margen inferior extra de los párrafos en meta */
-}
-
-/* ESTADOS DEL MENSAJE */
-.message-card.read {
-    border-left: 5px solid #4CAF50; /* Verde para leído */
-    background-color: #e6ffe6; /* Fondo más claro para leído */
-}
-
-.message-card.deleted {
-    border-left: 5px solid #f44336; /* Rojo para eliminado */
-    background-color: #ffe6e6; /* Fondo más claro para eliminado */
-    opacity: 0.8; /* Ligeramente transparente para indicar que está eliminado */
-}
-
-/* ACCIONES DE MENSAJES (BOTONES) */
-.message-actions {
+/* --- Estilo Base de Botones de Acción --- */
+.message-actions, .article-actions, .observation-actions, .revisor-actions {
     margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 12px; /* Espacio entre botones */
+    justify-content: flex-end;
 }
 
-.message-actions button {
-    padding: 8px 15px;
+.action-btn {
+    background-color: var(--primary-color);
+    color: var(--text-light);
     border: none;
-    border-radius: 5px;
+    padding: 10px 18px; /* Más padding */
+    border-radius: 8px; /* Más redondeado */
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     font-size: 0.9em;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Estilo para el botón "Marcar como Leído" */
-.message-actions .mark-read-button {
-    background-color: #2196F3; /* Azul */
-    color: white;
+.action-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.message-actions .mark-read-button:hover {
-    background-color: #0b7dda; /* Azul más oscuro al pasar el ratón */
+.action-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+.action-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
-/* Estilo para el botón "Marcar como No Leído" */
-.message-actions .mark-unread-button {
-    background-color: #FFC107; /* Amarillo/Naranja para "No Leído" */
-    color: #333;
+/* Colores Específicos para Botones de Acción */
+.mark-as-read-btn, .approve-article-btn, .mark-observation-read-btn {
+    background-color: var(--success-color);
+}
+.mark-as-read-btn:hover:not(:disabled), .approve-article-btn:hover:not(:disabled), .mark-observation-read-btn:hover:not(:disabled) {
+    background-color: #218838;
 }
 
-.message-actions .mark-unread-button:hover {
-    background-color: #e0b000; /* Tono más oscuro al pasar el ratón */
+.mark-as-unread-btn, .reject-article-btn, .mark-observation-unread-btn {
+    background-color: var(--warning-color);
+    color: var(--text-dark); /* Texto oscuro para contraste en fondo amarillo */
+}
+.mark-as-unread-btn:hover:not(:disabled), .reject-article-btn:hover:not(:disabled), .mark-observation-unread-btn:hover:not(:disabled) {
+    background-color: #e0a800;
 }
 
-/* Estilo para el botón "Eliminar" */
-.message-actions .delete-button {
-    background-color: #f44336; /* Rojo */
-    color: white;
+.delete-message-btn, .permanently-delete-message-btn, .delete-article-btn, .delete-observation-btn {
+    background-color: var(--danger-color);
+}
+.delete-message-btn:hover:not(:disabled), .permanently-delete-message-btn:hover:not(:disabled), .delete-article-btn:hover:not(:disabled), .delete-observation-btn:hover:not(:disabled) {
+    background-color: #c82333;
 }
 
-.message-actions .delete-button:hover {
-    background-color: #da190b; /* Rojo más oscuro al pasar el ratón */
+.restore-message-btn {
+    background-color: var(--info-color); /* Azul claro para restaurar */
+}
+.restore-message-btn:hover:not(:disabled) {
+    background-color: #138496;
 }
 
-/* Estilo para el botón "Restaurar" (usado en la vista de Eliminados) */
-.message-actions .restore-button {
-    background-color: #4CAF50; /* Verde */
-    color: white;
+.hide-article-btn, .unhide-article-btn {
+    background-color: var(--gray-color);
+}
+.hide-article-btn:hover:not(:disabled), .unhide-article-btn:hover:not(:disabled) {
+    background-color: var(--dark-gray-color);
 }
 
-.message-actions .restore-button:hover {
-    background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+.save-revisor-comment-btn, .view-article-content-btn {
+    background-color: var(--accent-color);
+    color: var(--text-dark); /* Texto oscuro si el acento es claro */
+}
+.save-revisor-comment-btn:hover:not(:disabled), .view-article-content-btn:hover:not(:disabled) {
+    background-color: #00a4bd;
 }
 
-/* Ajustes responsivos para mi página de administración */
-@media screen and (max-width: 768px) {
+.close-article-view-btn {
+    background-color: var(--gray-color);
+}
+.close-article-view-btn:hover:not(:disabled) {
+    background-color: var(--dark-gray-color);
+}
+
+/* --- Estilos para la Vista Completa del Artículo (Modal/Expansión) --- */
+.full-article-view {
+    margin-top: 30px;
+    padding: 25px;
+    border-top: 2px solid var(--border-color);
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Sombra interna */
+}
+
+.full-article-view h4 {
+    color: var(--secondary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.full-article-view textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    line-height: 1.6;
+    resize: vertical;
+    min-height: 100px;
+    background-color: #f9f9f9;
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.full-article-view textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+    outline: none;
+}
+
+.full-article-view textarea[readonly] {
+    background-color: var(--light-gray-color);
+    cursor: default;
+    color: #666;
+    border-color: #e0e0e0;
+}
+
+.feedback-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.95em;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    border: 1px solid;
+    transition: all 0.3s ease;
+}
+
+.feedback-message[style*="green"] {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: var(--success-color);
+    color: var(--success-color);
+}
+.feedback-message[style*="orange"] {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}
+.feedback-message[style*="red"] {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+}
+
+
+/* --- Mensajes de "No hay [elementos]" --- */
+#no-messages, #no-articles, #no-observations {
+    text-align: center;
+    color: var(--gray-color);
+    padding: 30px;
+    font-style: italic;
+    font-size: 1.1em;
+    background-color: var(--light-gray-color);
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 1200px) {
+    .container {
+        gap: 20px;
+        padding: 0 15px;
+    }
+    .sidebar {
+        width: 250px;
+        padding: 25px 15px;
+    }
+    .sidebar h3 {
+        font-size: 1.6em;
+    }
+    .sidebar nav ul li a {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+    .main-content {
+        padding: 30px;
+    }
+    .section h2 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 992px) {
     .container {
         flex-direction: column;
-        padding: 10px;
-        gap: 20px;
+        align-items: center; /* Centra el contenido en columnas */
     }
     .sidebar {
         width: 100%;
-        position: static; /* Ya no es sticky en móviles */
-        height: auto;
-        margin-bottom: 20px;
+        position: static; /* En pantallas pequeñas, no es sticky, vuelve a ser estático */
+        margin-bottom: 25px;
+        max-width: 700px; /* Limita el ancho en pantallas más grandes para que no se estire demasiado */
     }
     .main-content {
-        padding: 20px;
+        width: 100%;
+        padding: 25px;
+        max-width: 700px; /* Limita el ancho en pantallas más grandes */
     }
-    .message-filters, .date-filters {
-        flex-direction: column; /* Apila los botones de filtro */
-        gap: 10px;
-    }
-    .message-filters button, .date-filters button {
-        width: 100%; /* Que los botones de filtro ocupen todo el ancho */
+    .section h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
     }
     .filter-group-title {
+        width: 100%; /* El título del filtro ocupa toda la línea */
         text-align: center;
         margin-right: 0;
         margin-bottom: 10px;
+        justify-content: center;
     }
-    .message-card {
-        padding: 15px; /* Menos padding en pantallas pequeñas */
+    .message-filters, .date-filters, .article-filters, .observation-filters {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
     }
-    .message-card h3 {
-        font-size: 1.1em;
+    .message-filters button,
+    .date-filters button,
+    .article-filters button,
+    .observation-filters button {
+        width: 100%; /* Botones de filtro ocupan todo el ancho */
+        justify-content: center;
     }
-    .message-actions {
-        flex-direction: column; /* Apila los botones de acción */
-        gap: 8px;
+    .message-card, .article-card, .observation-card {
+        padding: 20px;
     }
-    .message-actions button {
-        width: 100%; /* Que los botones de acción ocupen todo el ancho */
+    .message-actions, .article-actions, .observation-actions, .revisor-actions {
+        flex-direction: column;
+        align-items: stretch; /* Estira los botones para ocupar el ancho */
+        gap: 10px;
+    }
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: 15px;
+    }
+    .section h2 {
+        font-size: 1.5em;
+        gap: 10px;
+    }
+    .message-header h3, .article-header h3, .observation-header h3 {
+        font-size: 1.2em;
+    }
+    .message-status, .article-status, .observation-status {
+        font-size: 0.75em;
+        padding: 4px 6px;
+        margin-left: 8px;
+    }
+    .message-date, .article-date, .observation-date {
+        font-size: 0.7em;
+        margin-left: 8px;
+    }
+    .message-meta p, .article-meta p {
+        font-size: 0.9em;
+    }
+    .full-article-view textarea {
+        min-height: 80px;
+        font-size: 0.9em;
     }
 }
