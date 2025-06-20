@@ -45,6 +45,7 @@ body {
 .container {
     display: flex;
     gap: 30px;
+    width: 1500px;
     max-width: 1500px;
     margin: 30px auto;
     padding: 0 20px;
