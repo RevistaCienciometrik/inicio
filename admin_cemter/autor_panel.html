@@ -17,6 +17,7 @@
                     <li><a href="#enviar-articulo"><i class="fas fa-paper-plane"></i> Enviar Artículo</a></li>
                     <li><a href="#mis-articulos"><i class="fas fa-file-alt"></i> Mis Artículos</a></li>
                     <li><a href="#observaciones"><i class="fas fa-comment-dots"></i> Observaciones</a></li>
+                    <li><a href="#articulos-eliminados"><i class="fas fa-trash-restore"></i> Mis Artículos Eliminados</a></li>
                     <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
                 </ul>
             </nav>
@@ -89,7 +90,7 @@
                     </div>
                     <div class="form-group">
                         <label for="observation-email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
-                        <input type="email" id="observation-email" required>
+                        <input type="email" id="observation-email" required class="modern-form-input">
                     </div>
                     <div class="form-group">
                         <label for="observation-message"><i class="fas fa-comment-dots icon"></i> Tu Observación/Sugerencia:</label>
@@ -98,6 +99,22 @@
                     <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Enviar Observación</button>
                     <div id="mensaje-observaciones" class="mensaje"></div>
                 </form>
+            </section>
+
+            <section id="articulos-eliminados" class="section deleted-articles-section">
+                <h2><i class="fas fa-trash-restore"></i> Mis Artículos Eliminados</h2>
+                <p>Aquí puedes ver los artículos que has marcado como eliminados y solicitar su recuperación.</p>
+                <div class="search-bar">
+                    <label for="search-deleted-email"><i class="fas fa-envelope icon"></i> Ingresa tu Correo Electrónico para ver tus artículos eliminados:</label>
+                    <input type="email" id="search-deleted-email" placeholder="tu_correo@example.com" required>
+                    <button id="btn-buscar-eliminados" class="submit-button small-button">
+                        <i class="fas fa-search"></i> Buscar Eliminados
+                    </button>
+                </div>
+                <div id="lista-articulos-eliminados" class="articles-list">
+                    <p class="loading-message">Ingresa tu correo electrónico y haz clic en "Buscar Eliminados" para ver tus artículos ocultos aquí.</p>
+                </div>
+                <div id="mensaje-articulos-eliminados" class="mensaje"></div>
             </section>
         </main>
     </div>
@@ -146,6 +163,12 @@
         const observationMessageInput = document.getElementById('observation-message');
         const mensajeObservaciones = document.getElementById('mensaje-observaciones');
 
+        const searchDeletedEmailInput = document.getElementById('search-deleted-email');
+        const btnBuscarEliminados = document.getElementById('btn-buscar-eliminados');
+        const listaArticulosEliminados = document.getElementById('lista-articulos-eliminados');
+        const mensajeArticulosEliminados = document.getElementById('mensaje-articulos-eliminados');
+
+
         let autorEmailConsultado = ''; // Variable para almacenar el email del autor consultado
 
         // --- MANEJADOR DE ENVÍO DE ARTÍCULO ---
@@ -187,7 +210,7 @@
                 submissionForm.reset(); // Limpiar el formulario después del envío
                 // Si el email actual coincide con el consultado, recargar sus artículos
                 if (autorEmail === autorEmailConsultado) {
-                    await cargarArticulos(autorEmailConsultado);
+                    await cargarArticulos(autorEmailConsultado, false);
                 }
 
             } catch (error) {
@@ -197,11 +220,14 @@
             }
         });
 
-        // --- FUNCIÓN PARA CARGAR ARTÍCULOS DEL AUTOR ---
+        // --- FUNCIÓN PARA CARGAR ARTÍCULOS DEL AUTOR (visibles u ocultos) ---
         async function cargarArticulos(email, oculto = false) {
-            mensajeMisArticulos.textContent = 'Cargando tus artículos...';
-            mensajeMisArticulos.style.color = 'blue';
-            listaMisArticulos.innerHTML = ''; // Limpiar lista anterior
+            const targetList = oculto ? listaArticulosEliminados : listaMisArticulos;
+            const targetMessage = oculto ? mensajeArticulosEliminados : mensajeMisArticulos;
+
+            targetMessage.textContent = `Cargando tus artículos${oculto ? ' eliminados' : ''}...`;
+            targetMessage.style.color = 'blue';
+            targetList.innerHTML = ''; // Limpiar lista anterior
 
             try {
                 const q = query(
@@ -212,8 +238,8 @@
                 const querySnapshot = await getDocs(q);
 
                 if (querySnapshot.empty) {
-                    mensajeMisArticulos.textContent = `No se encontraron artículos${oculto ? ' ocultos' : ''} para este correo electrónico.`;
-                    mensajeMisArticulos.style.color = 'orange';
+                    targetMessage.textContent = `No se encontraron artículos${oculto ? ' eliminados' : ''} para este correo electrónico.`;
+                    targetMessage.style.color = 'orange';
                     return;
                 }
 
@@ -251,17 +277,23 @@
                             ${data.oculto ? `<p><strong>Visibilidad:</strong> <span class="status-rechazado">Oculto</span></p>` : ''}
                             
                             <div class="article-actions">
-                                <button class="view-article-btn" data-id="${docId}">
+                                <button class="view-article-btn" data-id="${docId}" data-target-list="${oculto ? 'deleted' : 'visible'}">
                                     <i class="fas fa-eye"></i> Ver Contenido
                                 </button>
-                                ${isEditable ? `
+                                ${isEditable && !oculto ? `
                                     <button class="edit-article-btn" data-id="${docId}">
                                         <i class="fas fa-edit"></i> Editar Artículo
                                     </button>
                                 ` : ''}
-                                <button class="delete-article-btn" data-id="${docId}">
-                                    <i class="fas fa-trash-alt"></i> Eliminar
-                                </button>
+                                ${!oculto ? `
+                                    <button class="request-delete-btn" data-id="${docId}">
+                                        <i class="fas fa-trash-alt"></i> Solicitar Eliminación
+                                    </button>
+                                ` : `
+                                    <button class="request-restore-btn" data-id="${docId}">
+                                        <i class="fas fa-undo-alt"></i> Solicitar Recuperación
+                                    </button>
+                                `}
                             </div>
 
                             <div id="full-article-${docId}" class="full-article-content" style="display:none;">
@@ -285,40 +317,54 @@
                                 <textarea id="author-response-${docId}" rows="5" placeholder="Escribe aquí tu respuesta a los comentarios del revisor...">${data.respuestaAutorAComentarios || ''}</textarea>
                                 
                                 <div class="review-actions">
-                                    ${isEditable ? `
+                                    ${isEditable && !oculto ? `
                                         <button class="save-edit-btn" data-id="${docId}"><i class="fas fa-save"></i> Guardar Cambios</button>
                                     ` : ''}
-                                    <button class="save-response-btn" data-id="${docId}"><i class="fas fa-reply"></i> Guardar Respuesta</button>
-                                    <button class="close-article-btn"><i class="fas fa-times"></i> Cerrar</button>
+                                    ${!oculto ? `
+                                        <button class="save-response-btn" data-id="${docId}"><i class="fas fa-reply"></i> Guardar Respuesta</button>
+                                    ` : ''}
+                                    <button class="close-article-btn" data-target-list="${oculto ? 'deleted' : 'visible'}"><i class="fas fa-times"></i> Cerrar</button>
                                 </div>
                                 <div id="mensaje-articulo-${docId}" class="mensaje"></div>
                             </div>
                         </div>
                     `;
                 });
-                listaMisArticulos.innerHTML = htmlContent;
-                mensajeMisArticulos.textContent = ''; // Limpiar mensaje de carga
+                targetList.innerHTML = htmlContent;
+                targetMessage.textContent = ''; // Limpiar mensaje de carga
 
                 // --- Añadir Event Listeners para los botones de artículo ---
-                listaMisArticulos.querySelectorAll('.view-article-btn').forEach(button => {
+                targetList.querySelectorAll('.view-article-btn').forEach(button => {
                     button.addEventListener('click', (event) => {
                         const articleId = event.currentTarget.dataset.id;
+                        const targetListType = event.currentTarget.dataset.targetList;
                         const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
                         if (fullArticleDiv) {
+                            // Cierra todos los artículos abiertos en la lista actual
+                            targetList.querySelectorAll('.full-article-content').forEach(div => {
+                                if (div.id !== `full-article-${articleId}`) {
+                                    div.style.display = 'none';
+                                    const associatedViewButton = targetList.querySelector(`.view-article-btn[data-id="${div.id.replace('full-article-', '')}"][data-target-list="${targetListType}"]`);
+                                    if (associatedViewButton) {
+                                        associatedViewButton.style.display = 'inline-block';
+                                    }
+                                }
+                            });
+
                             fullArticleDiv.style.display = 'block';
                             event.currentTarget.style.display = 'none'; // Ocultar "Ver Contenido"
-                            // No es necesario precargar el contenido aquí, ya está en el textarea
                         }
                     });
                 });
 
-                listaMisArticulos.querySelectorAll('.close-article-btn').forEach(button => {
+                targetList.querySelectorAll('.close-article-btn').forEach(button => {
                     button.addEventListener('click', (event) => {
                         const fullArticleDiv = event.currentTarget.closest('.full-article-content');
                         if (fullArticleDiv) {
                             const articleId = fullArticleDiv.id.replace('full-article-', '');
+                            const targetListType = event.currentTarget.dataset.targetList;
                             fullArticleDiv.style.display = 'none';
-                            const viewButton = listaMisArticulos.querySelector(`.view-article-btn[data-id="${articleId}"]`);
+                            const viewButton = targetList.querySelector(`.view-article-btn[data-id="${articleId}"][data-target-list="${targetListType}"]`);
                             if (viewButton) {
                                 viewButton.style.display = 'inline-block';
                             }
@@ -326,55 +372,68 @@
                     });
                 });
 
-                listaMisArticulos.querySelectorAll('.edit-article-btn').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const articleId = event.currentTarget.dataset.id;
-                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
-                        if (fullArticleDiv) {
-                            fullArticleDiv.style.display = 'block';
-                            event.currentTarget.style.display = 'none'; // Ocultar "Editar Artículo"
-                        }
+                if (!oculto) { // Solo añadir listeners para edición y eliminación si no son artículos ocultos
+                    listaMisArticulos.querySelectorAll('.edit-article-btn').forEach(button => {
+                        button.addEventListener('click', (event) => {
+                            const articleId = event.currentTarget.dataset.id;
+                            const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                            if (fullArticleDiv) {
+                                fullArticleDiv.style.display = 'block';
+                                event.currentTarget.style.display = 'none'; // Ocultar "Editar Artículo"
+                            }
+                        });
                     });
-                });
 
-                listaMisArticulos.querySelectorAll('.save-edit-btn').forEach(button => {
-                    button.addEventListener('click', async (event) => {
-                        const docId = event.currentTarget.dataset.id;
-                        const newTitle = document.getElementById(`edit-title-${docId}`).value;
-                        const newContent = document.getElementById(`edit-content-${docId}`).value;
-                        const newObservaciones = document.getElementById(`edit-observaciones-${docId}`).value;
-                        
-                        if (confirm('¿Estás seguro de que quieres guardar los cambios en el artículo y reenviarlo para revisión?')) {
-                            await updateArticleAndResubmit(docId, newTitle, newContent, newObservaciones, `mensaje-articulo-${docId}`);
-                        }
+                    listaMisArticulos.querySelectorAll('.save-edit-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const newTitle = document.getElementById(`edit-title-${docId}`).value;
+                            const newContent = document.getElementById(`edit-content-${docId}`).value;
+                            const newObservaciones = document.getElementById(`edit-observaciones-${docId}`).value;
+                            
+                            if (confirm('¿Estás seguro de que quieres guardar los cambios en el artículo y reenviarlo para revisión?')) {
+                                await updateArticleAndResubmit(docId, newTitle, newContent, newObservaciones, `mensaje-articulo-${docId}`);
+                            }
+                        });
                     });
-                });
 
-                listaMisArticulos.querySelectorAll('.save-response-btn').forEach(button => {
-                    button.addEventListener('click', async (event) => {
-                        const docId = event.currentTarget.dataset.id;
-                        const authorResponse = document.getElementById(`author-response-${docId}`).value;
-                        
-                        if (confirm('¿Estás seguro de que quieres guardar tu respuesta al revisor?')) {
-                            await updateAuthorResponse(docId, authorResponse, `mensaje-articulo-${docId}`);
-                        }
+                    listaMisArticulos.querySelectorAll('.save-response-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const authorResponse = document.getElementById(`author-response-${docId}`).value;
+                            
+                            if (confirm('¿Estás seguro de que quieres guardar tu respuesta al revisor?')) {
+                                await updateAuthorResponse(docId, authorResponse, `mensaje-articulo-${docId}`);
+                            }
+                        });
                     });
-                });
 
-                listaMisArticulos.querySelectorAll('.delete-article-btn').forEach(button => {
-                    button.addEventListener('click', async (event) => {
-                        const docId = event.currentTarget.dataset.id;
-                        if (confirm('¿Estás seguro de que quieres eliminar este artículo? Esta acción no se puede deshacer.')) {
-                            await deleteArticle(docId, `mensaje-articulo-${docId}`);
-                        }
+                    listaMisArticulos.querySelectorAll('.request-delete-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const email = searchAutorEmailInput.value.trim();
+                            if (confirm('¿Estás seguro de que quieres solicitar la eliminación de este artículo? El administrador deberá aprobar la solicitud.')) {
+                                await requestArticleDeletion(docId, email, `mensaje-articulo-${docId}`);
+                            }
+                        });
                     });
-                });
+                } else { // Solo añadir listeners para recuperación si son artículos ocultos
+                    listaArticulosEliminados.querySelectorAll('.request-restore-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const email = searchDeletedEmailInput.value.trim();
+                            if (confirm('¿Estás seguro de que quieres solicitar la recuperación de este artículo? El administrador deberá aprobar la solicitud.')) {
+                                await requestArticleRestoration(docId, email, `mensaje-articulo-${docId}`);
+                            }
+                        });
+                    });
+                }
 
 
             } catch (error) {
                 console.error("Error al cargar los artículos del autor: ", error);
-                mensajeMisArticulos.textContent = `Error al cargar tus artículos: ${error.message}. Asegúrate de tener conexión a Firebase y reglas de seguridad adecuadas.`;
-                mensajeMisArticulos.style.color = 'red';
+                targetMessage.textContent = `Error al cargar tus artículos: ${error.message}. Asegúrate de tener conexión a Firebase y reglas de seguridad adecuadas.`;
+                targetMessage.style.color = 'red';
             }
         }
 
@@ -398,7 +457,7 @@
 
                 messageDiv.textContent = 'Artículo actualizado y reenviado para revisión exitosamente.';
                 messageDiv.style.color = 'green';
-                await cargarArticulos(autorEmailConsultado); // Recargar la lista para reflejar cambios
+                await cargarArticulos(autorEmailConsultado, false); // Recargar la lista para reflejar cambios
 
             } catch (error) {
                 console.error("Error al actualizar el artículo y reenviar: ", error);
@@ -430,24 +489,48 @@
             }
         }
 
-
-        // --- FUNCIÓN PARA ELIMINAR ARTÍCULO ---
-        async function deleteArticle(docId, messageDivId) {
+        // --- FUNCIÓN PARA SOLICITAR ELIMINACIÓN DE ARTÍCULO ---
+        async function requestArticleDeletion(docId, autorEmail, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
-            messageDiv.textContent = '';
-            messageDiv.style.color = 'initial';
-
+            messageDiv.textContent = 'Enviando solicitud de eliminación...';
+            messageDiv.style.color = 'blue';
             try {
-                await updateDoc(doc(db, "articulosEnviados", docId), {
-                    oculto: true // En lugar de eliminar, lo marcamos como oculto
+                await addDoc(collection(db, "solicitudesEliminacion"), {
+                    articleId: docId,
+                    autorEmail: autorEmail,
+                    timestamp: serverTimestamp(),
+                    status: 'Pendiente', // 'Pendiente', 'Aprobada', 'Rechazada'
+                    action: 'eliminar',
+                    articuloTitulo: document.getElementById(`edit-title-${docId}`).value || 'Título no disponible'
                 });
-                messageDiv.textContent = 'Artículo marcado como oculto exitosamente.';
+                messageDiv.textContent = 'Solicitud de eliminación enviada al administrador. Recibirás una notificación cuando sea procesada.';
                 messageDiv.style.color = 'green';
-                // Recargar solo los artículos no ocultos
-                await cargarArticulos(autorEmailConsultado, false); 
             } catch (error) {
-                console.error("Error al eliminar el artículo: ", error);
-                messageDiv.textContent = `Error al eliminar el artículo: ${error.message}`;
+                console.error("Error al solicitar eliminación: ", error);
+                messageDiv.textContent = `Error al solicitar la eliminación: ${error.message}`;
+                messageDiv.style.color = 'red';
+            }
+        }
+
+        // --- FUNCIÓN PARA SOLICITAR RECUPERACIÓN DE ARTÍCULO ---
+        async function requestArticleRestoration(docId, autorEmail, messageDivId) {
+            const messageDiv = document.getElementById(messageDivId);
+            messageDiv.textContent = 'Enviando solicitud de recuperación...';
+            messageDiv.style.color = 'blue';
+            try {
+                await addDoc(collection(db, "solicitudesRecuperacion"), {
+                    articleId: docId,
+                    autorEmail: autorEmail,
+                    timestamp: serverTimestamp(),
+                    status: 'Pendiente', // 'Pendiente', 'Aprobada', 'Rechazada'
+                    action: 'recuperar',
+                    articuloTitulo: document.getElementById(`edit-title-${docId}`).value || 'Título no disponible'
+                });
+                messageDiv.textContent = 'Solicitud de recuperación enviada al administrador. Recibirás una notificación cuando sea procesada.';
+                messageDiv.style.color = 'green';
+            } catch (error) {
+                console.error("Error al solicitar recuperación: ", error);
+                messageDiv.textContent = `Error al solicitar la recuperación: ${error.message}`;
                 messageDiv.style.color = 'red';
             }
         }
@@ -503,6 +586,16 @@
             listaMisArticulos.innerHTML = '<p class="loading-message">Ingresa tu correo electrónico y haz clic en "Buscar Mis Artículos" para verlos aquí.</p>';
             mensajeMisArticulos.textContent = '';
             autorEmailConsultado = '';
+        });
+
+        // --- EVENTO DEL BOTÓN DE BÚSQUEDA DE ARTÍCULOS ELIMINADOS ---
+        btnBuscarEliminados.addEventListener('click', async () => {
+            const email = searchDeletedEmailInput.value.trim();
+            if (email) {
+                await cargarArticulos(email, true); // Cargar artículos ocultos
+            } else {
+                alert("Por favor, introduce un correo electrónico para buscar tus artículos eliminados.");
+            }
         });
 
 

@@ -409,11 +409,7 @@ class MiHeader extends HTMLElement {
                         <a href="../login/login.html">Zona Administrativa</a>
                     </nav>
                 </div>
-                <div class="banner">
-                    <p>Publicación semestral del Servicio Nacional de Aprendizaje SENA, Centro de Comercio, Regional Antioquia, adscrita al Sistema de Investigación, Desarrollo Tecnológico e Innovación SENNOVA. </p>
-                    <p>ISSN: 2981-5533</p>
-                    <p>¡Bienvenidos!</p>
-                    </div>
+
             </header>
         `;
     }

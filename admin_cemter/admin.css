@@ -63,9 +63,9 @@ body {
     box-shadow: 0 8px 20px var(--shadow-medium); /* Sombra más pronunciada */
     flex-shrink: 0;
     position: sticky;
-    top: calc(var(--header-height) + 60px); /* Ajuste de movimiento al hacer scroll */
+    top: calc(var(--header-height) + 20px); /* Ajuste de movimiento al hacer scroll, se redujo el margen */
     height: fit-content;
-    z-index: 1000; /* Asegura que esté por encima */
+    z-index: 10; /* Se redujo el z-index */
     transform: translateZ(0); /* Pequeña optimización para renderizado */
 }
 
@@ -531,6 +531,7 @@ body {
     .sidebar {
         width: 250px;
         padding: 25px 15px;
+        top: calc(var(--header-height) + 15px); /* Ajuste para pantallas medianas */
     }
     .sidebar h3 {
         font-size: 1.6em;
@@ -557,6 +558,7 @@ body {
         position: static; /* En pantallas pequeñas, no es sticky, vuelve a ser estático */
         margin-bottom: 25px;
         max-width: 700px; /* Limita el ancho en pantallas más grandes para que no se estire demasiado */
+        z-index: auto; /* Restablecer z-index a automático */
     }
     .main-content {
         width: 100%;

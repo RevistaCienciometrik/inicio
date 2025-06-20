@@ -26,6 +26,7 @@
     --info-color: #17a2b8;      /* Azul para información */
     --gray-color: #6c757d;      /* Gris general */
     --header-height: 70px; /* **IMPORTANTE**: Define la altura de tu cabecera. Ajusta este valor si es diferente. */
+    --translucent-blue-light: rgba(173, 216, 230, 0.3); /* Nuevo: Azul claro semitransparente */
 }
 
 body {
@@ -169,7 +170,7 @@ body {
 }
 
 /* --- Hero Section del Autor --- */
-.autor-hero {
+.author-hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--text-light);
     text-align: center;
@@ -182,12 +183,12 @@ body {
     justify-content: center;
 }
 
-.autor-hero-content {
+.author-hero-content {
     max-width: 700px;
     margin: 0 auto;
 }
 
-.autor-hero h2 {
+.author-hero h2 {
     color: #fff;
     font-size: 2.5em;
     margin-bottom: 12px;
@@ -195,13 +196,13 @@ body {
     padding-bottom: 0;
 }
 
-.autor-hero .autor-icon {
+.author-hero .author-icon {
     font-size: 3.5em;
     margin-bottom: 18px;
     display: block;
 }
 
-.autor-hero .subtitle {
+.author-hero .subtitle {
     font-size: 1.2em;
     opacity: 0.9;
     line-height: 1.5;
@@ -213,6 +214,12 @@ body {
     gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+/* Estilo para cuando un artículo se expande y ocupa el ancho completo */
+.articles-list.expanded-view .article-card {
+    grid-column: 1 / -1; /* Ocupa todas las columnas disponibles */
+}
+
 
 .article-card {
     background-color: var(--bg-card);
@@ -320,8 +327,13 @@ body {
 .edit-article-btn { background-color: var(--primary-color); color: #fff; }
 .edit-article-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
 
+.request-delete-btn,
 .delete-article-btn { background-color: var(--danger-color); color: #fff; }
+.request-delete-btn:hover,
 .delete-article-btn:hover { background-color: #c82333; transform: translateY(-2px); }
+
+.request-restore-btn { background-color: #28a745; color: #fff; } /* Verde para restaurar */
+.request-restore-btn:hover { background-color: #218838; transform: translateY(-2px); }
 
 .respond-btn { background-color: var(--info-color); color: #fff; }
 .respond-btn:hover { background-color: #118aa6; transform: translateY(-2px); }
@@ -450,13 +462,14 @@ body {
 
 .modern-select,
 .modern-form input[type="text"],
+.modern-form input[type="email"], /* Añadido input[type="email"] para aplicar el estilo */
 .modern-form textarea {
     padding: 12px 18px; /* Aumentado el padding interno */
     border: 1px solid rgba(224, 224, 224, 0.7); /* Borde más suave y ligeramente translúcido */
     border-radius: 10px; /* Bordes más redondeados */
     font-size: 1.05em; /* Ligeramente más grande */
     color: var(--text-dark);
-    background-color: rgba(255, 255, 255, 0.7); /* Fondo ligeramente translúcido para los inputs */
+    background-color: var(--translucent-blue-light); /* Fondo azul claro semitransparente */
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     flex-grow: 1;
     min-width: 220px; /* Ligeramente aumentado el min-width */
@@ -465,6 +478,7 @@ body {
 
 .modern-select:focus,
 .modern-form input[type="text"]:focus,
+.modern-form input[type="email"]:focus, /* Añadido input[type="email"]:focus */
 .modern-form textarea:focus {
     border-color: var(--accent-color); /* Borde de color de acento al enfocar */
     box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.25), inset 0 1px 4px rgba(0, 0, 0, 0.08); /* Sombra de enfoque más suave */
@@ -495,7 +509,8 @@ body {
     align-items: flex-start;
 }
 
-.search-bar input[type="text"] {
+.search-bar input[type="text"],
+.search-bar input[type="email"] { /* Aplicar al input de email en search-bar */
     width: 100%;
 }
 
@@ -600,19 +615,19 @@ body {
         gap: 25px;
     }
 
-    .autor-hero {
+    .author-hero {
         padding: 35px 20px;
     }
 
-    .autor-hero h2 {
+    .author-hero h2 {
         font-size: 2.2em;
     }
 
-    .autor-hero .autor-icon {
+    .author-hero .author-icon {
         font-size: 3.5em;
     }
 
-    .autor-hero .subtitle {
+    .author-hero .subtitle {
         font-size: 1.1em;
     }
 
@@ -623,6 +638,14 @@ body {
     .section h2 {
         font-size: 1.8em;
         gap: 8px;
+    }
+
+    .articles-list {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ajuste para pantallas medianas */
+    }
+
+    .articles-list.expanded-view .article-card {
+        grid-column: 1 / -1; /* Ocupa todas las columnas disponibles */
     }
 
     .article-card {
@@ -667,6 +690,7 @@ body {
     }
     .modern-select,
     .modern-form input[type="text"],
+    .modern-form input[type="email"],
     .modern-form textarea {
         min-width: unset; /* Permite que se encoja más */
         padding: 10px 15px; /* Ajusta el padding para pantallas más pequeñas */
@@ -696,7 +720,7 @@ body {
     .full-article-content pre,
     .full-article-content textarea {
         padding: 8px;
-        font-size: 0.8em;
+        font-size: 0.85em;
     }
     .filter-controls,
     .search-bar {
@@ -709,6 +733,7 @@ body {
     }
     .modern-select,
     .modern-form input[type="text"],
+    .modern-form input[type="email"],
     .modern-form textarea {
         width: 100%;
         min-width: unset; /* Permite que se encoja más */
@@ -735,13 +760,13 @@ body {
         font-size: 1.4em;
         gap: 5px;
     }
-    .autor-hero h2 {
+    .author-hero h2 {
         font-size: 2em;
     }
-    .autor-hero .autor-icon {
+    .author-hero .author-icon {
         font-size: 3em;
     }
-    .autor-hero .subtitle {
+    .author-hero .subtitle {
         font-size: 1em;
     }
     .sidebar nav ul {
