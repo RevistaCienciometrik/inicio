@@ -616,6 +616,152 @@ body {
 
 
 /* --- VOLUMENES SECTION STYLES (ESTO ES PARA OTRA SECCIÓN: VOLÚMENES O PUBLICACIONES) --- */
+
+/* Definición de la animación de pulsación */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(1.03); /* Ligeramente más grande */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Definición de la animación de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        filter: brightness(0.5); /* Menos claridad al inicio */
+    }
+    to {
+        opacity: 1;
+        filter: brightness(1); /* Claridad normal al final */
+    }
+}
+
+/* Estilos para el contenedor de la imagen 'soon' */
+.image-container {
+    text-align: center; /* Centra la imagen horizontalmente */
+    margin: 40px auto; /* Margen superior e inferior, y centrado automático horizontal */
+    padding: 20px; /* Espacio interior */
+    background-color: #f9f9f9; /* Un fondo suave para el contenedor */
+    border-radius: 10px; /* Bordes ligeramente redondeados para el contenedor */
+    max-width: 1500px; /* Ancho máximo para el contenedor */
+}
+
+/* Estilos para la imagen 'soon' */
+.soon-image {
+    max-width: 100%; /* Asegura que la imagen sea responsiva y no se desborde */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Elimina espacio extra debajo de la imagen si lo hubiera */
+    border-radius: 8px; /* Bordes redondeados para la imagen */
+    
+    /* Aplicar animación de pulsación */
+    animation: pulse 2s infinite ease-in-out alternate, /* nombre duración repetición tipo dirección */
+               fadeIn 1.5s ease-out forwards; /* Aplicar animación de fade-in al cargar */
+    
+    /* Propiedades iniciales para la animación de fade-in */
+    opacity: 0; /* Empieza invisible */
+    filter: brightness(0.5); /* Empieza un poco más oscura */
+    
+    /* La sombra inicial para cuando la animación de pulse no está en 50% */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+}
+
+/* Opcional: Estilos para el título "¡Nuestras ediciones!" */
+.contact-hero h2 {
+    font-size: 2.5em; /* Tamaño de fuente más grande */
+    color: #333; /* Color de texto oscuro */
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra de texto sutil */
+}
+/* ----------------------------------------------------------------------------------------------------- */
+/* Estilos para los botones submit-button */
+.submit-button {
+    display: inline-flex; /* Permite que el icono y el texto estén en línea y centrados */
+    align-items: center; /* Centra verticalmente el contenido (icono y texto) */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    padding: 10px 20px; /* Relleno interno del botón */
+    margin: 10px 0; /* Margen superior e inferior para separarlo de otros elementos */
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Quita el subrayado predeterminado de los enlaces */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave para efectos */
+}
+
+/* Estilos al pasar el mouse (hover) */
+.submit-button:hover {
+    background-color: #0056b3; /* Color de fondo más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Ligeramente más alto para un efecto "flotante" */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil al pasar el mouse */
+}
+
+/* Estilos para el icono dentro del botón */
+.submit-button i {
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+    font-size: 1.1em; /* Ajusta el tamaño del icono si es necesario */
+}
+
+/* Estilos para el contenedor específico del botón y contador en index.html */
+.index-download-section {
+    display: flex; /* Usa flexbox para alinear el botón y la métrica */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    margin-top: 10px; /* Espacio superior para separarlo de la imagen */
+    /* Puedes ajustar el ancho máximo si el botón es muy ancho */
+    /* max-width: 200px; */ 
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+}
+
+/* Estilos para el botón de descarga */
+.index-download-section .button_download {
+    display: inline-block; /* Permite aplicar padding y margin */
+    padding: 10px 20px;
+    background-color: #007bff; /* Color azul de ejemplo */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.index-download-section .button_download:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el texto de la métrica de descargas */
+.index-download-section .download-metric {
+    font-size: 0.8em; /* Tamaño de fuente más pequeño */
+    color: #555; /* Color de texto más suave */
+    margin-top: 5px; /* Pequeño margen entre el botón y la métrica */
+    text-align: center; /* Asegura que el texto esté centrado si hay espacio */
+}
+
+/* Estilos para el número del contador dentro de la métrica */
+.index-download-section .download-count {
+    font-weight: bold; /* Hace el número más visible */
+    color: #007bff; /* Podrías usar un color que destaque, como el del botón */
+}
+
+/* Si el botón .button_download ya tiene estilos que lo centran, puedes omitir .index-download-section */
+/* y solo usar los estilos .download-metric y .download-count */
+
+
+
+/* ---------------------------------------- */
+
 .volumenes-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

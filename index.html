@@ -8,10 +8,8 @@
 </head>
 <body>
     
-    <!-- HEADER LLAMADO COMO OBJECTO JS DESDE HEADER.JS -->
     <mi-header></mi-header>
 
-    <!-- PANEL DE NAVEGACIÓN -->
     <div class="container">
         <aside class="sidebar" id="nav_panel">
             <h3>Panel de Navegación</h3>
@@ -31,6 +29,10 @@
 
         <main class="main-content">
 
+    <div class="image-container">
+        <img src="images/soon2.jpeg" alt="Próximamente-img" class="soon-image">
+    </div>
+
 <section id="inicio" class="section">
     <div class="main-content-banner">
         <div class="image-wrapper right-image">
@@ -39,8 +41,11 @@
         <div class="image-wrapper left-image">
             <img src="images/Portada.png" id="portada_imagen" alt="Imagen de portada de la revista" class="main-image-banner">
             <br>
-            <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" id="volumen_revista" download class="button_download">Último volúmen</a>
-        </div>
+            <div class="descarga-info index-download-section"> 
+                <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" id="volumen_revista" download class="button_download" data-volume-id="sena-volumen-3">Último volúmen</a> 
+                <p class="download-metric">Descargas: <span id="downloads-sena-volumen-3" class="download-count">0</span></p>
+            </div>
+            </div>
     </div>
 </section>
             
@@ -94,7 +99,6 @@
         </main>
     </div>
 
-    <!-- FOOTER LLAMADO COMO OBJECTO JS DESDE FOOTER.JS -->
     <mi-footer></mi-footer>
 
     <script src="Objects/header.js"></script>
@@ -103,5 +107,6 @@
     <script src="Objects/script.js"></script>
     <script src="js/contentloader.js"></script>
     <script src="js/admin_edit_index.js"></script>
+    <script src="Objects/download_tracker.js"></script> 
 </body>
 </html>
