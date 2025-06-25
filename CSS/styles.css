@@ -648,7 +648,7 @@ body {
 /* Estilos para el contenedor de la imagen 'soon' */
 .image-container {
     text-align: center; /* Centra la imagen horizontalmente */
-    margin: 40px auto; /* Margen superior e inferior, y centrado automático horizontal */
+    margin: 10px auto; /* Margen superior e inferior, y centrado automático horizontal */
     padding: 20px; /* Espacio interior */
     background-color: #f9f9f9; /* Un fondo suave para el contenedor */
     border-radius: 10px; /* Bordes ligeramente redondeados para el contenedor */

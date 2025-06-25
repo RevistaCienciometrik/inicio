@@ -22,19 +22,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-    <mi-header></mi-header>
+    <mi-header id="top"></mi-header>
 
     <div class="container">
         <aside class="sidebar">
             <h3>Panel de Navegación</h3>
             <nav>
                 <ul>
-                    <li>
-                        <a href="index.html">Inicio</a>
-                        <a href="Proximos_Volumenes">Próximos Volúmenes</a>
-                        <a href="#Nuestras_ediciones">Próximamente</a>
-                        
-                    </li>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="#Nuestras_ediciones">Publicaciones de la Revista</a></li>
+                        <li><a href="#top"> Subir todo</a></li>
+                        <li><a href="#bottom"> Ir hasta abajo</a></li>
+                    </ul>
 
                 </ul>
             </nav>
@@ -48,7 +48,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </section>
 
-    <div class="image-container">
+    <div class="image-container" id="img">
         <img src="images/soon.jpeg" alt="Próximamente-img" class="soon-image">
     </div>
     
@@ -129,7 +129,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 </div>
 
-    <mi-footer></mi-footer>
+    <mi-footer id="bottom"></mi-footer>
 
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>

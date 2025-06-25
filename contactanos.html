@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <body>
-    <mi-header></mi-header>
+    <mi-header id="top"></mi-header>
 
     <div class="container">
         <aside class="sidebar">
@@ -15,10 +15,10 @@
             <nav>
                 <ul>
                     <li><i class="fas fa-home"></i><a href="index.html">Inicio</a></li>
-                    <li><a href="quienes_somos.html">Quiénes Somos</a></li>
-                    <li><a href="publicaciones.html">Publicaciones</a></li>
-                    <li><a href="autores.html">Autores</a></li>
-                    <li><a href="contactanos.html">Contáctanos</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                    <li><a href="#mensaje">Envíanos un mensaje</a></li>
+                    <li><a href="#top"></i> Subir todo</a></li>
+                    <li><a href="#bottom"></i> Ir hasta abajo</a></li>
                 </ul>
             </nav>
         </aside>
@@ -33,7 +33,7 @@
             </section>
 
             <section class="section contact-info-section">
-                <h2>Contáctanos</h2>
+                <h2 id="contactanos">Contáctanos</h2>
                 <p>Puedes encontrarnos aquí:</p>
                 <div class="contact-details">
                     <div class="contact-item">
@@ -46,7 +46,7 @@
                         <i class="fas fa-phone-alt icon-large"></i>
                         <h3>Teléfono</h3>
                         <p>Hugo Alexander Semanate (Instructor Sennova. Líder Semillero de Investigación ICI)</p>
-                        <p><a href="tel:+573125271993">+57 312-5271993</a></p>
+                        <p id="tel"><a href="tel:+573125271993">+57 312-5271993</a></p>
                         <p>Llámanos en horario de oficina.</p>
                     </div>
                     <div class="contact-item">
@@ -68,7 +68,7 @@
             </section>
 
                         <section class="section contact-form-section">
-                <h2>Envíanos tu mensaje</h2>
+                <h2 id="mensaje">Envíanos tu mensaje</h2>
                 <p>Completa este formulario y nos pondremos en contacto contigo lo antes posible. <br> ¡Tu opinión y tus ideas son valiosas para nosotros!</p>
                 <form id="formulario-contacto" class="modern-form">
                     <div class="form-group">
@@ -109,7 +109,7 @@
 
     
 
-    <mi-footer></mi-footer>
+    <mi-footer id="bottom"></mi-footer>
 
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>
