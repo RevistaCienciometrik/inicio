@@ -505,7 +505,7 @@ body {
 /* ------------------------------------------------------------------------------------------------------------- */
 
 
-/* --- ESTILOS DEL BOTÓN DE DESCARGA (EXISTENTES, solo revisa el margen) --- */
+/* --- ESTILOS DEL BOTÓN DE DESCARGA --- */
 .button_download {
     display: inline-block;
     padding: 8px 16px; /* Hacemos el padding un poco más pequeño */
