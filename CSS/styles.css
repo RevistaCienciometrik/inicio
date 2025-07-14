@@ -12,7 +12,6 @@ body {
     line-height: 1.6;
 }
 
-/* --- MAIN CONTENT & SIDEBAR --------------------------------------------------------------------------------- */
 /* --- Layout del Contenedor Principal --- */
 .container {
     display: flex;
@@ -22,85 +21,6 @@ body {
     margin: 40px auto; /* Margen superior de los contenedores */
 }
 
-
-/* --- Barra Lateral (Sidebar) --- */
-
-.sidebar {
-    width: 280px; /* Un poco más de ancho */
-    background-color: #237482;
-    color: var(--text-light);
-    padding: 30px 20px;
-    border-radius: 12px; /* Más redondeado */
-    box-shadow: 0 8px 20px var(--shadow-medium); /* Sombra más pronunciada */
-    flex-shrink: 0;
-    position: sticky;
-    top: calc(var(--header-height, 0px) + -80px); /* top position. Ajuste de movimiento al hacer scroll */
-    height: fit-content; /* Comentar para que el contenedor sea de toda la pantalla */
-    z-index: 10; /* Se redujo el z-index */
-    transform: translateZ(0); /* Pequeña optimización para renderizado */
-}
-
-.sidebar h3 {
-    text-align: center;
-    margin-bottom: 35px;
-    color: whitesmoke;
-    font-size: 1.8em; /* Más grande */
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.sidebar h3::after { /* Línea decorativa */
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
-    border-radius: 2px;
-}
-
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 12px;
-}
-
-.sidebar nav ul li a {
-    color: whitesmoke;
-    text-decoration: none;
-    display: flex; /* Para alinear icono y texto */
-    align-items: center;
-    padding: 12px 18px;
-    border-radius: 8px; /* Bordes más suaves */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 1.05em;
-    font-weight: 500;
-}
-
-.sidebar nav ul li a i {
-    margin-right: 12px;
-    font-size: 1.2em;
-    color: var(--accent-color); /* Color de acento para los iconos */
-}
-
-.sidebar nav ul li a:hover,
-.sidebar nav ul ul li a.active {
-    background-color: var(--secondary-color);
-    transform: translateX(5px); /* Pequeño desplazamiento al pasar el ratón */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar nav ul li a.active {
-    background-color: var(--secondary-color);
-    border-left: 5px solid var(--accent-color); /* Indicador de sección activa */
-    padding-left: 13px; /* Ajusta el padding por el borde */
-}
 /* -------------------------------------------------------------------------------------------- */
 
 /* QUIENES SOMOS ESTILOS DE LA IMAGEN */
