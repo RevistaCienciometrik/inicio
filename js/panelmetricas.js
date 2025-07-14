@@ -10,7 +10,7 @@ class MetricasPanel extends HTMLElement {
     render() {
         this.shadowRoot.innerHTML = `
             <style>
-                    /* --- Estilos para el Web Component <metricas-panel> --- */
+                    /* --- SSTILOS PARA EL PANEL DE MÉTRICAS --- */
 
                     /* Estilos para el contenedor principal del panel de métricas */
                     .metrics-panel-container {
@@ -89,8 +89,10 @@ class MetricasPanel extends HTMLElement {
                             order: -1; /* Para que aparezca primero en móviles si el flex-direction es column */
                         }
                     }
+                        
 
                 /* Estilos específicos para los botones de navegación dentro del panel de métricas */
+
                 .navigation-buttons {
                     margin-top: 30px;
                     padding-top: 20px;
@@ -125,6 +127,9 @@ class MetricasPanel extends HTMLElement {
 
                 /* Asegurarse de que no haya un .sidebar con estas mismas propiedades, o que este las sobrescriba */
             </style>
+
+                    
+                /* CONTENIDO DEL PANEL EN HTML */
 
             <div class="metrics-panel-container" id="nav_panel">
                 <h3>Métricas</h3>
