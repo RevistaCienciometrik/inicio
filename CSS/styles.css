@@ -19,7 +19,7 @@ body {
     padding: 10px;
     gap: 30px; /* Aumenté el gap para mayor separación de los contenedores */
     max-width: 1500px; /* Ancho de los contenedores */
-    margin: 20px auto; /* Margen superior de los contenedores */
+    margin: 40px auto; /* Margen superior de los contenedores */
 }
 
 
@@ -101,6 +101,41 @@ body {
     border-left: 5px solid var(--accent-color); /* Indicador de sección activa */
     padding-left: 13px; /* Ajusta el padding por el borde */
 }
+/* -------------------------------------------------------------------------------------------- */
+
+/* QUIENES SOMOS ESTILOS DE LA IMAGEN */
+
+/* --- Estilos para la sección de publicidad --- */
+.publicidad-container {
+    text-align: center; /* Centra la imagen horizontalmente */
+    margin: 30px auto; /* Añade un margen arriba y abajo, y centra el contenedor */
+    padding: 15px; /* Un pequeño espacio alrededor de la imagen */
+    background-color: transparent; /* Un fondo muy claro o transparrente para destacar la sección */
+    border-radius: 8px; /* Bordes redondeados (opcional) */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Una sombra sutil (opcional) */
+    max-width: 90%; /* Asegura que no se salga del contenedor principal en pantallas grandes */
+}
+
+.publicidad-imagen {
+    display: block; /* Evita espacios extra debajo de la imagen */
+    max-width: 50%; /* La imagen no excederá el ancho de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 6px; /* Bordes redondeados para la imagen (opcional) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Una sombra suave para la imagen */
+    margin: 0 auto; /* Centra la imagen dentro del contenedor */
+}
+
+/* --- Media query para pantallas más pequeñas --- */
+@media screen and (max-width: 768px) {
+    .publicidad-container {
+        margin: 20px auto; /* Reduce un poco el margen en pantallas pequeñas */
+        padding: 10px;
+    }
+    .publicidad-imagen {
+        border-radius: 4px; /* Bordes menos redondeados en pantallas pequeñas */
+    }
+}
+
 /* -------------------------------------------------------------------------------------------- */
 
 

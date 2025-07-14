@@ -5,27 +5,13 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Quiénes Somos</title>
      <link rel="stylesheet" href="CSS/styles.css">
+     <link rel="stylesheet" href="CSS/metricas.css"> 
  </head>
  <body>
 
     <mi-header id="top"></mi-header>
 
      <div class="container">
-         <aside class="sidebar">
-             <h3>Panel de Navegación</h3>
-             <nav>
-                 <ul>
-                     <li></i><a href="#inicio">Inicio</a></li>
-                     <li><a href="#quienes-somos">Quiénes somos</a></li>
-                     <li><a href="#nuestro-equipo">Nuestro Equipo</a></li>
-                     <li><a href="#informacion-revista">Información de la Revista</a></li>
-                     <li><a href="#nuestro-enfoque">Nuestro Enfoque</a></li>
-                     <li><a href="#invitacion-sennova">Invitación SENNOVA</a></li>
-                     <li><a href="#top"> Subir todo</a></li>
-                        <li><a href="#bottom">Ir hasta abajo</a></li>
-                 </ul>
-             </nav>
-         </aside>
 
          <main class="main-content">
 
@@ -38,6 +24,7 @@
 
              <section id="quienes-somos" class="section">
                  <h2>¿Quiénes somos?</h2>
+
                  <p>
                      La <strong>Revista Cienciometrik</strong> es una publicación semestral del Servicio Nacional de Aprendizaje SENA,
                      adscrita al Sistema de Investigación, Desarrollo Tecnológico e Innovación SENNOVA. Específicamente, nace del
@@ -50,10 +37,16 @@
                      tenemos un interés particular en la <strong>cienciometría</strong> como una herramienta fundamental para el análisis
                      y la mejora de la investigación.
                  </p>
+
+                 <!-- IMAGEN  -->
+                  <div class="publicidad-container">
+                  <img src="images/imgsaloon (2).png" alt="Publicidad Revista Cienciometrik" class="publicidad-imagen">
+                  </div>
+
                  <br>
                  <h3 id="nuestro-equipo">Nuestro Equipo (Créditos):</h3>
                     <ul>
-                        <li><strong>Subdirector (e), Centro de Comercio, Regional Antioquia:</strong> Oswaldo De Jesús Monroy Urrego</li>
+                        <li><strong>Subdirectora, Centro de Comercio, Regional Antioquia:</strong> Patricia Aristizabal Correa</li>
                         <li><strong>Editor Revista Cienciometrik:</strong> Hugo Alexander Semanate Quiñonez <br> (Instructor Sennova. Líder Semillero de Investigación ICI. Centro de Comercio, Regional Antioquia)</li>
                         <li><strong>Monitores Semillero de Investigación ICI (Investiga, Crea, Innova):</strong>
                             <ul>
@@ -62,6 +55,19 @@
                                 <li>Nidia Cristina Monrroy (Aprendiz Tecnólogo Desarrollo Publicitario. Centro de Comercio, Regional Antioquia)</li>
                             </ul>
                         </li>
+
+                        <li><strong>Equpo de codificación, diseño y edición de la web Cienciométrik:</strong>
+                            <ul>
+                            <li>Marcela Restrepo (Aprendiz Tecnólogo Desarrollo Publicitario. Centro de Comercio, Regional Antioquia)</li>
+                            <li>Francisco Quiñones Maldonado (Aprendiz Tecnólogo en Análisis & Desarrollo de Software. Centro de Comercio, Regional Antioquia)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Comité científico y editorial:</strong>
+                            <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            </ul>
                     </ul>
                  <br>
                  <h3 id="informacion-revista">Información de la Revista:</h3>
@@ -76,11 +82,13 @@
                  <h3 id="invitacion-sennova">Invitación a la Comunidad SENNOVA:</h3>
                  <p>
                      Invitamos a aprendices, instructores e investigadores del Sistema SENNOVA a ser parte de Cienciometrik,
-                     compartiendo sus valiosos aportes al conocimiento científico y tecnológico. Puedes hacerlo en el siguiente enlace: <a href="/autores.html"> - Postear artículo - </a>
+                     compartiendo sus valiosos aportes al conocimiento científico y tecnológico. Puedes hacerlo en el siguiente enlace: <a href="autores.html"> - Postear artículo (Sección autores) - </a>
                  </p>
              </section>
 
              </main>
+
+     <metricas-panel></metricas-panel> 
 
      </div>
 
@@ -90,6 +98,8 @@
      <script src="Objects/container.js"></script>
      <script src="Objects/footer.js"></script>
      <script src="Objects/script.js"></script>
+    <script src="js/panelmetricas.js"></script> </body>
+    <script src="js/download_tracker.js"></script> </body>
 
  </body>
  </html>

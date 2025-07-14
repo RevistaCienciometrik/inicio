@@ -5,23 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contáctanos - Revista Cienciometrik</title>
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/metricas.css">
 </head>
 <body>
     <mi-header id="top"></mi-header>
 
     <div class="container">
-        <aside class="sidebar">
-            <h3>Panel de Navegación</h3>
-            <nav>
-                <ul>
-                    <li><i class="fas fa-home"></i><a href="index.html">Inicio</a></li>
-                    <li><a href="#contactanos">Contáctanos</a></li>
-                    <li><a href="#mensaje">Envíanos un mensaje</a></li>
-                    <li><a href="#top"></i> Subir todo</a></li>
-                    <li><a href="#bottom"></i> Ir hasta abajo</a></li>
-                </ul>
-            </nav>
-        </aside>
 
         <main class="main-content">
             <section class="section contact-hero">
@@ -39,13 +28,13 @@
                     <div class="contact-item">
                         <i class="fas fa-envelope-open-text icon-large"></i>
                         <h3>Correo Electrónico</h3>
-                        <p><a href="mailto:revista.cienciometrik@sena.edu.co">hsemanate@sena.edu.co</a></p>
+                        <p><a href="mailto:cienciometrik@gmail.com">cienciometrik@gmail.com</a></p>
                         <p>¡Esperamos tu email!</p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone-alt icon-large"></i>
                         <h3>Teléfono</h3>
-                        <p>Hugo Alexander Semanate (Instructor Sennova. Líder Semillero de Investigación ICI)</p>
+                        <p>Hugo Alexander Semanate hsemanate@sena.edu.co <br> (Coordinador Revista Cienciométrik)</p>
                         <p id="tel"><a href="tel:+573125271993">+57 312-5271993</a></p>
                         <p>Llámanos en horario de oficina.</p>
                     </div>
@@ -63,6 +52,8 @@
                         <a href="https://www.facebook.com/profile.php?id=61576106693485" class="social-icon-link"><i class="facebook">F</i></a>
                         <a href="https://www.linkedin.com/in/revista-cienciometrik-b7a5ab363/" class="social-icon-link"><i class="linkedin">L</i></a>
                         <a href="https://www.instagram.com/revistacienciometrik/" class="social-icon-link"><i class="instagram">iG</i></a>
+                        <a href="https://www.youtube.com/@revistacienciometrik" class="social-icon-link"><i class="Youtube">Yt</i></a>
+
                     </div>
                 </div>
             </section>
@@ -105,6 +96,7 @@
                 <div id="mensaje-contacto" class="mensaje"></div>
             </section>
         </main>
+    <metricas-panel></metricas-panel>     
     </div>
 
     
@@ -115,6 +107,8 @@
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
+    <script src="js/panelmetricas.js"></script> </body>
+    <script src="js/download_tracker.js"></script> </body>
 
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase.

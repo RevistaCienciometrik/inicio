@@ -5,51 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revista Cienciometrik</title>
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/metricas.css"> 
 </head>
 <body>
     
     <mi-header id="top"></mi-header>
 
     <div class="container">
-        <aside class="sidebar" id="nav_panel">
-            <h3>Panel de Navegación</h3>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#inicio">Inicio</a>
-                    </li>
-                    <li><a href="#titulo_inicio">Bienvenido</a></li>
-                    <li><a href="#historia">Historia de la Revista</a></li>
-                    <li><a href="#linea-tiempo">Línea de Tiempo</a></li>
-                    <li><a href="#enfoque">Enfoque</a></li>
-                    <li><a href="#top"></i> Subir todo</a></li>
-                        <li><a href="#bottom"></i> Ir hasta abajo</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-
         <main class="main-content">
 
-    <div class="image-container">
-        <img src="images/soon2.jpeg" alt="Próximamente-img" class="soon-image">
-    </div>
+            <div class="image-container">
+                <img src="images/soon2.jpeg" alt="Próximamente-img" class="soon-image">
+            </div>
 
-<section id="inicio" class="section">
-    <div class="main-content-banner">
-        <div class="image-wrapper right-image">
-            <img src="images/IMG-MOV-INDX.png" id="img_moving" class="animated-image-banner">
-        </div>
-        <div class="image-wrapper left-image">
-            <img src="images/Portada.png" id="portada_imagen" alt="Imagen de portada de la revista" class="main-image-banner">
-            <br>
-            <div class="descarga-info index-download-section"> 
-                <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" id="volumen_revista" download class="button_download" data-volume-id="sena-volumen-3">Último volúmen</a> 
-                <p class="download-metric">Descargas: <span id="downloads-sena-volumen-3" class="download-count">0</span></p>
-            </div>
-            </div>
-    </div>
-</section>
+            <section id="inicio" class="section">
+                <div class="main-content-banner">
+                    <div class="image-wrapper right-image">
+                        <img src="images/IMG-MOV-INDX.png" id="img_moving" class="animated-image-banner">
+                    </div>
+                    <div class="image-wrapper left-image">
+                        <img src="images/Portada.png" id="portada_imagen" alt="Imagen de portada de la revista" class="main-image-banner">
+                        <br>
+                        <div class="descarga-info index-download-section"> 
+                            <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" id="volumen_revista" download class="button_download" data-volume-id="sena-volumen-3">Último volúmen</a> 
+                            </div>
+                    </div>
+                </div>
+            </section>
             
             <section id="inicio_bienvenido" class="section">
                 <h2 id="titulo_inicio">Bienvenido a la Revista Cienciometrik</h2>
@@ -87,7 +69,7 @@
             <section id="enfoque" class="section">
                 <h2 id="titulo_enfoque">Enfoque de la Revista</h2>
                 <p id="parrafo_enfoque">La Revista Cienciometrik se enfoca en la difusión de investigaciones, desarrollos tecnológicos e innovaciones en diversas áreas del conocimiento, con un interés particular en la cienciometría como herramienta para el análisis y la mejora de la investigación.</p>
-                <h3 id="p_enfoque">Líneas que recibe la revista (ejemplos basados en los documentos):</h3>
+                <h3 id="p_enfoque">Líneas que recibe la revista:</h3> <br>
                 <ul>
                     <li id="#1">Cienciometría y estudios métricos de la información.</li>
                     <li id="#2">Investigación pedagógica.</li>
@@ -99,6 +81,9 @@
                 </ul>
             </section>
         </main>
+        
+        <metricas-panel></metricas-panel> 
+
     </div>
 
     <mi-footer id="bottom"></mi-footer>
@@ -109,6 +94,6 @@
     <script src="Objects/script.js"></script>
     <script src="js/contentloader.js"></script>
     <script src="js/admin_edit_index.js"></script>
-    <script src="Objects/download_tracker.js"></script> 
-</body>
+    <script src="js/panelmetricas.js"></script> </body>
+    <script src="js/download_tracker.js"></script> </body>
 </html>
