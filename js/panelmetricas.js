@@ -89,7 +89,7 @@ class MetricasPanel extends HTMLElement {
                             order: -1; /* Para que aparezca primero en móviles si el flex-direction es column */
                         }
                     }
-                        
+
 
                 /* Estilos específicos para los botones de navegación dentro del panel de métricas */
 
@@ -129,7 +129,6 @@ class MetricasPanel extends HTMLElement {
             </style>
 
                     
-                /* CONTENIDO DEL PANEL EN HTML */
 
             <div class="metrics-panel-container" id="nav_panel">
                 <h3>Métricas</h3>
