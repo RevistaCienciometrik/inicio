@@ -259,7 +259,7 @@ class MiHeader extends HTMLElement {
                     </button>
                     <nav class="menu">
                         <a href="index.html">Inicio</a>
-                        <a href="quienes_somos.html">Quienes somos</a>
+                        <a href="quienes_somos.html">¿Quiénes somos?</a>
                         <a href="publicaciones.html">Publicaciones</a>
                         <a href="autores.html">Autores</a>
                         <a href="contactanos.html">Contáctanos</a>
