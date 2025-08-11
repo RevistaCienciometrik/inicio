@@ -1,0 +1,194 @@
+/* --- ESTILOS ESPECÍFICOS PARA LA PÁGINA QUIÉNES SOMOS --- */
+.quienes-somos-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.quienes-somos-hero {
+    background: transparent; /* Fondo transparente */
+    border: 5px solid #008394; /* Borde azul grueso */
+    color: #003057; /* Texto en azul oscuro para legibilidad */
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.quienes-somos-hero h2 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.quienes-somos-hero p {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+.quienes-somos-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.quienes-somos-text {
+    flex: 3;
+    min-width: 300px;
+}
+
+.quienes-somos-visual {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.quienes-somos-image {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.quienes-somos-image:hover {
+    transform: scale(1.02);
+}
+
+.quienes-somos-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.quienes-somos-card:hover {
+    transform: translateY(-5px);
+}
+
+.quienes-somos-card h3 {
+    color: #003057;
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quienes-somos-card p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.quienes-somos-card ul {
+    color: #555;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.quienes-somos-card li {
+    margin-bottom: 8px;
+}
+
+.quienes-somos-card li strong {
+    color: #003057;
+}
+
+.quienes-somos-sublist {
+    padding-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.quienes-somos-sublist li {
+    margin-bottom: 6px;
+    font-size: 0.95em;
+}
+
+.quienes-somos-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #008394;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.quienes-somos-button:hover {
+    background-color: #006b7a;
+    transform: translateY(-2px);
+}
+
+.quienes-somos-link {
+    color: #008394;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.quienes-somos-link:hover {
+    color: #006b7a;
+    text-decoration: underline;
+}
+
+/* --- IMÁGENES DECORATIVAS --- */
+.quienes-somos-decoration {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media screen and (max-width: 992px) {
+    .quienes-somos-content {
+        flex-direction: column;
+    }
+    
+    .quienes-somos-visual {
+        order: -1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .quienes-somos-hero {
+        padding: 30px 15px;
+    }
+    
+    .quienes-somos-hero h2 {
+        font-size: 1.8em;
+    }
+    
+    .quienes-somos-hero p {
+        font-size: 1em;
+    }
+    
+    .quienes-somos-card {
+        padding: 20px;
+    }
+    
+    .quienes-somos-card h3 {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .quienes-somos-hero h2 {
+        font-size: 1.6em;
+    }
+    
+    .quienes-somos-card h3 {
+        font-size: 1.1em;
+    }
+}

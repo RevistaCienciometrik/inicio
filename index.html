@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revista Cienciometrik</title>
     <link rel="stylesheet" href="CSS/styles.css">
+    <!-- <link rel="stylesheet" href="CSS/metricas.css"> -->
 
 </head>
 <body>
@@ -15,7 +16,7 @@
         <main class="main-content">
 
             <div class="image-container">
-                <img src="images/soon2.jpeg" alt="Próximamente-img" class="soon-image">
+                <img src="images/estreno-2-julio-2025.png" alt="ultimovolumen-img" class="soon-image">
             </div>
 
             <section id="inicio" class="section">
@@ -24,10 +25,10 @@
                         <img src="images/IMG-MOV-INDX.png" id="img_moving" class="animated-image-banner">
                     </div>
                     <div class="image-wrapper left-image">
-                        <img src="images/Portada.png" id="portada_imagen" alt="Imagen de portada de la revista" class="main-image-banner">
+                        <img src="Docs/UltimoVolumen/Revista Cienciometrik Vol. 3 N° 4, Enero - Julio.png" id="portada_imagen" alt="Imagen de portada de la revista" class="main-image-banner">
                         <br>
                         <div class="descarga-info index-download-section"> 
-                            <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" id="volumen_revista" download class="button_download" data-volume-id="sena-volumen-3">Último volúmen</a> 
+                            <a href="Docs/UltimoVolumen/Revista Cienciometrik Vol. 3 N° 4, Enero - Julio.pdf" id="volumen_revista" download class="button_download" data-volume-id="sena-volumen-3">Último volúmen</a> 
                             </div>
                     </div>
                 </div>
@@ -87,6 +88,17 @@
     </div>
 
     <mi-footer id="bottom"></mi-footer>
+
+
+<!-- SCRIPT PARA LA UNIÓN AL PANELMETRICAS.JS PARA EL CONTADOR DE VISITAS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let visits = parseInt(localStorage.getItem('web_visits') || '0');
+            visits++;
+            localStorage.setItem('web_visits', visits);
+        });
+    </script>
+<!-- -------------------------------------------------------------------- -->
 
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>

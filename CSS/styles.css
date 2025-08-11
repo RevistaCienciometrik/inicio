@@ -438,7 +438,7 @@ body {
     border: 1px solid #eee;
 }
 
-.image-container-volumenes .image-authors:hover { /* Renamed hover class */
+.image-container-volumenes .image-authors:hover { 
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -600,7 +600,7 @@ body {
     }
 }
 
-/* Estilos para el contenedor de la imagen 'soon' */
+/* Estilos para el contenedor de la imagen "soon" o "ultimovolumen06-2025" */
 .image-container {
     text-align: center; /* Centra la imagen horizontalmente */
     margin: 10px auto; /* Margen superior e inferior, y centrado automático horizontal */
@@ -610,12 +610,13 @@ body {
     max-width: 1500px; /* Ancho máximo para el contenedor */
 }
 
-/* Estilos para la imagen 'soon' */
+/* Estilos para la imagen "soon" o "ultimovolumen06-2025" */
 .soon-image {
-    max-width: 100%; /* Asegura que la imagen sea responsiva y no se desborde */
+    max-width: 80%; /* Asegura que la imagen sea responsiva y no se desborde */
     height: auto; /* Mantiene la proporción de la imagen */
     display: block; /* Elimina espacio extra debajo de la imagen si lo hubiera */
     border-radius: 8px; /* Bordes redondeados para la imagen */
+    margin: 0 auto; /* Para centrar la imagen horizontalmente, simplemente agrega la propiedad margin: 0 auto;  Esto funciona porque al tener display: block, la imagen se comporta como un elemento de bloque y los márgenes automáticos la centran en su contenedor. */
     
     /* Aplicar animación de pulsación */
     animation: pulse 2s infinite ease-in-out alternate, /* nombre duración repetición tipo dirección */
@@ -715,8 +716,23 @@ body {
 
 
 
-/* ---------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------- */
+/* --- ESTILOS PARA CENTRAR EL CONTENIDO DEL NUEVO VOLUMEN --- */
+.nuevo-volumen-section {
+    text-align: center;
+}
+.nuevo-volumen-section .volumenes-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.nuevo-volumen-section .volumen {
+    display: inline-block;
+    text-align: left;
+    max-width: 500px;
+}
 
+/* ----------------------------------------------------------------------------------------------------------- */
 .volumenes-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -773,14 +789,14 @@ body {
     color: #777;
 }
 
-/* --- imagenes de portada (VOLUMENES) --- */
+/* --- imagenes de portada (VOLUMENES / PUBLICACIONES.HTML) --- */
 
 .revista-portada {
     text-align: center;
 }
 
 .revista-imagen {
-    max-width: 100px;
+    max-width: 180px; /* Tamaño de las imagenes miniatura */
     height: auto;
     margin-bottom: 10px;
 }

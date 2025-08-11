@@ -3,70 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autores</title>
+    <title>Autores - Revista Cienciometrik</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/metricas.css">
-    </head>
+    <link rel="stylesheet" href="CSS/autores.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
-
     <mi-header id="top"></mi-header>
-
     <div class="container">
-
-                <main class="main-content">
-
-
-            <section id="autores" class="section">
-                <h2>Requisitos de publicación para autores</h2>
-
-                <div class="content-with-image">
-                    <div class="text-content">
-                        <p>Invitamos a aprendices, instructores e investigadores a contribuir con sus trabajos a la Revista Cienciometrik.</p>
-                        <H3>Código ético y de antiplagio</H3>
-                        <p>Recuerda que artículo debe ser original, inédito y basado en información veraz, citando siempre todas las fuentes y autores adecuadamente para evitar el plagio. La contribución de cada autor debe ser significativa y transparente, garantizando así la integridad y calidad académica que nuestra revista promueve.</p>
-                        <h3>Documentación:</h3>
-                        <ul>
-                    <a href="https://drive.google.com/drive/u/3/folders/1GFmLC1g07gxpe4XkZzHOjzpta4wyPdgr" target="_blank" class="submit-button">
-                        <i class="fas fa-upload"></i> Documentación
-                    </a>                    
-                    <p>Visita este enlace para verificar la documentación necesaria para postear articulos en la revista.</p>
-                        </ul>
-                        <br>
-                        <h3>¡Visita tu sitio web para Autores!</h3>
-                        <br>
-                        <p>¡Si tienes ideas de postulaciones para Cienciométrik, ingresa a la web Autores, escribe tu artículo, espera la respuesta del área de revisión y verás tu artículo en la Revista Cienciometrik!</p>
+        <main class="main-content">
+            <section id="autores" class="section authors-section">
+                <!-- BANNER PRINCIPAL -->
+                <div class="authors-hero">
+                    <h2>Publica con nosotros</h2>
+                    <p>Invitamos a aprendices, instructores e investigadores a contribuir con sus trabajos a la Revista Cienciometrik.</p>
+                </div>
+                
+                <!-- CONTENIDO PRINCIPAL -->
+                <div class="authors-content">
+                    <div class="authors-text">
+                        <!-- TARJETA 1: CÓDIGO ÉTICO -->
+                        <div class="authors-card">
+                            <h3>
+                                <i class="fas fa-balance-scale"></i>
+                                Código ético y de antiplagio
+                            </h3>
+                            <p>Recuerda que tu artículo debe ser original, inédito y basado en información veraz, citando siempre todas las fuentes y autores adecuadamente para evitar el plagio.</p>
+                            <p>La contribución de cada autor debe ser significativa y transparente, garantizando así la integridad y calidad académica que nuestra revista promueve.</p>
+                        </div>
                         
-                        <a href="login/login.html" class="button calm-button" id="autores_login">
-                            Autores Login
-                        </a>
-                        <br><br>
+                        <!-- TARJETA 2: DOCUMENTACIÓN -->
+                        <div class="authors-card">
+                            <h3>
+                                <i class="fas fa-file-alt"></i>
+                                Documentación necesaria
+                            </h3>
+                            <p>Para postular tu artículo en la revista, debes seguir nuestras directrices de formato y incluir toda la documentación requerida.</p>
+                            <ul>
+                                <li>Incluir todas las referencias bibliográficas</li>
+                                <li>Agregar resumen y palabras clave</li>
+                                <li>Incluir información de todos los autores</li>
+                                <li>Seguir las normas de publicación</li>
+                            </ul>
+                            <a href="https://drive.google.com/drive/u/3/folders/1GFmLC1g07gxpe4XkZzHOjzpta4wyPdgr" target="_blank" class="authors-button">
+                                <i class="fas fa-external-link-alt"></i> Ver documentación
+                            </a>
+                        </div>
                         
-                        <p>Si no cuentas aún con usuario y contarseña, solicitalo aquí.</p>
-                        <p class="button calm-button"><a href="mailto:cienciometrik@gmail.com">cienciometrik@gmail.com</a></p>
+                        <!-- TARJETA 3: ACCESO -->
+                        <div class="authors-card">
+                            <h3>
+                                <i class="fas fa-user-edit"></i>
+                                Acceso para Autores
+                            </h3>
+                            <p>¿Tienes ideas de postulaciones para Cienciométrik? Ingresa a la web de Autores, envía tu artículo y espera la respuesta del área de revisión.</p>
+                            <p>Una vez aprobado, verás tu artículo publicado en la Revista Cienciometrik.</p>
+                            
+                            <a href="login/login.html" class="authors-button" id="autores_login">
+                                <i class="fas fa-sign-in-alt"></i> Autores Login
+                            </a>
+                            
+                            <div class="authors-contact">
+                                <p>Si no cuentas aún con usuario y contraseña, solicítalo aquí:</p>
+                                <a href="mailto:cienciometrik@gmail.com" class="authors-secondary-button">
+                                    <i class="fas fa-envelope"></i> cienciometrik@gmail.com
+                                </a>
+                            </div>
+                            
+                            <div id="mensaje" class="mensaje"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="authors-visual">
+                        <!-- IMAGEN PRINCIPAL -->
+                        <img src="images/autoresimg1.png" alt="Proceso de edición para autores" class="authors-image">
+                        
+                        <!-- IMÁGENES DECORATIVAS -->
+                        <img src="images/investigacionacademica.png" alt="Investigación académica" class="authors-decoration">       
 
-
-                        <div id="mensaje" class="mensaje"></div>
-                    </div> 
-
-                </div> 
-<div class="image-container-volumenes">
-        <img src="images/edicion_autores.png" alt="Imagen de edición para autores" class="image-authors">
-    </div>
-
+                        <!-- IMÁGENES DECORATIVAS -->
+                        <img src="images/autoresimg2.png" alt="Investigación académica" class="authors-decoration">                        
+                    </div>
+                </div>
             </section>
         </main>
-
-    <metricas-panel></metricas-panel>     
+        <metricas-panel></metricas-panel>     
     </div>
-
     <mi-footer id="bottom"></mi-footer>
-
+    
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
-    <script src="js/panelmetricas.js"></script> </body>
-    <script src="js/download_tracker.js"></script> </body>
-
+    <script src="js/panelmetricas.js"></script>
+    <script src="js/download_tracker.js"></script>
 </body>
 </html>
