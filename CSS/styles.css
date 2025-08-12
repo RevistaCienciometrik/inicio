@@ -12,24 +12,53 @@ body {
     line-height: 1.6;
 }
 
-/* --- Layout del Contenedor Principal --- */
 .container {
     display: flex;
     padding: 10px;
-    gap: 30px; /* Aumenté el gap para mayor separación de los contenedores */
+    gap: 30px; /* Aumentando el gap para mayor separación de los contenedores */
     max-width: 1500px; /* Ancho de los contenedores */
     margin: 40px auto; /* Margen superior de los contenedores */
 }
 
 /* -------------------------------------------------------------------------------------------- */
 
-/* QUIENES SOMOS ESTILOS DE LA IMAGEN */
+/* ESTILOS PARA EL ENLACE DEL MISMO SITIO WEB EN QUIENES SOMOS */
+
+.enlace-elegante {
+    color: #2c3e50; /* Azul oscuro elegante */
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.enlace-elegante::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3498db; /* Azul brillante */
+    transition: width 0.3s ease;
+}
+
+.enlace-elegante:hover {
+    color: #3498db;
+}
+
+.enlace-elegante:hover::after {
+    width: 100%;
+}
+
+/* ------------------------------ QUIENES SOMOS - ESTILOS DE LA IMAGEN ---------------- */
 
 /* --- Estilos para la sección de publicidad --- */
 .publicidad-container {
     text-align: center; /* Centra la imagen horizontalmente */
     margin: 30px auto; /* Añade un margen arriba y abajo, y centra el contenedor */
-    padding: 15px; /* Un pequeño espacio alrededor de la imagen */
+    padding: 15px; /* Unn pequeño espacio alrededor de la imagen */
     background-color: transparent; /* Un fondo muy claro o transparrente para destacar la sección */
     border-radius: 8px; /* Bordes redondeados (opcional) */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Una sombra sutil (opcional) */
