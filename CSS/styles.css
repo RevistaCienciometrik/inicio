@@ -612,7 +612,7 @@ body {
 
 /* Estilos para la imagen "soon" o "ultimovolumen06-2025" */
 .soon-image {
-    max-width: 80%; /* Asegura que la imagen sea responsiva y no se desborde */
+    max-width: 70%; /* Asegura que la imagen sea responsiva y no se desborde */
     height: auto; /* Mantiene la proporción de la imagen */
     display: block; /* Elimina espacio extra debajo de la imagen si lo hubiera */
     border-radius: 8px; /* Bordes redondeados para la imagen */

@@ -11,19 +11,19 @@ class MetricasPanel extends HTMLElement {
                 /* --- ESTILOS PARA EL PANEL DE MÉTRICAS --- */
                 .metrics-panel-container {
                     width: 220px;
-                    background-color: rgba(15, 30, 60, 0.5); /* Azul oscuro más transparente */
-                    border: 4px solid #3FCED4; /* Borde más grande y elegante en color cian */
+                    background-color: rgba(20, 40, 80, 0.7); /* Azul oscuro más profundo */
+                    border: 4px solid #2c5aa0; /* Azul elegante sin verdoso */
                     color: whitesmoke;
                     padding: 15px 12px;
-                    border-radius: 12px; /* Bordes más redondeados */
-                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(63, 206, 212, 0.2); /* Sombra más elegante con brillo cian */
+                    border-radius: 12px;
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(44, 90, 160, 0.3);
                     flex-shrink: 0;
                     position: sticky;
                     top: calc(var(--header-height, 0px) + -80px);
                     height: fit-content;
                     z-index: 10;
                     transform: translateZ(0);
-                    backdrop-filter: blur(5px); /* Efecto de desenfoque para mayor elegancia */
+                    backdrop-filter: blur(5px);
                 }
                 .metrics-panel-container h3 {
                     text-align: center;
@@ -42,25 +42,25 @@ class MetricasPanel extends HTMLElement {
                     transform: translateX(-50%);
                     width: 40px;
                     height: 2px;
-                    background-color: #3FCED4;
+                    background-color: #5d8fd9; /* Azul claro elegante */
                     border-radius: 2px;
                 }
                 .metric-item {
-                    background-color: rgba(255, 255, 255, 0.08); /* Fondo más transparente */
+                    background-color: rgba(255, 255, 255, 0.08);
                     border-radius: 8px;
                     padding: 6px 8px;
                     margin-bottom: 8px;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(63, 206, 212, 0.1); /* Sombra interna sutil */
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(93, 143, 217, 0.1);
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    border: 1px solid rgba(63, 206, 212, 0.2); /* Borde sutil en cian */
+                    border: 1px solid rgba(93, 143, 217, 0.2);
                 }
                 .metric-item:hover {
                     transform: translateY(-3px);
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(63, 206, 212, 0.2);
-                    border-color: rgba(63, 206, 212, 0.4);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(93, 143, 217, 0.2);
+                    border-color: rgba(93, 143, 217, 0.4);
                 }
                 .metric-item h4 {
-                    color: #3FCED4;
+                    color: #5d8fd9; /* Azul claro elegante */
                     margin-bottom: 3px;
                     font-size: 0.95em;
                     font-weight: 600;
@@ -92,7 +92,7 @@ class MetricasPanel extends HTMLElement {
                     background-color: rgba(255, 255, 255, 0.1);
                     color: whitesmoke;
                     padding: 8px 10px;
-                    border: 1px solid rgba(63, 206, 212, 0.3); /* Borde sutil en cian */
+                    border: 1px solid rgba(93, 143, 217, 0.3);
                     border-radius: 6px;
                     cursor: pointer;
                     font-size: 0.95em;
@@ -101,22 +101,22 @@ class MetricasPanel extends HTMLElement {
                     transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
                 }
                 .nav-button:hover {
-                    background-color: rgba(63, 206, 212, 0.2);
+                    background-color: rgba(93, 143, 217, 0.2);
                     transform: translateY(-2px);
                     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-                    border-color: #3FCED4;
+                    border-color: #5d8fd9;
                 }
                 .nav-button:active {
                     transform: translateY(0);
                 }
                 .reset-button {
-                    background-color: rgba(255, 87, 87, 0.6);
-                    border-color: rgba(255, 87, 87, 0.4);
+                    background-color: rgba(180, 60, 60, 0.7);
+                    border-color: rgba(180, 60, 60, 0.5);
                     margin-top: 5px;
                 }
                 .reset-button:hover {
-                    background-color: rgba(255, 87, 87, 0.8);
-                    border-color: rgba(255, 87, 87, 0.6);
+                    background-color: rgba(200, 70, 70, 0.8);
+                    border-color: rgba(200, 70, 70, 0.6);
                 }
             </style>
             <div class="metrics-panel-container" id="nav_panel">

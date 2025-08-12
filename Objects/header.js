@@ -249,7 +249,7 @@ class MiHeader extends HTMLElement {
             <header>
                 <div class="header-top">
                     <div class="logo-container">
-                        <img src="Objects/logos_png/revista_blanco.png" alt="Logo Revista" class="logo" />
+                        <img src="Objects/LogosPNG-2/logo_blanco.png" alt="Logo Revista" class="logo" />
                         <img src="Objects/logos_png/sena_blanco.png" alt="Logo SENA" class="logo" />
                     </div>
                     <button class="hamburger" aria-label="Abrir menú de navegación">
