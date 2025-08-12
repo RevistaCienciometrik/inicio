@@ -24,6 +24,7 @@ class MetricasPanel extends HTMLElement {
                     z-index: 10;
                     transform: translateZ(0);
                     backdrop-filter: blur(5px); /* Efecto de desenfoque para mayor elegancia */
+                    margin-right: -20px; /* <-- AGREGADO: Para pegar el panel al borde derecho de la wen */
                 }
                 .metrics-panel-container h3 {
                     text-align: center;
@@ -77,6 +78,7 @@ class MetricasPanel extends HTMLElement {
                         width: 100%;
                         position: static;
                         margin-bottom: 20px;
+                        margin-right: 0; /* <-- AGREGADO: Resetear margen en móviles */
                         order: -1;
                     }
                 }

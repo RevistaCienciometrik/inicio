@@ -7,22 +7,345 @@
     <link rel="stylesheet" href="CSS/styles.css">
     <!-- <link rel="stylesheet" href="CSS/metricas.css"> -->
 
+<!-- ------------------------------------------------------------------------------------------------------     -->
+<style>
+        /* --- ESTILOS MEJORADOS --- */
+        :root {
+            --primary-color: #003057;
+            --secondary-color: #008394;
+            --accent-color: #3FCED4;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(63, 206, 212, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 48, 87, 0.07) 0%, transparent 20%);
+        }
+
+        /* --- ESTILOS PARA EL BANNER PRINCIPAL --- */
+        .main-content-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 40px auto;
+            max-width: 90%;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.9) 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        .image-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 45%;
+            transition: var(--transition);
+        }
+        .image-wrapper:hover {
+            transform: scale(1.02);
+        }
+        .main-image-banner {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+        .main-image-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+        .animated-image-banner {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        /* --- ESTILOS PARA BOTONES --- */
+        .button_download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 131, 148, 0.3);
+            transition: var(--transition);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .button_download::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+        .button_download:hover::before {
+            left: 100%;
+        }
+        .button_download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 131, 148, 0.4);
+        }
+        .button_download:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(0, 131, 148, 0.3);
+        }
+        .button_download i {
+            margin-right: 8px;
+        }
+        /* --- ESTILOS PARA SECCIÓN DE BIENVENIDA --- */
+        #inicio_bienvenido {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+        }
+        #titulo_inicio {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        #titulo_inicio::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+        #párrafo_inicio {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            color: #555;
+        }
+        .video-container {
+            width: fit-content;
+            margin: 25px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+        /* --- ESTILOS PARA SECCIÓN DE HISTORIA --- */
+        #historia {
+            background-color: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        #titulo_historia {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #convocatorias {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-color);
+        }
+        #convocatorias_cont li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: rgba(63, 206, 212, 0.05);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        #convocatorias_cont li:hover {
+            background-color: rgba(63, 206, 212, 0.1);
+            transform: translateX(5px);
+        }
+        /* --- ESTILOS PARA LÍNEA DE TIEMPO --- */
+        #linea-tiempo {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f5f9 100%);
+        }
+        #linea-tiempo h2 {
+            color: var(--primary-color);
+            font-size: 1.9em;
+        }
+        #linea-tiempo ul {
+            position: relative;
+            padding-left: 30px;
+        }
+        #linea-tiempo ul::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 10px;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-color), transparent);
+        }
+        #linea-tiempo li {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        #linea-tiempo li::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: -5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(63, 206, 212, 0.2);
+        }
+        /* --- ESTILOS PARA SECCIÓN DE ENFOQUE --- */
+        #enfoque {
+            background-color: #fff;
+        }
+        #titulo_enfoque {
+            color: var(--primary-color);
+            font-size: 1.9em;
+        }
+        #p_enfoque {
+            color: var(--secondary-color);
+            font-size: 1.3em;
+            margin: 25px 0 20px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-color);
+        }
+        #enfoque ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        #enfoque li {
+            padding: 15px;
+            background-color: rgba(0, 131, 148, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+        #enfoque li:hover {
+            background-color: rgba(0, 131, 148, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        /* --- ESTILOS PARA IMAGEN PRONTO --- */
+        .image-container {
+            text-align: center;
+            margin: 30px auto;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        .soon-image {
+            max-width: 70%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        .soon-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            metricas-panel {
+                flex: none;
+                position: relative;
+                top: 0;
+                margin-top: 20px;
+                margin-right: 0 !important; /* <-- CAMBIO CLAVE: Resetear margen en tablets */
+            }
+        }
+        @media (max-width: 768px) {
+            .main-content-banner {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .image-wrapper {
+                max-width: 90%;
+            }
+            
+            #enfoque ul {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .section {
+                padding: 20px;
+            }
+            
+            .section h2 {
+                font-size: 1.6em;
+            }
+            
+            #titulo_inicio {
+                font-size: 1.8em;
+            }
+            
+            #p_enfoque {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+<!-- -------------------------------------------------------------------------------------------------------------- -->
+
 </head>
 <body>
     
     <mi-header id="top"></mi-header>
-
     <div class="container">
         <main class="main-content">
-
             <div class="image-container">
                 <img src="images/estreno-2-julio-2025.png" alt="ultimovolumen-img" class="soon-image">
             </div>
-
             <section id="inicio" class="section">
                 <div class="main-content-banner">
                     <div class="image-wrapper right-image">
-                        <img src="images/piensa publica impacta.png" id="img_moving" class="animated-image-banner">
+                        <img src="images/pubilicidad2.jpeg" id="img_moving" class="animated-image-banner">
                     </div>
                     <div class="image-wrapper left-image">
                         <img src="Docs/UltimoVolumen/Revista Cienciometrik Vol. 3 N° 4, Enero - Julio.png" id="portada_imagen" alt="Imagen de portada de la revista" class="main-image-banner">
@@ -38,14 +361,12 @@
                 <h2 id="titulo_inicio">Bienvenido a la Revista Cienciometrik</h2>
                 
                 <p id="párrafo_inicio">Un espacio para la difusión del conocimiento científico y tecnológico del Sistema SENNOVA.</p>
-
                 <div id="bienvenido_video" class="video-container">
                     <video width="100%" controls autoplay muted loop style="max-width: 500px; margin: 20px auto; display: block; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                         <source src="vids/vid1.mp4" type="video/mp4" id="video_index">
                     </video>
                 </div>
             </section>
-
             <section id="historia" class="section">
                 <h2 id="titulo_historia">Historia de la Revista</h2>
                 <p id="párrafo_historia">La Revista Cienciometrik es una publicación semestral del Servicio Nacional de Aprendizaje SENA, específicamente del Centro de Comercio, Regional Antioquia, adscrita al Sistema de Investigación, Desarrollo Tecnológico e Innovación SENNOVA.</p>
@@ -57,7 +378,6 @@
                     <li id="conv4"><strong>1er Simposio Nacional de Cienciometría (Julio - Diciembre 2024):</strong> Convocatoria especial para ponencias y trabajos relacionados con herramientas de cienciometría.</li>
                 </ul>
             </section>
-
             <section id="linea-tiempo" class="section">
                 <h2>Línea de Tiempo de la Revista</h2>
                 <ul>
@@ -66,7 +386,6 @@
                     <li id="l3"><strong>Julio - Diciembre 2024:</strong> Publicación del Vol. 2 N°. 3 y realización del 1er Simposio Nacional de Cienciometría.</li>
                 </ul>
             </section>
-
             <section id="enfoque" class="section">
                 <h2 id="titulo_enfoque">Enfoque de la Revista</h2>
                 <p id="parrafo_enfoque">La Revista Cienciometrik se enfoca en la difusión de investigaciones, desarrollos tecnológicos e innovaciones en diversas áreas del conocimiento, con un interés particular en la cienciometría como herramienta para el análisis y la mejora de la investigación.</p>
@@ -84,11 +403,8 @@
         </main>
         
         <metricas-panel></metricas-panel> 
-
     </div>
-
     <mi-footer id="bottom"></mi-footer>
-
 
 <!-- SCRIPT PARA LA UNIÓN AL PANELMETRICAS.JS PARA EL CONTADOR DE VISITAS -->
     <script>
@@ -99,13 +415,14 @@
         });
     </script>
 <!-- -------------------------------------------------------------------- -->
-
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
     <script src="js/contentloader.js"></script>
     <script src="js/admin_edit_index.js"></script>
-    <script src="js/panelmetricas.js"></script> </body>
-    <script src="js/download_tracker.js"></script> </body>
+    <script src="js/panelmetricas.js"></script>
+</body>
+    <script src="js/download_tracker.js"></script>
+</body>
 </html>
