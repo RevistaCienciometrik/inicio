@@ -481,10 +481,11 @@ body {
 /* --- ESTILOS PARA LA IMAGEN EN MOVIMIENTO (DERECHA) --- */
 .animated-image-banner {
     width: 100%; /* La imagen ocupará todo el ancho de su contenedor */
-    max-width: 401px; /* Tamaño imagen publucidad izq. Con 300 asegura el mismo tamaño que la imagen de la izquierda, con 400 incluiye el tamaño con el botón y la imagen de la derecha */
+    max-width: 415px; /* Tamaño imagen publucidad izq. Con 300 asegura el mismo tamaño que la imagen de la izquierda, con 400 incluiye el tamaño con el botón y la imagen de la derecha */
+    min-width: 215px; /* Tamaño mínimo*/
     height: auto; /* Mantiene la proporción */
     display: block; /* Asegura que no haya espacio extra debajo de la imagen */
-    /* Animación: Puedes usar una animación CSS o un GIF/PNG animado directamente */
+    /* Animación: Se puede usar una animación CSS o un GIF/PNG animado directamente */
     /* Ejemplo de animación de pulsación si no es un GIF/PNG animado: */
     animation: pulse 2s infinite ease-in-out; /* Animación de pulsación */
 }
