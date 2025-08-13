@@ -794,7 +794,6 @@ body {
 .mensaje[style*="color: orange"]::before {
     background-color: var(--warning-color);
 }
-
 /* --- Ventana Modal para Visualización de Artículos --- */
 .modal {
     display: none;
@@ -808,7 +807,6 @@ body {
     backdrop-filter: blur(5px);
     animation: fadeIn 0.3s ease;
 }
-
 .modal-content {
     background-color: var(--bg-card);
     margin: 3% auto;
@@ -827,38 +825,32 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
-
 .modal-header {
     padding: 25px 30px;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     border-bottom: 1px solid var(--border-color);
 }
-
 .modal-header h3 {
     margin: 0 0 15px 0;
     font-size: 1.8em;
     text-align: center;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .modal-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
 }
-
 .modal-info p {
     margin: 5px 0;
     font-size: 0.95em;
 }
-
 .modal-body {
     padding: 25px 30px;
     overflow-y: auto;
     flex-grow: 1;
 }
-
 .modal-body h4 {
     color: var(--primary-color);
     margin-top: 20px;
@@ -867,7 +859,6 @@ body {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 8px;
 }
-
 .modal-articulo-contenido {
     background-color: var(--bg-light);
     padding: 20px;
@@ -879,7 +870,6 @@ body {
     line-height: 1.6;
     margin-bottom: 20px;
 }
-
 .modal-comentarios {
     background-color: #f9f9f9;
     padding: 15px;
@@ -889,13 +879,11 @@ body {
     white-space: pre-wrap;
     min-height: 50px;
 }
-
 .modal-comentarios:empty::before {
     content: "No hay comentarios del revisor.";
     color: var(--gray-color);
     font-style: italic;
 }
-
 .modal-footer {
     padding: 20px 30px;
     background-color: var(--bg-light);
@@ -904,7 +892,6 @@ body {
     justify-content: flex-end;
     gap: 15px;
 }
-
 #modal-respuesta-autor {
     width: 100%;
     padding: 12px;
@@ -916,19 +903,16 @@ body {
     min-height: 100px;
     background-color: var(--translucent-blue-light);
 }
-
 #modal-respuesta-autor:focus {
     border-color: var(--accent-color);
     box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
     outline: none;
 }
-
 /* Animaciones para la modal */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
 @keyframes slideIn {
     from { 
         transform: translateY(-50px);
@@ -940,7 +924,7 @@ body {
     }
 }
 
-/* Responsive para la modal */
+/* --- Responsive para la modal --- */
 @media (max-width: 768px) {
     .modal-content {
         width: 95%;
@@ -969,242 +953,364 @@ body {
     }
 }
 
-/* --- Responsive Design --- */
+/* --- Mejoras Responsive para Tablets y Celulares --- */
+
+/* Tablets (768px - 992px) */
 @media (max-width: 992px) {
+    /* Reorganización del layout principal */
     .container {
         flex-direction: column;
-        margin: 20px;
-        padding: 0;
+        max-width: 100%;
+        padding: 0 15px;
     }
+    
+    /* Sidebar como barra superior horizontal */
     .sidebar {
         width: 100%;
         position: static;
         margin-bottom: 20px;
-        padding: 20px;
+        padding: 15px;
         border-radius: 10px;
-        max-height: none;
-        overflow-y: visible;
+        order: -1; /* Mueve la sidebar al principio */
     }
+    
     .sidebar h3 {
-        margin-bottom: 20px;
-        font-size: 1.6em;
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        padding: 0 15px;
     }
+    
     .sidebar nav ul {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
     }
+    
     .sidebar nav ul li {
         margin-bottom: 0;
     }
+    
     .sidebar nav ul li a {
         padding: 10px 15px;
         font-size: 0.9em;
         text-align: center;
         flex-direction: column;
         gap: 5px;
-        min-width: 120px;
+        min-width: 100px;
+        border-radius: 8px;
     }
+    
     .sidebar nav ul li a i {
         margin-right: 0;
         margin-bottom: 5px;
     }
+    
     .sidebar nav ul li a.active {
         border-left: none;
         border-bottom: 3px solid var(--accent-color);
-        padding-left: 15px;
     }
+    
+    /* Ajustes en el contenido principal */
     .main-content {
-        padding: 0 20px;
-        gap: 25px;
+        padding: 0;
+        gap: 20px;
     }
+    
+    /* Optimización de las tarjetas de artículo */
+    .articles-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    
+    .article-card {
+        padding: 15px;
+    }
+    
+    /* Ajustes en el hero section */
     .author-hero {
-        padding: 35px 20px;
+        padding: 30px 20px;
     }
+    
     .author-hero h2 {
-        font-size: 2.2em;
+        font-size: 2em;
     }
-    .author-hero .author-icon {
-        font-size: 3.5em;
+    
+    /* Mejoras en los formularios */
+    .filter-controls,
+    .search-bar {
+        padding: 15px 20px;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
-    .author-hero .subtitle {
-        font-size: 1.1em;
+    
+    .form-group {
+        flex: 1 1 calc(50% - 15px);
     }
-    .section {
-        padding: 25px;
+}
+
+/* Celulares (576px - 768px) */
+@media (max-width: 768px) {
+    /* Optimización del contenedor */
+    .container {
+        margin: 15px auto;
+        padding: 0 10px;
     }
-    .section h2 {
-        font-size: 1.8em;
+    
+    /* Sidebar como barra superior horizontal */
+    .sidebar {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .sidebar h3 {
+        font-size: 1.2em;
+        margin-bottom: 12px;
+    }
+    
+    .sidebar nav ul {
         gap: 8px;
     }
+    
+    .sidebar nav ul li a {
+        padding: 8px 12px;
+        font-size: 0.85em;
+        min-width: 90px;
+    }
+    
+    /* Ajustes en el contenido principal */
+    .main-content {
+        padding: 0;
+        gap: 15px;
+    }
+    
+    /* Mejoras en las secciones */
+    .section {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .section h2 {
+        font-size: 1.6em;
+        padding-bottom: 8px;
+    }
+    
+    /* Optimización de las tarjetas de artículo */
     .articles-list {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
-    .articles-list.expanded-view .article-card {
-        grid-column: 1 / -1;
-    }
+    
     .article-card {
-        padding: 18px;
+        padding: 15px;
     }
+    
+    .article-card h3 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    
+    /* Ajustes en los botones de acción */
     .article-actions {
         flex-direction: column;
         gap: 8px;
     }
+    
     .article-actions button {
         width: 100%;
-        padding: 9px;
-        font-size: 0.85em;
-    }
-    .full-article-content {
-        padding: 20px;
-    }
-    .full-article-content h4 {
-        font-size: 1.2em;
-    }
-    .full-article-content pre,
-    .full-article-content textarea {
-        padding: 10px;
-        font-size: 0.85em;
-    }
-    .form-group.article-submit-group {
-        gap: 10px;
-    }
-    .form-group.article-submit-group label {
-        align-self: flex-start;
-    }
-    .submit-button, .button-secondary {
-        width: 100%;
         justify-content: center;
-        padding: 12px 20px;
-    }
-    .filter-controls,
-    .search-bar {
-        padding: 20px 25px;
-    }
-    .modern-select,
-    .modern-form input[type="text"],
-    .modern-form input[type="email"],
-    .modern-form textarea {
-        min-width: unset;
         padding: 10px 15px;
-        font-size: 1em;
-    }
-}
-@media (max-width: 768px) {
-    .main-content {
-        padding: 0 15px;
-    }
-    .section h2 {
-        font-size: 1.6em;
-    }
-    .article-card h3 {
-        font-size: 1.3em;
-    }
-    .article-card p {
         font-size: 0.9em;
     }
-    .full-article-content {
-        padding: 15px;
+    
+    /* Mejoras en el hero section */
+    .author-hero {
+        padding: 25px 15px;
     }
-    .full-article-content h4 {
-        font-size: 1.1em;
-    }
-    .full-article-content pre,
-    .full-article-content textarea {
-        padding: 8px;
-        font-size: 0.85em;
-    }
-    .filter-controls,
-    .search-bar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .filter-controls label,
-    .search-bar label {
-        align-self: flex-start;
-    }
-    .modern-select,
-    .modern-form input[type="text"],
-    .modern-form input[type="email"],
-    .modern-form textarea {
-        width: 100%;
-        min-width: unset;
-    }
-    .search-bar button {
-        width: 100%;
-        align-self: stretch;
-        margin-top: 10px;
-    }
-    .submit-button, .button-secondary {
-        padding: 10px 18px;
-        font-size: 0.95em;
-    }
-}
-@media (max-width: 576px) {
-    .container {
-        margin: 10px;
-    }
-    .main-content {
-        padding: 0 10px;
-    }
-    .section h2 {
-        font-size: 1.4em;
-        gap: 5px;
-    }
+    
     .author-hero h2 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
+    
     .author-hero .author-icon {
-        font-size: 3em;
+        font-size: 2.5em;
     }
+    
     .author-hero .subtitle {
         font-size: 1em;
     }
-    .sidebar nav ul {
+    
+    /* Optimización de formularios */
+    .filter-controls,
+    .search-bar {
+        padding: 15px;
         flex-direction: column;
         align-items: stretch;
     }
-    .sidebar nav ul li a {
-        font-size: 0.9em;
-        padding: 10px 15px;
-        flex-direction: row;
-        justify-content: flex-start;
+    
+    .form-group {
+        flex: 1 1 100%;
+    }
+    
+    .modern-select,
+    .modern-form input[type="text"],
+    .modern-form input[type="email"],
+    .modern-form textarea {
         min-width: unset;
+        padding: 10px 15px;
+        font-size: 0.95em;
     }
-    .sidebar nav ul li a i {
-        margin-right: 10px;
-        margin-bottom: 0;
-    }
-    .sidebar nav ul li a.active {
-        border-bottom: none;
-        border-left: 5px solid var(--accent-color);
-    }
-    .article-card {
-        padding: 15px;
-    }
-    .article-card h3 {
-        font-size: 1.2em;
-    }
-    .article-card p {
-        font-size: 0.88em;
-    }
-    .article-actions button {
-        font-size: 0.8em;
-        padding: 8px 12px;
-    }
+    
+    /* Ajustes en el contenido completo del artículo */
     .full-article-content {
         padding: 15px;
     }
+    
     .full-article-content h4 {
         font-size: 1.1em;
     }
-    .full-article-content pre,
-    .full-article-content textarea {
+    
+    /* Mejoras en los botones de formulario */
+    .submit-button, 
+    .button-secondary {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 0.95em;
+    }
+}
+
+/* Celulares pequeños (< 576px) */
+@media (max-width: 576px) {
+    /* Optimización del contenedor */
+    .container {
+        margin: 10px auto;
+        padding: 0 5px;
+    }
+    
+    /* Sidebar como barra superior horizontal */
+    .sidebar {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    
+    .sidebar h3 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+    
+    .sidebar nav ul {
+        gap: 5px;
+    }
+    
+    .sidebar nav ul li a {
+        padding: 6px 10px;
+        font-size: 0.8em;
+        min-width: 70px;
+        border-radius: 6px;
+    }
+    
+    .sidebar nav ul li a i {
+        font-size: 0.9em;
+    }
+    
+    /* Ajustes en el contenido principal */
+    .main-content {
+        padding: 0;
+        gap: 10px;
+    }
+    
+    /* Mejoras en las secciones */
+    .section {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .section h2 {
+        font-size: 1.4em;
+        padding-bottom: 6px;
+    }
+    
+    /* Optimización del hero section */
+    .author-hero {
+        padding: 20px 10px;
+    }
+    
+    .author-hero h2 {
+        font-size: 1.6em;
+    }
+    
+    .author-hero .author-icon {
+        font-size: 2em;
+    }
+    
+    .author-hero .subtitle {
+        font-size: 0.95em;
+    }
+    
+    /* Mejoras en las tarjetas de artículo */
+    .article-card {
+        padding: 12px;
+    }
+    
+    .article-card h3 {
+        font-size: 1.1em;
+    }
+    
+    .article-card p {
+        font-size: 0.85em;
+    }
+    
+    /* Ajustes en los botones de acción */
+    .article-actions button {
+        padding: 8px 12px;
+        font-size: 0.85em;
+    }
+    
+    /* Optimización de formularios */
+    .filter-controls,
+    .search-bar {
+        padding: 12px 15px;
+    }
+    
+    .modern-select,
+    .modern-form input[type="text"],
+    .modern-form input[type="email"],
+    .modern-form textarea {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    
+    /* Mejoras en el contenido completo del artículo */
+    .full-article-content {
+        padding: 12px;
+    }
+    
+    .full-article-content h4 {
+        font-size: 1em;
+    }
+    
+    .full-article-content pre {
+        padding: 10px;
         font-size: 0.8em;
     }
-    .submit-button, .button-secondary {
-        padding: 10px 15px;
+    
+    /* Ajustes en los botones de formulario */
+    .submit-button, 
+    .button-secondary {
+        padding: 10px 12px;
         font-size: 0.9em;
+    }
+    
+    /* Optimización de los badges de estado */
+    .status-pendiente,
+    .status-enviado,
+    .status-en-revision,
+    .status-aprobado,
+    .status-rechazado,
+    .status-observaciones {
+        padding: 3px 8px;
+        font-size: 0.75em;
     }
 }
