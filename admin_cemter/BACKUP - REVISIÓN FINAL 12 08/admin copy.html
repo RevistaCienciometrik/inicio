@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración - Revista Cienciometrik</title>
     <link rel="stylesheet" href="admin.css">
-    <!-- Links en la web para estilos visuales de objetos en los botones -->
+    <link rel="stylesheet" href="sidebar.css">
+    
+    <!-- Links a estilos visuales de objetos en los botones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <mi-header></mi-header>
-    
+
     <div class="container">
         <aside class="sidebar">
             <h3>Panel de Administración</h3>
@@ -20,53 +22,49 @@
                     <li><a href="#administracion-de-articulos"><i class="fas fa-file-alt"></i> Administración de Artículos</a></li>
                     <li><a href="#observaciones-de-autores"><i class="fas fa-comments"></i> Observaciones de Autores</a></li>
                     <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+
                 </ul>
             </nav>
         </aside>
-        
+
         <main class="main-content">
-            <!-- Sección Hero para Zona Administrativa -->
-            <section class="section admin-hero">
-                <div class="admin-hero-content">
-                    <i class="fas fa-user-shield admin-icon"></i>
-                    <h2>ZONA ADMINISTRATIVA</h2>
-                    <p class="subtitle">Gestiona artículos, mensajes y observaciones de manera eficiente. Supervisa y controla el contenido de la revista desde la web.</p>
-                </div>
-            </section>
-            
             <section class="section">
-                <h2 id="bandeja-de-entrada-de-mensajes">Bandeja de Entrada de Mensajes</h2>
+                <h2 id="bandeja-de-entrada-de-mensajes">- Zona de Administración - <br> Bandeja de Entrada de Mensajes</h2>
+
                 <div class="message-filters">
                     <span class="filter-group-title"><i class="fas fa-filter"></i> Filtrar por Estado:</span>
-                    <button type="button" id="filter-message-all"><i class="fas fa-inbox"></i> Todos</button>
-                    <button type="button" id="filter-message-read"><i class="fas fa-eye"></i> Leídos</button>
-                    <button type="button" id="filter-message-unread"><i class="fas fa-envelope-open"></i> No Leídos</button>
-                    <button type="button" id="filter-message-deleted"><i class="fas fa-trash-alt"></i> Eliminados</button>
+                    <button id="filter-message-all" class="active"><i class="fas fa-inbox"></i> Todos</button>
+                    <button id="filter-message-read"><i class="fas fa-eye"></i> Leídos</button>
+                    <button id="filter-message-unread"><i class="fas fa-envelope-open"></i> No Leídos</button>
+                    <button id="filter-message-deleted"><i class="fas fa-trash-alt"></i> Eliminados</button>
                 </div>
+
                 <div class="date-filters">
                     <span class="filter-group-title"><i class="fas fa-calendar-alt"></i> Filtrar por Fecha:</span>
-                    <button type="button" id="filter-message-today" class="active">Hoy</button>
-                    <button type="button" id="filter-message-yesterday">Ayer</button>
-                    <button type="button" id="filter-message-last-week">Última Semana</button>
-                    <button type="button" id="filter-message-last-month">Último Mes</button>
-                    <button type="button" id="filter-message-last-year">Último Año</button>
-                    <button type="button" id="filter-message-date-all">Todas las Fechas</button>
+                    <button id="filter-message-today">Hoy</button>
+                    <button id="filter-message-yesterday">Ayer</button>
+                    <button id="filter-message-last-week">Última Semana</button>
+                    <button id="filter-message-last-month">Último Mes</button>
+                    <button id="filter-message-last-year">Último Año</button>
+                    <button id="filter-message-date-all" class="active">Todas las Fechas</button>
                 </div>
+
                 <div id="messages-container" class="message-list">
                     <p id="no-messages" style="text-align: center; color: #777; display: none;">No hay mensajes para mostrar en esta categoría.</p>
                 </div>
             </section>
-            
+
             <section id="admin-articles" class="section">
                 <h2 id="administracion-de-articulos">Administración de Artículos</h2>
                 <div class="article-filters">
                     <span class="filter-group-title"><i class="fas fa-filter"></i> Filtrar por Estado del Artículo:</span>
-                    <button type="button" id="filter-article-all"><i class="fas fa-file-alt"></i> Todos los Artículos</button>
-                    <button type="button" id="filter-article-pending" class="active"><i class="fas fa-hourglass-half"></i> Pendientes de Revisión</button>
-                    <button type="button" id="filter-article-approved"><i class="fas fa-check-circle"></i> Aprobados</button>
-                    <button type="button" id="filter-article-rejected"><i class="fas fa-times-circle"></i> Rechazados</button>
-                    <button type="button" id="filter-article-hidden"><i class="fas fa-eye-slash"></i> Ocultos</button>
+                    <button id="filter-article-all" class="active"><i class="fas fa-file-alt"></i> Todos los Artículos</button>
+                    <button id="filter-article-pending"><i class="fas fa-hourglass-half"></i> Pendientes de Revisión</button>
+                    <button id="filter-article-approved"><i class="fas fa-check-circle"></i> Aprobados</button>
+                    <button id="filter-article-rejected"><i class="fas fa-times-circle"></i> Rechazados</button>
+                    <button id="filter-article-hidden"><i class="fas fa-eye-slash"></i> Ocultos</button>
                 </div>
+
                 <div id="articles-container" class="articles-list">
                     <p id="no-articles" style="text-align: center; color: #777; display: none;">No hay artículos para mostrar en esta categoría.</p>
                 </div>
@@ -76,27 +74,29 @@
                 <h2 id="observaciones-de-autores">Observaciones de Autores</h2>
                 <div class="observation-filters">
                     <span class="filter-group-title"><i class="fas fa-filter"></i> Filtrar Observaciones:</span>
-                    <button type="button" id="filter-observation-all"><i class="fas fa-comments"></i> Todas las Observaciones</button>
-                    <button type="button" id="filter-observation-read"><i class="fas fa-eye"></i> Leídas</button>
-                    <button type="button" id="filter-observation-unread" class="active"><i class="fas fa-envelope-open"></i> No Leídas</button>
+                    <button id="filter-observation-all" class="active"><i class="fas fa-comments"></i> Todas las Observaciones</button>
+                    <button id="filter-observation-read"><i class="fas fa-eye"></i> Leídas</button>
+                    <button id="filter-observation-unread"><i class="fas fa-envelope-open"></i> No Leídas</button>
                 </div>
                 <div id="observations-container" class="observations-list">
-                    <p id="no-observations" style="text-align: center; color: #777; display: none;">No hay observaciones para mostrar en esta categoría.</p>
+                     <p id="no-observations" style="text-align: center; color: #777; display: none;">No hay observaciones para mostrar en esta categoría.</p>
                 </div>
             </section>
+
         </main>
     </div>
-    
+
     <mi-footer></mi-footer>
-    
+
     <script src="header_admin.js" type="module"></script>
     <script src="Objects/container.js" type="module"></script>
     <script src="footer_admin.js"></script>
-    
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        
+
+        // Tu configuración de Firebase (DEBE SER LA MISMA QUE EN contactanos.html y autor_panel.html)
         const firebaseConfig = {
             apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
             authDomain: "cienciometrik-3c8e7.firebaseapp.com",
@@ -105,29 +105,30 @@
             messagingSenderId: "60232446009",
             appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
         };
-        
+
+        // Inicializa Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        
+
         // --- Elementos del DOM para Mensajes de Contacto ---
         const messagesContainer = document.getElementById('messages-container');
         const noMessagesText = document.getElementById('no-messages');
         let allMessages = [];
         let currentFilterMessageState = 'all';
-        let currentFilterMessageDate = 'today'; // Por defecto: hoy
-        
+        let currentFilterMessageDate = 'all';
+
         // --- Elementos del DOM para Artículos ---
         const articlesContainer = document.getElementById('articles-container');
         const noArticlesText = document.getElementById('no-articles');
         let allArticles = [];
-        let currentFilterArticleState = 'pending'; // Por defecto: pendientes de revisión
-        
+        let currentFilterArticleState = 'all'; // all, pending, approved, rejected, hidden
+
         // --- Elementos del DOM para Observaciones ---
         const observationsContainer = document.getElementById('observations-container');
         const noObservationsText = document.getElementById('no-observations');
         let allObservations = [];
-        let currentFilterObservationState = 'unread'; // Por defecto: no leídas
-        
+        let currentFilterObservationState = 'all'; // all, read, unread
+
         // --- Funciones de Utilidad ---
         function formatFirebaseTimestamp(timestamp) {
             if (!timestamp || !timestamp.toDate) {
@@ -137,7 +138,7 @@
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             return date.toLocaleDateString('es-ES', options);
         }
-        
+
         // ---------------------------------------------------
         // --- LÓGICA PARA MENSAJES DE CONTACTO ---
         // ---------------------------------------------------
@@ -145,16 +146,16 @@
             allMessages = [];
             noMessagesText.style.display = 'none';
             messagesContainer.innerHTML = '';
-            
+
             try {
                 const q = query(collection(db, "mensajesContacto"), orderBy("fecha", "desc"));
                 const querySnapshot = await getDocs(q);
-                
+
                 if (querySnapshot.empty) {
                     noMessagesText.style.display = 'block';
                     return;
                 }
-                
+
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     allMessages.push({
@@ -164,31 +165,30 @@
                         deleted: data.deleted || false
                     });
                 });
-                
                 applyFiltersAndDisplayMessages();
             } catch (error) {
                 console.error("Error al obtener los mensajes: ", error);
                 messagesContainer.innerHTML = '<p style="color: red;">Error al cargar los mensajes. Por favor, intente de nuevo.</p>';
             }
         }
-        
+
         function displayMessages(messagesToDisplay) {
             messagesContainer.innerHTML = '';
-            
+
             if (messagesToDisplay.length === 0) {
                 noMessagesText.style.display = 'block';
                 return;
             } else {
                 noMessagesText.style.display = 'none';
             }
-            
+
             messagesToDisplay.forEach(message => {
                 const messageCard = document.createElement('div');
                 messageCard.className = `message-card ${message.read ? 'read' : 'unread'} ${message.deleted ? 'deleted' : ''}`;
                 messageCard.dataset.id = message.id;
-                
+
                 const formattedDate = formatFirebaseTimestamp(message.fecha);
-                
+
                 messageCard.innerHTML = `
                     <div class="message-header">
                         <span class="message-status">${message.deleted ? 'Eliminado' : (message.read ? 'Leído' : 'No Leído')}</span>
@@ -204,35 +204,33 @@
                     </div>
                     <div class="message-actions">
                         ${!message.deleted ? `
-                            <button type="button" class="action-btn mark-as-read-btn" data-id="${message.id}" ${message.read ? 'disabled' : ''}>
+                            <button class="action-btn mark-as-read-btn" data-id="${message.id}" ${message.read ? 'disabled' : ''}>
                                 <i class="fas fa-eye"></i> ${message.read ? 'Leído' : 'Marcar como Leído'}
                             </button>
-                            <button type="button" class="action-btn mark-as-unread-btn" data-id="${message.id}" ${!message.read ? 'disabled' : ''}>
+                            <button class="action-btn mark-as-unread-btn" data-id="${message.id}" ${!message.read ? 'disabled' : ''}>
                                 <i class="fas fa-envelope-open"></i> Marcar como No Leído
                             </button>
-                            <button type="button" class="action-btn delete-message-btn" data-id="${message.id}">
+                            <button class="action-btn delete-message-btn" data-id="${message.id}">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
                         ` : `
-                            <button type="button" class="action-btn restore-message-btn" data-id="${message.id}">
+                            <button class="action-btn restore-message-btn" data-id="${message.id}">
                                 <i class="fas fa-undo"></i> Restaurar
                             </button>
-                            <button type="button" class="action-btn permanently-delete-message-btn" data-id="${message.id}">
+                            <button class="action-btn permanently-delete-message-btn" data-id="${message.id}">
                                 <i class="fas fa-times-circle"></i> Eliminar Permanentemente
                             </button>
                         `}
                     </div>
                 `;
-                
                 messagesContainer.appendChild(messageCard);
             });
-            
             addEventListenersToMessageActions();
         }
-        
+
         function applyFiltersAndDisplayMessages() {
             let filteredMessages = [...allMessages];
-            
+
             if (currentFilterMessageState === 'read') {
                 filteredMessages = filteredMessages.filter(msg => msg.read && !msg.deleted);
             } else if (currentFilterMessageState === 'unread') {
@@ -242,12 +240,12 @@
             } else {
                 filteredMessages = filteredMessages.filter(msg => !msg.deleted);
             }
-            
+
             const now = new Date();
             filteredMessages = filteredMessages.filter(msg => {
                 const messageDate = msg.fecha ? msg.fecha.toDate() : null;
                 if (!messageDate) return false;
-                
+
                 switch (currentFilterMessageDate) {
                     case 'today':
                         return messageDate.toDateString() === now.toDateString();
@@ -272,19 +270,18 @@
                         return true;
                 }
             });
-            
             displayMessages(filteredMessages);
         }
-        
+
         async function handleMessageAction(action, messageId) {
             const messageRef = doc(db, "mensajesContacto", messageId);
             const messageIndex = allMessages.findIndex(msg => msg.id === messageId);
-            
+
             if (messageIndex === -1) {
                 console.error("Mensaje no encontrado en la lista local.");
                 return;
             }
-            
+
             try {
                 if (action === 'read') {
                     await updateDoc(messageRef, { read: true });
@@ -308,36 +305,31 @@
                         return;
                     }
                 }
-                
                 applyFiltersAndDisplayMessages();
             } catch (error) {
                 console.error(`Error al realizar la acción ${action} en el mensaje ${messageId}: `, error);
                 alert(`Error al procesar la acción: ${error.message}`);
             }
         }
-        
+
         function addEventListenersToMessageActions() {
             messagesContainer.querySelectorAll('.mark-as-read-btn').forEach(button => {
-                button.addEventListener('click', () => handleMessageAction('read', button.dataset.id));
+                button.onclick = () => handleMessageAction('read', button.dataset.id);
             });
-            
             messagesContainer.querySelectorAll('.mark-as-unread-btn').forEach(button => {
-                button.addEventListener('click', () => handleMessageAction('unread', button.dataset.id));
+                button.onclick = () => handleMessageAction('unread', button.dataset.id);
             });
-            
             messagesContainer.querySelectorAll('.delete-message-btn').forEach(button => {
-                button.addEventListener('click', () => handleMessageAction('delete', button.dataset.id));
+                button.onclick = () => handleMessageAction('delete', button.dataset.id);
             });
-            
             messagesContainer.querySelectorAll('.restore-message-btn').forEach(button => {
-                button.addEventListener('click', () => handleMessageAction('restore', button.dataset.id));
+                button.onclick = () => handleMessageAction('restore', button.dataset.id);
             });
-            
             messagesContainer.querySelectorAll('.permanently-delete-message-btn').forEach(button => {
-                button.addEventListener('click', () => handleMessageAction('permanently-delete', button.dataset.id));
+                button.onclick = () => handleMessageAction('permanently-delete', button.dataset.id);
             });
         }
-        
+
         // Event Listeners para los botones de filtro de estado de MENSAJES
         document.getElementById('filter-message-all').addEventListener('click', () => {
             currentFilterMessageState = 'all';
@@ -345,28 +337,25 @@
             document.getElementById('filter-message-all').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-read').addEventListener('click', () => {
             currentFilterMessageState = 'read';
             document.querySelectorAll('.message-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-read').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-unread').addEventListener('click', () => {
             currentFilterMessageState = 'unread';
             document.querySelectorAll('.message-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-unread').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-deleted').addEventListener('click', () => {
             currentFilterMessageState = 'deleted';
             document.querySelectorAll('.message-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-deleted').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
+
         // Event Listeners para los botones de filtro de fecha de MENSAJES
         document.getElementById('filter-message-today').addEventListener('click', () => {
             currentFilterMessageDate = 'today';
@@ -374,42 +363,37 @@
             document.getElementById('filter-message-today').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-yesterday').addEventListener('click', () => {
             currentFilterMessageDate = 'yesterday';
             document.querySelectorAll('.date-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-yesterday').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-last-week').addEventListener('click', () => {
             currentFilterMessageDate = 'last-week';
             document.querySelectorAll('.date-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-last-week').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-last-month').addEventListener('click', () => {
             currentFilterMessageDate = 'last-month';
             document.querySelectorAll('.date-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-last-month').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-last-year').addEventListener('click', () => {
             currentFilterMessageDate = 'last-year';
             document.querySelectorAll('.date-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-last-year').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
         document.getElementById('filter-message-date-all').addEventListener('click', () => {
             currentFilterMessageDate = 'all';
             document.querySelectorAll('.date-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-message-date-all').classList.add('active');
             applyFiltersAndDisplayMessages();
         });
-        
+
         // ---------------------------------------------------
         // --- LÓGICA PARA ARTÍCULOS ---
         // ---------------------------------------------------
@@ -417,48 +401,47 @@
             allArticles = [];
             noArticlesText.style.display = 'none';
             articlesContainer.innerHTML = '';
-            
+
             try {
                 const q = query(collection(db, "articulosEnviados"), orderBy("fechaEnvioFirebase", "desc"));
                 const querySnapshot = await getDocs(q);
-                
+
                 if (querySnapshot.empty) {
                     noArticlesText.style.display = 'block';
                     return;
                 }
-                
+
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     allArticles.push({
                         id: doc.id,
                         ...data,
+                        // Asegurar que existan y tengan valores por defecto
                         aprobadoRevisor: data.aprobadoRevisor === true ? true : (data.aprobadoRevisor === false ? false : null),
                         oculto: data.oculto || false,
-                        estado: data.estado || 'Desconocido'
+                        estado: data.estado || 'Desconocido' // Asegurar que el estado siempre esté presente
                     });
                 });
-                
                 applyFiltersAndDisplayArticles();
             } catch (error) {
                 console.error("Error al obtener los artículos: ", error);
                 articlesContainer.innerHTML = '<p style="color: red;">Error al cargar los artículos. Por favor, intente de nuevo.</p>';
             }
         }
-        
+
         function displayArticles(articlesToDisplay) {
             articlesContainer.innerHTML = '';
-            
+
             if (articlesToDisplay.length === 0) {
                 noArticlesText.style.display = 'block';
                 return;
             } else {
                 noArticlesText.style.display = 'none';
             }
-            
+
             articlesToDisplay.forEach(article => {
                 const articleCard = document.createElement('div');
                 let statusClass = '';
-                
                 if (article.oculto) {
                     statusClass = 'status-hidden';
                 } else if (article.aprobadoRevisor === true) {
@@ -468,21 +451,18 @@
                 } else {
                     statusClass = 'status-pending';
                 }
-                
+
                 articleCard.className = `article-card ${statusClass}`;
                 articleCard.dataset.id = article.id;
-                
+
                 const fechaEnvio = formatFirebaseTimestamp(article.fechaEnvioFirebase);
                 const fechaRecepcion = article.fechaRecepcionFirebase ? formatFirebaseTimestamp(article.fechaRecepcionFirebase) : 'N/A';
                 const fechaRevision = article.fechaRevisionRevisor ? formatFirebaseTimestamp(article.fechaRevisionRevisor) : 'N/A';
-                
-                // Reemplazar "por revisor" en el estado
-                const estadoMostrar = article.estado.replace(/ por revisor/gi, '');
-                
+
                 articleCard.innerHTML = `
                     <div class="article-header">
                         <h3 class="article-title">${article.tituloArticulo || 'Título no disponible'}</h3>
-                        <span class="article-status">Estado: ${estadoMostrar}</span>
+                        <span class="article-status">Estado: ${article.estado}</span>
                     </div>
                     <div class="article-meta">
                         <p><strong>Autor:</strong> ${article.autorNombre} &lt;${article.autorEmail}&gt;</p>
@@ -491,46 +471,49 @@
                         ${article.fechaRevisionRevisor ? `<p><strong>Última Revisión:</strong> ${fechaRevision}</p>` : ''}
                     </div>
                     <div class="article-actions">
-                        <button type="button" class="action-btn view-article-content-btn" data-id="${article.id}"><i class="fas fa-eye"></i> Ver/Revisar</button>
+                        <button class="action-btn view-article-content-btn" data-id="${article.id}"><i class="fas fa-eye"></i> Ver/Revisar</button>
                         ${!article.oculto ? `
-                            <button type="button" class="action-btn hide-article-btn" data-id="${article.id}"><i class="fas fa-eye-slash"></i> Ocultar</button>
+                            <button class="action-btn hide-article-btn" data-id="${article.id}"><i class="fas fa-eye-slash"></i> Ocultar</button>
                         ` : `
-                            <button type="button" class="action-btn unhide-article-btn" data-id="${article.id}"><i class="fas fa-eye"></i> Desocultar</button>
+                            <button class="action-btn unhide-article-btn" data-id="${article.id}"><i class="fas fa-eye"></i> Desocultar</button>
                         `}
-                        <button type="button" class="action-btn delete-article-btn" data-id="${article.id}"><i class="fas fa-trash-alt"></i> Eliminar Permanentemente</button>
+                        <button class="action-btn delete-article-btn" data-id="${article.id}"><i class="fas fa-trash-alt"></i> Eliminar Permanentemente</button>
                     </div>
+
                     <div id="full-article-view-${article.id}" class="full-article-view" style="display:none;">
                         <h4>Contenido del Artículo:</h4>
                         <textarea readonly rows="15">${article.contenidoArticulo || 'Sin contenido.'}</textarea>
+
                         <h4>Observaciones del Autor:</h4>
                         <textarea readonly rows="5">${article.observaciones || 'Ninguna.'}</textarea>
-                        <h4>Respuesta del Autor:</h4>
+
+                        <h4>Respuesta del Autor al Revisor:</h4>
                         <textarea readonly rows="5">${article.respuestaAutorAComentarios || 'No hay respuesta del autor.'}</textarea>
+                        
                         <h4>Comentarios de revisión (Admin o Revisor):</h4>
                         <textarea id="revisor-comments-${article.id}" rows="8" placeholder="Escribe aquí tus comentarios para el autor...">${article.comentariosRevisor || ''}</textarea>
+                        
                         <div class="revisor-actions">
-                            <button type="button" class="action-btn save-revisor-comment-btn" data-id="${article.id}"><i class="fas fa-comment"></i> Guardar Comentario</button>
-                            <button type="button" class="action-btn approve-article-btn" data-id="${article.id}" ${article.aprobadoRevisor === true ? 'disabled' : ''}>
+                            <button class="action-btn save-revisor-comment-btn" data-id="${article.id}"><i class="fas fa-comment"></i> Guardar Comentario</button>
+                            <button class="action-btn approve-article-btn" data-id="${article.id}" ${article.aprobadoRevisor === true ? 'disabled' : ''}>
                                 <i class="fas fa-check"></i> Aprobar
                             </button>
-                            <button type="button" class="action-btn reject-article-btn" data-id="${article.id}" ${article.aprobadoRevisor === false ? 'disabled' : ''}>
+                            <button class="action-btn reject-article-btn" data-id="${article.id}" ${article.aprobadoRevisor === false ? 'disabled' : ''}>
                                 <i class="fas fa-times"></i> Rechazar
                             </button>
-                            <button type="button" class="action-btn close-article-view-btn"><i class="fas fa-times"></i> Cerrar Vista</button>
+                            <button class="action-btn close-article-view-btn"><i class="fas fa-times"></i> Cerrar Vista</button>
                         </div>
                         <div id="article-feedback-${article.id}" class="feedback-message"></div>
                     </div>
                 `;
-                
                 articlesContainer.appendChild(articleCard);
             });
-            
             addEventListenersToArticleActions();
         }
-        
+
         function applyFiltersAndDisplayArticles() {
             let filteredArticles = [...allArticles];
-            
+
             if (currentFilterArticleState === 'pending') {
                 filteredArticles = filteredArticles.filter(art => art.aprobadoRevisor === null && !art.oculto);
             } else if (currentFilterArticleState === 'approved') {
@@ -540,27 +523,25 @@
             } else if (currentFilterArticleState === 'hidden') {
                 filteredArticles = filteredArticles.filter(art => art.oculto);
             } else { // 'all'
-                // Mostrar todos, incluyendo ocultos, pero aún diferenciados por la clase CSS
+                 // Mostrar todos, incluyendo ocultos, pero aún diferenciados por la clase CSS
             }
-            
             displayArticles(filteredArticles);
         }
-        
+
         async function handleArticleAction(action, articleId) {
             const articleRef = doc(db, "articulosEnviados", articleId);
             const articleIndex = allArticles.findIndex(art => art.id === articleId);
             const feedbackDiv = document.getElementById(`article-feedback-${articleId}`);
-            
             if (feedbackDiv) {
                 feedbackDiv.textContent = '';
                 feedbackDiv.style.color = 'initial';
             }
-            
+
             if (articleIndex === -1) {
                 console.error("Artículo no encontrado en la lista local.");
                 return;
             }
-            
+
             try {
                 if (action === 'approve') {
                     await updateDoc(articleRef, {
@@ -570,7 +551,7 @@
                     });
                     allArticles[articleIndex].aprobadoRevisor = true;
                     allArticles[articleIndex].estado = 'Aprobado';
-                    allArticles[articleIndex].fechaRevisionRevisor = { toDate: () => new Date() };
+                    allArticles[articleIndex].fechaRevisionRevisor = { toDate: () => new Date() }; // Actualizar localmente
                     if (feedbackDiv) feedbackDiv.textContent = 'Artículo aprobado.'; feedbackDiv.style.color = 'green';
                 } else if (action === 'reject') {
                     await updateDoc(articleRef, {
@@ -580,7 +561,7 @@
                     });
                     allArticles[articleIndex].aprobadoRevisor = false;
                     allArticles[articleIndex].estado = 'Rechazado';
-                    allArticles[articleIndex].fechaRevisionRevisor = { toDate: () => new Date() };
+                    allArticles[articleIndex].fechaRevisionRevisor = { toDate: () => new Date() }; // Actualizar localmente
                     if (feedbackDiv) feedbackDiv.textContent = 'Artículo rechazado.'; feedbackDiv.style.color = 'orange';
                 } else if (action === 'hide') {
                     await updateDoc(articleRef, { oculto: true });
@@ -590,11 +571,12 @@
                 } else if (action === 'unhide') {
                     await updateDoc(articleRef, { oculto: false });
                     allArticles[articleIndex].oculto = false;
+                    // Resetear estado a su valor original (ej. 'Pendiente de Revisión' si no ha sido aprobado/rechazado)
                     if (allArticles[articleIndex].aprobadoRevisor === null) {
                         allArticles[articleIndex].estado = 'Pendiente de Revisión';
                     } else if (allArticles[articleIndex].aprobadoRevisor === true) {
                         allArticles[articleIndex].estado = 'Aprobado';
-                    } else {
+                    } else { // false
                         allArticles[articleIndex].estado = 'Rechazado';
                     }
                     if (feedbackDiv) feedbackDiv.textContent = 'Artículo desocultado.'; feedbackDiv.style.color = 'green';
@@ -614,7 +596,6 @@
                     allArticles[articleIndex].comentariosRevisor = newComments;
                     if (feedbackDiv) feedbackDiv.textContent = 'Comentarios guardados.'; feedbackDiv.style.color = 'green';
                 }
-                
                 applyFiltersAndDisplayArticles();
             } catch (error) {
                 console.error(`Error al realizar la acción ${action} en el artículo ${articleId}: `, error);
@@ -626,52 +607,45 @@
                 }
             }
         }
-        
+
         function addEventListenersToArticleActions() {
             articlesContainer.querySelectorAll('.view-article-content-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
+                button.onclick = (event) => {
                     const articleId = event.currentTarget.dataset.id;
                     const fullArticleView = document.getElementById(`full-article-view-${articleId}`);
                     if (fullArticleView) {
                         fullArticleView.style.display = 'block';
                     }
-                });
+                };
             });
-            
             articlesContainer.querySelectorAll('.close-article-view-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
+                button.onclick = (event) => {
                     const fullArticleView = event.currentTarget.closest('.full-article-view');
                     if (fullArticleView) {
                         fullArticleView.style.display = 'none';
                     }
-                });
+                };
             });
-            
             articlesContainer.querySelectorAll('.save-revisor-comment-btn').forEach(button => {
-                button.addEventListener('click', () => handleArticleAction('save-comment', button.dataset.id));
+                button.onclick = () => handleArticleAction('save-comment', button.dataset.id);
             });
-            
             articlesContainer.querySelectorAll('.approve-article-btn').forEach(button => {
-                button.addEventListener('click', () => handleArticleAction('approve', button.dataset.id));
+                button.onclick = () => handleArticleAction('approve', button.dataset.id);
             });
-            
             articlesContainer.querySelectorAll('.reject-article-btn').forEach(button => {
-                button.addEventListener('click', () => handleArticleAction('reject', button.dataset.id));
+                button.onclick = () => handleArticleAction('reject', button.dataset.id);
             });
-            
             articlesContainer.querySelectorAll('.hide-article-btn').forEach(button => {
-                button.addEventListener('click', () => handleArticleAction('hide', button.dataset.id));
+                button.onclick = () => handleArticleAction('hide', button.dataset.id);
             });
-            
             articlesContainer.querySelectorAll('.unhide-article-btn').forEach(button => {
-                button.addEventListener('click', () => handleArticleAction('unhide', button.dataset.id));
+                button.onclick = () => handleArticleAction('unhide', button.dataset.id);
             });
-            
             articlesContainer.querySelectorAll('.delete-article-btn').forEach(button => {
-                button.addEventListener('click', () => handleArticleAction('delete-permanently', button.dataset.id));
+                button.onclick = () => handleArticleAction('delete-permanently', button.dataset.id);
             });
         }
-        
+
         // Event Listeners para los botones de filtro de ARTÍCULOS
         document.getElementById('filter-article-all').addEventListener('click', () => {
             currentFilterArticleState = 'all';
@@ -679,35 +653,31 @@
             document.getElementById('filter-article-all').classList.add('active');
             applyFiltersAndDisplayArticles();
         });
-        
         document.getElementById('filter-article-pending').addEventListener('click', () => {
             currentFilterArticleState = 'pending';
             document.querySelectorAll('.article-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-article-pending').classList.add('active');
             applyFiltersAndDisplayArticles();
         });
-        
         document.getElementById('filter-article-approved').addEventListener('click', () => {
             currentFilterArticleState = 'approved';
             document.querySelectorAll('.article-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-article-approved').classList.add('active');
             applyFiltersAndDisplayArticles();
         });
-        
         document.getElementById('filter-article-rejected').addEventListener('click', () => {
             currentFilterArticleState = 'rejected';
             document.querySelectorAll('.article-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-article-rejected').classList.add('active');
             applyFiltersAndDisplayArticles();
         });
-        
         document.getElementById('filter-article-hidden').addEventListener('click', () => {
             currentFilterArticleState = 'hidden';
             document.querySelectorAll('.article-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-article-hidden').classList.add('active');
             applyFiltersAndDisplayArticles();
         });
-        
+
         // ---------------------------------------------------
         // --- LÓGICA PARA OBSERVACIONES DE AUTORES ---
         // ---------------------------------------------------
@@ -715,49 +685,48 @@
             allObservations = [];
             noObservationsText.style.display = 'none';
             observationsContainer.innerHTML = '';
-            
+
             try {
                 const q = query(collection(db, "observacionesAutores"), orderBy("timestamp", "desc"));
                 const querySnapshot = await getDocs(q);
-                
+
                 if (querySnapshot.empty) {
                     noObservationsText.style.display = 'block';
                     return;
                 }
-                
+
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     allObservations.push({
                         id: doc.id,
                         ...data,
-                        read: data.read || false
+                        read: data.read || false // Añadir propiedad 'read'
                     });
                 });
-                
                 applyFiltersAndDisplayObservations();
             } catch (error) {
                 console.error("Error al obtener las observaciones: ", error);
                 observationsContainer.innerHTML = '<p style="color: red;">Error al cargar las observaciones. Por favor, intente de nuevo.</p>';
             }
         }
-        
+
         function displayObservations(observationsToDisplay) {
             observationsContainer.innerHTML = '';
-            
+
             if (observationsToDisplay.length === 0) {
                 noObservationsText.style.display = 'block';
                 return;
             } else {
                 noObservationsText.style.display = 'none';
             }
-            
+
             observationsToDisplay.forEach(observation => {
                 const observationCard = document.createElement('div');
                 observationCard.className = `observation-card ${observation.read ? 'read' : 'unread'}`;
                 observationCard.dataset.id = observation.id;
-                
+
                 const formattedDate = formatFirebaseTimestamp(observation.timestamp);
-                
+
                 observationCard.innerHTML = `
                     <div class="observation-header">
                         <span class="observation-status">${observation.read ? 'Leída' : 'No Leída'}</span>
@@ -768,45 +737,42 @@
                         <p>${observation.message}</p>
                     </div>
                     <div class="observation-actions">
-                        <button type="button" class="action-btn mark-observation-read-btn" data-id="${observation.id}" ${observation.read ? 'disabled' : ''}>
+                        <button class="action-btn mark-observation-read-btn" data-id="${observation.id}" ${observation.read ? 'disabled' : ''}>
                             <i class="fas fa-eye"></i> ${observation.read ? 'Leída' : 'Marcar como Leída'}
                         </button>
-                        <button type="button" class="action-btn mark-observation-unread-btn" data-id="${observation.id}" ${!observation.read ? 'disabled' : ''}>
+                        <button class="action-btn mark-observation-unread-btn" data-id="${observation.id}" ${!observation.read ? 'disabled' : ''}>
                             <i class="fas fa-envelope-open"></i> Marcar como No Leída
                         </button>
-                        <button type="button" class="action-btn delete-observation-btn" data-id="${observation.id}">
+                        <button class="action-btn delete-observation-btn" data-id="${observation.id}">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </button>
                     </div>
                 `;
-                
                 observationsContainer.appendChild(observationCard);
             });
-            
             addEventListenersToObservationActions();
         }
-        
+
         function applyFiltersAndDisplayObservations() {
             let filteredObservations = [...allObservations];
-            
+
             if (currentFilterObservationState === 'read') {
                 filteredObservations = filteredObservations.filter(obs => obs.read);
             } else if (currentFilterObservationState === 'unread') {
                 filteredObservations = filteredObservations.filter(obs => !obs.read);
             }
-            
             displayObservations(filteredObservations);
         }
-        
+
         async function handleObservationAction(action, observationId) {
             const observationRef = doc(db, "observacionesAutores", observationId);
             const observationIndex = allObservations.findIndex(obs => obs.id === observationId);
-            
+
             if (observationIndex === -1) {
                 console.error("Observación no encontrada en la lista local.");
                 return;
             }
-            
+
             try {
                 if (action === 'read') {
                     await updateDoc(observationRef, { read: true });
@@ -823,28 +789,25 @@
                         return;
                     }
                 }
-                
                 applyFiltersAndDisplayObservations();
             } catch (error) {
                 console.error(`Error al realizar la acción ${action} en la observación ${observationId}: `, error);
                 alert(`Error al procesar la acción: ${error.message}`);
             }
         }
-        
+
         function addEventListenersToObservationActions() {
             observationsContainer.querySelectorAll('.mark-observation-read-btn').forEach(button => {
-                button.addEventListener('click', () => handleObservationAction('read', button.dataset.id));
+                button.onclick = () => handleObservationAction('read', button.dataset.id);
             });
-            
             observationsContainer.querySelectorAll('.mark-observation-unread-btn').forEach(button => {
-                button.addEventListener('click', () => handleObservationAction('unread', button.dataset.id));
+                button.onclick = () => handleObservationAction('unread', button.dataset.id);
             });
-            
             observationsContainer.querySelectorAll('.delete-observation-btn').forEach(button => {
-                button.addEventListener('click', () => handleObservationAction('delete', button.dataset.id));
+                button.onclick = () => handleObservationAction('delete', button.dataset.id);
             });
         }
-        
+
         // Event Listeners para los botones de filtro de OBSERVACIONES
         document.getElementById('filter-observation-all').addEventListener('click', () => {
             currentFilterObservationState = 'all';
@@ -852,30 +815,25 @@
             document.getElementById('filter-observation-all').classList.add('active');
             applyFiltersAndDisplayObservations();
         });
-        
         document.getElementById('filter-observation-read').addEventListener('click', () => {
             currentFilterObservationState = 'read';
             document.querySelectorAll('.observation-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-observation-read').classList.add('active');
             applyFiltersAndDisplayObservations();
         });
-        
         document.getElementById('filter-observation-unread').addEventListener('click', () => {
             currentFilterObservationState = 'unread';
             document.querySelectorAll('.observation-filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('filter-observation-unread').classList.add('active');
             applyFiltersAndDisplayObservations();
         });
-        
+
+
         // Cargar todos los datos al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
             fetchMessages();
             fetchArticles();
             fetchObservations();
-            
-            // Activar el botón de pendientes en artículos
-            document.querySelectorAll('.article-filters button').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('filter-article-pending').classList.add('active');
         });
     </script>
 </body>

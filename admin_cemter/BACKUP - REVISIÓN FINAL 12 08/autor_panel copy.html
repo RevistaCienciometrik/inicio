@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autores - Revista Cienciometrik</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="autor_panel.css">
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <body>
     <mi-header></mi-header>
@@ -32,7 +32,7 @@
             </section>
             <section id="enviar-articulo" class="section submit-article-section">
                 <h2><i class="fas fa-paper-plane"></i> Enviar Nuevo Artículo</h2>
-                <p>Recuerda que artículo debe ser original, inédito y basado en información veraz, citando siempre todas las fuentes y autores adecuadamente para evitar el plagio. La contribución de cada autor debe ser significativa y transparente, garantizando así la integridad y calidad académica que nuestra revista promueve.</p>
+                <p>Recuerda que  artículo debe ser original, inédito y basado en información veraz, citando siempre todas las fuentes y autores adecuadamente para evitar el plagio. La contribución de cada autor debe ser significativa y transparente, garantizando así la integridad y calidad académica que nuestra revista promueve.</p>
                 <p>Completa este formulario para enviar tu artículo a revisión.</p>
                 <form id="submission-form" class="modern-form">
                     <div class="form-group">
@@ -70,6 +70,7 @@
                     <br>
                     <button type="submit" class="submit-button"><i class="fas fa-upload"></i> Enviar Artículo</button>
                     <p>¡Envíanos el texto de tu artículo para revisión! </p>
+                    <div id="mensaje-envio" class="mensaje"></div>
                 </form>
             </section>
             <section id="mis-articulos" class="section my-articles-section">
@@ -134,7 +135,7 @@
     <script src="../Objects/script.js?v=1.0"></script> 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, where, getDocs, doc, updateDoc, serverTimestamp, Timestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, doc, updateDoc, serverTimestamp, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         
         const firebaseConfig = {
             apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
@@ -168,77 +169,8 @@
         const btnBuscarEliminados = document.getElementById('btn-buscar-eliminados');
         const listaArticulosEliminados = document.getElementById('lista-articulos-eliminados');
         const mensajeArticulosEliminados = document.getElementById('mensaje-articulos-eliminados');
-        
-        // --- VARIABLES PARA LA MODAL (NUEVO) ---
-        const modalArticulo = document.getElementById('modal-articulo');
-        const modalTitulo = document.getElementById('modal-titulo');
-        const modalAutor = document.getElementById('modal-autor');
-        const modalEmail = document.getElementById('modal-email');
-        const modalFechaEnvio = document.getElementById('modal-fecha-envio');
-        const modalFechaRecepcion = document.getElementById('modal-fecha-recepcion');
-        const modalEstado = document.getElementById('modal-estado');
-        const modalContenido = document.getElementById('modal-contenido');
-        const modalComentariosRevisor = document.getElementById('modal-comentarios-revisor');
-        const modalRespuestaAutor = document.getElementById('modal-respuesta-autor');
-        const modalGuardarComentario = document.getElementById('modal-guardar-comentario');
-        const modalCerrar = document.getElementById('modal-cerrar');
-        const modalMensaje = document.getElementById('modal-mensaje');
-        
-        let autorEmailConsultado = '';
-        let currentArticleId = null; // Para almacenar el ID del artículo actual en la modal
-        
-        // --- FUNCIÓN PARA ABRIR LA MODAL (NUEVO) ---
-        function openArticleModal(articleData, docId) {
-            currentArticleId = docId;
-            
-            // Llenar datos en la modal
-            modalTitulo.textContent = articleData.tituloArticulo || 'Título no disponible';
-            modalAutor.textContent = articleData.autorNombre || 'Autor no disponible';
-            modalEmail.textContent = articleData.autorEmail || 'Correo no disponible';
-            
-            // Formatear fechas
-            const fechaEnvio = articleData.fechaEnvioFirebase && articleData.fechaEnvioFirebase.seconds 
-                ? new Date(articleData.fechaEnvioFirebase.seconds * 1000).toLocaleDateString('es-ES') 
-                : 'N/A';
-            const fechaRecepcion = articleData.fechaRecepcionFirebase && articleData.fechaRecepcionFirebase.seconds 
-                ? new Date(articleData.fechaRecepcionFirebase.seconds * 1000).toLocaleDateString('es-ES') 
-                : 'N/A';
-            
-            modalFechaEnvio.textContent = fechaEnvio;
-            modalFechaRecepcion.textContent = fechaRecepcion;
-            
-            // Estado con formato
-            let estadoTexto;
-            if (articleData.aprobadoRevisor === true) {
-                estadoTexto = 'Aprobado';
-                modalEstado.className = 'status-aprobado';
-            } else if (articleData.aprobadoRevisor === false) {
-                estadoTexto = 'Rechazado';
-                modalEstado.className = 'status-rechazado';
-            } else {
-                estadoTexto = 'Pendiente de Revisión';
-                modalEstado.className = 'status-pendiente';
-            }
-            modalEstado.textContent = estadoTexto;
-            
-            // Contenido del artículo
-            modalContenido.textContent = articleData.contenidoArticulo || 'Contenido no disponible';
-            
-            // Comentarios del revisor
-            modalComentariosRevisor.textContent = articleData.comentariosRevisor || '';
-            
-            // Respuesta del autor
-            modalRespuestaAutor.value = articleData.respuestaAutorAComentarios || '';
-            
-            // Limpiar mensajes anteriores
-            modalMensaje.textContent = '';
-            modalMensaje.style.color = '';
-            
-            // Mostrar la modal
-            modalArticulo.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
-        }
-        
+
+        let autorEmailConsultado = ''; // Variable para almacenar el email del autor consultado
         // --- MANEJADOR DE ENVÍO DE ARTÍCULO ---
         submissionForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -282,7 +214,6 @@
                 mensajeEnvio.style.color = 'red';
             }
         });
-        
         // --- FUNCIÓN PARA CARGAR ARTÍCULOS DEL AUTOR (visibles u ocultos) ---
         async function cargarArticulos(email, oculto = false) {
             const targetList = oculto ? listaArticulosEliminados : listaMisArticulos;
@@ -362,13 +293,13 @@
                                 <h4>Observaciones del Autor:</h4>
                                 <textarea id="edit-observaciones-${docId}" rows="5" ${!isEditable ? 'readonly' : ''}>${data.observaciones || ''}</textarea>
                                 ${data.comentariosRevisor ? `
-                                    <h4>Comentarios:</h4>
+                                    <h4>Comentarios del Revisor:</h4>
                                     <div class="revisor-comment-box">
                                         <p>${data.comentariosRevisor}</p>
                                     </div>
                                 ` : ''}
-                                <h4>Observaciones:</h4>
-                                <textarea id="author-response-${docId}" rows="5" placeholder="Escribe aquí tus observaciones...">${data.respuestaAutorAComentarios || ''}</textarea>
+                                <h4>Tu Respuesta al Revisor:</h4>
+                                <textarea id="author-response-${docId}" rows="5" placeholder="Escribe aquí tu respuesta a los comentarios del revisor...">${data.respuestaAutorAComentarios || ''}</textarea>
                                 
                                 <div class="review-actions">
                                     ${isEditable && !oculto ? `
@@ -386,83 +317,104 @@
                 });
                 targetList.innerHTML = htmlContent;
                 targetMessage.textContent = ''; // Limpiar mensaje de carga
-                
                 // --- Añadir Event Listeners para los botones de artículo ---
-                // Usamos event delegation para mejorar el rendimiento
-                targetList.addEventListener('click', async (event) => {
-                    const target = event.target;
-                    const button = target.closest('button');
-                    if (!button) return;
-                    
-                    const articleId = button.dataset.id;
-                    const targetListType = button.dataset.targetList;
-                    
-                    if (button.classList.contains('view-article-btn')) {
-                        // Obtener datos del artículo desde Firebase
-                        try {
-                            const articleRef = doc(db, "articulosEnviados", articleId);
-                            const articleSnap = await getDoc(articleRef);
-                            
-                            if (articleSnap.exists()) {
-                                const articleData = articleSnap.data();
-                                openArticleModal(articleData, articleId);
-                            } else {
-                                console.error("No se encontró el artículo");
-                                alert("No se pudo cargar el artículo. Inténtalo de nuevo.");
-                            }
-                        } catch (error) {
-                            console.error("Error al obtener el artículo: ", error);
-                            alert("Error al cargar el artículo. Inténtalo de nuevo.");
+                targetList.querySelectorAll('.view-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const articleId = event.currentTarget.dataset.id;
+                        const targetListType = event.currentTarget.dataset.targetList;
+                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                        if (fullArticleDiv) {
+                            // Cierra todos los artículos abiertos en la lista actual
+                            targetList.querySelectorAll('.full-article-content').forEach(div => {
+                                if (div.id !== `full-article-${articleId}`) {
+                                    div.style.display = 'none';
+                                    const associatedViewButton = targetList.querySelector(`.view-article-btn[data-id="${div.id.replace('full-article-', '')}"][data-target-list="${targetListType}"]`);
+                                    if (associatedViewButton) {
+                                        associatedViewButton.style.display = 'inline-block';
+                                    }
+                                }
+                            });
+                            fullArticleDiv.style.display = 'block';
+                            event.currentTarget.style.display = 'none'; // Ocultar "Ver Contenido"
                         }
-                    } else if (button.classList.contains('close-article-btn')) {
-                        const fullArticleDiv = button.closest('.full-article-content');
+                    });
+                });
+                targetList.querySelectorAll('.close-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const fullArticleDiv = event.currentTarget.closest('.full-article-content');
                         if (fullArticleDiv) {
                             const articleId = fullArticleDiv.id.replace('full-article-', '');
+                            const targetListType = event.currentTarget.dataset.targetList;
                             fullArticleDiv.style.display = 'none';
                             const viewButton = targetList.querySelector(`.view-article-btn[data-id="${articleId}"][data-target-list="${targetListType}"]`);
                             if (viewButton) {
                                 viewButton.style.display = 'inline-block';
                             }
                         }
-                    } else if (button.classList.contains('edit-article-btn') && !oculto) {
-                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
-                        if (fullArticleDiv) {
-                            fullArticleDiv.style.display = 'block';
-                            button.style.display = 'none'; // Ocultar "Editar Artículo"
-                        }
-                    } else if (button.classList.contains('save-edit-btn') && !oculto) {
-                        const newTitle = document.getElementById(`edit-title-${articleId}`).value;
-                        const newContent = document.getElementById(`edit-content-${articleId}`).value;
-                        const newObservaciones = document.getElementById(`edit-observaciones-${articleId}`).value;
-                        
-                        if (confirm('¿Estás seguro de que quieres guardar los cambios en el artículo y reenviarlo para revisión?')) {
-                            await updateArticleAndResubmit(articleId, newTitle, newContent, newObservaciones, `mensaje-articulo-${articleId}`);
-                        }
-                    } else if (button.classList.contains('save-response-btn') && !oculto) {
-                        const authorResponse = document.getElementById(`author-response-${articleId}`).value;
-                        
-                        if (confirm('¿Estás seguro de que quieres guardar tu respuesta al revisor?')) {
-                            await updateAuthorResponse(articleId, authorResponse, `mensaje-articulo-${articleId}`);
-                        }
-                    } else if (button.classList.contains('delete-article-btn') && !oculto) {
-                        const email = searchAutorEmailInput.value.trim();
-                        if (confirm('¿Estás seguro de que quieres eliminar este artículo? Se moverá a la sección de artículos eliminados.')) {
-                            await deleteArticle(articleId, email, `mensaje-articulo-${articleId}`);
-                        }
-                    } else if (button.classList.contains('restore-article-btn') && oculto) {
-                        const email = searchDeletedEmailInput.value.trim();
-                        if (confirm('¿Estás seguro de que quieres recuperar este artículo? Se moverá a la sección de artículos activos.')) {
-                            await restoreArticle(articleId, email, `mensaje-articulo-${articleId}`);
-                        }
-                    }
+                    });
                 });
+                if (!oculto) { // Solo añadir listeners para edición si no son artículos ocultos
+                    listaMisArticulos.querySelectorAll('.edit-article-btn').forEach(button => {
+                        button.addEventListener('click', (event) => {
+                            const articleId = event.currentTarget.dataset.id;
+                            const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                            if (fullArticleDiv) {
+                                fullArticleDiv.style.display = 'block';
+                                event.currentTarget.style.display = 'none'; // Ocultar "Editar Artículo"
+                            }
+                        });
+                    });
+                    listaMisArticulos.querySelectorAll('.save-edit-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const newTitle = document.getElementById(`edit-title-${docId}`).value;
+                            const newContent = document.getElementById(`edit-content-${docId}`).value;
+                            const newObservaciones = document.getElementById(`edit-observaciones-${docId}`).value;
+                            
+                            if (confirm('¿Estás seguro de que quieres guardar los cambios en el artículo y reenviarlo para revisión?')) {
+                                await updateArticleAndResubmit(docId, newTitle, newContent, newObservaciones, `mensaje-articulo-${docId}`);
+                            }
+                        });
+                    });
+                    listaMisArticulos.querySelectorAll('.save-response-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const authorResponse = document.getElementById(`author-response-${docId}`).value;
+                            
+                            if (confirm('¿Estás seguro de que quieres guardar tu respuesta al revisor?')) {
+                                await updateAuthorResponse(docId, authorResponse, `mensaje-articulo-${docId}`);
+                            }
+                        });
+                    });
+                    // Evento para eliminar artículo
+                    listaMisArticulos.querySelectorAll('.delete-article-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const email = searchAutorEmailInput.value.trim();
+                            if (confirm('¿Estás seguro de que quieres eliminar este artículo? Se moverá a la sección de artículos eliminados.')) {
+                                await deleteArticle(docId, email, `mensaje-articulo-${docId}`);
+                            }
+                        });
+                    });
+                } else { // Solo añadir listeners para recuperación si son artículos ocultos
+                    // Evento para recuperar artículo
+                    listaArticulosEliminados.querySelectorAll('.restore-article-btn').forEach(button => {
+                        button.addEventListener('click', async (event) => {
+                            const docId = event.currentTarget.dataset.id;
+                            const email = searchDeletedEmailInput.value.trim();
+                            if (confirm('¿Estás seguro de que quieres recuperar este artículo? Se moverá a la sección de artículos activos.')) {
+                                await restoreArticle(docId, email, `mensaje-articulo-${docId}`);
+                            }
+                        });
+                    });
+                }
+
             } catch (error) {
                 console.error("Error al cargar los artículos del autor: ", error);
                 targetMessage.textContent = `Error al cargar tus artículos: ${error.message}. Asegúrate de tener conexión a Firebase y reglas de seguridad adecuadas.`;
                 targetMessage.style.color = 'red';
             }
         }
-        
         // --- FUNCIÓN PARA ACTUALIZAR EL ARTÍCULO Y REENVIAR A REVISIÓN ---
         async function updateArticleAndResubmit(docId, newTitle, newContent, newObservaciones, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
@@ -488,7 +440,6 @@
                 messageDiv.style.color = 'red';
             }
         }
-        
         // --- FUNCIÓN PARA SOLO ACTUALIZAR LA RESPUESTA DEL AUTOR ---
         async function updateAuthorResponse(docId, authorResponse, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
@@ -508,7 +459,6 @@
                 messageDiv.style.color = 'red';
             }
         }
-        
         // --- FUNCIÓN PARA ELIMINAR ARTÍCULO (MOVER A ELIMINADOS) ---
         async function deleteArticle(docId, autorEmail, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
@@ -531,7 +481,6 @@
                 messageDiv.style.color = 'red';
             }
         }
-        
         // --- FUNCIÓN PARA RECUPERAR ARTÍCULO (MOVER A ACTIVOS) ---
         async function restoreArticle(docId, autorEmail, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
@@ -554,7 +503,7 @@
                 messageDiv.style.color = 'red';
             }
         }
-        
+
         // --- MANEJADOR DE ENVÍO DE OBSERVACIONES ---
         observationsForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -584,49 +533,6 @@
                 mensajeObservaciones.style.color = 'red';
             }
         });
-        
-        // --- EVENT LISTENERS PARA LA MODAL (NUEVO) ---
-        modalCerrar.addEventListener('click', () => {
-            modalArticulo.style.display = 'none';
-            document.body.style.overflow = ''; // Restaurar scroll
-            currentArticleId = null;
-        });
-
-        // Cerrar modal al hacer clic fuera del contenido
-        window.addEventListener('click', (event) => {
-            if (event.target === modalArticulo) {
-                modalArticulo.style.display = 'none';
-                document.body.style.overflow = '';
-                currentArticleId = null;
-            }
-        });
-
-        // Guardar comentario/respuesta del autor
-        modalGuardarComentario.addEventListener('click', async () => {
-            if (!currentArticleId) return;
-            
-            const respuesta = modalRespuestaAutor.value.trim();
-            
-            try {
-                const articleRef = doc(db, "articulosEnviados", currentArticleId);
-                await updateDoc(articleRef, {
-                    respuestaAutorAComentarios: respuesta
-                });
-                
-                modalMensaje.textContent = 'Tu respuesta ha sido guardada exitosamente.';
-                modalMensaje.style.color = 'green';
-                
-                // Actualizar el artículo en la lista si está visible
-                if (autorEmailConsultado) {
-                    await cargarArticulos(autorEmailConsultado, false);
-                }
-            } catch (error) {
-                console.error("Error al guardar la respuesta del autor: ", error);
-                modalMensaje.textContent = `Error al guardar tu respuesta: ${error.message}`;
-                modalMensaje.style.color = 'red';
-            }
-        });
-        
         // --- EVENTO DEL BOTÓN DE BÚSQUEDA DE ARTÍCULOS ---
         btnBuscarArticulos.addEventListener('click', async () => {
             const email = searchAutorEmailInput.value.trim();
@@ -637,14 +543,12 @@
                 alert("Por favor, introduce un correo electrónico para buscar tus artículos.");
             }
         });
-        
         btnLimpiarBusqueda.addEventListener('click', async () => {
             searchAutorEmailInput.value = '';
             listaMisArticulos.innerHTML = '<p class="loading-message">Ingresa tu correo electrónico y haz clic en "Buscar Mis Artículos" para verlos aquí.</p>';
             mensajeMisArticulos.textContent = '';
             autorEmailConsultado = '';
         });
-        
         // --- EVENTO DEL BOTÓN DE BÚSQUEDA DE ARTÍCULOS ELIMINADOS ---
         btnBuscarEliminados.addEventListener('click', async () => {
             const email = searchDeletedEmailInput.value.trim();
@@ -654,47 +558,12 @@
                 alert("Por favor, introduce un correo electrónico para buscar tus artículos eliminados.");
             }
         });
-        
+
         // --- CARGA INICIAL DE ARTÍCULOS AL CARGAR LA PÁGINA (VACÍA AL PRINCIPIO) ---
         // La carga inicial se disparará solo cuando el usuario ingrese un email y haga clic en el botón.
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
             // No llamar a cargarArticulos aquí para que el usuario deba buscar.
         });
     </script>
-
-    <!-- Ventana Modal para Visualizar Artículo -->
-    <div id="modal-articulo" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-titulo">Título del Artículo</h3>
-                <div class="modal-info">
-                    <p><strong>Autor:</strong> <span id="modal-autor"></span></p>
-                    <p><strong>Correo:</strong> <span id="modal-email"></span></p>
-                    <p><strong>Fecha Envío:</strong> <span id="modal-fecha-envio"></span></p>
-                    <p><strong>Fecha Recepción:</strong> <span id="modal-fecha-recepcion"></span></p>
-                    <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
-                </div>
-            </div>
-            <div class="modal-body">
-                <h4>Contenido Completo:</h4>
-                <div id="modal-contenido" class="modal-articulo-contenido"></div>
-                
-                <h4>Comentarios del Revisor:</h4>
-                <div id="modal-comentarios-revisor" class="modal-comentarios"></div>
-                
-                <h4>Tu Respuesta:</h4>
-                <textarea id="modal-respuesta-autor" rows="5" placeholder="Escribe aquí tus observaciones..."></textarea>
-            </div>
-            <div class="modal-footer">
-                <button id="modal-guardar-comentario" class="submit-button">
-                    <i class="fas fa-save"></i> Guardar Comentario
-                </button>
-                <button id="modal-cerrar" class="button-secondary">
-                    <i class="fas fa-times"></i> Cerrar
-                </button>
-            </div>
-            <div id="modal-mensaje" class="mensaje"></div>
-        </div>
-    </div>
 </body>
 </html>

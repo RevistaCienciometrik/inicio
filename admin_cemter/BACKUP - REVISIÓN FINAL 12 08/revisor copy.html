@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revisor - Revista Cienciometrik</title>
     <link rel="stylesheet" href="revisor.css"> 
+    <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <mi-header></mi-header>
+
     <div class="container">
         <aside class="sidebar">
             <h3>Panel de Revisor</h3>
@@ -18,17 +20,20 @@
                     <li><a href="#historial-revisiones"><i class="fas fa-history"></i> Historial de Revisiones</a></li>
                     <li><a href="#buscar-articulos"><i class="fas fa-search"></i> Buscar Artículos</a></li>
                     <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+
                 </ul>
             </nav>
         </aside>
+
         <main class="main-content">
             <section class="section revisor-hero">
                 <div class="revisor-hero-content">
                     <i class="fas fa-glasses revisor-icon"></i>
-                    <h2>ZONA DE REVISIÓN</h2>
+                    <h2>¡Bienvenido, Revisor de la Ciencia!</h2>
                     <p class="subtitle">Tu labor es crucial para mantener la calidad y el rigor de nuestra revista. Revisa los artículos enviados y comparte tus valiosos comentarios.</p>
                 </div>
             </section>
+
             <section id="articulos-pendientes" class="section pending-articles-section">
                 <h2><i class="fas fa-hourglass-half"></i> Artículos Pendientes de Revisión</h2>
                 <p>Aquí encontrarás los artículos que aún no han sido aprobados o desaprobados por un revisor.</p>
@@ -47,6 +52,7 @@
                 </div>
                 <div id="mensaje-pendientes" class="mensaje"></div>
             </section>
+
             <section id="historial-revisiones" class="section history-articles-section">
                 <h2><i class="fas fa-history"></i> Historial de Artículos Revisados</h2>
                 <p>Aquí puedes ver el historial de todos los artículos que ya han pasado por un proceso de revisión.</p>
@@ -66,6 +72,7 @@
                 </div>
                 <div id="mensaje-historial" class="mensaje"></div>
             </section>
+
             <section id="buscar-articulos" class="section search-articles-section">
                 <h2><i class="fas fa-search"></i> Buscar Artículos</h2>
                 <p>Busca artículos específicos por título, nombre de autor o correo electrónico del autor.</p>
@@ -74,7 +81,7 @@
                         <label for="search-query"><i class="fas fa-keyboard icon"></i> Buscar por Título, Autor o Email:</label>
                         <input type="text" id="search-query" placeholder="Ej: Inteligencia Artificial, Juan Pérez, autor@example.com">
                     </div>
-                    <button type="button" class="submit-button small-button" id="search-text-button">
+                    <button type="submit" class="submit-button small-button" id="search-text-button">
                         <i class="fas fa-search"></i> Buscar
                     </button>
                     <button type="button" class="button-secondary small-button" id="clear-search-button" style="margin-top: 15px;">
@@ -86,36 +93,22 @@
                 </div>
                 <div id="mensaje-busqueda" class="mensaje"></div>
             </section>
+
         </main>
     </div>
-    
-    <!-- Modal para ver artículo completo -->
-    <div id="article-modal" class="article-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-article-title">Título del Artículo</h3>
-                <button class="modal-close" id="close-modal">&times;</button>
-            </div>
-            <div class="modal-body" id="modal-article-content">
-                <!-- El contenido del artículo se insertará aquí dinámicamente -->
-            </div>
-            <div class="modal-footer">
-                <button class="save-comment-btn action-btn" id="modal-save-comment"><i class="fas fa-save"></i> Guardar Comentario</button>
-                <button class="close-article-btn action-btn" id="modal-close-article"><i class="fas fa-times"></i> Cerrar</button>
-            </div>
-        </div>
-    </div>
-    
+
     <mi-footer></mi-footer>
+
     <script src="header_admin.js"></script>
     <script src="../Objects/container.js"></script>
     <script src="footer_admin.js"></script>
     <script src="../Objects/script.js?v=1.9"></script> 
+
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase.
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         // Importa las funciones específicas para Firestore.
-        import { getFirestore, collection, updateDoc, doc, query, where, getDocs, serverTimestamp, orderBy, Timestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFirestore, collection, updateDoc, doc, query, where, getDocs, serverTimestamp, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         
         // Aquí está la configuración de tu proyecto de Firebase.
         const firebaseConfig = {
@@ -126,11 +119,12 @@
             messagingSenderId: "60232446009",
             appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
         };
+
         // Inicializa Firebase.
         const app = initializeApp(firebaseConfig);
         // Obtén una referencia a la base de datos de Firestore.
         const db = getFirestore(app);
-        
+
         // --- REFERENCIAS A ELEMENTOS DEL DOM ---
         const listaArticulosPendientes = document.getElementById('lista-articulos-pendientes');
         const mensajePendientes = document.getElementById('mensaje-pendientes');
@@ -144,19 +138,8 @@
         const filterHistoryTime = document.getElementById('filter-history-time');
         const searchTextButton = document.getElementById('search-text-button');
         const clearSearchButton = document.getElementById('clear-search-button');
-        
-        // Referencias al modal
-        const articleModal = document.getElementById('article-modal');
-        const modalArticleTitle = document.getElementById('modal-article-title');
-        const modalArticleContent = document.getElementById('modal-article-content');
-        const closeModalBtn = document.getElementById('close-modal');
-        const modalCloseArticleBtn = document.getElementById('modal-close-article');
-        const modalSaveCommentBtn = document.getElementById('modal-save-comment');
-        
-        // Variable para almacenar el ID del artículo actual en el modal
-        let currentArticleId = null;
-        let currentSectionType = null;
-        
+
+
         // --- FUNCIÓN PARA CALCULAR FECHAS PARA FILTRADO TEMPORAL ---
         function getDateFilter(period) {
             const now = new Date();
@@ -173,7 +156,7 @@
             // Convertir a Timestamp para comparación con Firestore
             return startDate ? Timestamp.fromDate(startDate) : null;
         }
-        
+
         // --- FUNCIÓN PARA CARGAR Y MOSTRAR ARTÍCULOS ---
         async function cargarArticulosRevisor(
             containerElement,
@@ -185,36 +168,34 @@
             containerElement.innerHTML = '<p class="loading-message">Cargando artículos...</p>';
             messageElement.textContent = '';
             messageElement.style.color = 'initial';
-            
+
             // Comportamiento inicial para Historial
             if (sectionType === 'history' && filterPeriod === 'none') {
                 containerElement.innerHTML = '<p class="loading-message">Selecciona un filtro para ver el historial.</p>';
                 messageElement.textContent = '';
                 return;
             }
-            
+
             let q;
             const articlesRef = collection(db, "articulosEnviados");
             let queries = [];
             let orderByField = "fechaRecepcionFirebase"; // Campo de orden predeterminado para la mayoría de los casos
-            
+
             // Lógica para filtrar por tipo de sección (pendiente o historial)
             if (sectionType === 'pending') {
                 queries.push(where("aprobadoRevisor", "==", null)); 
             } else if (sectionType === 'history') {
                 queries.push(where("aprobadoRevisor", "!=", null)); 
             }
-            
             // Si sectionType es 'search', no añadimos un filtro de estado aquí para permitir buscar en todos.
-            
+
             // Lógica de filtrado de fecha para secciones de pendientes/historial
             const effectiveStartDate = getDateFilter(filterPeriod);
             if (effectiveStartDate) {
                 queries.push(where("fechaRecepcionFirebase", ">=", effectiveStartDate));
             }
-            
             // orderByField ya es "fechaRecepcionFirebase" por defecto.
-            
+
             // Lógica de búsqueda por texto (título, autor, email)
             if (sectionType === 'search' && searchTerm) {
                 // Si parece un email, busca por email exacto
@@ -228,16 +209,16 @@
                     // Para grandes volúmenes de datos, esto no es escalable.
                 }
             }
-            
+
             // Construir la consulta con orden. Se necesita un orderBy para range filters.
             // Para la búsqueda de texto que no es email exacto, simplemente ordenamos por fechaRecepcionFirebase
             // ya que el filtrado de texto completo se hará en el cliente.
             q = query(articlesRef, ...queries, orderBy(orderByField, "desc"));
-            
+
             try {
                 const querySnapshot = await getDocs(q);
                 let articlesToShow = [];
-                
+
                 if (sectionType === 'search' && searchTerm && !searchTerm.includes('@')) {
                     const lowerSearchTerm = searchTerm.toLowerCase();
                     querySnapshot.forEach(doc => {
@@ -256,7 +237,7 @@
                         articlesToShow.push({ id: doc.id, ...doc.data() });
                     });
                 }
-                
+
                 if (articlesToShow.length === 0) {
                     const periodMap = {
                         'day': 'del último día',
@@ -276,7 +257,7 @@
                     containerElement.innerHTML = `<p class="no-articles-message">No hay artículos ${sectionMessage} ${periodMap[filterPeriod] || ''}.</p>`;
                     return;
                 }
-                
+
                 let htmlContent = '';
                 articlesToShow.forEach((data) => {
                     const docId = data.id;
@@ -296,12 +277,12 @@
                         estadoClase = 'status-pendiente-de-revision';
                         estadoTexto = data.estado || 'Pendiente de Revisión'; // Usa el estado del documento o el valor por defecto
                     }
-                    
+
                     const isApprovedByRevisor = data.aprobadoRevisor === true;
                     const isRejectedByRevisor = data.aprobadoRevisor === false;
-                    
+
                     htmlContent += `
-                        <div class="article-card ${estadoClase}">
+                        <div class="article-card">
                             <h3>${data.tituloArticulo || 'Título no disponible'}</h3>
                             <p><strong>Autor:</strong> ${data.autorNombre || 'N/A'}</p>
                             <p><strong>Email:</strong> ${data.autorEmail || 'N/A'}</p>
@@ -314,74 +295,134 @@
                                 <p><strong>Veredicto:</strong> ${estadoTexto}</p>
                                 <p><strong>Comentarios Revisor:</strong> ${data.comentariosRevisor || 'N/A'}</p>
                             ` : ''}
-                            
+
                             <div class="article-actions">
-                                <button class="view-article-btn action-btn" data-id="${docId}" data-section="${sectionType}">
+                                <button class="view-article-btn" data-id="${docId}">
                                     <i class="fas fa-eye"></i> Ver Artículo
                                 </button>
-                                
                                 ${!isApprovedByRevisor && !isRejectedByRevisor && sectionType === 'pending' ? `
-                                    <button class="approve-article-btn action-btn" data-id="${docId}">
+                                    <button class="approve-article-btn" data-id="${docId}">
                                         <i class="fas fa-check"></i> Aprobar
                                     </button>
-                                    <button class="reject-article-btn action-btn" data-id="${docId}">
+                                    <button class="reject-article-btn" data-id="${docId}">
                                         <i class="fas fa-times"></i> Rechazar
                                     </button>
                                 ` : ''}
-                                
                                 ${sectionType === 'history' || sectionType === 'search' ? `
-                                    <button class="edit-comment-btn action-btn" data-id="${docId}" data-section="${sectionType}">
+                                    <button class="edit-comment-btn" data-id="${docId}">
                                         <i class="fas fa-edit"></i> Editar Comentario
                                     </button>
                                 ` : ''}
                             </div>
+                            <div id="full-article-${docId}" class="full-article-content" style="display:none;">
+                                <h4>Contenido Completo:</h4>
+                                <pre>${data.contenidoArticulo || 'Contenido no disponible'}</pre>
+                                ${data.observaciones ? `<h4>Observaciones del Autor (Envío Inicial):</h4><p>${data.observaciones}</p>` : ''}
+                                
+                                ${data.comentariosRevisor ? `
+                                    <h4>Tus Comentarios (Revisor):</h4>
+                                    <div class="revisor-comment-box">
+                                        <p>${data.comentariosRevisor}</p>
+                                    </div>
+                                ` : ''}
+
+                                ${data.respuestaAutorAComentarios ? `
+                                    <h4>Respuesta del Autor:</h4>
+                                    <div class="author-response-box">
+                                        <p>${data.respuestaAutorAComentarios}</p>
+                                    </div>
+                                ` : ''}
+
+                                <div class="form-group review-comment-group">
+                                    <label for="revisor-comment-${docId}"><i class="fas fa-comment-alt icon"></i> Tu Comentario (Actual):</label>
+                                    <textarea id="revisor-comment-${docId}" rows="5" placeholder="Escribe tus comentarios sobre el artículo aquí...">${data.comentariosRevisor || ''}</textarea>
+                                </div>
+                                <div class="review-actions">
+                                    <button class="save-comment-btn" data-id="${docId}"><i class="fas fa-save"></i> Guardar Comentario</button>
+                                    <button class="close-article-btn"><i class="fas fa-times"></i> Cerrar</button>
+                                </div>
+                                <div id="mensaje-revision-${docId}" class="mensaje"></div>
+                            </div>
                         </div>
                     `;
                 });
-                
                 containerElement.innerHTML = htmlContent;
-                
-                // Añadir listeners para los botones después de un pequeño retraso para asegurar que el DOM se haya actualizado
-                setTimeout(() => {
-                    // Botones Ver Artículo
-                    containerElement.querySelectorAll('.view-article-btn').forEach(button => {
-                        button.addEventListener('click', (event) => {
-                            const articleId = event.currentTarget.dataset.id;
-                            const sectionType = event.currentTarget.dataset.section;
-                            openArticleModal(articleId, sectionType, 'view');
-                        });
-                    });
-                    
-                    // Botones Aprobar (solo en sección pendiente)
-                    containerElement.querySelectorAll('.approve-article-btn').forEach(button => {
-                        button.addEventListener('click', (event) => {
-                            const docId = event.currentTarget.dataset.id;
-                            if (confirm('¿Estás seguro de que quieres APROBAR este artículo?')) {
-                                openArticleModal(docId, 'pending', 'approve');
+
+                // Añadir listeners para los botones (se mantiene la lógica)
+                containerElement.querySelectorAll('.view-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const articleId = event.currentTarget.dataset.id;
+                        const fullArticleDiv = document.getElementById(`full-article-${articleId}`);
+                        if (fullArticleDiv) {
+                            fullArticleDiv.style.display = 'block';
+                            event.currentTarget.style.display = 'none'; // Ocultar el botón "Ver Artículo"
+                            const commentArea = fullArticleDiv.querySelector(`#revisor-comment-${articleId}`);
+                            if (commentArea) {
+                                commentArea.value = articlesToShow.find(a => a.id === articleId).comentariosRevisor || '';
                             }
-                        });
+                        }
                     });
-                    
-                    // Botones Rechazar (solo en sección pendiente)
-                    containerElement.querySelectorAll('.reject-article-btn').forEach(button => {
-                        button.addEventListener('click', (event) => {
-                            const docId = event.currentTarget.dataset.id;
-                            if (confirm('¿Estás seguro de que quieres RECHAZAR este artículo? Se recomienda añadir un comentario explicando los motivos.')) {
-                                openArticleModal(docId, 'pending', 'reject');
+                });
+
+                containerElement.querySelectorAll('.close-article-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const fullArticleDiv = event.currentTarget.closest('.full-article-content');
+                        if (fullArticleDiv) {
+                            const articleId = fullArticleDiv.id.replace('full-article-', '');
+                            fullArticleDiv.style.display = 'none';
+                            const viewButton = containerElement.querySelector(`.view-article-btn[data-id="${articleId}"]`);
+                            if (viewButton) {
+                                viewButton.style.display = 'inline-block';
                             }
-                        });
+                        }
                     });
-                    
-                    // Botones Editar Comentario (solo en historial/búsqueda)
-                    containerElement.querySelectorAll('.edit-comment-btn').forEach(button => {
-                        button.addEventListener('click', (event) => {
-                            const articleId = event.currentTarget.dataset.id;
-                            const sectionType = event.currentTarget.dataset.section;
-                            openArticleModal(articleId, sectionType, 'edit');
-                        });
+                });
+
+                // Botones Aprobar/Rechazar (solo en sección pendiente)
+                containerElement.querySelectorAll('.approve-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const comment = document.getElementById(`revisor-comment-${docId}`).value;
+                        if (confirm('¿Estás seguro de que quieres APROBAR este artículo?')) {
+                            await updateEstadoRevision(docId, true, comment, `mensaje-revision-${docId}`);
+                        }
                     });
-                }, 100);
+                });
+
+                containerElement.querySelectorAll('.reject-article-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const comment = document.getElementById(`revisor-comment-${docId}`).value;
+                        if (confirm('¿Estás seguro de que quieres RECHAZAR este artículo? Se recomienda añadir un comentario explicando los motivos.')) {
+                            await updateEstadoRevision(docId, false, comment, `mensaje-revision-${docId}`);
+                        }
+                    });
+                });
                 
+                // Botón Editar Comentario (solo en historial/búsqueda) - si se desea editar el comentario sin cambiar el estado
+                containerElement.querySelectorAll('.edit-comment-btn').forEach(button => {
+                    button.addEventListener('click', (event) => { // Cambiado a 'click'
+                        const docId = event.currentTarget.dataset.id;
+                        const fullArticleDiv = document.getElementById(`full-article-${docId}`);
+                        if (fullArticleDiv) {
+                            fullArticleDiv.style.display = 'block'; 
+                            const commentArea = fullArticleDiv.querySelector(`#revisor-comment-${docId}`);
+                            commentArea.value = articlesToShow.find(a => a.id === docId).comentariosRevisor || '';
+                        }
+                    });
+                });
+
+
+                containerElement.querySelectorAll('.save-comment-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const docId = event.currentTarget.dataset.id;
+                        const comment = document.getElementById(`revisor-comment-${docId}`).value;
+                        if (confirm('¿Estás seguro de que quieres guardar este comentario?')) {
+                            await updateComment(docId, comment, `mensaje-revision-${docId}`);
+                        }
+                    });
+                });
+
             } catch (error) {
                 console.error("Error al cargar los artículos para el revisor: ", error);
                 messageElement.textContent = `Error al cargar los artículos: ${error.message}. Por favor, verifica tu conexión a Firebase y asegúrate de que los índices necesarios estén creados en Cloud Firestore.`;
@@ -389,137 +430,13 @@
                 containerElement.innerHTML = '<p class="error-message">Hubo un error al cargar los artículos.</p>';
             }
         }
-        
-        // --- FUNCIÓN PARA ABRIR EL MODAL CON EL CONTENIDO DEL ARTÍCULO ---
-        async function openArticleModal(articleId, sectionType, action = 'view') {
-            try {
-                const articleRef = doc(db, "articulosEnviados", articleId);
-                const articleDoc = await getDoc(articleRef);
-                
-                if (!articleDoc.exists()) {
-                    console.error("El artículo no existe");
-                    return;
-                }
-                
-                const data = articleDoc.data();
-                currentArticleId = articleId;
-                currentSectionType = sectionType;
-                
-                // Establecer el título del modal
-                modalArticleTitle.textContent = data.tituloArticulo || 'Título no disponible';
-                
-                // Construir el contenido del modal
-                const fechaRecepcion = data.fechaRecepcionFirebase && data.fechaRecepcionFirebase.seconds ? new Date(data.fechaRecepcionFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
-                const fechaEnvio = data.fechaEnvioFirebase && data.fechaEnvioFirebase.seconds ? new Date(data.fechaEnvioFirebase.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
-                const fechaRevision = data.fechaRevisionRevisor && data.fechaRevisionRevisor.seconds ? new Date(data.fechaRevisionRevisor.seconds * 1000).toLocaleDateString('es-ES') : 'N/A';
-                
-                let estadoTexto;
-                if (data.aprobadoRevisor === true) {
-                    estadoTexto = 'Aprobado';
-                } else if (data.aprobadoRevisor === false) {
-                    estadoTexto = 'Rechazado';
-                } else {
-                    estadoTexto = data.estado || 'Pendiente de Revisión';
-                }
-                
-                let modalHTML = `
-                    <div class="article-meta">
-                        <p><strong>Autor:</strong> ${data.autorNombre || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${data.autorEmail || 'N/A'}</p>
-                        <p><strong>Fecha Envío Autor:</strong> ${fechaEnvio}</p>
-                        <p><strong>Fecha Recepción:</strong> ${fechaRecepcion}</p>
-                        <p><strong>Estado Revisión:</strong> ${estadoTexto}</p>
-                        ${sectionType === 'history' || sectionType === 'search' ? `
-                            <p><strong>Fecha Revisión:</strong> ${fechaRevision}</p>
-                            <p><strong>Veredicto:</strong> ${estadoTexto}</p>
-                        ` : ''}
-                    </div>
-                    
-                    <div class="full-article-content">
-                        <h4><i class="fas fa-file-alt"></i> Contenido Completo:</h4>
-                        <pre>${data.contenidoArticulo || 'Contenido no disponible'}</pre>
-                        
-                        ${data.observaciones ? `
-                            <h4><i class="fas fa-sticky-note"></i> Observaciones del Autor (Envío Inicial):</h4>
-                            <p>${data.observaciones}</p>
-                        ` : ''}
-                        
-                        ${data.comentariosRevisor ? `
-                            <h4><i class="fas fa-comment-alt"></i> Tus Comentarios (Revisor):</h4>
-                            <div class="revisor-comment-box">
-                                <p>${data.comentariosRevisor}</p>
-                            </div>
-                        ` : ''}
-                        
-                        ${data.respuestaAutorAComentarios ? `
-                            <h4><i class="fas fa-reply"></i> Respuesta del Autor:</h4>
-                            <div class="author-response-box">
-                                <p>${data.respuestaAutorAComentarios}</p>
-                            </div>
-                        ` : ''}
-                        
-                        <div class="form-group review-comment-group">
-                            <label for="modal-comment-text"><i class="fas fa-comment-alt"></i> Tu Comentario:</label>
-                            <textarea id="modal-comment-text" rows="6" placeholder="Escribe tus comentarios sobre el artículo aquí...">${data.comentariosRevisor || ''}</textarea>
-                        </div>
-                        
-                        <div id="modal-mensaje" class="mensaje"></div>
-                    </div>
-                `;
-                
-                modalArticleContent.innerHTML = modalHTML;
-                
-                // Configurar los botones del modal según la acción
-                if (action === 'approve') {
-                    modalSaveCommentBtn.innerHTML = '<i class="fas fa-check"></i> Aprobar Artículo';
-                    modalSaveCommentBtn.className = 'approve-article-btn action-btn';
-                    modalSaveCommentBtn.onclick = () => {
-                        const comment = document.getElementById('modal-comment-text').value;
-                        if (confirm('¿Estás seguro de que quieres APROBAR este artículo?')) {
-                            updateEstadoRevision(articleId, true, comment, 'modal-mensaje');
-                        }
-                    };
-                } else if (action === 'reject') {
-                    modalSaveCommentBtn.innerHTML = '<i class="fas fa-times"></i> Rechazar Artículo';
-                    modalSaveCommentBtn.className = 'reject-article-btn action-btn';
-                    modalSaveCommentBtn.onclick = () => {
-                        const comment = document.getElementById('modal-comment-text').value;
-                        if (confirm('¿Estás seguro de que quieres RECHAZAR este artículo? Se recomienda añadir un comentario explicando los motivos.')) {
-                            updateEstadoRevision(articleId, false, comment, 'modal-mensaje');
-                        }
-                    };
-                } else {
-                    modalSaveCommentBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Comentario';
-                    modalSaveCommentBtn.className = 'save-comment-btn action-btn';
-                    modalSaveCommentBtn.onclick = () => {
-                        const comment = document.getElementById('modal-comment-text').value;
-                        if (confirm('¿Estás seguro de que quieres guardar este comentario?')) {
-                            updateComment(articleId, comment, 'modal-mensaje');
-                        }
-                    };
-                }
-                
-                // Mostrar el modal
-                articleModal.classList.add('active');
-                
-            } catch (error) {
-                console.error("Error al abrir el modal del artículo: ", error);
-            }
-        }
-        
-        // --- FUNCIÓN PARA CERRAR EL MODAL ---
-        function closeArticleModal() {
-            articleModal.classList.remove('active');
-            currentArticleId = null;
-            currentSectionType = null;
-        }
-        
+
         // --- FUNCIÓN PARA ACTUALIZAR EL ESTADO DE REVISIÓN Y AÑADIR COMENTARIOS ---
         async function updateEstadoRevision(docId, aprobado, comentario, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
             messageDiv.textContent = '';
             messageDiv.style.color = 'initial';
-            
+
             try {
                 const articleRef = doc(db, "articulosEnviados", docId);
                 const updateData = {
@@ -528,77 +445,55 @@
                     fechaRevisionRevisor: serverTimestamp(),
                     estado: aprobado ? "Aprobado" : "Rechazado"
                 };
-                
                 await updateDoc(articleRef, updateData);
-                
+
                 messageDiv.textContent = `Artículo ${aprobado ? 'aprobado' : 'rechazado'} y comentario guardado exitosamente.`;
                 messageDiv.style.color = 'green';
-                
-                // Cerrar el modal después de un breve retraso para mostrar el mensaje
-                setTimeout(() => {
-                    closeArticleModal();
-                }, 2000);
-                
                 // Recargar las secciones relevantes para reflejar los cambios
+                // Cargamos la sección de pendientes siempre con 'all' para que muestre datos
                 await cargarArticulosRevisor(listaArticulosPendientes, mensajePendientes, 'pending', 'all'); 
+                // La sección de historial se carga con el valor actual del filtro
                 await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', filterHistoryTime.value);
-                
+                // Si la búsqueda está activa, recargar también esa sección
                 if (searchQueryInput.value) { 
                     await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', searchQueryInput.value);
                 }
-                
+
             } catch (error) {
                 console.error(`Error al actualizar el estado del artículo: `, error);
                 messageDiv.textContent = `Hubo un error al actualizar el artículo: ${error.message}`;
                 messageDiv.style.color = 'red';
             }
         }
-        
+
         // --- FUNCIÓN PARA SÓLO GUARDAR COMENTARIOS SIN CAMBIAR ESTADO ---
         async function updateComment(docId, comentario, messageDivId) {
             const messageDiv = document.getElementById(messageDivId);
             messageDiv.textContent = '';
             messageDiv.style.color = 'initial';
-            
+
             try {
                 const articleRef = doc(db, "articulosEnviados", docId);
                 await updateDoc(articleRef, {
                     comentariosRevisor: comentario,
                 });
-                
+
                 messageDiv.textContent = `Comentario guardado exitosamente.`;
                 messageDiv.style.color = 'green';
-                
-                // Cerrar el modal después de un breve retraso para mostrar el mensaje
-                setTimeout(() => {
-                    closeArticleModal();
-                }, 2000);
-                
                 // Recargar las secciones relevantes para reflejar los cambios
                 await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', filterHistoryTime.value);
-                
+                // Si la búsqueda está activa, recargar también esa sección
                 if (searchQueryInput.value) { 
                     await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', searchQueryInput.value);
                 }
-                
+
             } catch (error) {
                 console.error(`Error al guardar el comentario: `, error);
                 messageDiv.textContent = `Hubo un error al guardar el comentario: ${error.message}`;
                 messageDiv.style.color = 'red';
             }
         }
-        
-        // --- EVENT LISTENERS PARA EL MODAL ---
-        closeModalBtn.addEventListener('click', closeArticleModal);
-        modalCloseArticleBtn.addEventListener('click', closeArticleModal);
-        
-        // Cerrar el modal al hacer clic fuera del contenido
-        articleModal.addEventListener('click', (event) => {
-            if (event.target === articleModal) {
-                closeArticleModal();
-            }
-        });
-        
+
         // --- INICIALIZACIÓN DE CARGA DE ARTÍCULOS ---
         document.addEventListener('DOMContentLoaded', async () => {
             // Cargar artículos pendientes con "all" por defecto al inicio
@@ -611,27 +506,28 @@
             filterHistoryTime.value = 'none'; // Asegurarse de que el valor por defecto sea 'none'
             await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', 'none'); 
         });
-        
+
+
         // Eventos de filtrado por tiempo 
         filterPendingTime.addEventListener('change', async (event) => {
             await cargarArticulosRevisor(listaArticulosPendientes, mensajePendientes, 'pending', event.target.value);
         });
-        
+
         filterHistoryTime.addEventListener('change', async (event) => {
             await cargarArticulosRevisor(listaHistorialRevisiones, mensajeHistorial, 'history', event.target.value);
         });
-        
+
         searchTextButton.addEventListener('click', async (e) => {
             e.preventDefault();
             const searchTerm = searchQueryInput.value.trim();
             await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', searchTerm);
         });
-        
+
         clearSearchButton.addEventListener('click', async () => {
             searchQueryInput.value = '';
             await cargarArticulosRevisor(listaArticulosBusqueda, mensajeBusqueda, 'search', 'all', '');
         });
-        
+
         searchQueryInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
