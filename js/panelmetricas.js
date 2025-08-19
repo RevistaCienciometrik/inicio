@@ -92,7 +92,7 @@ class MetricasPanel extends HTMLElement {
                 }
                 @media screen and (max-width: 768px) {
                     .metrics-panel-container {
-                        width: 100%;
+                        width: 90%;
                         position: static;
                         margin-bottom: 20px;
                         margin-right: 0; /* <-- AGREGADO: Resetear margen en móviles */
