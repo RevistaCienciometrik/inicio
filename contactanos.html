@@ -104,7 +104,7 @@
         // Importa las funciones específicas para Firestore.
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         
-        // Aquí está la configuración de tu proyecto de Firebase.
+        // Aquí está la configuración del proyecto de Firebase.
         const firebaseConfig = {
             apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
             authDomain: "cienciometrik-3c8e7.firebaseapp.com",
@@ -114,16 +114,16 @@
             appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
         };
         
-        // Inicializa Firebase.
+        // Inicializano Firebase.
         const app = initializeApp(firebaseConfig);
-        // Obtén una referencia a la base de datos de Firestore.
+        // Obteniendo una referencia a la base de datos de Firestore.
         const db = getFirestore(app);
         
         // Esperar a que el DOM esté completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
-            // Selecciona el formulario de contacto.
+            // Seleccionar el formulario de contacto.
             const formulario = document.getElementById('formulario-contacto');
-            // Selecciona el div donde mostraremos el mensaje de éxito o error.
+            // Seleccionar el div donde mostraremos el mensaje de éxito o error.
             const mensajeContacto = document.getElementById('mensaje-contacto');
             
             // Verificar que el formulario existe
@@ -164,7 +164,7 @@
                     mensajeContacto.style.color = 'green'; // Mensaje en verde para éxito
                     formulario.reset(); // Limpia los campos del formulario.
                     
-                    // Opcional: Si quieres una "ventana emergente" de alerta real (menos bonita, pero efectiva):
+                    // Opcional: Si se quiere una "ventana emergente" de alerta real (menos bonita, pero efectiva):
                     // alert('Tu mensaje de contacto ha sido enviado. Pronto recibirás respuesta en el correo electrónico registrado en el formulario. Att: Equipo Cienciométrik - Sena.');
                 } catch (error) {
                     // Si hay un error, muestra un mensaje de error.
@@ -172,7 +172,7 @@
                     mensajeContacto.textContent = 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.';
                     mensajeContacto.style.color = 'red'; // Mensaje en rojo para error.
                     
-                    // Opcional: Si quiero una "ventana emergente" de alerta real para errores:
+                    // Opcional: Si se quiere una "ventana emergente" de alerta real para errores:
                     // alert('Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.');
                 }
             });

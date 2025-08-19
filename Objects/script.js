@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (formularioPostulacion) {
         formularioPostulacion.addEventListener('submit', function(event) {
             event.preventDefault();
-            // Aquí puedes añadir la lógica para enviar los datos del formulario
+            // Aquí se puede añadir la lógica para enviar los datos del formulario
             // a un servidor o realizar alguna otra acción.
             // Por ahora, mostraremos un mensaje simulado.
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mensajePostulacion.className = 'mensaje exito';
             formularioPostulacion.reset();
 
-            // Simulación de error (puedes comentar esto)
+            // Simulación de error (se puede comentar esto)
             // mensajePostulacion.textContent = 'Hubo un error al enviar la postulación.';
             // mensajePostulacion.className = 'mensaje error';
         });

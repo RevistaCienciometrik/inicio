@@ -272,14 +272,11 @@ class MiHeader extends HTMLElement {
     }
 
     setupEventListeners() {
-        // Asegúrate de que el DOM ya ha sido renderizado en el shadow DOM
+
         this.shadowRoot.querySelector('.hamburger').addEventListener('click', () => {
             this.toggleMenu();
         });
 
-        // Opcional: Cerrar el menú si se hace clic fuera de él (solo para móviles/tablets)
-        // Esto es un poco más complejo con Shadow DOM, pero se puede añadir si es necesario.
-        // Por ahora, se cierra al hacer clic en un enlace o en el botón de hamburguesa.
         this.shadowRoot.querySelectorAll('.menu a').forEach(link => {
             link.addEventListener('click', () => {
                 // Solo cerrar el menú si está abierto (para evitar parpadeo en desktop)

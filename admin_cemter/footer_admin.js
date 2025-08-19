@@ -22,7 +22,7 @@ class MiFooter extends HTMLElement {
           }
         </style>
         <footer>
-          <p>&copy; 2024 Revista Cienciometrik. Todos los derechos reservados.</p>
+          <p>&copy; 2025 Revista Cienciometrik. Todos los derechos reservados.</p>
         </footer>
         
       `;

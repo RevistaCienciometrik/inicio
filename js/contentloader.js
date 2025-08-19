@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Sección de Línea de Tiempo ---
         // Aquí no hay título con ID, solo la UL tiene ID (lo ideal sería que el H2 también tuviera ID)
-        // Puedes agregar un ID al H2 si quieres que sea editable
-        // Si no hay un ID específico para el H2, podrías editarlo por su contenido o por su relación con el ul,
+        // Se puede agregar un ID al H2 si se quiere que sea editable
+        // Si no hay un ID específico para el H2, se podría editarlo por su contenido o por su relación con el ul,
         // pero es menos robusto. Para este ejemplo, lo dejaremos sin edición si no tiene ID.
 
         // Contenido de la lista de Línea de Tiempo (se reemplaza el HTML completo)
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // Contenido de la lista de Líneas de la revista (se reemplaza el HTML completo)
         if (editableContent.adminLinesListEnfoque) {
-            // Asumiendo que la UL dentro de #enfoque es la que quieres editar.
+            // Asumiendo que la UL dentro de #enfoque es la que se quiere editar.
             // Es buena idea darle un ID único si hay más ULs en esa sección.
             const element = document.querySelector('#enfoque ul');
             if (element) element.innerHTML = editableContent.adminLinesListEnfoque;
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const element = document.querySelector('#nav_panel h3'); // Selecciona el h3 dentro del aside con ID nav_panel
             if (element) element.textContent = editableContent.adminNavPanelTitle;
         }
-        // Para los enlaces de navegación, si quieres editarlos, necesitarías IDs individuales para cada <a>
+        // Para los enlaces de navegación, si se quiere editarlos, necesitaría IDs individuales para cada <a>
         // o un enfoque que maneje la UL completa (como en las listas de contenido).
         // Por ahora, se asume que los enlaces del panel de navegación son estáticos o se gestionan de otra manera.
     }

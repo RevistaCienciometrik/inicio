@@ -140,7 +140,7 @@ body {
 /* ------------------------------------------------------------------------------------------------------------- */
 /* --- Estilo para la Sección de banner Principal --- */
 .contact-hero {
-    background: linear-gradient(135deg, #008394 0%, #3FCED4 100%); /* Degradado de tus azules/turquesas */
+    background: linear-gradient(135deg, #008394 0%, #3FCED4 100%); /* Degradado de loss azules/turquesas */
     color: white;
     text-align: center;
     padding: 50px 20px;
@@ -646,7 +646,7 @@ body {
     height: auto; /* Mantiene la proporción de la imagen */
     display: block; /* Elimina espacio extra debajo de la imagen si lo hubiera */
     border-radius: 8px; /* Bordes redondeados para la imagen */
-    margin: 0 auto; /* Para centrar la imagen horizontalmente, simplemente agrega la propiedad margin: 0 auto;  Esto funciona porque al tener display: block, la imagen se comporta como un elemento de bloque y los márgenes automáticos la centran en su contenedor. */
+    margin: 0 auto; /* Para centrar la imagen horizontalmente, simplemente agregar la propiedad margin: 0 auto;  Esto funciona porque al tener display: block, la imagen se comporta como un elemento de bloque y los márgenes automáticos la centran en su contenedor. */
     
     /* Aplicar animación de pulsación */
     animation: pulse 2s infinite ease-in-out alternate, /* nombre duración repetición tipo dirección */
@@ -705,7 +705,7 @@ body {
     flex-direction: column; /* Apila los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */
     margin-top: 10px; /* Espacio superior para separarlo de la imagen */
-    /* Puedes ajustar el ancho máximo si el botón es muy ancho */
+    /* Se puede ajustar el ancho máximo si el botón es muy ancho */
     /* max-width: 200px; */ 
     /* margin-left: auto; */
     /* margin-right: auto; */
@@ -738,7 +738,7 @@ body {
 /* Estilos para el número del contador dentro de la métrica */
 .index-download-section .download-count {
     font-weight: bold; /* Hace el número más visible */
-    color: #007bff; /* Podrías usar un color que destaque, como el del botón */
+    color: #007bff; /* Se podría usar un color que destaque, como el del botón */
 }
 
 /* Si el botón .button_download ya tiene estilos que lo centran, puedes omitir .index-download-section */

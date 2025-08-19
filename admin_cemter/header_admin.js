@@ -417,7 +417,7 @@ class MiHeader extends HTMLElement {
     }
 
     setupEventListeners() {
-        // Asegúrate de que el DOM ya ha sido renderizado en el shadow DOM
+        // Asegurar de que el DOM ya ha sido renderizado en el shadow DOM
         const hamburgerButton = this.shadowRoot.querySelector('.hamburger');
         if (hamburgerButton) { // Verificar si el botón existe antes de añadir el listener
             hamburgerButton.addEventListener('click', () => {

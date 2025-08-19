@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Sección: Línea de Tiempo ---
         // Nota: El H2 de Línea de Tiempo en index.html no tiene ID. He añadido uno genérico en el map,
-        // pero necesitarías añadir `id="titulo_linea_tiempo"` en el H2 de index.html para que esto funcione directamente.
+        // pero se necesitaría añadir `id="titulo_linea_tiempo"` en el H2 de index.html para que esto funcione directamente.
         // Si no, se usará el selector CSS 'linea-tiempo h2' en contentLoader.js, lo cual es menos específico.
         'adminLineaTiempoTitulo': { type: 'text', targetId: 'linea-tiempo h2', defaultValue: 'Línea de Tiempo de la Revista', isSelector: true }, // isSelector: true para indicar que targetId es un selector CSS
         'adminLineaTiempoList': {

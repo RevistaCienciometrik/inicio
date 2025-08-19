@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateDisplayCounts(); // Actualizar la visualización inmediatamente
             }
 
-            // Opcional: Si quieres que el enlace NO redirija automáticamente para poder hacer una petición AJAX antes,
-            // descomenta la siguiente línea y maneja la descarga con JavaScript.
+            // Opcional: Si se quiere que el enlace NO redirija automáticamente para poder hacer una petición AJAX ( (Asynchronous JavaScript and XML) es una técnica que permite a las aplicaciones web enviar y recibir datos de un servidor de forma asíncrona, sin necesidad de recargar la página completa.) antes,
+            // descomentar la siguiente línea y maneja la descarga con JavaScript.
             // event.preventDefault();
             // window.location.href = event.currentTarget.href; // Redirige manualmente después de actualizar el contador
         });
