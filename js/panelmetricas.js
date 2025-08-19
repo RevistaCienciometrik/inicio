@@ -21,10 +21,27 @@ class MetricasPanel extends HTMLElement {
                     position: sticky;
                     top: calc(var(--header-height, 0px) + -80px);
                     height: fit-content;
+                    max-height: calc(100vh - 100px);
+                    overflow-y: auto; /* Scroll individual para el panel */
                     z-index: 10;
                     transform: translateZ(0);
                     backdrop-filter: blur(5px); /* Efecto de desenfoque para mayor elegancia */
                     margin-right: -20px; /* <-- AGREGADO: Para pegar el panel al borde derecho de la wen */
+                }
+                /* Estilo para la barra de scroll */
+                .metrics-panel-container::-webkit-scrollbar {
+                    width: 8px;
+                }
+                .metrics-panel-container::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.2);
+                    border-radius: 4px;
+                }
+                .metrics-panel-container::-webkit-scrollbar-thumb {
+                    background: #3FCED4;
+                    border-radius: 4px;
+                }
+                .metrics-panel-container::-webkit-scrollbar-thumb:hover {
+                    background: #3FCED4;
                 }
                 .metrics-panel-container h3 {
                     text-align: center;
@@ -80,6 +97,8 @@ class MetricasPanel extends HTMLElement {
                         margin-bottom: 20px;
                         margin-right: 0; /* <-- AGREGADO: Resetear margen en móviles */
                         order: -1;
+                        max-height: none; /* En móviles no limitamos la altura */
+                        overflow-y: visible; /* En móviles no hay scroll */
                     }
                 }
                 .navigation-buttons {
@@ -138,12 +157,16 @@ class MetricasPanel extends HTMLElement {
                     <p class="metric-value" id="total-revista-downloads-sidebar">0</p>
                 </div>
                 <div class="metric-item">
-                    <h4>Descargas Cartillas Inclusión:</h4>
-                    <p class="metric-value" id="inclusi-downloads-sidebar">0</p>
+                    <h4>Descargas de Libros:</h4>
+                    <p class="metric-value" id="total-libros-downloads-sidebar">0</p>
                 </div>
                 <div class="metric-item">
-                    <h4>Descargas Cartillas Servitización:</h4>
-                    <p class="metric-value" id="servitizacion-downloads-sidebar">0</p>
+                    <h4>Descargas de Cartillas Digitales:</h4>
+                    <p class="metric-value" id="total-cartillas-downloads-sidebar">0</p>
+                </div>
+                <div class="metric-item">
+                    <h4>Descargas de Informes:</h4>
+                    <p class="metric-value" id="total-informes-downloads-sidebar">0</p>
                 </div>
                 <div class="metric-item">
                     <h4>Tiempo de Carga:</h4>
@@ -157,6 +180,7 @@ class MetricasPanel extends HTMLElement {
         `;
         this.loadMetrics();
         this.setupNavigationButtons();
+        this.setupDownloadTracking();
     }
     loadMetrics() {
         const webVisitsElement = this.shadowRoot.getElementById('web-visits');
@@ -178,10 +202,15 @@ class MetricasPanel extends HTMLElement {
         }
         const totalRevistaDownloads = parseInt(localStorage.getItem('total_revista_downloads') || '0');
         this.updateMetric('total-revista-downloads-sidebar', totalRevistaDownloads);
-        const totalInclusionDownloads = parseInt(localStorage.getItem('total_inclusion_downloads') || '0');
-        this.updateMetric('inclusi-downloads-sidebar', totalInclusionDownloads);
-        const totalServitizacionDownloads = parseInt(localStorage.getItem('total_servitizacion_downloads') || '0');
-        this.updateMetric('servitizacion-downloads-sidebar', totalServitizacionDownloads);
+        
+        const totalLibrosDownloads = parseInt(localStorage.getItem('total_libros_downloads') || '0');
+        this.updateMetric('total-libros-downloads-sidebar', totalLibrosDownloads);
+        
+        const totalCartillasDownloads = parseInt(localStorage.getItem('total_cartillas_downloads') || '0');
+        this.updateMetric('total-cartillas-downloads-sidebar', totalCartillasDownloads);
+        
+        const totalInformesDownloads = parseInt(localStorage.getItem('total_informes_downloads') || '0');
+        this.updateMetric('total-informes-downloads-sidebar', totalInformesDownloads);
     }
     setupNavigationButtons() {
         const btnInicio = this.shadowRoot.getElementById('btn-inicio');
@@ -203,6 +232,84 @@ class MetricasPanel extends HTMLElement {
                 this.resetAllCounters();
             });
         }
+    }
+    
+    setupDownloadTracking() {
+        // Esperar a que el DOM esté completamente cargado
+        const setupTracking = () => {
+            // Configurar el seguimiento de descargas para todos los enlaces con data-volume-id
+            const downloadLinks = document.querySelectorAll('a[data-volume-id]');
+            
+            downloadLinks.forEach(link => {
+                // Eliminar event listeners existentes para evitar duplicados
+                link.removeEventListener('click', this.handleDownloadClick);
+                // Agregar event listener
+                link.addEventListener('click', this.handleDownloadClick.bind(this));
+            });
+            
+            console.log(`Seguimiento de descargas configurado para ${downloadLinks.length} enlaces`);
+        };
+        
+        // Ejecutar inmediatamente si el DOM ya está cargado
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupTracking);
+        } else {
+            setupTracking();
+        }
+    }
+    
+    handleDownloadClick(event) {
+        const link = event.currentTarget;
+        const volumeId = link.getAttribute('data-volume-id');
+        
+        if (volumeId) {
+            console.log(`Clic detectado en enlace con volume-id: ${volumeId}`);
+            
+            // Determinar la categoría según el ID del volumen
+            let category = '';
+            let localStorageKey = '';
+            let sidebarElementId = '';
+            
+            if (volumeId.startsWith('volumen-')) {
+                category = 'revista';
+                localStorageKey = 'total_revista_downloads';
+                sidebarElementId = 'total-revista-downloads-sidebar';
+            } else if (volumeId.startsWith('libro-')) {
+                category = 'libro';
+                localStorageKey = 'total_libros_downloads';
+                sidebarElementId = 'total-libros-downloads-sidebar';
+            } else if (volumeId.startsWith('cartilla-inclusion-') || volumeId.startsWith('cartilla-servitizacion-')) {
+                category = 'cartilla';
+                localStorageKey = 'total_cartillas_downloads';
+                sidebarElementId = 'total-cartillas-downloads-sidebar';
+            } else if (volumeId.startsWith('informe-')) {
+                category = 'informe';
+                localStorageKey = 'total_informes_downloads';
+                sidebarElementId = 'total-informes-downloads-sidebar';
+            }
+            
+            // Actualizar el contador correspondiente
+            if (category && localStorageKey && sidebarElementId) {
+                console.log(`Categoría detectada: ${category}, clave: ${localStorageKey}`);
+                
+                // Obtener el valor actual
+                const currentCount = parseInt(localStorage.getItem(localStorageKey) || '0');
+                const newCount = currentCount + 1;
+                
+                // Guardar en localStorage
+                localStorage.setItem(localStorageKey, newCount.toString());
+                
+                // Actualizar la visualización en el panel
+                this.updateMetric(sidebarElementId, newCount);
+                
+                console.log(`Descarga registrada en categoría ${category}: ${newCount}`);
+            } else {
+                console.error(`No se pudo determinar la categoría para el volume-id: ${volumeId}`);
+            }
+        }
+        
+        // No prevenimos el comportamiento por defecto para permitir la descarga normal
+        // No necesitamos simular el clic nuevamente
     }
     
     // Método para permitir que otros scripts actualicen las métricas
@@ -232,11 +339,14 @@ class MetricasPanel extends HTMLElement {
             localStorage.setItem('total_revista_downloads', '0');
             this.updateMetric('total-revista-downloads-sidebar', 0);
             
-            localStorage.setItem('total_inclusion_downloads', '0');
-            this.updateMetric('inclusi-downloads-sidebar', 0);
+            localStorage.setItem('total_libros_downloads', '0');
+            this.updateMetric('total-libros-downloads-sidebar', 0);
             
-            localStorage.setItem('total_servitizacion_downloads', '0');
-            this.updateMetric('servitizacion-downloads-sidebar', 0);
+            localStorage.setItem('total_cartillas_downloads', '0');
+            this.updateMetric('total-cartillas-downloads-sidebar', 0);
+            
+            localStorage.setItem('total_informes_downloads', '0');
+            this.updateMetric('total-informes-downloads-sidebar', 0);
             
             // Reiniciar contadores individuales
             const downloadCounters = document.querySelectorAll('.download-count');
