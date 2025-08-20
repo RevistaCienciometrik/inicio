@@ -1,34 +1,8 @@
-// js/panelmetricas.js - FIREBASE
+// js/panelmetricas.js
 class MetricasPanel extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        
-        // Verificar si Firebase está disponible antes de inicializar
-        if (typeof firebase === 'undefined') {
-            console.error("Firebase SDK no está cargado. Asegúrate de incluir los scripts de Firebase antes de este componente.");
-            this.render();
-            return;
-        }
-        
-        // Configuración para la conexión a la base de datos de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
-            authDomain: "cienciometrik-3c8e7.firebaseapp.com",
-            projectId: "cienciometrik-3c8e7",
-            storageBucket: "cienciometrik-3c8e7.firebasestorage.app",
-            messagingSenderId: "60232446009",
-            appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
-        };
-        
-        // Inicializar Firebase si no está inicializado
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        
-        this.db = firebase.firestore();
-        this.metricsRef = this.db.collection('metrics').doc('global_metrics');
-        
         this.render();
     }
     render() {
@@ -37,42 +11,38 @@ class MetricasPanel extends HTMLElement {
                 /* --- ESTILOS PARA EL PANEL DE MÉTRICAS --- */
                 .metrics-panel-container {
                     width: 220px;
-                    background-color: rgba(15, 30, 60, 0.5);
-                    border: 4px solid #3FCED4;
+                    background-color: rgba(15, 30, 60, 0.5); /* Azul oscuro más transparente */
+                    border: 4px solid #3FCED4; /* Borde más grande y elegante en color cian */
                     color: whitesmoke;
                     padding: 15px 12px;
-                    border-radius: 12px;
-                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(63, 206, 212, 0.2);
+                    border-radius: 12px; /* Bordes más redondeados */
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(63, 206, 212, 0.2); /* Sombra más elegante con brillo cian */
                     flex-shrink: 0;
                     position: sticky;
                     top: calc(var(--header-height, 0px) + -80px);
                     height: fit-content;
                     max-height: calc(100vh - 100px);
-                    overflow-y: auto;
+                    overflow-y: auto; /* Scroll individual para el panel */
                     z-index: 10;
                     transform: translateZ(0);
-                    backdrop-filter: blur(5px);
-                    margin-right: -20px;
+                    backdrop-filter: blur(5px); /* Efecto de desenfoque para mayor elegancia */
+                    margin-right: -20px; /* <-- AGREGADO: Para pegar el panel al borde derecho de la wen */
                 }
-                
+                /* Estilo para la barra de scroll */
                 .metrics-panel-container::-webkit-scrollbar {
                     width: 8px;
                 }
-                
                 .metrics-panel-container::-webkit-scrollbar-track {
                     background: rgba(0, 0, 0, 0.2);
                     border-radius: 4px;
                 }
-                
                 .metrics-panel-container::-webkit-scrollbar-thumb {
                     background: #3FCED4;
                     border-radius: 4px;
                 }
-                
                 .metrics-panel-container::-webkit-scrollbar-thumb:hover {
                     background: #3FCED4;
                 }
-                
                 .metrics-panel-container h3 {
                     text-align: center;
                     margin-bottom: 15px;
@@ -82,7 +52,6 @@ class MetricasPanel extends HTMLElement {
                     position: relative;
                     padding-bottom: 8px;
                 }
-                
                 .metrics-panel-container h3::after {
                     content: '';
                     position: absolute;
@@ -94,30 +63,26 @@ class MetricasPanel extends HTMLElement {
                     background-color: #3FCED4;
                     border-radius: 2px;
                 }
-                
                 .metric-item {
-                    background-color: rgba(255, 255, 255, 0.08);
+                    background-color: rgba(255, 255, 255, 0.08); /* Fondo más transparente */
                     border-radius: 8px;
                     padding: 6px 8px;
                     margin-bottom: 8px;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(63, 206, 212, 0.1);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(63, 206, 212, 0.1); /* Sombra interna sutil */
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    border: 1px solid rgba(63, 206, 212, 0.2);
+                    border: 1px solid rgba(63, 206, 212, 0.2); /* Borde sutil en cian */
                 }
-                
                 .metric-item:hover {
                     transform: translateY(-3px);
                     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(63, 206, 212, 0.2);
                     border-color: rgba(63, 206, 212, 0.4);
                 }
-                
                 .metric-item h4 {
                     color: #3FCED4;
                     margin-bottom: 3px;
                     font-size: 0.95em;
                     font-weight: 600;
                 }
-                
                 .metric-item .metric-value {
                     color: #fff;
                     font-size: 1.2em;
@@ -125,19 +90,17 @@ class MetricasPanel extends HTMLElement {
                     text-align: center;
                     margin-top: 2px;
                 }
-                
                 @media screen and (max-width: 768px) {
                     .metrics-panel-container {
                         width: 90%;
                         position: static;
                         margin-bottom: 20px;
-                        margin-right: 0;
+                        margin-right: 0; /* <-- AGREGADO: Resetear margen en móviles */
                         order: -1;
-                        max-height: none;
-                        overflow-y: visible;
+                        max-height: none; /* En móviles no limitamos la altura */
+                        overflow-y: visible; /* En móviles no hay scroll */
                     }
                 }
-                
                 .navigation-buttons {
                     margin-top: 15px;
                     padding-top: 12px;
@@ -146,12 +109,11 @@ class MetricasPanel extends HTMLElement {
                     flex-direction: column;
                     gap: 8px;
                 }
-                
                 .nav-button {
                     background-color: rgba(255, 255, 255, 0.1);
                     color: whitesmoke;
                     padding: 8px 10px;
-                    border: 1px solid rgba(63, 206, 212, 0.3);
+                    border: 1px solid rgba(63, 206, 212, 0.3); /* Borde sutil en cian */
                     border-radius: 6px;
                     cursor: pointer;
                     font-size: 0.95em;
@@ -159,24 +121,20 @@ class MetricasPanel extends HTMLElement {
                     text-align: center;
                     transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
                 }
-                
                 .nav-button:hover {
                     background-color: rgba(63, 206, 212, 0.2);
                     transform: translateY(-2px);
                     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
                     border-color: #3FCED4;
                 }
-                
                 .nav-button:active {
                     transform: translateY(0);
                 }
-                
                 .reset-button {
                     background-color: rgba(255, 87, 87, 0.6);
                     border-color: rgba(255, 87, 87, 0.4);
                     margin-top: 5px;
                 }
-                
                 .reset-button:hover {
                     background-color: rgba(255, 87, 87, 0.8);
                     border-color: rgba(255, 87, 87, 0.6);
@@ -184,6 +142,7 @@ class MetricasPanel extends HTMLElement {
             </style>
             <div class="metrics-panel-container" id="nav_panel">
                 <h3>Ciencio/métricas</h3>
+                
                 <div class="navigation-buttons">
                     <button class="nav-button" id="btn-fin">Top Down</button>
                     <br>
@@ -192,6 +151,7 @@ class MetricasPanel extends HTMLElement {
                     <h4>Visitas a la Web:</h4>
                     <p class="metric-value" id="web-visits">Cargando...</p>
                 </div>
+                
                 <div class="metric-item">
                     <h4>Descargas de Revistas:</h4>
                     <p class="metric-value" id="total-revista-downloads-sidebar">0</p>
@@ -218,60 +178,16 @@ class MetricasPanel extends HTMLElement {
                 </div>
             </div>
         `;
-        
-        // Solo cargar métricas si Firebase está disponible
-        if (typeof firebase !== 'undefined') {
-            this.loadMetrics();
-            this.setupNavigationButtons();
-            this.setupDownloadTracking();
-            
-            // Establecer un listener para actualizaciones en tiempo real
-            this.setupRealtimeUpdates();
-        } else {
-            // Mostrar mensaje de error en el panel si Firebase no está disponible
-            this.updateMetric('web-visits', 'Error: Firebase no disponible');
-            this.updateMetric('total-revista-downloads-sidebar', 'Error');
-            this.updateMetric('total-libros-downloads-sidebar', 'Error');
-            this.updateMetric('total-cartillas-downloads-sidebar', 'Error');
-            this.updateMetric('total-informes-downloads-sidebar', 'Error');
-        }
+        this.loadMetrics();
+        this.setupNavigationButtons();
+        this.setupDownloadTracking();
     }
-    
-    // Cargar métricas desde Firestore
-    async loadMetrics() {
-        try {
-            const doc = await this.metricsRef.get();
-            
-            if (doc.exists) {
-                const data = doc.data();
-                this.updateMetric('web-visits', data.webVisits || 0);
-                this.updateMetric('total-revista-downloads-sidebar', data.totalRevistaDownloads || 0);
-                this.updateMetric('total-libros-downloads-sidebar', data.totalLibrosDownloads || 0);
-                this.updateMetric('total-cartillas-downloads-sidebar', data.totalCartillasDownloads || 0);
-                this.updateMetric('total-informes-downloads-sidebar', data.totalInformesDownloads || 0);
-            } else {
-                // Crear documento inicial si no existe
-                await this.metricsRef.set({
-                    webVisits: 0,
-                    totalRevistaDownloads: 0,
-                    totalLibrosDownloads: 0,
-                    totalCartillasDownloads: 0,
-                    totalInformesDownloads: 0
-                });
-                
-                // Cargar valores iniciales
-                this.loadMetrics();
-            }
-        } catch (error) {
-            console.error("Error al cargar métricas:", error);
-            this.updateMetric('web-visits', 'Error');
-            this.updateMetric('total-revista-downloads-sidebar', 'Error');
-            this.updateMetric('total-libros-downloads-sidebar', 'Error');
-            this.updateMetric('total-cartillas-downloads-sidebar', 'Error');
-            this.updateMetric('total-informes-downloads-sidebar', 'Error');
+    loadMetrics() {
+        const webVisitsElement = this.shadowRoot.getElementById('web-visits');
+        if (webVisitsElement) {
+            const visits = parseInt(localStorage.getItem('web_visits') || '0');
+            webVisitsElement.textContent = visits.toLocaleString();
         }
-        
-        // El tiempo de carga sigue siendo local
         const loadingTimeElement = this.shadowRoot.getElementById('loading-time');
         if (loadingTimeElement) {
             requestAnimationFrame(() => {
@@ -284,24 +200,18 @@ class MetricasPanel extends HTMLElement {
                 }
             });
         }
+        const totalRevistaDownloads = parseInt(localStorage.getItem('total_revista_downloads') || '0');
+        this.updateMetric('total-revista-downloads-sidebar', totalRevistaDownloads);
+        
+        const totalLibrosDownloads = parseInt(localStorage.getItem('total_libros_downloads') || '0');
+        this.updateMetric('total-libros-downloads-sidebar', totalLibrosDownloads);
+        
+        const totalCartillasDownloads = parseInt(localStorage.getItem('total_cartillas_downloads') || '0');
+        this.updateMetric('total-cartillas-downloads-sidebar', totalCartillasDownloads);
+        
+        const totalInformesDownloads = parseInt(localStorage.getItem('total_informes_downloads') || '0');
+        this.updateMetric('total-informes-downloads-sidebar', totalInformesDownloads);
     }
-    
-    // Configurar actualizaciones en tiempo real
-    setupRealtimeUpdates() {
-        this.metricsRef.onSnapshot(doc => {
-            if (doc.exists) {
-                const data = doc.data();
-                this.updateMetric('web-visits', data.webVisits || 0);
-                this.updateMetric('total-revista-downloads-sidebar', data.totalRevistaDownloads || 0);
-                this.updateMetric('total-libros-downloads-sidebar', data.totalLibrosDownloads || 0);
-                this.updateMetric('total-cartillas-downloads-sidebar', data.totalCartillasDownloads || 0);
-                this.updateMetric('total-informes-downloads-sidebar', data.totalInformesDownloads || 0);
-            }
-        }, error => {
-            console.error("Error en actualización en tiempo real:", error);
-        });
-    }
-    
     setupNavigationButtons() {
         const btnInicio = this.shadowRoot.getElementById('btn-inicio');
         const btnFin = this.shadowRoot.getElementById('btn-fin');
@@ -312,13 +222,11 @@ class MetricasPanel extends HTMLElement {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
-        
         if (btnFin) {
             btnFin.addEventListener('click', () => {
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             });
         }
-        
         if (btnReset) {
             btnReset.addEventListener('click', () => {
                 this.resetAllCounters();
@@ -327,17 +235,22 @@ class MetricasPanel extends HTMLElement {
     }
     
     setupDownloadTracking() {
+        // Esperar a que el DOM esté completamente cargado
         const setupTracking = () => {
+            // Configurar el seguimiento de descargas para todos los enlaces con data-volume-id
             const downloadLinks = document.querySelectorAll('a[data-volume-id]');
+            
             downloadLinks.forEach(link => {
                 // Eliminar event listeners existentes para evitar duplicados
                 link.removeEventListener('click', this.handleDownloadClick);
                 // Agregar event listener
                 link.addEventListener('click', this.handleDownloadClick.bind(this));
             });
+            
             console.log(`Seguimiento de descargas configurado para ${downloadLinks.length} enlaces`);
         };
         
+        // Ejecutar inmediatamente si el DOM ya está cargado
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', setupTracking);
         } else {
@@ -345,62 +258,61 @@ class MetricasPanel extends HTMLElement {
         }
     }
     
-    async handleDownloadClick(event) {
+    handleDownloadClick(event) {
         const link = event.currentTarget;
         const volumeId = link.getAttribute('data-volume-id');
         
         if (volumeId) {
             console.log(`Clic detectado en enlace con volume-id: ${volumeId}`);
             
-            let field = '';
-            // Corregido para detectar tanto "volumen-" como "sena-volumen-"
-            if (volumeId.startsWith('volumen-') || volumeId.startsWith('sena-volumen-')) {
-                field = 'totalRevistaDownloads';
+            // Determinar la categoría según el ID del volumen
+            let category = '';
+            let localStorageKey = '';
+            let sidebarElementId = '';
+            
+            if (volumeId.startsWith('volumen-')) {
+                category = 'revista';
+                localStorageKey = 'total_revista_downloads';
+                sidebarElementId = 'total-revista-downloads-sidebar';
             } else if (volumeId.startsWith('libro-')) {
-                field = 'totalLibrosDownloads';
+                category = 'libro';
+                localStorageKey = 'total_libros_downloads';
+                sidebarElementId = 'total-libros-downloads-sidebar';
             } else if (volumeId.startsWith('cartilla-inclusion-') || volumeId.startsWith('cartilla-servitizacion-')) {
-                field = 'totalCartillasDownloads';
+                category = 'cartilla';
+                localStorageKey = 'total_cartillas_downloads';
+                sidebarElementId = 'total-cartillas-downloads-sidebar';
             } else if (volumeId.startsWith('informe-')) {
-                field = 'totalInformesDownloads';
+                category = 'informe';
+                localStorageKey = 'total_informes_downloads';
+                sidebarElementId = 'total-informes-downloads-sidebar';
             }
             
-            if (field) {
-                try {
-                    // Usar transacción para actualizar de forma segura
-                    await this.db.runTransaction(async (transaction) => {
-                        const doc = await transaction.get(this.metricsRef);
-                        
-                        if (!doc.exists) {
-                            // Si no existe, crearlo con valores iniciales
-                            transaction.set(this.metricsRef, {
-                                webVisits: 0,
-                                totalRevistaDownloads: 0,
-                                totalLibrosDownloads: 0,
-                                totalCartillasDownloads: 0,
-                                totalInformesDownloads: 0
-                            });
-                        }
-                        
-                        // Actualizar el campo específico
-                        const currentValue = doc.exists ? (doc.data()[field] || 0) : 0;
-                        transaction.update(this.metricsRef, {
-                            [field]: currentValue + 1
-                        });
-                        
-                        return currentValue + 1;
-                    });
-                    
-                    // No necesitamos llamar a loadMetrics() porque tenemos actualizaciones en tiempo real
-                    console.log(`Contador de ${field} actualizado correctamente`);
-                } catch (error) {
-                    console.error("Error al actualizar contador de descargas:", error);
-                }
+            // Actualizar el contador correspondiente
+            if (category && localStorageKey && sidebarElementId) {
+                console.log(`Categoría detectada: ${category}, clave: ${localStorageKey}`);
+                
+                // Obtener el valor actual
+                const currentCount = parseInt(localStorage.getItem(localStorageKey) || '0');
+                const newCount = currentCount + 1;
+                
+                // Guardar en localStorage
+                localStorage.setItem(localStorageKey, newCount.toString());
+                
+                // Actualizar la visualización en el panel
+                this.updateMetric(sidebarElementId, newCount);
+                
+                console.log(`Descarga registrada en categoría ${category}: ${newCount}`);
             } else {
                 console.error(`No se pudo determinar la categoría para el volume-id: ${volumeId}`);
             }
         }
+        
+        // No prevenimos el comportamiento por defecto para permitir la descarga normal
+        // No necesitamos simular el clic nuevamente
     }
     
+    // Método para permitir que otros scripts actualicen las métricas
     updateMetric(id, count) {
         const metricElement = this.shadowRoot.getElementById(id);
         if (metricElement) {
@@ -408,52 +320,67 @@ class MetricasPanel extends HTMLElement {
         }
     }
     
-    async resetAllCounters() {
-        if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores? Esta acción no se puede deshacer.')) {
-            try {
-                await this.metricsRef.update({
-                    webVisits: 0,
-                    totalRevistaDownloads: 0,
-                    totalLibrosDownloads: 0,
-                    totalCartillasDownloads: 0,
-                    totalInformesDownloads: 0
-                });
-                
-                // No necesitamos llamar a loadMetrics() porque tenemos actualizaciones en tiempo real
-                
-                // Mostrar notificación
-                this.showNotification('Todos los contadores han sido reiniciados.');
-            } catch (error) {
-                console.error("Error al reiniciar contadores:", error);
-                this.showNotification('Error al reiniciar contadores.', 'error');
-            }
-        }
+    // Método para resetear el contador de visitas desde el código
+    resetWebVisits() {
+        localStorage.setItem('web_visits', '0');
+        this.updateMetric('web-visits', 0);
+        console.log("Contador de visitas a la web reseteado a 0.");
     }
     
-    showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.right = '20px';
-        notification.style.backgroundColor = type === 'success' ? 'rgba(76, 175, 80, 0.9)' : 'rgba(244, 67, 54, 0.9)';
-        notification.style.color = 'white';
-        notification.style.padding = '15px';
-        notification.style.borderRadius = '5px';
-        notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        notification.style.zIndex = '1000';
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transition = 'opacity 0.5s';
+    // Método para reiniciar todos los contadores
+    resetAllCounters() {
+        // Confirmar antes de reiniciar
+        if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores? Esta acción no se puede deshacer.')) {
+            // Reiniciar contador de visitas
+            localStorage.setItem('web_visits', '0');
+            this.updateMetric('web-visits', 0);
+            
+            // Reiniciar contadores de descargas
+            localStorage.setItem('total_revista_downloads', '0');
+            this.updateMetric('total-revista-downloads-sidebar', 0);
+            
+            localStorage.setItem('total_libros_downloads', '0');
+            this.updateMetric('total-libros-downloads-sidebar', 0);
+            
+            localStorage.setItem('total_cartillas_downloads', '0');
+            this.updateMetric('total-cartillas-downloads-sidebar', 0);
+            
+            localStorage.setItem('total_informes_downloads', '0');
+            this.updateMetric('total-informes-downloads-sidebar', 0);
+            
+            // Reiniciar contadores individuales
+            const downloadCounters = document.querySelectorAll('.download-count');
+            downloadCounters.forEach(counter => {
+                const volumeId = counter.id.replace('downloads-', '');
+                localStorage.setItem(`downloads-${volumeId}`, '0');
+                counter.textContent = '0';
+            });
+            
+            console.log("Todos los contadores han sido reiniciados a 0.");
+            
+            // Opcional: mostrar una notificación
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'rgba(76, 175, 80, 0.9)';
+            notification.style.color = 'white';
+            notification.style.padding = '15px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            notification.style.zIndex = '1000';
+            notification.textContent = 'Todos los contadores han sido reiniciados.';
+            document.body.appendChild(notification);
+            
+            // Eliminar la notificación después de 3 segundos
             setTimeout(() => {
-                if (document.body.contains(notification)) {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
                     document.body.removeChild(notification);
-                }
-            }, 500);
-        }, 3000);
+                }, 500);
+            }, 3000);
+        }
     }
 }
-
 customElements.define('metricas-panel', MetricasPanel);

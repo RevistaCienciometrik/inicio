@@ -399,12 +399,17 @@
     <div class="reset-individual-container">
         <button id="reset-individual-counters" class="reset-button">Reiniciar Contadores Individuales</button>
     </div>
+
+    <!-- Firebase SDK para métricas base de datos en firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     
+    <script src="js/panelmetricas.js"></script>
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
-    <script src="js/panelmetricas.js"></script>
+    
     
     <!-- Script para inicializar y manejar contadores individuales -->
     <script>
@@ -576,5 +581,7 @@
             transition: opacity 0.5s ease;
         }
     </style>
+
+    
 </body>
 </html>
