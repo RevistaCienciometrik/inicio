@@ -1,4 +1,8 @@
 // JS/contentLoader.js
+// El archivo contentLoader.js es un gestor de contenido dinámico que permite modificar elementos de la 
+// web sin necesidad de editar directamente el código HTML. Su función principal es cargar 
+// y aplicar contenido previamente guardado en el almacenamiento local del navegador (localStorage).
+// El localstorage, por lo general, se deja de usar al aplicar upload a firebase.
 
 document.addEventListener('DOMContentLoaded', () => {
     // Intenta obtener el contenido guardado en localStorage
