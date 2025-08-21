@@ -1,39 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
-    // La funcionalidad de "Olvidé la contraseña" se maneja directamente en login.html
-    // por lo que esta línea ya no es necesaria aquí mientras no se programe una funcionalidad backend:
-    // const forgotPasswordLink = document.getElementById('forgotPasswordLink');
-
-    // Definiendos los usuarios y sus respectivas páginas de destino
-    // Quito la oción "invitado sena" porque la veo irrelevante:
-    // "invitado@sena.edu.co:invitado123": "../index.html",  
+    
+    // Definiendo los usuarios y sus respectivas páginas de destino y roles
     const users = {
-        "admin@sena.edu.co:admin123": "../admin_cemter/admin.html", 
-        "autor@sena.edu.co:autor123": "../admin_cemter/autor_panel.html",                   
-        "revisor@sena.edu.co:revisor123": "../admin_cemter/revisor.html",
-        "editorweb@sena.edu.co:editor123": "../admin_cemter/admin_edit_index.html"    
+        "admin@sena.edu.co:admin123": {
+            page: "../admin_cemter/admin.html",
+            role: "admin"
+        }, 
+        "autor@sena.edu.co:autor123": {
+            page: "../admin_cemter/autor_panel.html",
+            role: "autor"
+        },              
+        "revisor@sena.edu.co:revisor123": {
+            page: "../admin_cemter/revisor.html",
+            role: "revisor"
+        },
+        "editorweb@sena.edu.co:editor123": {
+            page: "../admin_cemter/admin_edit_index.html",
+            role: "editor"
+        }   
     };
-
-    // Event listener o evento de escucha/acción: para el formulario de login
+    
+    // Event listener para el formulario de login
     loginForm.addEventListener('submit', (event) => {
         event.preventDefault(); // Previene el envío del formulario por defecto
-
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        // Opcional: La línea 'rememberMe' está comentada ya que no hay un elemento con ese ID en el HTML. 
-        // const rememberMe = document.getElementById('rememberMe').checked; 
-
-        console.log('Intento de inicio de sesión:');
-        console.log('Email:', email);
-        console.log('Contraseña:', password);
-        // console.log('Recordarme:', rememberMe); // Se puede eliminar esta línea si no se usa rememberMe
-
+        
         const credentials = `${email}:${password}`; // Combinando email y contraseña para la búsqueda
-
+        
         if (users[credentials]) { // Verifica si las credenciales existen en el objeto users
-            const redirectToPage = users[credentials];
-            alert(`¡Inicio de sesión exitoso! Redirigiendo tu página ${redirectToPage}`);
-            window.location.href = redirectToPage; // Redirige a la página correspondiente
+            const userData = users[credentials];
+            
+            // Guardar información de sesión en sessionStorage
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userRole', userData.role);
+            sessionStorage.setItem('userEmail', email);
+            
+            // Establecer tiempo de expiración de la sesión (2 horas)
+            const sessionExpiry = new Date().getTime() + (2 * 60 * 60 * 1000);
+            sessionStorage.setItem('sessionExpiry', sessionExpiry);
+            
+            // Redirige a la página correspondiente
+            window.location.href = userData.page;
         } else {
             alert('Credenciales incorrectas. Por favor, intente de nuevo.');
         }

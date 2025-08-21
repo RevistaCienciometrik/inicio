@@ -19,8 +19,9 @@
                     <li><a href="#bandeja-de-entrada-de-mensajes"><i class="fas fa-inbox"></i> Bandeja de Entrada de Mensajes</a></li>
                     <li><a href="#administracion-de-articulos"><i class="fas fa-file-alt"></i> Administración de Artículos</a></li>
                     <li><a href="#observaciones-de-autores"><i class="fas fa-comments"></i> Observaciones de Autores</a></li>
-                    <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
-                </ul>
+                    <li id="logout-btnn">
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </li>                 </ul>
             </nav>
         </aside>
         
@@ -88,10 +89,27 @@
     </div>
     
     <mi-footer></mi-footer>
-    
+
+
+    <script>
+    // Verificar si el usuario está autenticado
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAuthentication();
+        
+        // Mostrar información del usuario
+        const userEmail = getUserEmail();
+        const userRole = getUserRole();
+        
+        // Puedes mostrar esta información en la página si lo deseas
+        console.log(`Usuario: ${userEmail}, Rol: ${userRole}`);
+    });
+    </script>
+
+    <script src="auth.js"></script>
     <script src="header_admin.js" type="module"></script>
     <script src="Objects/container.js" type="module"></script>
     <script src="footer_admin.js"></script>
+    
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";

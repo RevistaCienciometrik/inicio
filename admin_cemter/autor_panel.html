@@ -18,7 +18,9 @@
                     <li><a href="#mis-articulos"><i class="fas fa-file-alt"></i> Mis Artículos</a></li>
                     <li><a href="#observaciones"><i class="fas fa-comment-dots"></i> Observaciones</a></li>
                     <li><a href="#articulos-eliminados"><i class="fas fa-trash-restore"></i> Mis Artículos Eliminados</a></li>
-                    <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                    <li id="logout-btnn">
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </li>                    
                 </ul>
             </nav>
         </aside>
@@ -128,6 +130,24 @@
         </main>
     </div>
     <mi-footer></mi-footer>
+
+    
+
+    <script>
+    // Verificar si el usuario está autenticado
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAuthentication();
+        
+        // Mostrar información del usuario
+        const userEmail = getUserEmail();
+        const userRole = getUserRole();
+        
+        // Puedes mostrar esta información en la página si lo deseas
+        console.log(`Usuario: ${userEmail}, Rol: ${userRole}`);
+    });
+    </script>
+
+    <script src="auth.js"></script>
     <script src="header_admin.js"></script>
     <script src="../Objects/container.js"></script>
     <script src="footer_admin.js"></script>

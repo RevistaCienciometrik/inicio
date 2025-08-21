@@ -17,7 +17,9 @@
                     <li><a href="#articulos-pendientes"><i class="fas fa-hourglass-half"></i> Artículos Pendientes</a></li>
                     <li><a href="#historial-revisiones"><i class="fas fa-history"></i> Historial de Revisiones</a></li>
                     <li><a href="#buscar-articulos"><i class="fas fa-search"></i> Buscar Artículos</a></li>
-                    <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                    <li id="logout-btnn">
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </li>                
                 </ul>
             </nav>
         </aside>
@@ -107,6 +109,22 @@
     </div>
     
     <mi-footer></mi-footer>
+
+    <script>
+    // Verificar si el usuario está autenticado
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAuthentication();
+        
+        // Mostrar información del usuario
+        const userEmail = getUserEmail();
+        const userRole = getUserRole();
+        
+        // Puedes mostrar esta información en la página si lo deseas
+        console.log(`Usuario: ${userEmail}, Rol: ${userRole}`);
+    });
+    </script>
+
+    <script src="auth.js"></script>
     <script src="header_admin.js"></script>
     <script src="../Objects/container.js"></script>
     <script src="footer_admin.js"></script>
