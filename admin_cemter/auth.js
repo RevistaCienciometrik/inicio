@@ -20,7 +20,7 @@ function logout() {
     sessionStorage.removeItem('sessionExpiry'); // Es buena práctica también eliminar la fecha de expiración
     
     // Redirigir al login con la nueva URL
-    window.location.href = 'http://127.0.0.1:5501/login/login.html';
+    window.location.href = 'https://revistacienciometrik.github.io/inicio/login/login.html';
 }
 
 // Función para obtener el rol del usuario actual
