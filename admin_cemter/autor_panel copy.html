@@ -6,7 +6,6 @@
     <title>Autores - Revista Cienciometrik</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="autor_panel.css">
-
 </head>
 <body>
     <mi-header></mi-header>
@@ -131,7 +130,9 @@
         </main>
     </div>
     <mi-footer></mi-footer>
+
     
+
     <script>
     // Verificar si el usuario está autenticado
     document.addEventListener('DOMContentLoaded', () => {
@@ -145,6 +146,7 @@
         console.log(`Usuario: ${userEmail}, Rol: ${userRole}`);
     });
     </script>
+
     <script src="auth.js"></script>
     <script src="header_admin.js"></script>
     <script src="../Objects/container.js"></script>
@@ -609,6 +611,7 @@
             document.body.style.overflow = ''; // Restaurar scroll
             currentArticleId = null;
         });
+
         // Cerrar modal al hacer clic fuera del contenido
         window.addEventListener('click', (event) => {
             if (event.target === modalArticulo) {
@@ -617,6 +620,7 @@
                 currentArticleId = null;
             }
         });
+
         // Guardar comentario/respuesta del autor
         modalGuardarComentario.addEventListener('click', async () => {
             if (!currentArticleId) return;
@@ -677,6 +681,7 @@
             // No llamar a cargarArticulos aquí para que el usuario deba buscar.
         });
     </script>
+
     <!-- Ventana para Visualizar Artículo -->
     <div id="modal-articulo" class="modal">
         <div class="modal-content">
