@@ -14,11 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "revisor@sena.edu.co:revisor123": {
             page: "../admin_cemter/revisor.html",
             role: "revisor"
-        },
-        "editorweb@sena.edu.co:editor123": {
-            page: "../admin_cemter/admin_edit_index.html",
-            role: "editor"
-        }   
+        },  
     };
     
     // Event listener para el formulario de login

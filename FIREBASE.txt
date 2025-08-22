@@ -1,0 +1,57 @@
+CREDENCIALES DE FIREBASE:
+
+Funcionan con Gmail:
+revistacienciometrik@gmail.com
+cienciometrik2025
+
+
+NOMBRE: Cienciometrik
+ID del proyecto: cienciometrik-3c8e7
+No. 60232446009
+
+
+// Aquí está la configuración de el proyecto de Firebase.
+        const firebaseConfig = {
+            apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
+            authDomain: "cienciometrik-3c8e7.firebaseapp.com",
+            projectId: "cienciometrik-3c8e7",
+            storageBucket: "cienciometrik-3c8e7.firebasestorage.app",
+            messagingSenderId: "60232446009",
+            appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
+};
+
+
+REGLAS - FUNCIONANDO ESTABLEMENTE AL 20 08 2025
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Esta regla permite a CUALQUIERA (autenticado o no) LEER cualquier documento.
+    // También permite a CUALQUIERA (autenticado o no) ESCRIBIR (crear, actualizar, eliminar) cualquier documento.
+    // Esto es lo más permisivo que se puede hacer. Si esto falla, el problema no son los permisos.
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
+---------------------------------------------------------
+SDK - NPM
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
+  authDomain: "cienciometrik-3c8e7.firebaseapp.com",
+  projectId: "cienciometrik-3c8e7",
+  storageBucket: "cienciometrik-3c8e7.firebasestorage.app",
+  messagingSenderId: "60232446009",
+  appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
