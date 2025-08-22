@@ -399,7 +399,6 @@
     <div class="reset-individual-container">
         <button id="reset-individual-counters" class="reset-button">Reiniciar Contadores Individuales</button>
     </div>
-
     <!-- Firebase SDK para métricas base de datos en firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
@@ -409,132 +408,247 @@
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
-        <!-- <script src="js/download_tracker.js"></script> SE COMENTA PARA DETENER EL CONTEO DE DESCARGAS COMO LOCALHOST-->
     
-    <!-- Script para inicializar y manejar contadores individuales -->
+ <!-- Script para inicializar y manejar contadores individuales con Firebase -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Verificar si Firebase está inicializado
+        if (typeof firebase === 'undefined') {
+            console.error("Firebase no está inicializado. Asegúrate de que panelmetricas.js se carga primero.");
+            // Fallback a localStorage si Firebase no está disponible
+            initializeWithLocalStorage();
+            return;
+        }
+
+        try {
+            const db = firebase.firestore();
+            const countersCollection = 'individual_counters';
+
+            // Función para obtener el contador de Firestore
+            const getCounter = async (counterId) => {
+                try {
+                    const docRef = db.collection(countersCollection).doc(counterId);
+                    const doc = await docRef.get();
+                    
+                    if (doc.exists) {
+                        return doc.data().count || 0;
+                    } else {
+                        // Si no existe, lo creamos con count=0
+                        await docRef.set({ count: 0 });
+                        return 0;
+                    }
+                } catch (error) {
+                    console.error("Error al obtener el contador:", error);
+                    return 0;
+                }
+            };
+
+            // Función para incrementar el contador en Firestore
+            const incrementCounter = async (counterId) => {
+                try {
+                    const docRef = db.collection(countersCollection).doc(counterId);
+                    // Usamos una transacción para asegurar la atomicidad
+                    await db.runTransaction(async (transaction) => {
+                        const doc = await transaction.get(docRef);
+                        let newCount = 1; // valor por defecto si no existe
+                        
+                        if (doc.exists) {
+                            newCount = (doc.data().count || 0) + 1;
+                        }
+                        
+                        transaction.set(docRef, { count: newCount });
+                    });
+                    
+                    return true;
+                } catch (error) {
+                    console.error("Error al incrementar el contador:", error);
+                    return false;
+                }
+            };
+
+            // Función para reiniciar un contador a 0
+            const resetCounter = async (counterId) => {
+                try {
+                    await db.collection(countersCollection).doc(counterId).set({ count: 0 });
+                    return true;
+                } catch (error) {
+                    console.error("Error al reiniciar el contador:", error);
+                    return false;
+                }
+            };
+
             // Inicializar contadores individuales al cargar la página
-            const initializeCounters = () => {
+            const initializeCounters = async () => {
                 const individualCounters = document.querySelectorAll('.download-count');
                 
+                // Creamos un array de promesas para obtener todos los contadores
+                const promises = [];
                 individualCounters.forEach(counter => {
-                    const counterId = counter.id;
-                    const storedCount = localStorage.getItem(counterId) || '0';
-                    
-                    // Solo actualizar si no ha sido reseteado explícitamente
-                    if (counter.getAttribute('data-reset') !== 'true') {
-                        counter.textContent = storedCount;
-                    }
+                    const counterId = counter.id.replace('downloads-', ''); // Quitamos el prefijo "downloads-"
+                    promises.push(getCounter(counterId).then(count => {
+                        counter.textContent = count;
+                    }));
                 });
+                
+                // Esperamos a que todas las promesas se resuelvan
+                await Promise.all(promises);
             };
-            
+
             // Ejecutar la inicialización
-            initializeCounters();
-            
+            initializeCounters().catch(error => {
+                console.error("Error al inicializar los contadores:", error);
+                initializeWithLocalStorage(); // Fallback a localStorage
+            });
+
             // Función para manejar los clics en los enlaces de descarga
-            const handleDownloadClick = (event) => {
+            const handleDownloadClick = async (event) => {
                 const link = event.currentTarget;
                 const volumeId = link.getAttribute('data-volume-id');
                 
                 if (volumeId) {
-                    // Construir el ID del contador
-                    const counterId = `downloads-${volumeId}`;
-                    const counter = document.getElementById(counterId);
+                    // Incrementar el contador en Firestore
+                    const success = await incrementCounter(volumeId);
                     
-                    if (counter) {
-                        // Obtener el valor actual
-                        let currentCount = parseInt(counter.textContent) || 0;
+                    if (success) {
+                        // Actualizar el contador en el DOM
+                        const counterId = `downloads-${volumeId}`;
+                        const counter = document.getElementById(counterId);
                         
-                        // Incrementar el contador
-                        currentCount++;
-                        
-                        // Actualizar el DOM
-                        counter.textContent = currentCount;
-                        
-                        // Guardar en localStorage
-                        localStorage.setItem(counterId, currentCount.toString());
-                        
-                        console.log(`Contador ${counterId} actualizado a ${currentCount}`);
+                        if (counter) {
+                            // Obtener el nuevo valor
+                            const newCount = await getCounter(volumeId);
+                            counter.textContent = newCount;
+                        }
                     }
                 }
             };
-            
+
             // Agregar event listeners a todos los enlaces de descarga
             const downloadLinks = document.querySelectorAll('a[data-volume-id]');
             downloadLinks.forEach(link => {
                 link.addEventListener('click', handleDownloadClick);
             });
-            
+
             // Botón de reseteo
             const resetButton = document.getElementById('reset-individual-counters');
             
             if (resetButton) {
-                resetButton.addEventListener('click', () => {
+                resetButton.addEventListener('click', async () => {
                     if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores individuales de descarga? Esta acción no se puede deshacer.')) {
                         const individualCounters = document.querySelectorAll('.download-count');
                         
+                        // Array de promesas para reiniciar todos los contadores
+                        const resetPromises = [];
                         individualCounters.forEach(counter => {
-                            const counterId = counter.id;
-                            
-                            // Reiniciar en localStorage
-                            localStorage.setItem(counterId, '0');
-                            
-                            // Actualizar la visualización
-                            counter.textContent = '0';
-                            
-                            // Marcar como reseteado
-                            counter.setAttribute('data-reset', 'true');
+                            const counterId = counter.id.replace('downloads-', '');
+                            resetPromises.push(resetCounter(counterId).then(() => {
+                                counter.textContent = '0';
+                            }));
                         });
                         
-                        // Mostrar notificación
-                        const notification = document.createElement('div');
-                        notification.className = 'reset-notification';
-                        notification.textContent = 'Todos los contadores individuales han sido reiniciados.';
-                        document.body.appendChild(notification);
-                        
-                        // Eliminar la notificación después de 3 segundos
-                        setTimeout(() => {
-                            notification.style.opacity = '0';
+                        try {
+                            await Promise.all(resetPromises);
+                            
+                            // Mostrar notificación
+                            const notification = document.createElement('div');
+                            notification.className = 'reset-notification';
+                            notification.textContent = 'Todos los contadores individuales han sido reiniciados.';
+                            document.body.appendChild(notification);
+                            
+                            // Eliminar la notificación después de 3 segundos
                             setTimeout(() => {
-                                document.body.removeChild(notification);
-                            }, 500);
-                        }, 3000);
-                        
-                        console.log("Todos los contadores individuales de descarga han sido reiniciados a 0.");
-                    }
-                });
-            }
-            
-            // Observador para mantener los contadores reseteados en 0
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'childList' || mutation.type === 'characterData') {
-                        const target = mutation.target;
-                        
-                        // Si el elemento es un contador y fue reseteado
-                        if (target.classList && target.classList.contains('download-count') && 
-                            target.getAttribute('data-reset') === 'true' && target.textContent !== '0') {
-                            // Mantenerlo en 0
-                            target.textContent = '0';
+                                notification.style.opacity = '0';
+                                setTimeout(() => {
+                                    document.body.removeChild(notification);
+                                }, 500);
+                            }, 3000);
+                            
+                            console.log("Todos los contadores individuales de descarga han sido reiniciados a 0.");
+                        } catch (error) {
+                            console.error("Error al reiniciar los contadores:", error);
                         }
                     }
                 });
-            });
+            }
+        } catch (error) {
+            console.error("Error al usar Firebase, usando localStorage como fallback:", error);
+            initializeWithLocalStorage();
+        }
+    });
+
+    // Fallback a localStorage si Firebase no está disponible
+    function initializeWithLocalStorage() {
+        console.log("Usando localStorage para contadores individuales");
+        
+        // Inicializar contadores desde localStorage
+        const initializeCounters = () => {
+            const individualCounters = document.querySelectorAll('.download-count');
             
-            // Configurar el observador después de un pequeño retraso para asegurar que todos los elementos estén cargados
-            setTimeout(() => {
-                const downloadCounters = document.querySelectorAll('.download-count');
-                downloadCounters.forEach(counter => {
-                    observer.observe(counter, { 
-                        childList: true,
-                        characterData: true,
-                        subtree: true
-                    });
-                });
-            }, 100);
+            individualCounters.forEach(counter => {
+                const counterId = counter.id;
+                const storedCount = localStorage.getItem(counterId) || '0';
+                counter.textContent = storedCount;
+            });
+        };
+        
+        initializeCounters();
+        
+        // Función para manejar los clics en los enlaces de descarga
+        const handleDownloadClick = (event) => {
+            const link = event.currentTarget;
+            const volumeId = link.getAttribute('data-volume-id');
+            
+            if (volumeId) {
+                const counterId = `downloads-${volumeId}`;
+                const counter = document.getElementById(counterId);
+                
+                if (counter) {
+                    let currentCount = parseInt(counter.textContent) || 0;
+                    currentCount++;
+                    counter.textContent = currentCount;
+                    localStorage.setItem(counterId, currentCount.toString());
+                }
+            }
+        };
+        
+        // Agregar event listeners a todos los enlaces de descarga
+        const downloadLinks = document.querySelectorAll('a[data-volume-id]');
+        downloadLinks.forEach(link => {
+            link.addEventListener('click', handleDownloadClick);
         });
-    </script>
+        
+        // Botón de reseteo
+        const resetButton = document.getElementById('reset-individual-counters');
+        
+        if (resetButton) {
+            resetButton.addEventListener('click', () => {
+                if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores individuales de descarga? Esta acción no se puede deshacer.')) {
+                    const individualCounters = document.querySelectorAll('.download-count');
+                    
+                    individualCounters.forEach(counter => {
+                        const counterId = counter.id;
+                        localStorage.setItem(counterId, '0');
+                        counter.textContent = '0';
+                    });
+                    
+                    // Mostrar notificación
+                    const notification = document.createElement('div');
+                    notification.className = 'reset-notification';
+                    notification.textContent = 'Todos los contadores individuales han sido reiniciados.';
+                    document.body.appendChild(notification);
+                    
+                    // Eliminar la notificación después de 3 segundos
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        setTimeout(() => {
+                            document.body.removeChild(notification);
+                        }, 500);
+                    }, 3000);
+                }
+            });
+        }
+    }
+</script>
     
     <!-- Estilos para el botón y notificación -->
     <style>
@@ -581,7 +695,6 @@
             transition: opacity 0.5s ease;
         }
     </style>
-
     
 </body>
 </html>
