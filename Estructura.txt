@@ -1,45 +1,93 @@
 COPIAREVISTA/
 ├── .vscode/
+    ├── settings.json
+
 ├── admin_cemter/
-│   ├── admin_edit_index.css
-│   ├── admin_edit_index.html
-│   ├── admin_messages.js
 │   ├── admin.css
 │   ├── admin.html
-│   ├── adminBU.css
-│   ├── adminBU.html
+│   ├── auth.js
+│   ├── autor_panel.css
 │   ├── autor_panel.html
-│   ├── autores.css
 │   ├── footer_admin.js
 │   ├── header_admin.js
 │   ├── Logo cienciometrik blanco.png
 │   ├── Logo cienciometrik negro.png
 │   ├── Logo SENA blanco.png
 │   ├── Logo SENA negro.png
-│   ├── revisor_styles.css
 │   ├── revisor.css
 │   └── revisor.html
+
 ├── CSS/
+│   ├── autores.css (auturos index) 
+│   ├── quienes_somos.css (quienes_somos index)
 │   └── styles.css
+
 ├── Docs/
+│   ├── Cartillas inclusión/
+│   ----└── Cartilla Sena Me enseña_Comunicación inclusiva para la educación y el empleo_2024 2.pdf
+│   ----└── Cartilla Sena Me enseña_Comunicación inclusiva para la educación y el empleo_2024 2.png
+│   ----└── Cartilla_digital_de_comunicacion_para_la_inclusion.pdf
+│   ----└── Cartilla_digital_de_comunicacion_para_la_inclusion.png
+
+│   ├── cartillas Servitización/
+│   ----└── Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad.pdf
+│   ----└── Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad.png
+│   ----└── Cartilla Servitizacion_produccion_comercializacion.pdf
+│   ----└── Cartilla Servitizacion_produccion_comercializacion.png
+
+│   ├── informes de etapa productiva/
+│   ----└── 2-Informe final EP.docx
+│   ----└── Formato Informe final EP.docx
+│   ----└── informe1.png
+│   ----└── informe2.png
+
+│   ├── informes de proyectos de investigación/
+│   ----└── 2-INFORME DE PROYECTO DE INVESTIGACIÓN.docx
+│   ----└── INFORME DE PROYECTO DE INVESTIGACIÓN.docx
+│   ----└── informe1.png
+│   ----└── informe2.png
+
+│   ├── informes de vigilancia tecnológica/
+│   ----└── 2-ivt.docx
+│   ----└── GFPI-F-153FormatoboletindevigilanciatecnologicadelproyectoproductivobajoenfoqueIDi.docx
+│   ----└── informe1.png
+│   ----└── informe2.png
+
+│   ├── libros/
+│   ----└── 1 Paleta de colores utilizada - Revista Cienciometrik.pdf
+│   ----└── 2 Paleta de colores utilizada - Revista Cienciometrik - copia.pdf
+│   ----└── libro 2.png
+│   ----└── libro 1.png UltimoVolumen
+
+│   ├── UltimoVolumen/
+│   ----└── REVISTA CIENCIOMETRIK V 3 N 4
+│   ----└── Revista Cienciometrik Vol. 3 N° 4, Enero - Julio.png
+│   ----└── informe1.png
+│   ----└── informe2.png
+
 │   ├── MANUAL_IDENTIDAD_VISUAL_SENA_2024....pdf
 │   ├── Paleta de colores utilizada - Revista Ciencio....pdf
 │   ├── Revista CienciometriK_Vol. 2 N°. 3 2024.pdf
 │   ├── REVISTA_CIENCIOMETRIK_VOLUMEN 2 N° ....pdf
 │   └── REVISTA_CienciometriK_1-1-3.pdf
+
 ├── images/
 ├── js/
-│   ├── admin_edit_index.js
 │   ├── contentloader.js
-│   └── firebase-config.js
-├── login/
-│   ├── crear_cuenta.html
+│   ├── download_tracker.js
+│   ├── panelmetricas-localhost.js (sin uso)
+│   ├── panelmetricas.js
+
+├── login/	
 │   ├── Login usser.txt
 │   ├── login.css
 │   ├── login.html
 │   ├── login.js
-│   └── pass_rec.html
+│   └── pass_rec.html (no configurado aún)
+
 ├── Objects/
+│   ----└── logos_png/
+│   ----└── LogosPNG-2/
 │   ├── logos_png/
 │   ├── container.js
 │   ├── footer.js
@@ -51,12 +99,8 @@ COPIAREVISTA/
 ├── .gitattributes
 ├── autores.html
 ├── contactanos.html
-├── contactanosR.html
+├── Estructura.txt
+├── Estructura.txt
 ├── index.html
-├── new_html.txt
-├── noticias.html
-├── otro.html
-├── panel.txt
 ├── publicaciones.html
 ├── quienes_somos.html
-└── Sincionization.txt.txt
