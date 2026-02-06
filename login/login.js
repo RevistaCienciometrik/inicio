@@ -3,15 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Definiendo los usuarios y sus respectivas páginas de destino y roles
     const users = {
-        "admin@sena.edu.co:admin123": {
+        "admincmk@sena.edu.co:admin2026": {
             page: "../admin_cemter/admin.html",
             role: "admin"
         }, 
-        "autor@sena.edu.co:autor123": {
+        "autorcmk@sena.edu.co:autor2026": {
             page: "../admin_cemter/autor_panel.html",
             role: "autor"
         },              
-        "revisor@sena.edu.co:revisor123": {
+        "revisorcmk@sena.edu.co:revisor2026": {
             page: "../admin_cemter/revisor.html",
             role: "revisor"
         },  
