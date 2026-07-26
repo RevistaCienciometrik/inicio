@@ -2,397 +2,432 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Revista Cienciometrik</title>
-
-<link rel="stylesheet" href="CSS/styles.css">
-
-<style>
-
-/* VARIABLES */
-:root{
---primary-color:#003057;
---secondary-color:#008394;
---accent-color:#3FCED4;
---light-color:#f8f9fa;
---dark-color:#343a40;
---transition:all .3s ease;
-}
-
-/* BODY */
-
-body{
-font-family:'Segoe UI',Tahoma,Verdana,sans-serif;
-background:#f5f7fa;
-color:#333;
-line-height:1.6;
-}
-
-/* BANNER */
-
-.main-content-banner{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:40px;
-margin:40px auto;
-max-width:90%;
-padding:20px;
-border-radius:16px;
-}
-
-.image-wrapper{
-flex:1;
-display:flex;
-flex-direction:column;
-align-items:center;
-max-width:45%;
-}
-
-.main-image-banner{
-width:100%;
-max-width:320px;
-border-radius:12px;
-}
-
-/* BOTON DESCARGA */
-
-.button_download{
-
-display:inline-flex;
-align-items:center;
-justify-content:center;
-
-padding:12px 24px;
-
-background:linear-gradient(
-135deg,
-var(--secondary-color),
-var(--accent-color)
-);
-
-color:white;
-
-text-decoration:none;
-
-border-radius:50px;
-
-font-weight:600;
-
-transition:var(--transition);
-
-}
-
-.button_download:hover{
-
-transform:translateY(-3px);
-
-}
-
-/* SECCION BIENVENIDO */
-
-#inicio_bienvenido{
-
-text-align:center;
-
-padding:35px;
-
-}
-
-#titulo_inicio{
-
-color:var(--primary-color);
-
-font-size:2em;
-
-}
-
-#parrafo_inicio{
-
-font-size:1.2em;
-
-max-width:800px;
-
-margin:auto;
-
-}
-
-/* VIDEO */
-
-.video-container{
-
-max-width:500px;
-
-margin:auto;
-
-}
-
-/* HISTORIA */
-
-#historia{
-
-background:#fff;
-
-padding:30px;
-
-border-radius:16px;
-
-}
-
-/* ENFOQUE */
-
-#enfoque ul{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-
-gap:15px;
-
-}
-
-/* RESPONSIVE */
-
-@media(max-width:768px){
-
-.main-content-banner{
-
-flex-direction:column;
-
-}
-
-.image-wrapper{
-
-max-width:90%;
-
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revista Cienciométrik | Inicio</title>
+
+    <link rel="stylesheet" href="CSS/styles.css">
+
+    <style>
+        /* VARIABLES MODERNIZADAS */
+       /* VARIABLES MODERNIZADAS - MODO ELEGANTE/VIP */
+        :root {
+            --primary-color: #003057; 
+            --secondary-color: #008394;
+            --accent-color: #3FCED4;
+            --highlight-color: #00FF88; /* Verde neón solo para el Vol 4 */
+            
+            /* Fondos y sombras para tarjetas elegantes */
+            --card-bg: #ffffff; 
+            --card-shadow: 0 10px 30px rgba(0, 48, 87, 0.08);
+            --card-border: 1px solid rgba(0, 48, 87, 0.05);
+            
+            --text-main: #333333; 
+            --text-muted: #666666;
+            
+            --font-headings: 'Georgia', 'Times New Roman', serif;
+            --font-body: 'Segoe UI', Tahoma, Verdana, sans-serif;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            /* Hereda el fondo de styles.css, no lo sobreescribimos aquí */
+            color: var(--text-main);
+        }
+
+        /* TÍTULOS DE SECCIÓN */
+        .section-header {
+            font-family: var(--font-headings);
+            color: var(--primary-color);
+            font-size: 2.4em;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            margin: 15px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* CONTENEDORES DE SECCIÓN (LAS "TARJETAS" VIP) */
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto 50px auto;
+            padding: 40px;
+            background: var(--card-bg);
+            border: var(--card-border);
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* CARRUSEL DE REVISTAS */
+        .magazine-showcase {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 20px;
+            padding: 20px 10px 40px 10px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .magazine-showcase::-webkit-scrollbar { height: 8px; }
+        .magazine-showcase::-webkit-scrollbar-track { background: #f0f4f8; border-radius: 10px; }
+        .magazine-showcase::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+
+        .mag-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 280px;
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            position: relative;
+        }
+
+        .mag-cover {
+            width: 100%;
+            border-radius: 4px 12px 12px 4px; /* Simula lomo de libro */
+            box-shadow: -8px 10px 25px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            margin-bottom: 25px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .mag-card a {
+            transition: var(--transition);
+            display: block;
+            width: 100%;
+        }
+
+        .mag-card a:hover .mag-cover {
+            transform: translateY(-10px) scale(1.03) rotateY(-5deg);
+            box-shadow: -15px 20px 35px rgba(0,0,0,0.2);
+        }
+
+        /* ANIMACIÓN ELEGANTE PARA EL VOLUMEN 4 */
+        @keyframes subtle-glow {
+            0% { box-shadow: 0 0 15px rgba(0, 255, 136, 0.4), -8px 10px 25px rgba(0,0,0,0.15); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 136, 0.6), -8px 10px 25px rgba(0,0,0,0.15); }
+            100% { box-shadow: 0 0 15px rgba(0, 255, 136, 0.4), -8px 10px 25px rgba(0,0,0,0.15); }
+        }
+
+        .mag-card.highlight .mag-cover {
+            width: 108%; /* Un poco más grande para destacar */
+            border: 2px solid var(--highlight-color);
+            animation: subtle-glow 3s infinite;
+        }
+
+        .badge-new {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #ff4757;
+            color: white;
+            padding: 6px 18px;
+            font-weight: bold;
+            border-radius: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+            z-index: 10;
+            letter-spacing: 1px;
+        }
+
+        /* BOTONES DE DESCARGA */
+        .btn-download {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: var(--transition);
+            text-align: center;
+            width: 85%;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 48, 87, 0.2);
+        }
+
+        .btn-download:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 131, 148, 0.3);
+        }
+
+        .mag-card.highlight .btn-download {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        /* SECCIÓN BIENVENIDA (SPLIT LAYOUT) */
+        .welcome-split {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .welcome-text { flex: 1; }
+
+        .welcome-text p {
+            font-size: 1.15em;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .welcome-video {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 4px solid var(--light-color);
+        }
+
+        .welcome-video video {
+            width: 100%;
+            display: block;
+        }
+
+        /* LÍNEA DE TIEMPO VISUAL */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 100%;
+            width: 3px;
+            background: var(--secondary-color);
+            opacity: 0.2;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--secondary-color);
+            border: 3px solid var(--card-bg);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--secondary-color);
+            z-index: 2;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover::before {
+            background: var(--accent-color);
+            box-shadow: 0 0 0 4px var(--secondary-color);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            font-family: var(--font-headings);
+        }
+
+        .timeline-content {
+            background: #f8f9fa; /* Fondo muy sutil para diferenciar del blanco de la tarjeta */
+            padding: 20px;
+            border-radius: 8px;
+            color: var(--text-main);
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left-color: var(--accent-color);
+        }
+
+        /* ENFOQUE (PÍLDORAS) */
+        .focus-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .focus-pill {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .focus-pill:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 48, 87, 0.15);
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 900px) {
+            .welcome-split { flex-direction: column; gap: 30px; }
+            .section-container { padding: 30px 20px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<mi-header id="top"></mi-header>
+    <!-- HEADER MODULAR -->
+    <mi-header id="top"></mi-header>
+
+    <div class="container">
+        <main class="main-content" style="padding-top: 40px;">
+
+            <!-- VITRINA DE REVISTAS (CARRUSEL) -->
+            <section class="section-container">
+                <h2 class="section-header">Publicaciones Destacadas</h2>
+                
+                <div class="magazine-showcase">
+                    
+                    <!-- Tarjeta 1: Publicidad / Convocatoria -->
+                    <div class="mag-card">
+                        <a href="autores.html" target="_blank">
+                            <img src="images/pubilicidad2.jpeg" alt="Publicidad Piensa, Publica, Impacta" class="mag-cover">
+                        </a>
+                        <a href="autores.html" target="_blank" class="btn-download" style="background: var(--text-muted);">Ver Convocatoria</a>
+                    </div>
+
+                    <!-- Tarjeta 2: Volumen 3 -->
+                    <div class="mag-card">
+                        <a href="Docs/UltimoVolumen/Revista_Cienciometrik_Vol_3_N5.pdf" target="_blank" data-volume-id="volumen-3">
+                            <img src="Docs/UltimoVolumen/VOL5.png" alt="Portada Cienciométrik Volumen 3" class="mag-cover">
+                        </a>
+                        <a href="Docs/UltimoVolumen/Revista_Cienciometrik_Vol_3_N5.pdf" target="_blank" download class="btn-download" data-volume-id="volumen-3">Descargar Vol. 3</a>
+                    </div>
+
+                    <!-- Tarjeta 3: Volumen 4 (¡NUEVO Y LLAMATIVO!) -->
+                    <div class="mag-card highlight">
+                        <span class="badge-new">¡NUEVO!</span>
+                        <a href="Docs/UltimoVolumen/Revista_2026_Julio_numerada_Volumen4.pdf" target="_blank" data-volume-id="volumen-4">
+                            <img src="images/Volume4_2026.png" alt="Portada Cienciométrik Volumen 4" class="mag-cover">
+                        </a>
+                        <a href="Docs/UltimoVolumen/Revista_2026_Julio_numerada_Volumen4.pdf" target="_blank" download class="btn-download" data-volume-id="volumen-4">Descargar Vol. 4</a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- BIENVENIDA (SPLIT LAYOUT) -->
+            <section id="inicio_bienvenido" class="section-container">
+                <div class="welcome-split">
+                    <div class="welcome-text">
+                        <h2 class="section-header" style="text-align: left;">Bienvenido a Cienciométrik</h2>
+                        <p>
+                            Somos un espacio estratégico dedicado a la difusión del conocimiento científico y tecnológico generado por investigadores, aprendices e instructores del ecosistema <strong>SENNOVA</strong>.
+                        </p>
+                        <p>
+                            Nuestra misión es visibilizar proyectos de investigación aplicada e innovación que aportan soluciones reales a la industria colombiana.
+                        </p>
+                    </div>
+                    <div class="welcome-video">
+                        <video controls muted loop preload="metadata">
+                            <source src="vids/vid1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LÍNEA DE TIEMPO -->
+            <section id="linea-tiempo" class="section-container">
+                <h2 class="section-header">Nuestra Trayectoria</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-content"><strong>Vol.1 N°1:</strong> Convocatoria general de investigación, marcando el inicio de nuestra difusión académica.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-content"><strong>Vol.2 N°2 y N°3:</strong> Ediciones regulares y el Simposio Nacional de Cienciometría con convocatoria especial.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-content"><strong>Vol.3 N°5:</strong> Consolidación de artículos en investigación pedagógica y desarrollo sostenible.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-content" style="border-left-color: var(--accent-color); background: #e0fbfc;"><strong>Vol.4 N°6:</strong> Dossier especial: <em>II Feria Tecnológica SENA</em>.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ENFOQUE DE LA REVISTA -->
+            <section id="enfoque" class="section-container">
+                <h2 class="section-header">Líneas de Investigación</h2>
+                <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Nuestras publicaciones abarcan una amplia gama de disciplinas orientadas a la innovación tecnológica y el desarrollo industrial.</p>
+                
+                <div class="focus-grid">
+                    <div class="focus-pill">📊 Cienciometría y estudios métricos</div>
+                    <div class="focus-pill">🎓 Investigación pedagógica</div>
+                    <div class="focus-pill">🧠 Habilidades socioemocionales</div>
+                    <div class="focus-pill">⚙️ Optimización de procesos</div>
+                    <div class="focus-pill">💻 Innovación tecnológica</div>
+                    <div class="focus-pill">🌱 Economía verde y sostenibilidad</div>
+                    <div class="focus-pill">📈 Administración y comercio</div>
+                </div>
+            </section>
+
+        </main>
 
-<div class="container">
+        <!-- PANEL DE MÉTRICAS -->
+        <metricas-panel></metricas-panel>
 
-<main class="main-content">
+    </div>
 
-<!-- ULTIMO VOLUMEN -->
+    <!-- FOOTER MODULAR -->
+    <mi-footer id="bottom"></mi-footer>
 
-<div class="image-container">
+    <!-- FIREBASE Y LÓGICA -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
-<a href="Docs/UltimoVolumen/Revista_Cienciometrik_Vol_3_N5.pdf"
-id="ultimovolumen-pdf">
+    <script src="js/panelmetricas.js"></script>
 
-<img
-src="images/ultimovolumen6.png"
-alt="Último volumen revista Cienciometrik"
-class="soon-image">
+    <script src="Objects/header.js"></script>
+    <script src="Objects/container.js"></script>
+    <script src="Objects/footer.js"></script>
+    <script src="Objects/script.js"></script>
 
-</a>
-
-</div>
-
-<!-- BANNER -->
-
-<section id="inicio" class="section">
-
-<div class="main-content-banner">
-
-<div class="image-wrapper">
-
-<img
-src="images/pubilicidad2.jpeg"
-alt="Publicidad revista"
-class="main-image-banner">
-
-</div>
-
-<div class="image-wrapper">
-
-<img
-src="Docs/UltimoVolumen/VOL5.png"
-alt="Portada revista Cienciometrik"
-class="main-image-banner">
-
-<a
-href="Docs/UltimoVolumen/Revista_Cienciometrik_Vol_3_N5.pdf"
-download
-class="button_download">
-
-Último volumen
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- BIENVENIDA -->
-
-<section id="inicio_bienvenido" class="section">
-
-<h2 id="titulo_inicio">
-
-Bienvenido a la Revista Cienciometrik
-
-</h2>
-
-<p id="parrafo_inicio">
-
-Un espacio para la difusión del conocimiento científico y tecnológico del sistema SENNOVA.
-
-</p>
-
-<div class="video-container">
-
-<video
-controls
-muted
-loop
-preload="metadata">
-
-<source
-src="vids/vid1.mp4"
-type="video/mp4">
-
-</video>
-
-</div>
-
-</section>
-
-<!-- HISTORIA -->
-
-<section id="historia" class="section">
-
-<h2>Historia de la Revista</h2>
-
-<p>
-
-La Revista Cienciometrik es una publicación semestral del Servicio Nacional de Aprendizaje SENA, adscrita al sistema SENNOVA.
-
-</p>
-
-<h3>Convocatorias</h3>
-
-<ul>
-
-<li>
-
-<strong>Vol.1 N°1 (2023):</strong> Convocatoria general de investigación.
-
-</li>
-
-<li>
-
-<strong>Vol.2 N°2 (2024):</strong> Convocatoria general de investigación.
-
-</li>
-
-<li>
-
-<strong>Vol.2 N°3 (2024):</strong> Convocatoria general de investigación.
-
-</li>
-
-<li>
-
-<strong>Simposio Nacional de Cienciometría (2024):</strong>
-
-Convocatoria especial.
-
-</li>
-
-</ul>
-
-</section>
-
-<!-- LINEA DE TIEMPO -->
-
-<section id="linea-tiempo" class="section">
-
-<h2>Línea de tiempo</h2>
-
-<ul>
-
-<li><strong>2023:</strong> Publicación Vol 1.</li>
-
-<li><strong>2024:</strong> Publicación Vol 2.</li>
-
-<li><strong>2025:</strong> Publicación Vol 3.</li>
-
-</ul>
-
-</section>
-
-<!-- ENFOQUE -->
-
-<section id="enfoque" class="section">
-
-<h2>Enfoque de la Revista</h2>
-
-<p>
-
-Difusión de investigaciones científicas, desarrollo tecnológico e innovación.
-
-</p>
-
-<h3>Líneas de investigación</h3>
-
-<ul>
-
-<li>Cienciometría y estudios métricos</li>
-
-<li>Investigación pedagógica</li>
-
-<li>Habilidades socioemocionales</li>
-
-<li>Optimización de procesos industriales</li>
-
-<li>Innovación tecnológica</li>
-
-<li>Economía verde y sostenibilidad</li>
-
-<li>Administración y comercio</li>
-
-</ul>
-
-</section>
-
-</main>
-
-<metricas-panel></metricas-panel>
-
-</div>
-
-<!-- FOOTER -->
-
-<mi-footer id="bottom"></mi-footer>
-
-<!-- FIREBASE -->
-
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-
-<script src="js/panelmetricas.js"></script>
-
-<script src="Objects/header.js"></script>
-<script src="Objects/container.js"></script>
-<script src="Objects/footer.js"></script>
-<script src="Objects/script.js"></script>
-
-<script src="js/contentloader.js"></script>
-<script src="js/admin_edit_index.js"></script>
+    <script src="js/contentloader.js"></script>
+    <script src="js/admin_edit_index.js"></script>
 
 </body>
 

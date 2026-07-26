@@ -7,25 +7,76 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
+    /* Fondo azul oscuro elegante que dará contraste a las tarjetas blancas */
+    background-color: #0b192c; 
     color: #333;
     line-height: 1.6;
+    min-height: 100vh;
 }
 
+/* El contenedor envuelve el contenido principal y el sidebar (panel de métricas) */
 .container {
     display: flex;
     padding: 10px;
-    gap: 30px; /* Aumentando el gap para mayor separación de los contenedores */
-    max-width: 1500px; /* Ancho de los contenedores */
-    margin: 40px auto; /* Margen superior de los contenedores */
+    gap: 40px; 
+    max-width: 1400px;
+    margin: 40px auto; 
+    position: relative;
 }
 
 /* -------------------------------------------------------------------------------------------- */
+/* ESTILOS PARA EL CONTENIDO PRINCIPAL */
 
+.main-content {
+    flex: 1;
+    min-width: 0; 
+}
+
+/* ESTILO BASE PARA TODAS LAS SECCIONES */
+.section {
+    background-color: #ffffff; /* Fondo blanco puro para contraste */
+    margin-bottom: 40px;
+    padding: 40px;
+    border-radius: 12px;
+    /* Sombra profunda para dar efecto de elevación (efecto tarjeta) */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    border-top: 5px solid #3FCED4; /* Detalle superior neón para unir con el panel */
+}
+
+/* TÍTULOS DE SECCIÓN */
+.section h2 {
+    color: #003057;
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    position: relative;
+    border-bottom: none; /* Quitamos el borde básico */
+}
+
+/* Línea decorativa bajo los títulos */
+.section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #3FCED4;
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+.section p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #555;
+    text-align: justify;
+}
+
+/* -------------------------------------------------------------------------------------------- */
 /* ESTILOS PARA EL ENLACE DEL MISMO SITIO WEB EN QUIENES SOMOS */
 
 .enlace-elegante {
-    color: #2c3e50; /* Azul oscuro elegante */
+    color: #2c3e50; 
     text-decoration: none;
     position: relative;
     padding-bottom: 2px;
@@ -40,7 +91,7 @@ body {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #3498db; /* Azul brillante */
+    background-color: #3498db; 
     transition: width 0.3s ease;
 }
 

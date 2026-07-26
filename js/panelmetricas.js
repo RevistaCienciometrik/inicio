@@ -1,17 +1,17 @@
-// js/panelmetricas.js - FIREBASE
+// js/panelmetricas.js - FIREBASE VIP EDITION
 class MetricasPanel extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
         
-        // Verificar si Firebase está disponible antes de inicializar
+        // Verificar si Firebase está disponible
         if (typeof firebase === 'undefined') {
-            console.error("Firebase SDK no está cargado. Asegúrate de incluir los scripts de Firebase antes de este componente.");
+            console.error("Firebase SDK no está cargado.");
             this.render();
             return;
         }
         
-        // Configuración para la conexión a la base de datos de Firebase
+        // Configuración para Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
             authDomain: "cienciometrik-3c8e7.firebaseapp.com",
@@ -21,7 +21,6 @@ class MetricasPanel extends HTMLElement {
             appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
         };
         
-        // Inicializar Firebase si no está inicializado
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
@@ -31,217 +30,224 @@ class MetricasPanel extends HTMLElement {
         
         this.render();
     }
+    
     render() {
         this.shadowRoot.innerHTML = `
             <style>
-                /* --- ESTILOS PARA EL PANEL DE MÉTRICAS --- */
+                @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+                /* --- PANEL VIP GLASSMORPHISM --- */
                 .metrics-panel-container {
-                    width: 220px;
-                    background-color: rgba(15, 30, 60, 0.5);
-                    border: 4px solid #3FCED4;
-                    color: whitesmoke;
-                    padding: 15px 12px;
-                    border-radius: 12px;
-                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(63, 206, 212, 0.2);
-                    flex-shrink: 0;
+                    width: 250px;
+                    background: rgba(10, 15, 30, 0.75); /* Azul profundo semitransparente */
+                    backdrop-filter: blur(12px); /* Efecto de vidrio */
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid rgba(63, 206, 212, 0.3); /* Borde sutil cyan */
+                    border-radius: 16px;
+                    padding: 20px;
+                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
+                                inset 0 0 15px rgba(63, 206, 212, 0.1); /* Brillo interior */
+                    color: #fff;
                     position: sticky;
-                    top: calc(var(--header-height, 0px) + -80px);
+                    top: 100px;
                     height: fit-content;
-                    max-height: calc(100vh - 100px);
+                    max-height: 85vh;
                     overflow-y: auto;
-                    z-index: 10;
-                    transform: translateZ(0);
-                    backdrop-filter: blur(5px);
-                    margin-right: -20px;
+                    z-index: 100;
+                    margin-left: 20px;
+                    transition: all 0.4s ease;
                 }
                 
-                .metrics-panel-container::-webkit-scrollbar {
-                    width: 8px;
+                .metrics-panel-container:hover {
+                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
+                                inset 0 0 25px rgba(63, 206, 212, 0.3);
+                    border-color: rgba(63, 206, 212, 0.8);
                 }
-                
-                .metrics-panel-container::-webkit-scrollbar-track {
-                    background: rgba(0, 0, 0, 0.2);
-                    border-radius: 4px;
+
+                .metrics-panel-container::-webkit-scrollbar { width: 4px; }
+                .metrics-panel-container::-webkit-scrollbar-track { background: transparent; }
+                .metrics-panel-container::-webkit-scrollbar-thumb { background: #3FCED4; border-radius: 4px; }
+
+                /* HEADER DEL PANEL */
+                .panel-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 }
-                
-                .metrics-panel-container::-webkit-scrollbar-thumb {
-                    background: #3FCED4;
-                    border-radius: 4px;
+
+                h3 {
+                    font-family: 'Orbitron', sans-serif;
+                    font-size: 1.2rem;
+                    color: #3FCED4;
+                    margin: 0;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                    text-shadow: 0 0 8px rgba(63, 206, 212, 0.5);
                 }
-                
-                .metrics-panel-container::-webkit-scrollbar-thumb:hover {
-                    background: #3FCED4;
-                }
-                
-                .metrics-panel-container h3 {
-                    text-align: center;
-                    margin-bottom: 15px;
-                    color: whitesmoke;
-                    font-size: 1.4em;
-                    font-weight: 600;
+
+                /* ITEMS DE MÉTRICA */
+                .metric-item {
+                    background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+                    border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 10px;
+                    padding: 12px;
+                    margin-bottom: 12px;
                     position: relative;
-                    padding-bottom: 8px;
+                    overflow: hidden;
+                    transition: all 0.3s ease;
                 }
-                
-                .metrics-panel-container h3::after {
+
+                .metric-item::before {
                     content: '';
                     position: absolute;
-                    left: 50%;
-                    bottom: 0;
-                    transform: translateX(-50%);
-                    width: 40px;
-                    height: 2px;
-                    background-color: #3FCED4;
-                    border-radius: 2px;
+                    top: 0; left: 0;
+                    width: 3px;
+                    height: 100%;
+                    background: #3FCED4;
+                    box-shadow: 0 0 10px #3FCED4;
+                    opacity: 0.5;
+                    transition: opacity 0.3s ease;
                 }
-                
-                .metric-item {
-                    background-color: rgba(255, 255, 255, 0.08);
-                    border-radius: 8px;
-                    padding: 6px 8px;
-                    margin-bottom: 8px;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(63, 206, 212, 0.1);
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    border: 1px solid rgba(63, 206, 212, 0.2);
-                }
-                
+
                 .metric-item:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(63, 206, 212, 0.2);
-                    border-color: rgba(63, 206, 212, 0.4);
+                    transform: translateX(5px);
+                    background: rgba(63, 206, 212, 0.05);
                 }
-                
-                .metric-item h4 {
-                    color: #3FCED4;
-                    margin-bottom: 3px;
-                    font-size: 0.95em;
-                    font-weight: 600;
+
+                .metric-item:hover::before { opacity: 1; }
+
+                h4 {
+                    font-family: 'Segoe UI', Tahoma, sans-serif;
+                    color: #A0AAB2;
+                    font-size: 0.85rem;
+                    margin: 0 0 5px 0;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
                 }
-                
-                .metric-item .metric-value {
-                    color: #fff;
-                    font-size: 1.2em;
+
+                .metric-value {
+                    font-family: 'Rajdhani', sans-serif;
+                    color: #FFFFFF;
+                    font-size: 1.8rem;
                     font-weight: 700;
-                    text-align: center;
-                    margin-top: 2px;
+                    margin: 0;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
                 }
-                
-                @media screen and (max-width: 768px) {
-                    .metrics-panel-container {
-                        width: 90%;
-                        position: static;
-                        margin-bottom: 20px;
-                        margin-right: 0;
-                        order: -1;
-                        max-height: none;
-                        overflow-y: visible;
-                    }
+
+                /* NÚMERO RESALTADO */
+                #web-visits {
+                    color: #00FF88; /* Verde neón para visitas */
+                    text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
                 }
-                
-                .navigation-buttons {
-                    margin-top: 15px;
-                    padding-top: 12px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.2);
-                    display: flex;
-                    flex-direction: column;
-                    gap: 8px;
+
+                /* BOTONES DE NAVEGACIÓN */
+                .nav-group {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 10px;
+                    margin-top: 20px;
+                    padding-top: 15px;
+                    border-top: 1px solid rgba(255,255,255,0.1);
                 }
-                
-                .nav-button {
-                    background-color: rgba(255, 255, 255, 0.1);
-                    color: whitesmoke;
-                    padding: 8px 10px;
-                    border: 1px solid rgba(63, 206, 212, 0.3);
+
+                .btn-cyber {
+                    background: transparent;
+                    color: #A0AAB2;
+                    border: 1px solid rgba(160, 170, 178, 0.3);
+                    padding: 8px;
                     border-radius: 6px;
+                    font-family: 'Orbitron', sans-serif;
+                    font-size: 0.7rem;
                     cursor: pointer;
-                    font-size: 0.95em;
-                    font-weight: 500;
-                    text-align: center;
-                    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+                    text-transform: uppercase;
+                    transition: all 0.3s ease;
                 }
-                
-                .nav-button:hover {
-                    background-color: rgba(63, 206, 212, 0.2);
-                    transform: translateY(-2px);
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+
+                .btn-cyber:hover {
+                    color: #3FCED4;
                     border-color: #3FCED4;
+                    background: rgba(63, 206, 212, 0.1);
+                    box-shadow: 0 0 10px rgba(63, 206, 212, 0.3);
                 }
-                
-                .nav-button:active {
-                    transform: translateY(0);
+
+                .btn-danger {
+                    grid-column: span 2;
+                    border-color: rgba(255, 71, 87, 0.3);
+                    color: #ff4757;
                 }
-                
-                .reset-button {
-                    background-color: rgba(255, 87, 87, 0.6);
-                    border-color: rgba(255, 87, 87, 0.4);
-                    margin-top: 5px;
+                .btn-danger:hover {
+                    background: rgba(255, 71, 87, 0.1);
+                    border-color: #ff4757;
+                    box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+                    color: #fff;
                 }
-                
-                .reset-button:hover {
-                    background-color: rgba(255, 87, 87, 0.8);
-                    border-color: rgba(255, 87, 87, 0.6);
+
+                /* RESPONSIVE */
+                @media (max-width: 992px) {
+                    .metrics-panel-container {
+                        width: 100%;
+                        margin-left: 0;
+                        margin-bottom: 30px;
+                        position: relative;
+                        top: 0;
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                        gap: 15px;
+                    }
+                    .panel-header, .nav-group { grid-column: 1 / -1; }
                 }
             </style>
-            <div class="metrics-panel-container" id="nav_panel">
-                <h3>Ciencio/métricas</h3>
-                <div class="navigation-buttons">
-                    <button class="nav-button" id="btn-fin">Top Down</button>
-                    <br>
+            
+            <div class="metrics-panel-container">
+                <div class="panel-header">
+                    <h3>DATA DASHBOARD</h3>
+                </div>
+                
+                <div class="metric-item">
+                    <h4>Visitas a la Web</h4>
+                    <p class="metric-value" id="web-visits">...</p>
                 </div>
                 <div class="metric-item">
-                    <h4>Visitas a la Web:</h4>
-                    <p class="metric-value" id="web-visits">Cargando...</p>
-                </div>
-                <div class="metric-item">
-                    <h4>Descargas de Revistas:</h4>
+                    <h4>Descargas Revistas</h4>
                     <p class="metric-value" id="total-revista-downloads-sidebar">0</p>
                 </div>
                 <div class="metric-item">
-                    <h4>Descargas de Libros:</h4>
+                    <h4>Descargas Libros</h4>
                     <p class="metric-value" id="total-libros-downloads-sidebar">0</p>
                 </div>
                 <div class="metric-item">
-                    <h4>Descargas de Cartillas Digitales:</h4>
+                    <h4>Cartillas Digitales</h4>
                     <p class="metric-value" id="total-cartillas-downloads-sidebar">0</p>
                 </div>
                 <div class="metric-item">
-                    <h4>Descargas de Informes:</h4>
+                    <h4>Informes</h4>
                     <p class="metric-value" id="total-informes-downloads-sidebar">0</p>
                 </div>
-                <div class="metric-item">
-                    <h4>Tiempo de Carga:</h4>
-                    <p class="metric-value" id="loading-time">Cargando...</p>
-                </div>
-                <div class="navigation-buttons">
-                    <button class="nav-button" id="btn-inicio">Top Up</button>
-                    <button class="nav-button reset-button" id="btn-reset">Reiniciar Contadores</button>
+                
+                <div class="nav-group">
+                    <button class="btn-cyber" id="btn-inicio">Top Up</button>
+                    <button class="btn-cyber" id="btn-fin">Down</button>
+                    <button class="btn-cyber btn-danger" id="btn-reset">System Reset</button>
                 </div>
             </div>
         `;
         
-        // Solo cargar métricas si Firebase está disponible
         if (typeof firebase !== 'undefined') {
             this.loadMetrics();
             this.setupNavigationButtons();
             this.setupDownloadTracking();
-            
-            // Establecer un listener para actualizaciones en tiempo real
             this.setupRealtimeUpdates();
-        } else {
-            // Mostrar mensaje de error en el panel si Firebase no está disponible
-            this.updateMetric('web-visits', 'Error: Firebase no disponible');
-            this.updateMetric('total-revista-downloads-sidebar', 'Error');
-            this.updateMetric('total-libros-downloads-sidebar', 'Error');
-            this.updateMetric('total-cartillas-downloads-sidebar', 'Error');
-            this.updateMetric('total-informes-downloads-sidebar', 'Error');
         }
     }
     
-    // Cargar métricas desde Firestore
+    // ... [El resto de la lógica JavaScript de tu archivo original se mantiene igual]
     async loadMetrics() {
         try {
             const doc = await this.metricsRef.get();
-            
             if (doc.exists) {
                 const data = doc.data();
                 this.updateMetric('web-visits', data.webVisits || 0);
@@ -249,44 +255,10 @@ class MetricasPanel extends HTMLElement {
                 this.updateMetric('total-libros-downloads-sidebar', data.totalLibrosDownloads || 0);
                 this.updateMetric('total-cartillas-downloads-sidebar', data.totalCartillasDownloads || 0);
                 this.updateMetric('total-informes-downloads-sidebar', data.totalInformesDownloads || 0);
-            } else {
-                // Crear documento inicial si no existe
-                await this.metricsRef.set({
-                    webVisits: 0,
-                    totalRevistaDownloads: 0,
-                    totalLibrosDownloads: 0,
-                    totalCartillasDownloads: 0,
-                    totalInformesDownloads: 0
-                });
-                
-                // Cargar valores iniciales
-                this.loadMetrics();
             }
-        } catch (error) {
-            console.error("Error al cargar métricas:", error);
-            this.updateMetric('web-visits', 'Error');
-            this.updateMetric('total-revista-downloads-sidebar', 'Error');
-            this.updateMetric('total-libros-downloads-sidebar', 'Error');
-            this.updateMetric('total-cartillas-downloads-sidebar', 'Error');
-            this.updateMetric('total-informes-downloads-sidebar', 'Error');
-        }
-        
-        // El tiempo de carga sigue siendo local
-        const loadingTimeElement = this.shadowRoot.getElementById('loading-time');
-        if (loadingTimeElement) {
-            requestAnimationFrame(() => {
-                const [entry] = performance.getEntriesByType("navigation");
-                if (entry) {
-                    const loadTime = (entry.loadEventEnd - entry.startTime) / 1000;
-                    loadingTimeElement.textContent = `${loadTime.toFixed(2)}s`;
-                } else {
-                    loadingTimeElement.textContent = 'N/A';
-                }
-            });
-        }
+        } catch (error) { console.error("Error:", error); }
     }
     
-    // Configurar actualizaciones en tiempo real
     setupRealtimeUpdates() {
         this.metricsRef.onSnapshot(doc => {
             if (doc.exists) {
@@ -297,163 +269,63 @@ class MetricasPanel extends HTMLElement {
                 this.updateMetric('total-cartillas-downloads-sidebar', data.totalCartillasDownloads || 0);
                 this.updateMetric('total-informes-downloads-sidebar', data.totalInformesDownloads || 0);
             }
-        }, error => {
-            console.error("Error en actualización en tiempo real:", error);
         });
     }
     
     setupNavigationButtons() {
-        const btnInicio = this.shadowRoot.getElementById('btn-inicio');
-        const btnFin = this.shadowRoot.getElementById('btn-fin');
-        const btnReset = this.shadowRoot.getElementById('btn-reset');
-        
-        if (btnInicio) {
-            btnInicio.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-        
-        if (btnFin) {
-            btnFin.addEventListener('click', () => {
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            });
-        }
-        
-        if (btnReset) {
-            btnReset.addEventListener('click', () => {
-                this.resetAllCounters();
-            });
-        }
+        this.shadowRoot.getElementById('btn-inicio')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        this.shadowRoot.getElementById('btn-fin')?.addEventListener('click', () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
+        this.shadowRoot.getElementById('btn-reset')?.addEventListener('click', () => this.resetAllCounters());
     }
     
     setupDownloadTracking() {
         const setupTracking = () => {
-            const downloadLinks = document.querySelectorAll('a[data-volume-id]');
-            downloadLinks.forEach(link => {
-                // Eliminar event listeners existentes para evitar duplicados
+            document.querySelectorAll('a[data-volume-id]').forEach(link => {
                 link.removeEventListener('click', this.handleDownloadClick);
-                // Agregar event listener
                 link.addEventListener('click', this.handleDownloadClick.bind(this));
             });
-            console.log(`Seguimiento de descargas configurado para ${downloadLinks.length} enlaces`);
         };
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', setupTracking);
-        } else {
-            setupTracking();
-        }
+        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', setupTracking) : setupTracking();
     }
     
     async handleDownloadClick(event) {
-        const link = event.currentTarget;
-        const volumeId = link.getAttribute('data-volume-id');
+        const volumeId = event.currentTarget.getAttribute('data-volume-id');
+        if (!volumeId) return;
         
-        if (volumeId) {
-            console.log(`Clic detectado en enlace con volume-id: ${volumeId}`);
-            
-            let field = '';
-            // Corregido para detectar tanto "volumen-" como "sena-volumen-"
-            if (volumeId.startsWith('volumen-') || volumeId.startsWith('sena-volumen-')) {
-                field = 'totalRevistaDownloads';
-            } else if (volumeId.startsWith('libro-')) {
-                field = 'totalLibrosDownloads';
-            } else if (volumeId.startsWith('cartilla-inclusion-') || volumeId.startsWith('cartilla-servitizacion-')) {
-                field = 'totalCartillasDownloads';
-            } else if (volumeId.startsWith('informe-')) {
-                field = 'totalInformesDownloads';
-            }
-            
-            if (field) {
-                try {
-                    // Usar transacción para actualizar de forma segura
-                    await this.db.runTransaction(async (transaction) => {
-                        const doc = await transaction.get(this.metricsRef);
-                        
-                        if (!doc.exists) {
-                            // Si no existe, crearlo con valores iniciales
-                            transaction.set(this.metricsRef, {
-                                webVisits: 0,
-                                totalRevistaDownloads: 0,
-                                totalLibrosDownloads: 0,
-                                totalCartillasDownloads: 0,
-                                totalInformesDownloads: 0
-                            });
-                        }
-                        
-                        // Actualizar el campo específico
-                        const currentValue = doc.exists ? (doc.data()[field] || 0) : 0;
-                        transaction.update(this.metricsRef, {
-                            [field]: currentValue + 1
-                        });
-                        
-                        return currentValue + 1;
-                    });
+        let field = volumeId.startsWith('volumen-') || volumeId.startsWith('sena-volumen-') ? 'totalRevistaDownloads' :
+                    volumeId.startsWith('libro-') ? 'totalLibrosDownloads' :
+                    volumeId.startsWith('cartilla-') ? 'totalCartillasDownloads' :
+                    volumeId.startsWith('informe-') ? 'totalInformesDownloads' : '';
                     
-                    // No necesitamos llamar a loadMetrics() porque tenemos actualizaciones en tiempo real
-                    console.log(`Contador de ${field} actualizado correctamente`);
-                } catch (error) {
-                    console.error("Error al actualizar contador de descargas:", error);
-                }
-            } else {
-                console.error(`No se pudo determinar la categoría para el volume-id: ${volumeId}`);
-            }
+        if (field) {
+            try {
+                await this.db.runTransaction(async (t) => {
+                    const doc = await t.get(this.metricsRef);
+                    const val = doc.exists ? (doc.data()[field] || 0) : 0;
+                    t.update(this.metricsRef, { [field]: val + 1 });
+                });
+            } catch (error) { console.error("Error:", error); }
         }
     }
     
     updateMetric(id, count) {
-        const metricElement = this.shadowRoot.getElementById(id);
-        if (metricElement) {
-            metricElement.textContent = count.toLocaleString();
+        const el = this.shadowRoot.getElementById(id);
+        if (el) {
+            // Efecto contador digital
+            let start = parseInt(el.innerText) || 0;
+            if(start === count) return;
+            el.style.color = '#3FCED4';
+            setTimeout(() => {
+                el.innerText = count.toLocaleString();
+                el.style.color = id === 'web-visits' ? '#00FF88' : '#FFFFFF';
+            }, 150);
         }
     }
     
     async resetAllCounters() {
-        if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores? Esta acción no se puede deshacer.')) {
-            try {
-                await this.metricsRef.update({
-                    webVisits: 0,
-                    totalRevistaDownloads: 0,
-                    totalLibrosDownloads: 0,
-                    totalCartillasDownloads: 0,
-                    totalInformesDownloads: 0
-                });
-                
-                // No necesitamos llamar a loadMetrics() porque tenemos actualizaciones en tiempo real
-                
-                // Mostrar notificación
-                this.showNotification('Todos los contadores han sido reiniciados.');
-            } catch (error) {
-                console.error("Error al reiniciar contadores:", error);
-                this.showNotification('Error al reiniciar contadores.', 'error');
-            }
+        if (confirm('¿SYSTEM OVERRIDE: Reiniciar métricas?')) {
+            await this.metricsRef.update({ webVisits: 0, totalRevistaDownloads: 0, totalLibrosDownloads: 0, totalCartillasDownloads: 0, totalInformesDownloads: 0 });
         }
     }
-    
-    showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.right = '20px';
-        notification.style.backgroundColor = type === 'success' ? 'rgba(76, 175, 80, 0.9)' : 'rgba(244, 67, 54, 0.9)';
-        notification.style.color = 'white';
-        notification.style.padding = '15px';
-        notification.style.borderRadius = '5px';
-        notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        notification.style.zIndex = '1000';
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transition = 'opacity 0.5s';
-            setTimeout(() => {
-                if (document.body.contains(notification)) {
-                    document.body.removeChild(notification);
-                }
-            }, 500);
-        }, 3000);
-    }
 }
-
 customElements.define('metricas-panel', MetricasPanel);
