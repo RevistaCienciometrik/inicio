@@ -1,183 +1,208 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url('../images/background_cienciometrik3.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    overflow: hidden;
+/* ==========================================================================
+   ESTILOS VIP PARA LOGIN - REVISTA CIENCIOMÉTRIK
+   ========================================================================== */
+   
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #003057; 
+    --secondary-color: #008394;
+    --accent-color: #39A900; 
+    --card-bg: #ffffff; 
+    --text-main: #333333; 
+    --text-muted: #666666;
+    --transition: all 0.3s ease;
 }
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-.login-box {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 30px rgba(0, 32, 96, 0.3);
-    text-align: center;
-    width: 380px;
-    max-width: 90%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-sizing: border-box;
-}
-.login-box h2 {
-    color: whitesmoke;
-    margin-bottom: 5px;
-    font-size: 1.3em;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.login-box h1 {
-    color: rgba(255, 255, 255, 0.3);
-    margin-top: 0;
-    margin-bottom: 30px;
-    font-size: 2.2em;
-    font-weight: bold;
-}
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9em;
-}
-.input-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-size: 1em;
-    outline: none;
-    transition: background-color 0.3s ease;
-    box-sizing: border-box;
-}
-.input-group input:focus {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-.input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-.options-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    font-size: 0.9em;
-}
-.checkbox-container {
-    display: block;
-    position: relative;
-    padding-left: 25px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    color: rgba(255, 255, 255, 0.8);
-}
-.checkbox-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 18px;
-    width: 18px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-.checkbox-container:hover input ~ .checkmark {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-.checkbox-container input:checked ~ .checkmark {
-    background-color: #0047AB;
-}
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-.checkbox-container input:checked ~ .checkmark:after {
-    display: block;
-}
-.checkbox-container .checkmark:after {
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-.forgot-password {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-.forgot-password:hover {
-    color: #0047AB;
-}
-.login-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #0047AB;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 71, 171, 0.4);
-}
-.login-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-}
-.login-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 71, 171, 0.4);
-}
-.create-account {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.7);
-}
-.create-account a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-.create-account a:hover {
-    color: rgba(255, 255, 255, 0.1);
-    text-decoration: underline;
-}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    /* Fondo elegante corporativo (Gradiente Azul a Oscuro) en lugar de imagen genérica */
+    background: linear-gradient(135deg, #003057 0%, #001224 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- BOTÓN VOLVER AL INICIO (ESQUINA SUPERIOR) --- */
+.back-home-btn {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-home-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateX(-5px);
+    border-color: var(--accent-color);
+}
+
+/* --- CONTENEDOR Y TARJETA DEL LOGIN --- */
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border-top: 6px solid var(--accent-color); /* Borde superior Verde SENA */
+}
+
+/* --- CABECERA DEL LOGIN --- */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-logo {
+    height: 55px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.login-header h1 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    font-size: 0.95em;
+}
+
+/* --- FORMULARIO Y CAMPOS --- */
+.modern-form .input-group {
+    margin-bottom: 20px;
+}
+
+.modern-form label {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    font-size: 1.1em;
+}
+
+.modern-form input {
+    width: 100%;
+    padding: 14px 15px 14px 45px; /* Espacio a la izquierda para el icono */
+    border: 2px solid #eef2f5;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-size: 1em;
+    color: var(--text-main);
+    transition: var(--transition);
+    outline: none;
+}
+
+.modern-form input:focus {
+    border-color: var(--secondary-color);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 131, 148, 0.1);
+}
+
+.modern-form input::placeholder {
+    color: #a0aec0;
+}
+
+/* --- OPCIONES (CONTRASEÑA) --- */
+.options-group {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.forgot-password {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.forgot-password:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* --- BOTÓN DE LOGIN --- */
+.login-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(0, 48, 87, 0.2);
+}
+
+.login-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(57, 169, 0, 0.3);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+    .back-home-btn {
+        top: 15px;
+        left: 15px;
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+    .login-card {
+        padding: 30px 20px;
+    }
 }
