@@ -3,439 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicaciones</title>
+    <title>Publicaciones - Revista Cienciométrik</title>
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* VARIABLES VIP CORPORATIVAS */
+        :root {
+            --primary-color: #003057; 
+            --secondary-color: #008394;
+            --accent-color: #39A900; 
+            --card-bg: #ffffff; 
+            --text-main: #333333; 
+            --text-muted: #666666;
+            --bg-page: #f4f7f8;
+            --transition: all 0.3s ease;
+        }
+
+        /* CONTENEDORES GENERALES */
+        .pub-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 48, 87, 0.08);
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .section-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--primary-color);
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* --- BANNER ÚLTIMO VOLUMEN (VOLUMEN 4) --- */
+        .hero-volumen {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            border: 1px solid rgba(0, 48, 87, 0.05);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+            border-left: 6px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #ff4757;
+            color: white;
+            padding: 8px 40px;
+            font-weight: bold;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .hero-img-container {
+            flex: 0 0 300px;
+        }
+
+        .hero-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: -10px 15px 30px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+        
+        .hero-img:hover {
+            transform: scale(1.03) rotate(-2deg);
+        }
+
+        .hero-info h1 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        .hero-info .vol-meta {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .hero-info p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        /* --- CUADRÍCULA DE PUBLICACIONES (GRID) --- */
+        .pub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .pub-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .pub-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 48, 87, 0.1);
+            border-color: rgba(57, 169, 0, 0.3);
+        }
+
+        .pub-card-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pub-card h3 {
+            color: var(--primary-color);
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .pub-card .meta {
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .pub-card p.desc {
+            color: var(--text-muted);
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* --- BOTONES Y MÉTRICAS --- */
+        .action-area {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eeeeee;
+        }
+
+        .btn-download {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary-color);
+            color: #ffffff !important;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-bottom: 10px;
+        }
+
+        .btn-download i { margin-right: 8px; }
+
+        .btn-download:hover {
+            background: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(57, 169, 0, 0.3);
+        }
+
+        .btn-repo {
+            background: transparent;
+            color: var(--secondary-color) !important;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .btn-repo:hover {
+            background: var(--secondary-color);
+            color: #ffffff !important;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #888888;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #dddddd;
+        }
+
+        .stats span { font-weight: bold; color: var(--primary-color); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-volumen { flex-direction: column; text-align: center; }
+            .hero-img-container { width: 80%; margin: 0 auto; }
+        }
+    </style>
 </head>
 <body>
     <mi-header id="top"></mi-header>
+    
     <div class="container">
-<main class="main-content">
-    <div class="image-container" id="img">
-        <img src="images/ultimovolumen6.png" alt="Próximamente-img" class="soon-image">
-    </div>
-<!-- -------------------------------------------------------------------------------------------------- -->
-<!-- SECCIÓN DE VOLÚMENES -->
-        <!-- ULTIMO VOLUMEN -->
-<section id="ultimo-volumen" class="section nuevo-volumen-section">
-    <h2>ÚLTIMO VOLÚMEN</h2>
-    <div class="volumenes-container">
-            <div class="volumen">
-            <div class="revista-portada">
-            <img src="Docs/UltimoVolumen/VOL5.png" alt="Imagen de la revista" class="revista-imagen">
-            <h1 class="revista-nombre">Cienciometrik</h1>
-            <p class="revista-volumen">Volúmen 3, Número 5, Agosto - Diciembre 2025</p>
+        <main class="main-content">
+            
+            <!-- SECCIÓN: ÚLTIMO VOLUMEN (VOLUMEN 4) -->
+            <section class="pub-section" style="border-top-color: var(--accent-color);">
+                <h2 class="section-title">Edición Más Reciente</h2>
+                
+                <div class="hero-volumen">
+                    <div class="hero-badge">NUEVO</div>
+                    <div class="hero-img-container">
+                        <img src="images/Volume4_2026.png" alt="Portada Volumen 4" class="hero-img">
+                    </div>
+                    <div class="hero-info">
+                        <h1>Revista Cienciométrik</h1>
+                        <p class="vol-meta">Volumen 4, Número 6, Enero - Junio 2026</p>
+                        <p><strong>Dossier especial:</strong> II Feria Tecnológica SENA. Este volumen integra los proyectos más destacados en investigación aplicada, innovación tecnológica y desarrollo industrial presentados por la comunidad académica y el ecosistema SENNOVA.</p>
+                        
+                        <div class="action-area" style="max-width: 400px; background: transparent; border: none; padding: 0;">
+                            <a href="Docs/UltimoVolumen/Revista_2026_Julio_numerada_Volumen4.pdf" target="_blank" data-volume-id="volumen-4" class="btn-download">
+                                <i class="fas fa-file-pdf"></i> Descargar Volumen 4 (PDF)
+                            </a>
+                            <div class="stats" style="border: none;">
+                                <div>ISSN: <strong>2981-5533</strong></div>
+                                <div>Descargas: <span id="downloads-volumen-4" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br>
-            <p>El último volúmen de la Revista con artículos de investigación y resultados del semillero ICI.</p>
-            <div class="descarga-info">
-                <a href="Docs/UltimoVolumen/Revista_Cienciometrik_Vol_3_N5.pdf" target="_blank" data-volume-id="volumen-3-4">Descargar PDF</a>
-                <p>ISSN: 2981-5533</p>
-                <p>Descargas: <span id="downloads-volumen-3-4" class="download-count">0</span></p>
-            </div>
-                                        <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8643" target="_blank" data-volume-id="sena-volumen-3">Volúmen 3</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- -------------------------------------------------------------------------------------------------- -->
-<!-- vol 1-3 -->
-<section id="volumenes" class="section">
-    <h2>Publicaciones de la Revista</h2>
-    <div class="volumenes-container">
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="images/Revista_CienciometriK_1_1-3.png" alt="Imagen de la revista" class="revista-imagen">
-            <h1 class="revista-nombre">Cienciometrik</h1>
-            <p class="revista-volumen">Volúmen 1, Número 1-3</p>
-            </div>
-            <p>Este volúmen incluye artículos de investigación y ponencias del 1er Simposio Nacional de Cienciometría.</p>
-            <div class="descarga-info">
-                <a href="Docs/Revista_CienciometriK_1_1-3.pdf" target="_blank" data-volume-id="volumen-1-1-3">Descargar PDF</a>
-                <p>ISSN: 2981-5533</p>
-                <p>Descargas: <span id="downloads-volumen-1-1-3" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8135?locale-attribute=es" target="_blank" data-volume-id="sena-volumen-1">Volúmen 1</a>
-            </div>
-        </div>
-<!--  vol 2 - 2  -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="images/REVISTA CIENCIOMETRIK_VOLUMEN 2 N° 2 - ENERO - JUNIO - 2024.png" alt="Imagen de la revista" class="revista-imagen">
-            <h1 class="revista-nombre">Cienciometrik</h1>
-            <p class="revista-volumen">Volúmen 2, Número 2, Enero - Junio 2024</p>
+            </section>
+
+            <!-- SECCIÓN: HISTÓRICO DE REVISTAS -->
+            <section class="pub-section">
+                <h2 class="section-title">Archivo de Publicaciones</h2>
+                
+                <div class="pub-grid">
+                    
+                    <!-- VOLUMEN 3 -->
+                    <div class="pub-card">
+                        <img src="Docs/UltimoVolumen/VOL5.png" alt="Volumen 3" class="pub-card-img">
+                        <h3>Cienciométrik</h3>
+                        <p class="meta">Volumen 3, Número 5, Ago - Dic 2025</p>
+                        <p class="desc">Artículos de investigación y resultados del semillero ICI con enfoque en desarrollo sostenible.</p>
+                        
+                        <div class="action-area">
+                            <a href="Docs/UltimoVolumen/Revista_Cienciometrik_Vol_3_N5.pdf" target="_blank" data-volume-id="volumen-3-4" class="btn-download"><i class="fas fa-download"></i> Descargar PDF</a>
+                            <a href="https://repositorio.sena.edu.co/handle/11404/8643" target="_blank" class="btn-download btn-repo"><i class="fas fa-link"></i> Ver en Repositorio</a>
+                            <div class="stats">
+                                <div>ISSN: 2981-5533</div>
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-volumen-3-4" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VOLUMEN 3, NÚMERO 4 -->
+                    <div class="pub-card">
+                        <img src="images/Volumen3n4.png" alt="Volumen 3 No 4" class="pub-card-img">
+                        <h3>Cienciométrik</h3>
+                        <p class="meta">Volumen 3, Número 4, Ene - Jul 2025</p>
+                        <p class="desc">Investigación en tecnología, desarrollo sostenible y contabilidad corporativa.</p>
+                        
+                        <div class="action-area">
+                            <a href="Docs/REVISTA CIENCIOMETRIK V 3 N 4-1.pdf" target="_blank" data-volume-id="volumen-3-num-4" class="btn-download"><i class="fas fa-download"></i> Descargar PDF</a>
+                            <a href="https://repositorio.sena.edu.co/handle/" target="_blank" class="btn-download btn-repo"><i class="fas fa-link"></i> Ver en Repositorio</a>
+                            <div class="stats">
+                                <div>ISSN: 2981-5533</div>
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-volumen-3-num-4" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VOLUMEN 2, NÚMERO 3 -->
+                    <div class="pub-card">
+                        <img src="images/Revista CienciometriK_Vol. 2 N°. 3 2024.png" alt="Volumen 2 No 3" class="pub-card-img">
+                        <h3>Cienciométrik</h3>
+                        <p class="meta">Volumen 2, Número 3, Jul - Dic 2024</p>
+                        <p class="desc">Tercer volumen de la revista con resultados consolidados del semillero ICI.</p>
+                        
+                        <div class="action-area">
+                            <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" target="_blank" data-volume-id="volumen-2-3" class="btn-download"><i class="fas fa-download"></i> Descargar PDF</a>
+                            <a href="https://repositorio.sena.edu.co/handle/11404/8643" target="_blank" class="btn-download btn-repo"><i class="fas fa-link"></i> Ver en Repositorio</a>
+                            <div class="stats">
+                                <div>ISSN: 2981-5533</div>
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-volumen-2-3" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VOLUMEN 2, NÚMERO 2 -->
+                    <div class="pub-card">
+                        <img src="images/REVISTA CIENCIOMETRIK_VOLUMEN 2 N° 2 - ENERO - JUNIO - 2024.png" alt="Volumen 2 No 2" class="pub-card-img">
+                        <h3>Cienciométrik</h3>
+                        <p class="meta">Volumen 2, Número 2, Ene - Jun 2024</p>
+                        <p class="desc">Artículos sobre IA, mipymes, economía circular e inclusión tecnológica.</p>
+                        
+                        <div class="action-area">
+                            <a href="Docs/REVISTA CIENCIOMETRIK_VOLUMEN 2 N° 2 - ENERO - JUNIO - 2024.pdf" target="_blank" data-volume-id="volumen-2-2" class="btn-download"><i class="fas fa-download"></i> Descargar PDF</a>
+                            <a href="https://repositorio.sena.edu.co/handle/11404/8483" target="_blank" class="btn-download btn-repo"><i class="fas fa-link"></i> Ver en Repositorio</a>
+                            <div class="stats">
+                                <div>ISSN: 2981-5533</div>
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-volumen-2-2" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VOLUMEN 1 -->
+                    <div class="pub-card">
+                        <img src="images/Revista_CienciometriK_1_1-3.png" alt="Volumen 1" class="pub-card-img">
+                        <h3>Cienciométrik</h3>
+                        <p class="meta">Volumen 1, Número 1-3</p>
+                        <p class="desc">Incluye artículos de investigación y ponencias del 1er Simposio Nacional de Cienciometría.</p>
+                        
+                        <div class="action-area">
+                            <a href="Docs/Revista_CienciometriK_1_1-3.pdf" target="_blank" data-volume-id="volumen-1-1-3" class="btn-download"><i class="fas fa-download"></i> Descargar PDF</a>
+                            <a href="https://repositorio.sena.edu.co/handle/11404/8135?locale-attribute=es" target="_blank" class="btn-download btn-repo"><i class="fas fa-link"></i> Ver en Repositorio</a>
+                            <div class="stats">
+                                <div>ISSN: 2981-5533</div>
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-volumen-1-1-3" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            <p>Este volúmen contiene artículos sobre tecnologías e inteligencia artificial, mipymes, economía circular, inclusión y más.</p>
-            <div class="descarga-info">
-                <a href="Docs/REVISTA CIENCIOMETRIK_VOLUMEN 2 N° 2 - ENERO - JUNIO - 2024.pdf" target="_blank" data-volume-id="volumen-2-2">Descargar PDF</a>
-                <p>ISSN: 2981-5533</p>
-                <p>Descargas: <span id="downloads-volumen-2-2" class="download-count">0</span></p>
-            </div>
-                            <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8483" target="_blank" data-volume-id="sena-volumen-2">Volúmen 2</a>
-            </div>
-        </div>
-<!-- vol 2 - 3 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="images/Revista CienciometriK_Vol. 2 N°. 3 2024.png" alt="Imagen de la revista" class="revista-imagen">
-            <h1 class="revista-nombre">Cienciometrik</h1>
-            <p class="revista-volumen">Volúmen 2, Número 3, Julio - Diciembre 2024</p>
+            </section>
+
+            <!-- SECCIÓN: LIBROS -->
+            <section class="pub-section">
+                <h2 class="section-title">Libros Editados</h2>
+                <div class="pub-grid">
+                    <div class="pub-card">
+                        <img src="Docs/libros/Libro1.jpg" alt="Libro 1" class="pub-card-img" style="height: 250px;">
+                        <h3>Libro 1 Ejemplo</h3>
+                        <p class="meta">Publicación Especial</p>
+                        <p class="desc">Paleta de colores utilizada - Revista Cienciométrik.</p>
+                        <div class="action-area">
+                            <a href="Docs/libros/1 Paleta de colores utilizada - Revista Cienciometrik.pdf" target="_blank" data-volume-id="libro-1" class="btn-download"><i class="fas fa-download"></i> Descargar Libro</a>
+                            <div class="stats">
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-libro-1" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pub-card">
+                        <img src="Docs/libros/libro 2.png" alt="Libro 2" class="pub-card-img" style="height: 250px;">
+                        <h3>Libro 2 Ejemplo</h3>
+                        <p class="meta">Publicación Especial</p>
+                        <p class="desc">Paleta de colores utilizada - Copia.</p>
+                        <div class="action-area">
+                            <a href="Docs/libros/2 Paleta de colores utilizada - Revista Cienciometrik - copia.pdf" target="_blank" data-volume-id="libro-2" class="btn-download"><i class="fas fa-download"></i> Descargar Libro</a>
+                            <div class="stats">
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-libro-2" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br>
-            <p>El tercer volúmen de la revista con artículos de investigación y resultados del semillero ICI.</p>
-            <div class="descarga-info">
-                <a href="Docs/Revista CienciometriK_Vol. 2 N°. 3 2024.pdf" target="_blank" data-volume-id="volumen-2-3">Descargar PDF</a>
-                <p>ISSN: 2981-5533</p>
-                <p>Descargas: <span id="downloads-volumen-2-3" class="download-count">0</span></p>
-            </div>
-                                        <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8643" target="_blank" data-volume-id="sena-volumen-3">Volúmen 3</a>
-            </div>
-        </div>
- <!-- vol 3 - 4 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="images/Volumen3n4.png" alt="Imagen de la revista" class="revista-imagen">
-            <h1 class="revista-nombre">Cienciometrik</h1>
-            <p class="revista-volumen">Volúmen 3, Número 4, Enero - Julio 2025</p>
+            </section>
+
+            <!-- SECCIÓN: CARTILLAS DIGITALES -->
+            <section class="pub-section">
+                <h2 class="section-title">Cartillas Digitales</h2>
+                <div class="pub-grid">
+                    <div class="pub-card">
+                        <img src="Docs/Cartillas inclusion/Cartilla_digital_de_comunicacion_para_la_inclusion.png" alt="Cartilla 1" class="pub-card-img" style="height: 250px;">
+                        <h3>Comunicación para la inclusión</h3>
+                        <p class="meta">Inclusión Laboral</p>
+                        <p class="desc">Herramientas web de comunicación para la inclusión laboral de aprendices sordos.</p>
+                        <div class="action-area">
+                            <a href="Docs/Cartillas inclusion/Cartilla_digital_de_comunicacion_para_la_inclusion.pdf" target="_blank" data-volume-id="cartilla-inclusion-1" class="btn-download"><i class="fas fa-download"></i> Descargar Cartilla</a>
+                            <div class="stats">
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-cartilla-inclusion-1" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pub-card">
+                        <img src="Docs/cartillas servitización/Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad.png" alt="Cartilla Servitización" class="pub-card-img" style="height: 250px;">
+                        <h3>Servitización y estrategias</h3>
+                        <p class="meta">SGPS-12518-2024</p>
+                        <p class="desc">Personalizando productos y servicios para la competitividad (SERVISER).</p>
+                        <div class="action-area">
+                            <a href="Docs/cartillas servitización/Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad.pdf" target="_blank" data-volume-id="cartilla-servitizacion-1" class="btn-download"><i class="fas fa-download"></i> Descargar Cartilla</a>
+                            <div class="stats">
+                                <div><i class="fas fa-chart-line"></i> <span id="downloads-cartilla-servitizacion-1" class="download-count">0</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            <p>Este volúmen contiene artículos con investigación en tecnología, desarrollo sostenible y contabilidad.</p>
-            <div class="descarga-info">
-                <a href="Docs/REVISTA CIENCIOMETRIK V 3 N 4-1.pdf" target="_blank" data-volume-id="volumen-2-2">Descargar PDF</a>
-                <p>ISSN: 2981-5533</p>
-                <p>Descargas: <span id="downloads-volumen-3-4" class="download-count">0</span></p>
-            </div>
-                            <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/" target="_blank" data-volume-id="sena-volumen-2">Volúmen 3</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ------------------------------------------------------------------------------------------------ -->
-<!-- SECCIÓN LIBROS  -->
-<section id="libros" class="section">
-    <h2>Libros</h2>
-    <div class="volumenes-container">
-    
- <!-- LIBRO 1 -->
-        <div class="volumen">
-            <div class="revista-portada"><br>
-            <img src="Docs/libros/Libro1.jpg" alt="Imagen de la cartilla" class="revista-imagen">
-            <h1 class="revista-nombre">Libro 1 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <BR>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/libros/1 Paleta de colores utilizada - Revista Cienciometrik.pdf" target="_blank" data-volume-id="libro-1">Descargar PDF</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-libro-1" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/7863" target="_blank" data-volume-id="sena-libro-1">Libro</a>
-            </div>
-        </div>
-<!-- LIBRO 2 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="Docs/libros/libro 2.png" alt="Imagen de la cartilla" class="revista-imagen">
-            <h1 class="revista-nombre">Libro 2 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/libros/2 Paleta de colores utilizada - Revista Cienciometrik - copia.pdf" target="_blank" data-volume-id="libro-2">Descargar PDF</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-libro-2" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8644" target="_blank" data-volume-id="sena-libro-2">Libro</a>
-            </div>
-        </div>
-        <BR></BR>
-<!-- FIN DE LA SECCIÓN DE LIBROS -->
-    </div>
-</section>
-<!-- ------------------------------------------------------------------------------------------------ -->
-<!-- SECCIÓN CARTILLAS SERVITIZACIÓN E INCLUSIÓN  -->
-<section id="cartillas" class="section">
-    <h2>Cartillas Digitales</h2>
-    <div class="volumenes-container">
-    
-<!-- SECCIÓN CARTILLAS INCLUSIÓN  -->
- <!-- CARTILLA 1 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="Docs/Cartillas inclusion/Cartilla_digital_de_comunicacion_para_la_inclusion.png" alt="Imagen de la cartilla" class="revista-imagen">
-            <h1 class="revista-nombre">Cartilla digital de comunicación para la inclusión</h1>
-            <p class="revista-volumen">PROVECTO DE INVESTIGACIÓN "HERRAMIENTAS WEB DE COMUNICACIÓN PARA, LA INCLUSIÓN LABORAL DE APRENDICES SORDOS"</p> <BR>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/Cartillas inclusion/Cartilla_digital_de_comunicacion_para_la_inclusion.pdf" target="_blank" data-volume-id="cartilla-inclusion-1">Descargar PDF</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-cartilla-inclusion-1" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/7863" target="_blank" data-volume-id="sena-cartilla-inclusion-1">Cartilla</a>
-            </div>
-        </div>
-<!-- CARTILLA 2 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="Docs/Cartillas inclusion/Cartilla Sena Me enseña_Comunicación inclusiva para la educación y el empleo_2024 2.png" alt="Imagen de la cartilla" class="revista-imagen">
-            <h1 class="revista-nombre">Comunicación inclusiva para la educación y el empleo 2024-2</h1>
-            <p class="revista-volumen">PROYECTO DE INVESTIGACIÓN "SENA ME ENSEÑA: INCLUSIÓN EMPRESARIAL DE PERSONAS SORDAS"</p> <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/Cartillas inclusion/Cartilla Sena Me enseña_Comunicación inclusiva para la educación y el empleo_2024 2.pdf" target="_blank" data-volume-id="cartilla-inclusion-2">Descargar PDF</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-cartilla-inclusion-2" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8644" target="_blank" data-volume-id="sena-cartilla-inclusion-2">Cartilla</a>
-            </div>
-        </div>
-<!-- ESTOS ESPACIO ENTRE LA 2 Y LA 3, ESTILIZAN EL ESPACIO DE LAS CARTILLAS -->
-<br><br> 
-<!-- SECCIÓN CARTILLAS SERVITIZACIÓN -->
- <!-- CARTILLA 3 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="Docs/cartillas servitización/Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad.png" alt="Imagen de la cartilla" class="revista-imagen">
-            <h1 class="revista-nombre">Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad</h1>
-            <p class="revista-volumen">PROYECTO DE INVESTIGACIÓN "SERVISER: SERVITIZACIÓN PARA LA SOSTENIBILIDAD DE LA ECONOMIA POPULAR Y CAMPESINA"</p> <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/cartillas servitización/Cartilla - Servitización y estrategias de mercado - Personalizando productos y servicios para la competitividad.pdf" target="_blank" data-volume-id="cartilla-servitizacion-1">Descargar PDF</a>
-                <p>SGPS-12518-2024</p>
-                <p>Descargas: <span id="downloads-cartilla-servitizacion-1" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8645" target="_blank" data-volume-id="sena-cartilla-servitizacion-1">Cartilla</a>
-            </div>
-        </div>
-<!-- ---------------------------- -->
- <!-- CARTILLA 4 -->
-        <div class="volumen">
-            <div class="revista-portada">
-            <img src="Docs/cartillas servitización/Cartilla Servitizacion_produccion_comercializacion.png" alt="Imagen de la cartilla" class="revista-imagen">
-            <h1 class="revista-nombre">Cartilla Servitizacion, produccion, comercializacion</h1> <br>
-            <p class="revista-volumen">PROVECTO DE INVESTIGACION "DISENO DE UN LABORATORIO WEB DE SERVITIZACION EMPRESARIAL V SOSTENIBILIDAD PARA MIPVMES DEL SECTOR COMERCIO, LOGÍSTICA V VENTAS DEL VALLE DE ABURRÁ"</p> <br> <br>
-            <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/cartillas servitización/Cartilla Servitizacion_produccion_comercializacion.pdf" target="_blank" data-volume-id="cartilla-servitizacion-2">Descargar PDF</a>
-                <p>SGPS-10439-2023</p>
-                <p>Descargas: <span id="downloads-cartilla-servitizacion-2" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el primer volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8468" target="_blank" data-volume-id="sena-cartilla-servitizacion-2">Cartilla</a>
-            </div>
-        </div>
+            </section>
+            
+        </main>
         
-<!-- FIN DE LA SECCIÓN DE CARTILLAS -->
+        <!-- PANEL DE MÉTRICAS -->
+        <metricas-panel></metricas-panel>
     </div>
-</section>
-<!-- ------------------------------------------------------------------------------------------------ -->
-<!-- SECCIÓN DE INFORMES   -->
-<section id="informes" class="section">
-    <h2>Informes</h2>
-    <div class="volumenes-container">
-<!--------------- INFORMES DE VIGILANCIA TEGNOLOGICA ------------------->
- <!-- informe de vigilancia tecnológica 1 -->
-        <div class="volumen">
-            <div class="revista-portada"><br>
-            <img src="Docs/informes de vigilancia tecnológica/informe1.png" alt="Imagen del informe" class="revista-imagen">
-            <h1 class="revista-nombre">Informe de vigilancia tecnológica 1 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <BR>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/informes de vigilancia tecnológica/GFPI-F-153FormatoboletindevigilanciatecnologicadelproyectoproductivobajoenfoqueIDi.docx" target="_blank" data-volume-id="informe-vigilancia-1">Descargar</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-informe-vigilancia-1" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/7863" target="_blank" data-volume-id="sena-informe-vigilancia-1">Informe</a>
-            </div>
-        </div>
- <!-- informe de vigilancia tecnológica 2 -->
-        <div class="volumen">
-            <div class="revista-portada"> <BR>
-            <img src="Docs/informes de vigilancia tecnológica/informe2.png" alt="Imagen del informe" class="revista-imagen">
-            <h1 class="revista-nombre">Informe de vigilancia tecnológica 2 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/informes de vigilancia tecnológica/2-ivt.docx" target="_blank" data-volume-id="informe-vigilancia-2">Descargar</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-informe-vigilancia-2" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8644" target="_blank" data-volume-id="sena-informe-vigilancia-2">Informe</a>
-            </div>
-        </div>
-        <br>
-<!--------------- INFORMES DE ESTAPA PRODUCTIVA ------------------->
- <!-- Informe de etapa productiva 1 -->
-<div class="volumen">
-            <div class="revista-portada"><br>
-            <img src="Docs/informes de etapa productiva/informe1.png" alt="Imagen del informe" class="revista-imagen">
-            <h1 class="revista-nombre">Informe de etapa productiva 1 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <BR>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/informes de etapa productiva/Formato Informe final EP.docx" target="_blank" data-volume-id="informe-etapa-1">Descargar</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-informe-etapa-1" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/7863" target="_blank" data-volume-id="sena-informe-etapa-1">Informe</a>
-            </div>
-        </div>
- <!-- Informe de etapa productiva 2 -->
-        <div class="volumen">
-            <div class="revista-portada"> <BR>
-            <img src="Docs/informes de etapa productiva/informe2.png" alt="Imagen del informe" class="revista-imagen">
-            <h1 class="revista-nombre">Informe de etapa productiva 2 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/informes de etapa productiva/2-Informe final EP.docx" target="_blank" data-volume-id="informe-etapa-2">Descargar</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-informe-etapa-2" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8644" target="_blank" data-volume-id="sena-informe-etapa-2">Informe</a>
-            </div>
-        </div>
-        <br>
-<!--------------- INFORMES DE PROYECTOS DE INVESTIGACIÓN ------------------->
-<!-- informe de proyectos de investigación 1 -->
-<div class="volumen">
-            <div class="revista-portada"><br>
-            <img src="Docs/informes de proyectos de investigación/informe1.png" alt="Imagen del informe" class="revista-imagen">
-            <h1 class="revista-nombre">Informe de proyectos de investigación 1 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <BR>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/informes de proyectos de investigación/INFORME DE PROYECTO DE INVESTIGACIÓN.docx" target="_blank" data-volume-id="informe-proyecto-1">Descargar</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-informe-proyecto-1" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/7863" target="_blank" data-volume-id="sena-informe-proyecto-1">Informe</a>
-            </div>
-        </div>
-<!-- informe de proyectos de investigación 2 -->
-        <div class="volumen">
-            <div class="revista-portada"> <BR>
-            <img src="Docs/informes de proyectos de investigación/informe2.png" alt="Imagen del informe" class="revista-imagen">
-            <h1 class="revista-nombre">Informe de proyectos de investigación 2 ejemplo</h1>
-            <p class="revista-volumen">Lorem text</p> <br>
-            </div>
-            <p></p>
-            <div class="descarga-info">
-                <a href="Docs/informes de proyectos de investigación/2-INFORME DE PROYECTO DE INVESTIGACIÓN.docx" target="_blank" data-volume-id="informe-proyecto-2">Descargar</a>
-                <p></p>
-                <p>Descargas: <span id="downloads-informe-proyecto-2" class="download-count">0</span></p>
-            </div>
-                <br>
-            <h3>Repositorio del volúmen - Sena</h3>
-            <p>Aquí podrás descargar el volúmen directamente del repositorio del SENA.</p>
-            <div class="descarga-info">
-                <a href="https://repositorio.sena.edu.co/handle/11404/8644" target="_blank" data-volume-id="sena-informe-proyecto-2">Informe</a>
-            </div>
-        </div>
-<!-- FIN DE LA SECCIÓN DE INFORMES -->
-    </div>
-</section>
-<!-- ------------------------------------------------------------------------------------------------ -->
-    
-</main>
-<metricas-panel></metricas-panel>
-</div>
         
     <mi-footer id="bottom"></mi-footer>
     
-    <!-- Botón para reiniciar contadores individuales -->
-    <div class="reset-individual-container">
-        <button id="reset-individual-counters" class="reset-button">Reiniciar Contadores Individuales</button>
-    </div>
-    <!-- Firebase SDK para métricas base de datos en firebase -->
+    <!-- Firebase SDK para métricas -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     
     <script src="js/panelmetricas.js"></script>
     <script src="Objects/header.js"></script>
-    <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
-    <script src="Objects/script.js"></script>
     
- <!-- Script para inicializar y manejar contadores individuales con Firebase -->
+    <!-- Script existente de Firebase para contadores individuales -->
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Verificar si Firebase está inicializado
         if (typeof firebase === 'undefined') {
-            console.error("Firebase no está inicializado. Asegúrate de que panelmetricas.js se carga primero.");
-            // Fallback a localStorage si Firebase no está disponible
             initializeWithLocalStorage();
             return;
         }
@@ -444,277 +446,84 @@
             const db = firebase.firestore();
             const countersCollection = 'individual_counters';
 
-            // Función para obtener el contador de Firestore
             const getCounter = async (counterId) => {
                 try {
                     const docRef = db.collection(countersCollection).doc(counterId);
                     const doc = await docRef.get();
-                    
-                    if (doc.exists) {
-                        return doc.data().count || 0;
-                    } else {
-                        // Si no existe, lo creamos con count=0
-                        await docRef.set({ count: 0 });
-                        return 0;
-                    }
-                } catch (error) {
-                    console.error("Error al obtener el contador:", error);
+                    if (doc.exists) return doc.data().count || 0;
+                    await docRef.set({ count: 0 });
                     return 0;
-                }
+                } catch (error) { return 0; }
             };
 
-            // Función para incrementar el contador en Firestore
             const incrementCounter = async (counterId) => {
                 try {
                     const docRef = db.collection(countersCollection).doc(counterId);
-                    // Usamos una transacción para asegurar la atomicidad
                     await db.runTransaction(async (transaction) => {
                         const doc = await transaction.get(docRef);
-                        let newCount = 1; // valor por defecto si no existe
-                        
-                        if (doc.exists) {
-                            newCount = (doc.data().count || 0) + 1;
-                        }
-                        
+                        let newCount = doc.exists ? (doc.data().count || 0) + 1 : 1;
                         transaction.set(docRef, { count: newCount });
                     });
-                    
                     return true;
-                } catch (error) {
-                    console.error("Error al incrementar el contador:", error);
-                    return false;
-                }
+                } catch (error) { return false; }
             };
 
-            // Función para reiniciar un contador a 0
-            const resetCounter = async (counterId) => {
-                try {
-                    await db.collection(countersCollection).doc(counterId).set({ count: 0 });
-                    return true;
-                } catch (error) {
-                    console.error("Error al reiniciar el contador:", error);
-                    return false;
-                }
-            };
-
-            // Inicializar contadores individuales al cargar la página
             const initializeCounters = async () => {
                 const individualCounters = document.querySelectorAll('.download-count');
-                
-                // Creamos un array de promesas para obtener todos los contadores
                 const promises = [];
                 individualCounters.forEach(counter => {
-                    const counterId = counter.id.replace('downloads-', ''); // Quitamos el prefijo "downloads-"
-                    promises.push(getCounter(counterId).then(count => {
-                        counter.textContent = count;
-                    }));
+                    const counterId = counter.id.replace('downloads-', '');
+                    promises.push(getCounter(counterId).then(count => { counter.textContent = count; }));
                 });
-                
-                // Esperamos a que todas las promesas se resuelvan
                 await Promise.all(promises);
             };
 
-            // Ejecutar la inicialización
-            initializeCounters().catch(error => {
-                console.error("Error al inicializar los contadores:", error);
-                initializeWithLocalStorage(); // Fallback a localStorage
-            });
+            initializeCounters().catch(() => initializeWithLocalStorage());
 
-            // Función para manejar los clics en los enlaces de descarga
             const handleDownloadClick = async (event) => {
                 const link = event.currentTarget;
                 const volumeId = link.getAttribute('data-volume-id');
-                
                 if (volumeId) {
-                    // Incrementar el contador en Firestore
                     const success = await incrementCounter(volumeId);
-                    
                     if (success) {
-                        // Actualizar el contador en el DOM
                         const counterId = `downloads-${volumeId}`;
                         const counter = document.getElementById(counterId);
-                        
-                        if (counter) {
-                            // Obtener el nuevo valor
-                            const newCount = await getCounter(volumeId);
-                            counter.textContent = newCount;
-                        }
+                        if (counter) counter.textContent = await getCounter(volumeId);
                     }
                 }
             };
 
-            // Agregar event listeners a todos los enlaces de descarga
-            const downloadLinks = document.querySelectorAll('a[data-volume-id]');
-            downloadLinks.forEach(link => {
+            document.querySelectorAll('a[data-volume-id]').forEach(link => {
                 link.addEventListener('click', handleDownloadClick);
             });
 
-            // Botón de reseteo
-            const resetButton = document.getElementById('reset-individual-counters');
-            
-            if (resetButton) {
-                resetButton.addEventListener('click', async () => {
-                    if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores individuales de descarga? Esta acción no se puede deshacer.')) {
-                        const individualCounters = document.querySelectorAll('.download-count');
-                        
-                        // Array de promesas para reiniciar todos los contadores
-                        const resetPromises = [];
-                        individualCounters.forEach(counter => {
-                            const counterId = counter.id.replace('downloads-', '');
-                            resetPromises.push(resetCounter(counterId).then(() => {
-                                counter.textContent = '0';
-                            }));
-                        });
-                        
-                        try {
-                            await Promise.all(resetPromises);
-                            
-                            // Mostrar notificación
-                            const notification = document.createElement('div');
-                            notification.className = 'reset-notification';
-                            notification.textContent = 'Todos los contadores individuales han sido reiniciados.';
-                            document.body.appendChild(notification);
-                            
-                            // Eliminar la notificación después de 3 segundos
-                            setTimeout(() => {
-                                notification.style.opacity = '0';
-                                setTimeout(() => {
-                                    document.body.removeChild(notification);
-                                }, 500);
-                            }, 3000);
-                            
-                            console.log("Todos los contadores individuales de descarga han sido reiniciados a 0.");
-                        } catch (error) {
-                            console.error("Error al reiniciar los contadores:", error);
-                        }
-                    }
-                });
-            }
         } catch (error) {
-            console.error("Error al usar Firebase, usando localStorage como fallback:", error);
             initializeWithLocalStorage();
         }
     });
 
-    // Fallback a localStorage si Firebase no está disponible
     function initializeWithLocalStorage() {
-        console.log("Usando localStorage para contadores individuales");
-        
-        // Inicializar contadores desde localStorage
         const initializeCounters = () => {
-            const individualCounters = document.querySelectorAll('.download-count');
-            
-            individualCounters.forEach(counter => {
-                const counterId = counter.id;
-                const storedCount = localStorage.getItem(counterId) || '0';
-                counter.textContent = storedCount;
+            document.querySelectorAll('.download-count').forEach(counter => {
+                counter.textContent = localStorage.getItem(counter.id) || '0';
             });
         };
-        
         initializeCounters();
-        
-        // Función para manejar los clics en los enlaces de descarga
-        const handleDownloadClick = (event) => {
-            const link = event.currentTarget;
-            const volumeId = link.getAttribute('data-volume-id');
-            
-            if (volumeId) {
-                const counterId = `downloads-${volumeId}`;
-                const counter = document.getElementById(counterId);
-                
-                if (counter) {
-                    let currentCount = parseInt(counter.textContent) || 0;
-                    currentCount++;
-                    counter.textContent = currentCount;
-                    localStorage.setItem(counterId, currentCount.toString());
-                }
-            }
-        };
-        
-        // Agregar event listeners a todos los enlaces de descarga
-        const downloadLinks = document.querySelectorAll('a[data-volume-id]');
-        downloadLinks.forEach(link => {
-            link.addEventListener('click', handleDownloadClick);
-        });
-        
-        // Botón de reseteo
-        const resetButton = document.getElementById('reset-individual-counters');
-        
-        if (resetButton) {
-            resetButton.addEventListener('click', () => {
-                if (confirm('¿Estás seguro de que quieres reiniciar todos los contadores individuales de descarga? Esta acción no se puede deshacer.')) {
-                    const individualCounters = document.querySelectorAll('.download-count');
-                    
-                    individualCounters.forEach(counter => {
-                        const counterId = counter.id;
-                        localStorage.setItem(counterId, '0');
-                        counter.textContent = '0';
-                    });
-                    
-                    // Mostrar notificación
-                    const notification = document.createElement('div');
-                    notification.className = 'reset-notification';
-                    notification.textContent = 'Todos los contadores individuales han sido reiniciados.';
-                    document.body.appendChild(notification);
-                    
-                    // Eliminar la notificación después de 3 segundos
-                    setTimeout(() => {
-                        notification.style.opacity = '0';
-                        setTimeout(() => {
-                            document.body.removeChild(notification);
-                        }, 500);
-                    }, 3000);
+        document.querySelectorAll('a[data-volume-id]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const volumeId = e.currentTarget.getAttribute('data-volume-id');
+                if (volumeId) {
+                    const counterId = `downloads-${volumeId}`;
+                    const counter = document.getElementById(counterId);
+                    if (counter) {
+                        let currentCount = parseInt(counter.textContent) || 0;
+                        counter.textContent = ++currentCount;
+                        localStorage.setItem(counterId, currentCount.toString());
+                    }
                 }
             });
-        }
+        });
     }
-</script>
-    
-    <!-- Estilos para el botón y notificación -->
-    <style>
-        .reset-individual-container {
-            text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-        }
-        
-        .reset-button {
-            background-color: #ff5757;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .reset-button:hover {
-            background-color: #e63946;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .reset-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .reset-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(76, 175, 80, 0.9);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            font-size: 14px;
-            transition: opacity 0.5s ease;
-        }
-    </style>
-    
+    </script>
 </body>
 </html>

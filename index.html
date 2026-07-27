@@ -11,35 +11,31 @@
     <style>
         /* VARIABLES MODERNIZADAS */
        /* VARIABLES MODERNIZADAS - MODO ELEGANTE/VIP */
-        :root {
+       :root {
             --primary-color: #003057; 
             --secondary-color: #008394;
-            --accent-color: #3FCED4;
-            --highlight-color: #00FF88; /* Verde neón solo para el Vol 4 */
-            
-            /* Fondos y sombras para tarjetas elegantes */
-            --card-bg: #ffffff; 
-            --card-shadow: 0 10px 30px rgba(0, 48, 87, 0.08);
-            --card-border: 1px solid rgba(0, 48, 87, 0.05);
-            
+            --accent-color: #39A900; /* Verde SENA para detalles */
+            --card-bg: #ffffff; /* Fondo blanco para las cajas */
             --text-main: #333333; 
             --text-muted: #666666;
-            
             --font-headings: 'Georgia', 'Times New Roman', serif;
             --font-body: 'Segoe UI', Tahoma, Verdana, sans-serif;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition: all 0.3s ease;
         }
 
         body {
-            /* Hereda el fondo de styles.css, no lo sobreescribimos aquí */
+            font-family: var(--font-body);
+            /* El fondo azul oscuro lo está heredando de styles.css */
             color: var(--text-main);
+            margin: 0;
+            padding: 0;
         }
 
-        /* TÍTULOS DE SECCIÓN */
+        /* TÍTULOS GENERALES */
         .section-header {
             font-family: var(--font-headings);
             color: var(--primary-color);
-            font-size: 2.4em;
+            font-size: 2.2em;
             text-align: center;
             margin-bottom: 40px;
             position: relative;
@@ -48,23 +44,22 @@
         .section-header::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            background: var(--accent-color);
             margin: 15px auto 0 auto;
             border-radius: 2px;
         }
 
-        /* CONTENEDORES DE SECCIÓN (LAS "TARJETAS" VIP) */
+        /* CAJAS BLANCAS (RECUADROS) */
         .section-container {
             max-width: 1100px;
             margin: 0 auto 50px auto;
             padding: 40px;
-            background: var(--card-bg);
-            border: var(--card-border);
-            border-top: 5px solid var(--secondary-color);
-            border-radius: 16px;
-            box-shadow: var(--card-shadow);
+            background: var(--card-bg); /* Fuerza el recuadro blanco */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra elegante */
+            border-top: 5px solid var(--secondary-color); /* Borde superior decorativo */
         }
 
         /* CARRUSEL DE REVISTAS */

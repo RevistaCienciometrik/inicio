@@ -1,4 +1,4 @@
-// js/panelmetricas.js - FIREBASE VIP EDITION
+// js/panelmetricas.js - Edicion mejorada 
 class MetricasPanel extends HTMLElement {
     constructor() {
         super();
@@ -36,18 +36,15 @@ class MetricasPanel extends HTMLElement {
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
 
-                /* --- PANEL VIP GLASSMORPHISM --- */
-                .metrics-panel-container {
-                    width: 250px;
-                    background: rgba(10, 15, 30, 0.75); /* Azul profundo semitransparente */
-                    backdrop-filter: blur(12px); /* Efecto de vidrio */
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(63, 206, 212, 0.3); /* Borde sutil cyan */
+                /* --- PANEL VIP MEJORADO --- */
+               .metrics-panel-container {
+                    width: 260px;
+                    background: #ffffff; /* Fondo blanco puro */
+                    border: 1px solid rgba(0, 48, 87, 0.1); /* Borde sutil corporativo */
                     border-radius: 16px;
-                    padding: 20px;
-                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
-                                inset 0 0 15px rgba(63, 206, 212, 0.1); /* Brillo interior */
-                    color: #fff;
+                    padding: 25px 20px;
+                    box-shadow: 0 10px 30px rgba(0, 48, 87, 0.08); /* Sombra suave */
+                    color: #333333; /* Texto oscuro */
                     position: sticky;
                     top: 100px;
                     height: fit-content;
@@ -56,92 +53,87 @@ class MetricasPanel extends HTMLElement {
                     z-index: 100;
                     margin-left: 20px;
                     transition: all 0.4s ease;
+                    border-top: 5px solid #39A900; /* Detalle Verde SENA arriba */
                 }
                 
                 .metrics-panel-container:hover {
-                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
-                                inset 0 0 25px rgba(63, 206, 212, 0.3);
-                    border-color: rgba(63, 206, 212, 0.8);
+                    box-shadow: 0 15px 40px rgba(0, 48, 87, 0.12);
+                    border-color: rgba(57, 169, 0, 0.3);
                 }
 
-                .metrics-panel-container::-webkit-scrollbar { width: 4px; }
-                .metrics-panel-container::-webkit-scrollbar-track { background: transparent; }
-                .metrics-panel-container::-webkit-scrollbar-thumb { background: #3FCED4; border-radius: 4px; }
+                .metrics-panel-container::-webkit-scrollbar { width: 6px; }
+                .metrics-panel-container::-webkit-scrollbar-track { background: #f0f4f8; border-radius: 10px; }
+                .metrics-panel-container::-webkit-scrollbar-thumb { background: #39A900; border-radius: 10px; }
 
                 /* HEADER DEL PANEL */
                 .panel-header {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 10px;
-                    margin-bottom: 20px;
+                    text-align: center;
+                    margin-bottom: 25px;
                     padding-bottom: 15px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
                 }
 
                 h3 {
                     font-family: 'Orbitron', sans-serif;
-                    font-size: 1.2rem;
-                    color: #3FCED4;
+                    font-size: 1.3rem;
+                    color: #003057; /* Azul oscuro corporativo */
                     margin: 0;
                     text-transform: uppercase;
-                    letter-spacing: 1.5px;
-                    text-shadow: 0 0 8px rgba(63, 206, 212, 0.5);
+                    letter-spacing: 1px;
                 }
 
                 /* ITEMS DE MÉTRICA */
                 .metric-item {
-                    background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-                    border: 1px solid rgba(255,255,255,0.05);
-                    border-radius: 10px;
-                    padding: 12px;
-                    margin-bottom: 12px;
+                    background: #f8f9fa; /* Gris muy clarito */
+                    border: 1px solid rgba(0, 0, 0, 0.05);
+                    border-radius: 12px;
+                    padding: 15px;
+                    margin-bottom: 15px;
                     position: relative;
                     overflow: hidden;
-                    transition: all 0.3s ease;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
 
                 .metric-item::before {
                     content: '';
                     position: absolute;
-                    top: 0; left: 0;
-                    width: 3px;
+                    top: 0; 
+                    left: 0;
+                    width: 4px;
                     height: 100%;
-                    background: #3FCED4;
-                    box-shadow: 0 0 10px #3FCED4;
-                    opacity: 0.5;
-                    transition: opacity 0.3s ease;
+                    background: #008394; /* Cyan oscuro */
+                    transition: all 0.3s ease;
                 }
 
                 .metric-item:hover {
                     transform: translateX(5px);
-                    background: rgba(63, 206, 212, 0.05);
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
                 }
 
-                .metric-item:hover::before { opacity: 1; }
+                .metric-item:hover::before { 
+                    background: #39A900; /* Verde SENA */
+                }
 
                 h4 {
                     font-family: 'Segoe UI', Tahoma, sans-serif;
-                    color: #A0AAB2;
-                    font-size: 0.85rem;
-                    margin: 0 0 5px 0;
+                    color: #666666;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    margin: 0 0 8px 0;
                     text-transform: uppercase;
-                    letter-spacing: 0.5px;
                 }
 
                 .metric-value {
                     font-family: 'Rajdhani', sans-serif;
-                    color: #FFFFFF;
-                    font-size: 1.8rem;
+                    color: #003057; /* Azul corporativo */
+                    font-size: 2.2rem; 
                     font-weight: 700;
                     margin: 0;
-                    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                    line-height: 1;
                 }
 
-                /* NÚMERO RESALTADO */
                 #web-visits {
-                    color: #00FF88; /* Verde neón para visitas */
-                    text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+                    color: #39A900; /* Verde SENA para destacar visitas */
                 }
 
                 /* BOTONES DE NAVEGACIÓN */
@@ -149,40 +141,38 @@ class MetricasPanel extends HTMLElement {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 10px;
-                    margin-top: 20px;
-                    padding-top: 15px;
-                    border-top: 1px solid rgba(255,255,255,0.1);
+                    margin-top: 25px;
+                    padding-top: 20px;
+                    border-top: 1px solid rgba(0,0,0,0.05);
                 }
 
                 .btn-cyber {
-                    background: transparent;
-                    color: #A0AAB2;
-                    border: 1px solid rgba(160, 170, 178, 0.3);
-                    padding: 8px;
+                    background: #ffffff;
+                    color: #666666;
+                    border: 1px solid #cccccc;
+                    padding: 10px;
                     border-radius: 6px;
-                    font-family: 'Orbitron', sans-serif;
-                    font-size: 0.7rem;
+                    font-family: 'Segoe UI', Tahoma, sans-serif;
+                    font-size: 0.75rem;
+                    font-weight: bold;
                     cursor: pointer;
                     text-transform: uppercase;
                     transition: all 0.3s ease;
                 }
 
                 .btn-cyber:hover {
-                    color: #3FCED4;
-                    border-color: #3FCED4;
-                    background: rgba(63, 206, 212, 0.1);
-                    box-shadow: 0 0 10px rgba(63, 206, 212, 0.3);
+                    color: #ffffff;
+                    border-color: #003057;
+                    background: #003057;
                 }
 
                 .btn-danger {
                     grid-column: span 2;
-                    border-color: rgba(255, 71, 87, 0.3);
-                    color: #ff4757;
                 }
+                
                 .btn-danger:hover {
-                    background: rgba(255, 71, 87, 0.1);
-                    border-color: #ff4757;
-                    box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+                    background: #e74c3c;
+                    border-color: #e74c3c;
                     color: #fff;
                 }
 
@@ -195,7 +185,7 @@ class MetricasPanel extends HTMLElement {
                         position: relative;
                         top: 0;
                         display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
                         gap: 15px;
                     }
                     .panel-header, .nav-group { grid-column: 1 / -1; }
@@ -229,9 +219,9 @@ class MetricasPanel extends HTMLElement {
                 </div>
                 
                 <div class="nav-group">
-                    <button class="btn-cyber" id="btn-inicio">Top Up</button>
-                    <button class="btn-cyber" id="btn-fin">Down</button>
-                    <button class="btn-cyber btn-danger" id="btn-reset">System Reset</button>
+                    <button class="btn-cyber" id="btn-inicio">Subir</button>
+                    <button class="btn-cyber" id="btn-fin">Bajar</button>
+                    <button class="btn-cyber btn-danger" id="btn-reset">Reiniciar Sistema</button>
                 </div>
             </div>
         `;
@@ -244,7 +234,7 @@ class MetricasPanel extends HTMLElement {
         }
     }
     
-    // ... [El resto de la lógica JavaScript de tu archivo original se mantiene igual]
+    // ... [El resto de la lógica JavaScript se mantiene exactamente igual] ...
     async loadMetrics() {
         try {
             const doc = await this.metricsRef.get();
@@ -314,10 +304,14 @@ class MetricasPanel extends HTMLElement {
             // Efecto contador digital
             let start = parseInt(el.innerText) || 0;
             if(start === count) return;
-            el.style.color = '#3FCED4';
+            
+            // Color de transición (Cyan oscuro) para que se vea sobre el fondo blanco
+            el.style.color = '#008394'; 
+            
             setTimeout(() => {
                 el.innerText = count.toLocaleString();
-                el.style.color = id === 'web-visits' ? '#00FF88' : '#FFFFFF';
+                // Si es "visitas a la web" lo pinta Verde SENA, el resto va en Azul Corporativo oscuro
+                el.style.color = id === 'web-visits' ? '#39A900' : '#003057';
             }, 150);
         }
     }

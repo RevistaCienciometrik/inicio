@@ -3,18 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contáctanos - Revista Cienciometrik</title>
+    <title>Contáctanos - Revista Cienciométrik</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <!-- <link rel="stylesheet" href="CSS/metricas.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* VARIABLES VIP CORPORATIVAS */
+        :root {
+            --primary-color: #003057; 
+            --secondary-color: #008394;
+            --accent-color: #39A900; 
+            --card-bg: #ffffff; 
+            --text-main: #333333; 
+            --text-muted: #666666;
+            --error-color: #e74c3c;
+            --transition: all 0.3s ease;
+        }
+
+        /* CONTENEDORES GENERALES */
+        .contact-info-section,
+        .contact-form-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 48, 87, 0.08);
+            border-top: 5px solid var(--secondary-color);
+            text-align: center;
+        }
+
+        .section h2 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--primary-color);
+            font-size: 2.4em;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 25px auto;
+            border-radius: 2px;
+        }
+
+        .section > p {
+            color: var(--text-muted);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        /* --- TARJETAS DE INFORMACIÓN --- */
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 48, 87, 0.08);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 48, 87, 0.08);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .contact-item .icon-large {
+            font-size: 2.8em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .icon-large {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .contact-item h3 { color: var(--primary-color); font-size: 1.3em; margin-bottom: 10px; }
+        .contact-item p { color: #555555; font-size: 0.95em; margin-bottom: 5px; line-height: 1.5; }
+        .contact-item a { color: var(--secondary-color); text-decoration: none; font-weight: bold; transition: var(--transition); }
+        .contact-item a:hover { color: var(--accent-color); }
+
+        /* --- REDES SOCIALES --- */
+        .social-media {
+            padding-top: 30px;
+            border-top: 1px dashed rgba(0, 48, 87, 0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon-link {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: #ffffff !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.4em;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(57, 169, 0, 0.4);
+        }
+
+        /* --- FORMULARIO DINÁMICO --- */
+        .modern-form {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .form-group label i { color: var(--secondary-color); margin-right: 8px; }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .modern-form input,
+        .modern-form select,
+        .modern-form textarea {
+            width: 100%;
+            padding: 14px 45px 14px 18px; /* Espacio extra a la derecha para el icono */
+            border: 2px solid #eef2f5;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1em;
+            transition: var(--transition);
+            background: #f8fafc;
+            box-sizing: border-box;
+            color: var(--text-main);
+        }
+
+        .modern-form textarea { resize: vertical; min-height: 120px; }
+
+        /* Estados del Input */
+        .modern-form input:focus,
+        .modern-form select:focus,
+        .modern-form textarea:focus {
+            border-color: var(--secondary-color);
+            background: #ffffff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 131, 148, 0.1);
+        }
+
+        /* --- SISTEMA DE VALIDACIÓN VISUAL --- */
+        .validation-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        textarea + .validation-icon { top: 25px; } /* Ajuste para el textarea */
+
+        .helper-text {
+            display: block;
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 6px;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        /* Al hacer Focus (Ayuda activa) */
+        .modern-form input:focus ~ .helper-text,
+        .modern-form select:focus ~ .helper-text,
+        .modern-form textarea:focus ~ .helper-text {
+            height: 20px;
+            opacity: 1;
+        }
+
+        /* Cuando es válido */
+        .form-group.is-valid input,
+        .form-group.is-valid select,
+        .form-group.is-valid textarea {
+            border-color: var(--accent-color);
+            background: #f0fdf4;
+        }
+        .form-group.is-valid .validation-icon {
+            opacity: 1;
+            color: var(--accent-color);
+            content: "\f058"; /* Check-circle */
+        }
+        .form-group.is-valid .helper-text {
+            color: var(--accent-color);
+        }
+
+        /* Cuando es inválido (después de escribir) */
+        .form-group.is-invalid input,
+        .form-group.is-invalid select,
+        .form-group.is-invalid textarea {
+            border-color: var(--error-color);
+            background: #fff5f5;
+        }
+        .form-group.is-invalid .validation-icon {
+            opacity: 1;
+            color: var(--error-color);
+        }
+        .form-group.is-invalid .helper-text {
+            color: var(--error-color);
+            height: 20px;
+            opacity: 1;
+        }
+
+        /* --- BOTÓN DE ENVÍO --- */
+        .submit-button {
+            background: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 16px 35px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 48, 87, 0.2);
+        }
+
+        .submit-button:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(57, 169, 0, 0.3);
+        }
+
+        .mensaje {
+            margin-top: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .contact-info-section, .contact-form-section { padding: 30px 20px; }
+        }
+    </style>
 </head>
 <body>
     <mi-header id="top"></mi-header>
     <div class="container">
         <main class="main-content">
 
+            <!-- SECCIÓN INFORMACIÓN DE CONTACTO -->
             <section class="section contact-info-section">
                 <h2 id="contactanos">Contáctanos</h2>
-                <p>Puedes encontrarnos aquí:</p>
+                <p>Estamos aquí para ayudarte. Puedes encontrarnos a través de los siguientes canales:</p>
+                
                 <div class="contact-details">
                     <div class="contact-item">
                         <i class="fas fa-envelope-open-text icon-large"></i>
@@ -25,90 +310,162 @@
                     <div class="contact-item">
                         <i class="fas fa-phone-alt icon-large"></i>
                         <h3>Teléfono</h3>
-                        <p>Hugo Alexander Semanate hsemanate@sena.edu.co <br> (Coordinador Revista Cienciométrik)</p>
+                        <p>Hugo Alexander Semanate<br><span style="font-size: 0.9em; color:#777;">(Coordinador Revista)</span></p>
+                        <p><a href="mailto:hsemanate@sena.edu.co" style="font-size: 0.9em;">hsemanate@sena.edu.co</a></p>
                         <p id="tel"><a href="tel:+573125271993">+57 312-5271993</a></p>
-                        <p>Llámanos en horario de oficina.</p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt icon-large"></i>
                         <h3>Nuestra Ubicación</h3>
-                            <p><a href="https://maps.app.goo.gl/9CVLQCo7UeGHEfKa9">Google Maps</a></p>
-                        <p>Calle 51 No. 57-70. Torre Sur. Piso 4. Medellín, Antioquia, Colombia.</p>
+                        <p>Calle 51 No. 57-70. Torre Sur. Piso 4.<br>Medellín, Antioquia, Colombia.</p>
+                        <p style="margin-top: 15px;"><a href="https://maps.app.goo.gl/9CVLQCo7UeGHEfKa9" target="_blank"><i class="fas fa-map"></i> Ver en Google Maps</a></p>
                     </div>
                 </div>
+
                 <div class="social-media">
                     <h3>¡Síguenos en redes!</h3>
                     <p>Mantente al tanto de nuestras últimas publicaciones y novedades:</p>
                     <div class="social-icons">
-                        <a href="https://www.facebook.com/profile.php?id=61576106693485" class="social-icon-link"><i class="facebook">F</i></a>
-                        <a href="https://www.linkedin.com/in/revista-cienciometrik-b7a5ab363/" class="social-icon-link"><i class="linkedin">L</i></a>
-                        <a href="https://www.instagram.com/revistacienciometrik/" class="social-icon-link"><i class="instagram">iG</i></a>
-                        <a href="https://www.youtube.com/@revistacienciometrik" class="social-icon-link"><i class="Youtube">Yt</i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61576106693485" target="_blank" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/revista-cienciometrik-b7a5ab363/" target="_blank" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/revistacienciometrik/" target="_blank" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@revistacienciometrik" target="_blank" class="social-icon-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </section>
+
+            <!-- SECCIÓN FORMULARIO DINÁMICO -->
             <section class="section contact-form-section">
                 <h2 id="mensaje">Envíanos tu mensaje</h2>
-                <p>Completa este formulario y nos pondremos en contacto contigo lo antes posible. <br> ¡Tu opinión y tus ideas son valiosas para nosotros!</p>
-                <form id="formulario-contacto" class="modern-form">
+                <p>Completa este formulario. Los campos te guiarán mientras escribes.</p>
+                
+                <form id="formulario-contacto" class="modern-form" novalidate>
+                    <!-- Campo Nombre -->
                     <div class="form-group">
                         <label for="nombre"><i class="fas fa-user icon"></i> Tu Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Ej: María Rodríguez" required>
+                        <div class="input-wrapper">
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej: María Rodríguez" required minlength="3">
+                            <i class="fas fa-check-circle validation-icon"></i>
+                            <span class="helper-text" data-default="Ingresa tu nombre completo." data-success="¡Nombre válido!" data-error="El nombre debe tener al menos 3 caracteres.">Ingresa tu nombre completo.</span>
+                        </div>
                     </div>
+                    
+                    <!-- Campo Email -->
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope icon"></i> Tu Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" placeholder="Ej: tu.email@example.com" required>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" name="email" placeholder="Ej: tu.email@ejemplo.com" required>
+                            <i class="fas fa-check-circle validation-icon"></i>
+                            <span class="helper-text" data-default="Te responderemos a esta dirección." data-success="¡Correo válido!" data-error="Ingresa un correo electrónico válido (ej: nombre@dominio.com).">Te responderemos a esta dirección.</span>
+                        </div>
                     </div>
+                    
+                    <!-- Campo Tipo de Consulta -->
                     <div class="form-group">
                         <label for="tipo-consulta"><i class="fas fa-tag icon"></i> Tipo de Consulta:</label>
-                        <select id="tipo-consulta" name="tipo-consulta" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="consulta">Consulta general</option>
-                            <option value="colaboracion">Propuesta de colaboración</option>
-                            <option value="sugerencia">Sugerencia</option>
-                            <option value="soporte">Soporte técnico</option>
-                            <option value="otro">Otro</option>
-                        </select>
+                        <div class="input-wrapper">
+                            <select id="tipo-consulta" name="tipo-consulta" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="consulta">Consulta general</option>
+                                <option value="colaboracion">Propuesta de colaboración</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="soporte">Soporte técnico</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <i class="fas fa-check-circle validation-icon"></i>
+                            <span class="helper-text" data-default="¿En qué te podemos ayudar?" data-success="¡Opción seleccionada!" data-error="Por favor selecciona un motivo.">¿En qué te podemos ayudar?</span>
+                        </div>
                     </div>
+                    
+                    <!-- Campo Asunto -->
                     <div class="form-group">
                         <label for="asunto"><i class="fas fa-lightbulb icon"></i> Asunto:</label>
-                        <input type="text" id="asunto" name="asunto" placeholder="Ej: Duda sobre una publicación" required>
+                        <div class="input-wrapper">
+                            <input type="text" id="asunto" name="asunto" placeholder="Ej: Duda sobre una publicación" required minlength="5">
+                            <i class="fas fa-check-circle validation-icon"></i>
+                            <span class="helper-text" data-default="Resume tu consulta en pocas palabras." data-success="¡Asunto correcto!" data-error="El asunto es muy corto.">Resume tu consulta en pocas palabras.</span>
+                        </div>
                     </div>
+                    
+                    <!-- Campo Mensaje -->
                     <div class="form-group">
                         <label for="mensaje-input"><i class="fas fa-comment-dots icon"></i> Tu Mensaje:</label>
-                        <textarea id="mensaje-input" name="mensaje" rows="6" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        <div class="input-wrapper">
+                            <textarea id="mensaje-input" name="mensaje" placeholder="Escribe tu mensaje aquí detalladamente..." required minlength="15"></textarea>
+                            <i class="fas fa-check-circle validation-icon"></i>
+                            <span class="helper-text" data-default="Cuéntanos todos los detalles (mínimo 15 caracteres)." data-success="¡Mensaje listo!" data-error="Tu mensaje es muy corto, cuéntanos un poco más.">Cuéntanos todos los detalles (mínimo 15 caracteres).</span>
+                        </div>
                     </div>
+                    
                     <button type="submit" class="submit-button">
                         <i class="fas fa-paper-plane"></i> Enviar Mensaje
                     </button>
                 </form>
+                
                 <div id="mensaje-contacto" class="mensaje"></div>
             </section>
         </main>
-    <metricas-panel></metricas-panel>     
+        
+        <metricas-panel></metricas-panel>     
     </div>
     
     <mi-footer id="bottom"></mi-footer>
 
-    <!-- PARA CONECTAR CON LA BASE DE DATOS DEL PANEL EN FIREBASE -->
+    <!-- FIREBASE Y COMPONENTES GLOBALES -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    
-    <!-- Scripts -->
     <script src="Objects/header.js"></script>
     <script src="Objects/container.js"></script>
     <script src="Objects/footer.js"></script>
     <script src="Objects/script.js"></script>
     <script src="js/panelmetricas.js"></script>
-    <!-- <script src="js/download_tracker.js"></script> SE COMENTA PARA DETENER EL CONTEO DE DESCARGAS COMO LOCALHOST-->
     
+    <!-- LÓGICA DE VALIDACIÓN DINÁMICA UI -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('.modern-form input, .modern-form select, .modern-form textarea');
+            
+            inputs.forEach(input => {
+                // Al interactuar o escribir, validamos en tiempo real
+                input.addEventListener('input', function() {
+                    validateField(this);
+                });
+                
+                // Si el usuario sale del campo, forzamos validación para mostrar errores si los hay
+                input.addEventListener('blur', function() {
+                    if(this.value.trim() !== '') {
+                        validateField(this);
+                    }
+                });
+            });
+
+            function validateField(field) {
+                const group = field.closest('.form-group');
+                const helper = group.querySelector('.helper-text');
+                const icon = group.querySelector('.validation-icon');
+                
+                if (field.checkValidity() && field.value.trim() !== '') {
+                    // Es Válido
+                    group.classList.remove('is-invalid');
+                    group.classList.add('is-valid');
+                    icon.className = 'fas fa-check-circle validation-icon';
+                    if(helper) helper.textContent = helper.getAttribute('data-success');
+                } else {
+                    // Es Inválido
+                    group.classList.remove('is-valid');
+                    group.classList.add('is-invalid');
+                    icon.className = 'fas fa-exclamation-circle validation-icon';
+                    if(helper) helper.textContent = helper.getAttribute('data-error');
+                }
+            }
+        });
+    </script>
+
+    <!-- LÓGICA DE FIREBASE PARA ENVÍO (Intacta) -->
     <script type="module">
-        // Importa las funciones que necesitas del SDK de Firebase.
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        // Importa las funciones específicas para Firestore.
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         
-        // Aquí está la configuración del proyecto de Firebase.
         const firebaseConfig = {
             apiKey: "AIzaSyAuRQC65O5zlkNbcnp1srZkQpjmD82TVco",
             authDomain: "cienciometrik-3c8e7.firebaseapp.com",
@@ -118,42 +475,38 @@
             appId: "1:60232446009:web:1ce1cbb0437018d62f9de8"
         };
         
-        // Inicializano Firebase.
         const app = initializeApp(firebaseConfig);
-        // Obteniendo una referencia a la base de datos de Firestore.
         const db = getFirestore(app);
         
-        // Esperar a que el DOM esté completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
-            // Seleccionar el formulario de contacto.
             const formulario = document.getElementById('formulario-contacto');
-            // Seleccionar el div donde mostraremos el mensaje de éxito o error.
             const mensajeContacto = document.getElementById('mensaje-contacto');
             
-            // Verificar que el formulario existe
-            if (!formulario) {
-                console.error("No se encontró el formulario de contacto");
-                return;
-            }
+            if (!formulario) return;
             
-            // Escucha el evento de envío del formulario.
             formulario.addEventListener('submit', async (e) => {
-                // Evita que la página se recargue.
                 e.preventDefault(); 
                 
-                // Obtiene los valores de los campos del formulario.
+                // Verificamos primero si todo el formulario es válido visualmente
+                if (!formulario.checkValidity()) {
+                    mensajeContacto.textContent = 'Por favor, corrige los campos marcados en rojo antes de enviar.';
+                    mensajeContacto.style.color = '#721c24';
+                    mensajeContacto.style.background = '#f8d7da';
+                    mensajeContacto.style.border = '1px solid #f5c6cb';
+                    return;
+                }
+                
                 const nombre = document.getElementById('nombre').value;
                 const email = document.getElementById('email').value;
                 const tipoConsulta = document.getElementById('tipo-consulta').value;
                 const asunto = document.getElementById('asunto').value;
                 const mensaje = document.getElementById('mensaje-input').value;
                 
-                // Antes de intentar enviar, oculta cualquier mensaje anterior.
-                mensajeContacto.textContent = '';
-                mensajeContacto.style.color = 'initial'; // Reinicia el color
+                mensajeContacto.textContent = 'Enviando...';
+                mensajeContacto.style.color = '#003057';
+                mensajeContacto.style.background = '#e2e3e5';
                 
                 try {
-                    // Envía la información a Firebase Firestore.
                     await addDoc(collection(db, "mensajesContacto"), { 
                         nombre: nombre,
                         email: email,
@@ -163,26 +516,28 @@
                         fecha: new Date() 
                     });
                     
-                    // Si todo sale bien, muestra el nuevo mensaje de confirmación.
-                    mensajeContacto.textContent = 'Tu mensaje de contacto ha sido enviado. Pronto recibirás respuesta en el correo electrónico registrado en el formulario. Att: Equipo Cienciométrik - Sena.';
-                    mensajeContacto.style.color = 'green'; // Mensaje en verde para éxito
-                    formulario.reset(); // Limpia los campos del formulario.
+                    mensajeContacto.textContent = '¡Tu mensaje ha sido enviado exitosamente! Pronto recibirás respuesta en tu correo. Att: Equipo Cienciométrik.';
+                    mensajeContacto.style.color = '#155724'; 
+                    mensajeContacto.style.background = '#d4edda';
+                    mensajeContacto.style.border = '1px solid #c3e6cb';
                     
-                    // Opcional: Si se quiere una "ventana emergente" de alerta real (menos bonita, pero efectiva):
-                    // alert('Tu mensaje de contacto ha sido enviado. Pronto recibirás respuesta en el correo electrónico registrado en el formulario. Att: Equipo Cienciométrik - Sena.');
+                    // Limpiar formulario y estilos visuales
+                    formulario.reset(); 
+                    document.querySelectorAll('.form-group').forEach(group => {
+                        group.classList.remove('is-valid', 'is-invalid');
+                        const helper = group.querySelector('.helper-text');
+                        if (helper) helper.textContent = helper.getAttribute('data-default');
+                    });
+                    
                 } catch (error) {
-                    // Si hay un error, muestra un mensaje de error.
                     console.error("Error al enviar el mensaje: ", error); 
-                    mensajeContacto.textContent = 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.';
-                    mensajeContacto.style.color = 'red'; // Mensaje en rojo para error.
-                    
-                    // Opcional: Si se quiere una "ventana emergente" de alerta real para errores:
-                    // alert('Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.');
+                    mensajeContacto.textContent = 'Hubo un error al enviar tu mensaje. Por favor, revisa tu conexión e inténtalo de nuevo.';
+                    mensajeContacto.style.color = '#721c24'; 
+                    mensajeContacto.style.background = '#f8d7da';
+                    mensajeContacto.style.border = '1px solid #f5c6cb';
                 }
             });
         });
     </script>
-
-
 </body>
 </html>

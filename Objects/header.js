@@ -1,9 +1,10 @@
 class MiHeader extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' }); // Encapsula los estilos y el DOM
+        this.attachShadow({ mode: 'open' });
         this.render();
         this.setupEventListeners();
+        this.setActiveLink(); // Llamamos a la nueva función al crear el menú
     }
 
     render() {
@@ -11,112 +12,91 @@ class MiHeader extends HTMLElement {
             <style>
                 /* Estilos del header */
                 header {
-                    background-color: #F9F9F9; /* Blanco hueso para el fondo principal del header */
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    background-color: #ffffff;
                     position: sticky;
                     top: 0;
                     z-index: 1000;
-                    width: 100%; /* Asegura que el header ocupe todo el ancho */
+                    width: 100%;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
                 }
 
-                /* Header Top Bar */
                 .header-top {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    background-color: #081D36; /* Azul oscuro de la paleta */
-                    color: white;
-                    padding: 10px 20px;
+                    padding: 10px 30px;
                     flex-wrap: wrap;
+                    max-width: 1500px;
+                    margin: 0 auto;
                 }
 
-                .header-top .logo-container {
+                .logo-container {
                     display: flex;
                     align-items: center;
-                    margin-bottom: 0;
                 }
 
                 .header-top img.logo {
-                    height: 40px;
-                    margin-right: 15px;
+                    height: 45px; 
+                    margin-right: 20px;
                     flex-shrink: 0;
+                    transition: transform 0.3s ease;
+                }
+
+                .header-top img.logo:hover {
+                    transform: scale(1.05);
                 }
 
                 .header-top nav.menu {
                     display: flex;
                     align-items: center;
                     flex-wrap: wrap;
-                    justify-content: flex-end;
                 }
 
+                /* --- MENÚ VIP --- */
                 .header-top nav.menu a {
-                    color: white;
+                    color: #003057; 
                     text-decoration: none;
-                    margin: 5px 15px;
-                    font-weight: bold;
-                    font-size: 0.9em;
-                    transition: color 0.3s ease;
-                    white-space: nowrap;
+                    margin: 5px 10px;
+                    padding: 8px 15px;
+                    font-weight: 700;
+                    font-size: 0.95em;
+                    letter-spacing: 0.5px;
+                    transition: all 0.3s ease;
+                    position: relative;
+                    border-radius: 6px;
+                    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
                 }
 
-                .header-top nav.menu a:hover {
-                    color: #00D6D0;
-                    text-decoration: none;
+                /* Efecto de línea animada debajo del menú */
+                .header-top nav.menu a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 0;
+                    height: 3px;
+                    background: #39A900; 
+                    transition: all 0.3s ease;
+                    transform: translateX(-50%);
+                    border-radius: 2px;
                 }
 
-                /* Opcional: Si el user-info se sigue usando, aquí sus estilos con los colores de la paleta */
-                .user-info {
-                    display: flex;
-                    align-items: center;
+                /* --- ESTADO ACTIVO Y HOVER --- */
+                /* Cuando pasas el ratón o cuando es la página actual (.active) */
+                .header-top nav.menu a:hover,
+                .header-top nav.menu a.active {
+                    color: #39A900;
+                    background: rgba(57, 169, 0, 0.05); 
                 }
 
-                .user-info .notification-icon {
-                    margin-right: 10px;
-                    cursor: pointer;
+                .header-top nav.menu a:hover::after,
+                .header-top nav.menu a.active::after {
+                    width: 70%;
                 }
 
-                .user-info .profile-dropdown {
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                }
-
-                .user-info .profile-dropdown .profile-name {
-                    margin-right: 5px;
-                }
-
-                .user-info .profile-dropdown .profile-initials {
-                    background-color: #9CA8B3;
-                    color: white;
-                    border-radius: 50%;
-                    width: 25px;
-                    height: 25px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .banner {
-                    background-color: #39854A;
-                    padding: 10px 20px;
-                    color: #FFFFFF;
-                    text-align: center;
-                }
-
-                .banner h1 {
-                    font-size: 1.5em;
-                    margin-bottom: 5px;
-                }
-
-                .banner p {
-                    font-size: 1em;
-                    line-height: 1.4;
-                    margin-bottom: 5px;
-                }
-
-                /* --- Estilos del Botón de Hamburguesa --- */
+                /* --- Botón de Hamburguesa para Móviles --- */
                 .hamburger {
-                    display: none; /* Oculto por defecto en escritorio */
+                    display: none;
                     cursor: pointer;
                     flex-direction: column;
                     justify-content: space-around;
@@ -125,132 +105,61 @@ class MiHeader extends HTMLElement {
                     background: transparent;
                     border: none;
                     padding: 0;
-                    z-index: 1001; /* Asegúrate de que esté por encima del menú */
+                    z-index: 1001;
                 }
 
                 .hamburger .bar {
                     width: 100%;
                     height: 3px;
-                    background-color: white;
+                    background-color: #003057;
                     border-radius: 5px;
                     transition: all 0.3s ease;
                 }
 
-                /* Animación del botón de hamburguesa */
-                .hamburger.open .bar:nth-child(1) {
-                    transform: translateY(11px) rotate(45deg);
-                }
-
-                .hamburger.open .bar:nth-child(2) {
-                    opacity: 0;
-                }
-
-                .hamburger.open .bar:nth-child(3) {
-                    transform: translateY(-11px) rotate(-45deg);
-                }
-
+                .hamburger.open .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+                .hamburger.open .bar:nth-child(2) { opacity: 0; }
+                .hamburger.open .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 
                 /* --- Media Queries --- */
-
-                /* Para Tablets y Móviles (ancho máximo de 768px) */
-                @media (max-width: 768px) {
+                @media (max-width: 900px) {
                     .header-top {
-                        flex-direction: row; /* Mantener en fila el logo y el botón */
-                        justify-content: space-between; /* Espacio entre logo y botón */
-                        align-items: center;
-                        padding: 15px 10px;
+                        padding: 15px 20px;
                     }
-
-                    .header-top .logo-container {
-                        margin-bottom: 0; /* Resetear margin */
-                    }
-
-                    .header-top img.logo {
-                        height: 35px;
-                        margin-right: 10px;
-                    }
-
-                    .header-top nav.menu {
-                        display: none; /* Oculta el menú por defecto en pantallas pequeñas */
-                        flex-direction: column;
-                        position: absolute;
-                        top: 60px; /* Ajusta según la altura de tu header-top */
-                        left: 0;
-                        width: 100%;
-                        background-color: #081D36; /* Mismo color de fondo que el header-top */
-                        padding: 10px 0;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                        z-index: 999; /* Debajo del botón de hamburguesa */
-                    }
-
-                    .header-top nav.menu.open {
-                        display: flex; /* Muestra el menú cuando tiene la clase 'open' */
-                    }
-
                     .header-top nav.menu a {
-                        margin: 10px 0; /* Más espacio vertical para los enlaces apilados */
-                        text-align: center;
-                        width: 100%;
-                    }
-
-                    .hamburger {
-                        display: flex; /* Muestra el botón de hamburguesa */
-                    }
-
-                    .banner {
-                        padding: 15px 15px;
-                    }
-
-                    .banner h1 {
-                        font-size: 1.3em;
-                    }
-
-                    .banner p {
-                        font-size: 0.9em;
-                        line-height: 1.3;
+                        margin: 5px;
+                        padding: 8px 10px;
+                        font-size: 0.85em;
                     }
                 }
 
-                /* Para Celulares (ancho máximo de 480px) - Ajustes adicionales si es necesario */
-                @media (max-width: 480px) {
-                    .header-top {
-                        padding: 10px 5px;
+                @media (max-width: 768px) {
+                    .header-top nav.menu {
+                        display: none;
+                        flex-direction: column;
+                        position: absolute;
+                        top: 70px;
+                        left: 0;
+                        width: 100%;
+                        background-color: #ffffff;
+                        padding: 15px 0;
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                        border-top: 3px solid #39A900;
                     }
-
-                    .header-top .logo-container {
-                        flex-direction: row; /* Mantener logos en fila si son solo dos */
-                        margin-bottom: 0;
-                    }
-
-                    .header-top img.logo {
-                        height: 30px;
-                        margin: 0 5px; /* Espacio entre logos */
-                    }
-                    
+                    .header-top nav.menu.open { display: flex; }
                     .header-top nav.menu a {
-                        font-size: 0.85em; /* Un poco más pequeño */
-                    }
-
-                    .banner {
-                        padding: 10px 10px;
-                    }
-
-                    .banner h1 {
+                        margin: 5px 0;
+                        text-align: center;
+                        width: 90%;
                         font-size: 1.1em;
                     }
-
-                    .banner p {
-                        font-size: 0.8em;
-                        line-height: 1.2;
-                    }
+                    .hamburger { display: flex; }
                 }
             </style>
 
             <header>
                 <div class="header-top">
                     <div class="logo-container">
-                        <img src="Objects/LogosPNG-2/logo_blanco.png" alt="Logo Revista" class="logo" />
-                        <img src="Objects/logos_png/sena_blanco.png" alt="Logo SENA" class="logo" />
+                        <img src="logo.png" alt="Logo Revista" class="logo" onerror="this.src='Objects/LogosPNG-2/logo_negro.png'" />
                     </div>
                     <button class="hamburger" aria-label="Abrir menú de navegación">
                         <span class="bar"></span>
@@ -266,24 +175,41 @@ class MiHeader extends HTMLElement {
                         <a href="login/login.html">Zona Administrativa</a>
                     </nav>
                 </div>
-
             </header>
         `;
     }
 
     setupEventListeners() {
-
         this.shadowRoot.querySelector('.hamburger').addEventListener('click', () => {
             this.toggleMenu();
         });
 
         this.shadowRoot.querySelectorAll('.menu a').forEach(link => {
             link.addEventListener('click', () => {
-                // Solo cerrar el menú si está abierto (para evitar parpadeo en desktop)
-                if (window.innerWidth <= 768) { // Cierra solo en tamaños móviles/tablet
-                    this.toggleMenu(false); // Forzar el cierre
+                if (window.innerWidth <= 768) { 
+                    this.toggleMenu(false); 
                 }
             });
+        });
+    }
+
+    // --- NUEVA FUNCIÓN PARA DETECTAR EN QUÉ PÁGINA ESTAMOS ---
+    setActiveLink() {
+        // Obtenemos la URL actual limpia (sin parámetros de búsqueda o identificadores #)
+        const currentLocation = window.location.href.split('?')[0].split('#')[0]; 
+        const links = this.shadowRoot.querySelectorAll('.menu a');
+        
+        links.forEach(link => {
+            const linkHref = link.href;
+            
+            // Si la ruta absoluta del enlace coincide con la URL actual
+            if (linkHref === currentLocation) {
+                link.classList.add('active');
+            } 
+            // Maneja el caso especial de la raíz (cuando el servidor abre index.html por defecto)
+            else if (currentLocation.endsWith('/') && link.getAttribute('href') === 'index.html') {
+                link.classList.add('active');
+            }
         });
     }
 
@@ -306,5 +232,4 @@ class MiHeader extends HTMLElement {
     }
 }
 
-// Define el custom element una sola vez
 customElements.define('mi-header', MiHeader);

@@ -1,161 +1,215 @@
-/* --- ESTILOS ESPECÍFICOS PARA LA PÁGINA DE AUTORES --- */
-.authors-section {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
+/* ==========================================================================
+   ESTILOS VIP PARA AUTORES - REVISTA CIENCIOMÉTRIK
+   ========================================================================== */
 
+/* --- BANNER PRINCIPAL (HERO) --- */
 .authors-hero {
-    background: transparent; /* Fondo transparente en lugar del gradiente azul */
-    border: 5px solid #008394; /* Borde azul grueso */
-    color: #003057; /* Cambiar el color del texto a azul oscuro para que sea legible sobre fondo transparente */
-    text-align: center;
-    padding: 40px 20px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 48, 87, 0.1);
+    border-top: 5px solid #008394; /* Detalle Cyan en el banner */
     border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 48, 87, 0.05);
+    position: relative;
+    overflow: hidden;
 }
 
 .authors-hero h2 {
-    font-size: 2.2em;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #003057;
+    font-size: 2.8em;
     margin-bottom: 15px;
-    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+/* Línea decorativa bajo el título */
+.authors-hero h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #39A900; /* Verde SENA */
+    border-radius: 2px;
 }
 
 .authors-hero p {
-    font-size: 1.1em;
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.9;
+    color: #666666;
+    font-size: 1.2em;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    margin-top: 20px;
 }
 
+/* --- CONTENEDOR PRINCIPAL: TEXTO E IMÁGENES --- */
 .authors-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px;
     align-items: flex-start;
 }
 
 .authors-text {
-    flex: 3;
+    flex: 1.5; /* Toma más espacio para la lectura */
     min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .authors-visual {
-    flex: 2;
+    flex: 1;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
-    justify-content: center;
+    position: sticky; /* Las imágenes se quedan fijas al hacer scroll */
+    top: 100px;
 }
 
-.authors-image {
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-}
-
-.authors-image:hover {
-    transform: scale(1.02);
-}
-
-.authors-icon {
-    font-size: 3em;
-    color: #008394;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
+/* --- TARJETAS DE CONTENIDO (CARDS) --- */
 .authors-card {
-    background-color: white;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 48, 87, 0.08);
+    border-left: 5px solid #003057; /* Acento Azul Corporativo */
     border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
+    padding: 35px;
+    box-shadow: 0 5px 20px rgba(0, 48, 87, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
 }
 
 .authors-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 48, 87, 0.08);
+    border-left-color: #39A900; /* Cambia a Verde SENA al pasar el mouse */
 }
 
 .authors-card h3 {
+    font-family: 'Georgia', 'Times New Roman', serif;
     color: #003057;
-    font-size: 1.4em;
-    margin-bottom: 15px;
+    font-size: 1.6em;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+}
+
+.authors-card h3 i {
+    color: #008394; /* Iconos en Cyan */
+    font-size: 1.2em;
 }
 
 .authors-card p {
-    color: #555;
+    color: #444444;
+    font-size: 1.05em;
+    line-height: 1.7;
     margin-bottom: 15px;
+    text-align: justify;
 }
 
+/* --- LISTAS EN LAS TARJETAS (Documentación) --- */
 .authors-card ul {
-    color: #555;
-    padding-left: 20px;
-    margin-bottom: 15px;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 25px;
 }
 
-.authors-card li {
-    margin-bottom: 8px;
+.authors-card ul li {
+    margin-bottom: 12px;
+    color: #444444;
+    font-size: 1.05em;
+    line-height: 1.6;
+    padding-left: 25px;
+    position: relative;
 }
 
+/* Viñeta de check para los requisitos */
+.authors-card ul li::before {
+    content: '\f058'; /* Icono de check-circle solid de FontAwesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: #008394; /* Color Cyan */
+}
+
+/* --- BOTONES DE ACCIÓN --- */
 .authors-button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background-color: #008394;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
+    gap: 10px;
+    background-color: #003057;
+    color: #ffffff !important;
+    padding: 12px 25px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.05em;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 48, 87, 0.2);
+    border: 2px solid #003057;
 }
 
 .authors-button:hover {
-    background-color: #006b7a;
+    background-color: #39A900;
+    border-color: #39A900;
     transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(57, 169, 0, 0.3);
+}
+
+.authors-contact {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(0, 48, 87, 0.1);
 }
 
 .authors-secondary-button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background-color: #e0f2f1;
-    color: #004d40;
-    padding: 12px 20px;
-    border-radius: 8px;
+    gap: 10px;
+    background-color: transparent;
+    color: #008394 !important;
+    padding: 10px 20px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    border: 2px solid #008394;
 }
 
 .authors-secondary-button:hover {
-    background-color: #b2dfdb;
-    transform: translateY(-2px);
+    background-color: #008394;
+    color: #ffffff !important;
+    box-shadow: 0 5px 15px rgba(0, 131, 148, 0.3);
 }
 
-.authors-contact {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.authors-contact p {
-    margin-bottom: 10px;
-    color: #555;
-}
-
-/* --- IMÁGENES DECORATIVAS --- */
+/* --- IMÁGENES (LADO DERECHO) --- */
+.authors-image,
 .authors-decoration {
     width: 100%;
+    height: auto;
     border-radius: 12px;
-    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.authors-image:hover,
+.authors-decoration:hover {
+    transform: scale(1.02);
+}
+
+/* --- MENSAJES DE ESTADO --- */
+.mensaje {
+    margin-top: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
 }
 
 /* --- RESPONSIVE DESIGN --- */
@@ -163,40 +217,12 @@
     .authors-content {
         flex-direction: column;
     }
-    
     .authors-visual {
-        order: -1;
+        position: static;
+        order: -1; /* Mueve las imágenes arriba del texto en móviles si lo deseas, o quita esta línea para dejarlas abajo */
+        margin-bottom: 20px;
     }
-}
-
-@media screen and (max-width: 768px) {
-    .authors-hero {
-        padding: 30px 15px;
-    }
-    
     .authors-hero h2 {
-        font-size: 1.8em;
-    }
-    
-    .authors-hero p {
-        font-size: 1em;
-    }
-    
-    .authors-card {
-        padding: 20px;
-    }
-    
-    .authors-card h3 {
-        font-size: 1.2em;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .authors-hero h2 {
-        font-size: 1.6em;
-    }
-    
-    .authors-card h3 {
-        font-size: 1.1em;
+        font-size: 2.2em;
     }
 }
