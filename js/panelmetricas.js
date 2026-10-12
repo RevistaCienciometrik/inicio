@@ -1,4 +1,4 @@
-// js/panelmetricas.js - Edicion mejorada 
+// js/panelmetricas.js - Edición con Tracking de Visitas y Seguridad de Roles
 class MetricasPanel extends HTMLElement {
     constructor() {
         super();
@@ -32,6 +32,10 @@ class MetricasPanel extends HTMLElement {
     }
     
     render() {
+        // --- VALIDACIÓN DE SEGURIDAD ---
+        // Verificamos si hay una sesión activa y si el rol es exactamente 'admin'
+        const isAdmin = sessionStorage.getItem('isLoggedIn') === 'true' && sessionStorage.getItem('userRole') === 'admin';
+
         this.shadowRoot.innerHTML = `
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
@@ -39,12 +43,12 @@ class MetricasPanel extends HTMLElement {
                 /* --- PANEL VIP MEJORADO --- */
                .metrics-panel-container {
                     width: 260px;
-                    background: #ffffff; /* Fondo blanco puro */
-                    border: 1px solid rgba(0, 48, 87, 0.1); /* Borde sutil corporativo */
+                    background: #ffffff;
+                    border: 1px solid rgba(0, 48, 87, 0.1);
                     border-radius: 16px;
                     padding: 25px 20px;
-                    box-shadow: 0 10px 30px rgba(0, 48, 87, 0.08); /* Sombra suave */
-                    color: #333333; /* Texto oscuro */
+                    box-shadow: 0 10px 30px rgba(0, 48, 87, 0.08);
+                    color: #333333;
                     position: sticky;
                     top: 100px;
                     height: fit-content;
@@ -53,7 +57,7 @@ class MetricasPanel extends HTMLElement {
                     z-index: 100;
                     margin-left: 20px;
                     transition: all 0.4s ease;
-                    border-top: 5px solid #39A900; /* Detalle Verde SENA arriba */
+                    border-top: 5px solid #39A900;
                 }
                 
                 .metrics-panel-container:hover {
@@ -76,7 +80,7 @@ class MetricasPanel extends HTMLElement {
                 h3 {
                     font-family: 'Orbitron', sans-serif;
                     font-size: 1.3rem;
-                    color: #003057; /* Azul oscuro corporativo */
+                    color: #003057;
                     margin: 0;
                     text-transform: uppercase;
                     letter-spacing: 1px;
@@ -84,7 +88,7 @@ class MetricasPanel extends HTMLElement {
 
                 /* ITEMS DE MÉTRICA */
                 .metric-item {
-                    background: #f8f9fa; /* Gris muy clarito */
+                    background: #f8f9fa;
                     border: 1px solid rgba(0, 0, 0, 0.05);
                     border-radius: 12px;
                     padding: 15px;
@@ -97,22 +101,13 @@ class MetricasPanel extends HTMLElement {
                 .metric-item::before {
                     content: '';
                     position: absolute;
-                    top: 0; 
-                    left: 0;
-                    width: 4px;
-                    height: 100%;
-                    background: #008394; /* Cyan oscuro */
+                    top: 0; left: 0; width: 4px; height: 100%;
+                    background: #008394;
                     transition: all 0.3s ease;
                 }
 
-                .metric-item:hover {
-                    transform: translateX(5px);
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-                }
-
-                .metric-item:hover::before { 
-                    background: #39A900; /* Verde SENA */
-                }
+                .metric-item:hover { transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+                .metric-item:hover::before { background: #39A900; }
 
                 h4 {
                     font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -125,16 +120,14 @@ class MetricasPanel extends HTMLElement {
 
                 .metric-value {
                     font-family: 'Rajdhani', sans-serif;
-                    color: #003057; /* Azul corporativo */
+                    color: #003057;
                     font-size: 2.2rem; 
                     font-weight: 700;
                     margin: 0;
                     line-height: 1;
                 }
 
-                #web-visits {
-                    color: #39A900; /* Verde SENA para destacar visitas */
-                }
+                #web-visits { color: #39A900; }
 
                 /* BOTONES DE NAVEGACIÓN */
                 .nav-group {
@@ -160,33 +153,16 @@ class MetricasPanel extends HTMLElement {
                     transition: all 0.3s ease;
                 }
 
-                .btn-cyber:hover {
-                    color: #ffffff;
-                    border-color: #003057;
-                    background: #003057;
-                }
-
-                .btn-danger {
-                    grid-column: span 2;
-                }
+                .btn-cyber:hover { color: #ffffff; border-color: #003057; background: #003057; }
                 
-                .btn-danger:hover {
-                    background: #e74c3c;
-                    border-color: #e74c3c;
-                    color: #fff;
-                }
+                .btn-danger { grid-column: span 2; }
+                .btn-danger:hover { background: #e74c3c; border-color: #e74c3c; color: #fff; }
 
                 /* RESPONSIVE */
                 @media (max-width: 992px) {
                     .metrics-panel-container {
-                        width: 100%;
-                        margin-left: 0;
-                        margin-bottom: 30px;
-                        position: relative;
-                        top: 0;
-                        display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                        gap: 15px;
+                        width: 100%; margin-left: 0; margin-bottom: 30px; position: relative; top: 0;
+                        display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;
                     }
                     .panel-header, .nav-group { grid-column: 1 / -1; }
                 }
@@ -199,7 +175,7 @@ class MetricasPanel extends HTMLElement {
                 
                 <div class="metric-item">
                     <h4>Visitas a la Web</h4>
-                    <p class="metric-value" id="web-visits">...</p>
+                    <p class="metric-value" id="web-visits">0</p>
                 </div>
                 <div class="metric-item">
                     <h4>Descargas Revistas</h4>
@@ -221,20 +197,34 @@ class MetricasPanel extends HTMLElement {
                 <div class="nav-group">
                     <button class="btn-cyber" id="btn-inicio">Subir</button>
                     <button class="btn-cyber" id="btn-fin">Bajar</button>
-                    <button class="btn-cyber btn-danger" id="btn-reset">Reiniciar Sistema</button>
+                    <!-- El botón rojo SOLO se inserta en el HTML si el usuario es Admin -->
+                    ${isAdmin ? '<button class="btn-cyber btn-danger" id="btn-reset">Reiniciar Sistema</button>' : ''}
                 </div>
             </div>
         `;
         
         if (typeof firebase !== 'undefined') {
-            this.loadMetrics();
+            this.registerVisit(); 
+            this.loadMetrics();   
             this.setupNavigationButtons();
             this.setupDownloadTracking();
             this.setupRealtimeUpdates();
         }
     }
     
-    // ... [El resto de la lógica JavaScript se mantiene exactamente igual] ...
+    async registerVisit() {
+        if (!sessionStorage.getItem('visited')) {
+            try {
+                await this.db.runTransaction(async (t) => {
+                    const doc = await t.get(this.metricsRef);
+                    const currentVisits = doc.exists && doc.data().webVisits ? doc.data().webVisits : 0;
+                    t.set(this.metricsRef, { webVisits: currentVisits + 1 }, { merge: true });
+                });
+                sessionStorage.setItem('visited', 'true');
+            } catch (error) { console.error("Error al registrar visita:", error); }
+        }
+    }
+
     async loadMetrics() {
         try {
             const doc = await this.metricsRef.get();
@@ -245,8 +235,11 @@ class MetricasPanel extends HTMLElement {
                 this.updateMetric('total-libros-downloads-sidebar', data.totalLibrosDownloads || 0);
                 this.updateMetric('total-cartillas-downloads-sidebar', data.totalCartillasDownloads || 0);
                 this.updateMetric('total-informes-downloads-sidebar', data.totalInformesDownloads || 0);
+            } else {
+                await this.metricsRef.set({ webVisits: 1, totalRevistaDownloads: 0, totalLibrosDownloads: 0, totalCartillasDownloads: 0, totalInformesDownloads: 0 });
+                this.updateMetric('web-visits', 1);
             }
-        } catch (error) { console.error("Error:", error); }
+        } catch (error) { console.error("Error al cargar métricas:", error); }
     }
     
     setupRealtimeUpdates() {
@@ -265,7 +258,12 @@ class MetricasPanel extends HTMLElement {
     setupNavigationButtons() {
         this.shadowRoot.getElementById('btn-inicio')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         this.shadowRoot.getElementById('btn-fin')?.addEventListener('click', () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
-        this.shadowRoot.getElementById('btn-reset')?.addEventListener('click', () => this.resetAllCounters());
+        
+        // Verificamos si el botón existe en el DOM antes de asignarle el evento
+        const btnReset = this.shadowRoot.getElementById('btn-reset');
+        if (btnReset) {
+            btnReset.addEventListener('click', () => this.resetAllCounters());
+        }
     }
     
     setupDownloadTracking() {
@@ -292,7 +290,7 @@ class MetricasPanel extends HTMLElement {
                 await this.db.runTransaction(async (t) => {
                     const doc = await t.get(this.metricsRef);
                     const val = doc.exists ? (doc.data()[field] || 0) : 0;
-                    t.update(this.metricsRef, { [field]: val + 1 });
+                    t.set(this.metricsRef, { [field]: val + 1 }, { merge: true });
                 });
             } catch (error) { console.error("Error:", error); }
         }
@@ -301,24 +299,26 @@ class MetricasPanel extends HTMLElement {
     updateMetric(id, count) {
         const el = this.shadowRoot.getElementById(id);
         if (el) {
-            // Efecto contador digital
             let start = parseInt(el.innerText) || 0;
             if(start === count) return;
             
-            // Color de transición (Cyan oscuro) para que se vea sobre el fondo blanco
             el.style.color = '#008394'; 
-            
             setTimeout(() => {
                 el.innerText = count.toLocaleString();
-                // Si es "visitas a la web" lo pinta Verde SENA, el resto va en Azul Corporativo oscuro
                 el.style.color = id === 'web-visits' ? '#39A900' : '#003057';
             }, 150);
         }
     }
     
     async resetAllCounters() {
-        if (confirm('¿SYSTEM OVERRIDE: Reiniciar métricas?')) {
-            await this.metricsRef.update({ webVisits: 0, totalRevistaDownloads: 0, totalLibrosDownloads: 0, totalCartillasDownloads: 0, totalInformesDownloads: 0 });
+        if (confirm('¿SYSTEM OVERRIDE: Reiniciar métricas? Esta acción borrará los registros de descargas.')) {
+            await this.metricsRef.set({ 
+                webVisits: 0, 
+                totalRevistaDownloads: 0, 
+                totalLibrosDownloads: 0, 
+                totalCartillasDownloads: 0, 
+                totalInformesDownloads: 0 
+            });
         }
     }
 }

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIDT - Revista Cienciométrik</title>
+    <!-- FontAwesome para iconografía -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="CSS/styles.css">
+    
+    <style>
+        /* ==========================================================================
+           ESTILOS VIP PARA GIDT - VERSIÓN INTERACTIVA Y COMPACTA
+           ========================================================================== */
+           
+        :root {
+            --primary-color: #003057; 
+            --secondary-color: #008394;
+            --accent-color: #39A900; 
+            --card-bg: #ffffff; 
+            --text-main: #333333; 
+            --text-muted: #666666;
+            --transition: all 0.3s ease;
+            
+            /* Colores del Flujo de Semilleros */
+            --color-ici: #003057;
+            --color-agencia: #8e24aa;
+            --color-finintec: #2e7d32;
+            --color-nexus: #0288d1;
+        }
+
+        /* --- HERO BANNER --- */
+        .gidt-hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f4f7f8 100%);
+            border-radius: 16px;
+            padding: 40px 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 48, 87, 0.08);
+            border-top: 6px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .gidt-hero-text { flex: 1.5; }
+        .gidt-hero-img { flex: 1; text-align: center; }
+        .gidt-hero-img img { max-width: 100%; height: auto; max-height: 180px; object-fit: contain; }
+        .gidt-hero h1 { font-family: 'Georgia', serif; color: var(--primary-color); font-size: 2.8em; margin-bottom: 10px; }
+        .gidt-hero h2 { color: var(--secondary-color); font-size: 1.1em; margin-bottom: 15px; font-weight: 600; }
+        .gidt-hero p { color: var(--text-muted); font-size: 1.05em; line-height: 1.6; }
+
+        /* --- SECCIÓN LÍNEAS DE INVESTIGACIÓN (TABS INTERACTIVOS) --- */
+        .white-section-wrapper {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+            font-size: 2.2em;
+            text-align: center;
+            margin: 0 0 15px 0;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .instruction-text { text-align: center; color: var(--secondary-color); margin-bottom: 30px; font-weight: 600; font-size: 0.95em; }
+
+        /* Contenedor de Pestañas */
+        .tabs-header {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+            padding-bottom: 15px;
+        }
+
+        .tab-btn {
+            background: #f4f7f8;
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 0.95em;
+        }
+
+        .tab-btn:hover { background: rgba(0, 131, 148, 0.1); color: var(--secondary-color); }
+        .tab-btn.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); box-shadow: 0 4px 10px rgba(0, 48, 87, 0.2); }
+
+        /* Contenido de las Pestañas */
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .line-detail-card {
+            background: #fafcff;
+            border: 1px solid rgba(0, 48, 87, 0.05);
+            border-left: 6px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .line-detail-title h3 { color: var(--primary-color); font-size: 1.4em; margin-bottom: 20px; line-height: 1.4; }
+        
+        .leader-info h4, .dependency-flow h4 { color: var(--secondary-color); font-size: 0.9em; text-transform: uppercase; margin-bottom: 8px; }
+        .leader-info p { color: var(--text-main); font-weight: bold; font-size: 1.1em; margin-bottom: 5px;}
+        .leader-info a { color: var(--primary-color); text-decoration: none; font-size: 0.95em; }
+        .leader-info a:hover { color: var(--accent-color); text-decoration: underline; }
+        .dependency-flow p { font-size: 0.95em; color: #555; margin-bottom: 15px; }
+
+        .dep-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .dep-tag { background: rgba(0, 48, 87, 0.05); color: var(--primary-color); padding: 6px 15px; border-radius: 6px; font-size: 0.85em; font-weight: 600; border: 1px solid rgba(0,0,0,0.05); }
+
+        /* --- ECOSISTEMA DE SEMILLEROS (FLUJO DINÁMICO) --- */
+        .ecosystem-container {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .flow-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .flow-btn {
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flow-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .flow-btn.active { transform: scale(1.05); border: 3px solid #fff; outline: 3px solid var(--text-main); }
+
+        .btn-ici { background: var(--color-ici); }
+        .btn-ici.active { outline-color: var(--color-ici); }
+        
+        .btn-agencia { background: var(--color-agencia); }
+        .btn-agencia.active { outline-color: var(--color-agencia); }
+        
+        .btn-finintec { background: var(--color-finintec); }
+        .btn-finintec.active { outline-color: var(--color-finintec); }
+        
+        .btn-nexus { background: var(--color-nexus); }
+        .btn-nexus.active { outline-color: var(--color-nexus); }
+
+        /* Paneles de Flujo */
+        .flow-panel { display: none; animation: fadeIn 0.4s ease; background: #fff; border-radius: 12px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .flow-panel.active { display: block; }
+        
+        .flow-panel-header { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .flow-panel-header img { height: 60px; object-fit: contain; }
+        .flow-panel-header h3 { font-size: 1.6em; margin: 0; }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .program-card {
+            text-align: center;
+            padding: 20px 15px;
+            border-radius: 8px;
+            background: #fafafa;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .program-card:hover { transform: translateY(-5px); background: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        
+        .program-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px auto;
+            color: #fff;
+            font-size: 1.3em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .program-card p { font-weight: 600; font-size: 0.9em; color: var(--text-main); margin: 0; }
+
+        /* Colores dinámicos para los iconos de cada panel */
+        #flow-ici .program-icon { background: var(--color-ici); }
+        #flow-agencia .program-icon { background: var(--color-agencia); }
+        #flow-finintec .program-icon { background: var(--color-finintec); }
+        #flow-nexus .program-icon { background: var(--color-nexus); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .gidt-hero { flex-direction: column-reverse; text-align: center; }
+            .line-detail-card { grid-template-columns: 1fr; gap: 20px; }
+            .flow-buttons { flex-direction: column; padding: 0 20px; }
+            .flow-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    
+    <mi-header id="top"></mi-header>
+    
+    <div class="container">
+        <main class="main-content" style="padding-top: 40px;">
+
+            <!-- BANNER PRINCIPAL GIDT -->
+            <section class="gidt-hero">
+                <div class="gidt-hero-text">
+                    <h1>GIDT</h1>
+                    <h2>Grupo de Investigación, Gestión de la Innovación y el Desarrollo Tecnológico</h2>
+                    <p>Somos un espacio de articulación académica dedicado a fortalecer el ecosistema SENNOVA. A través de nuestras líneas de investigación, conectamos el talento humano con soluciones innovadoras que responden a las necesidades reales del sector productivo y comercial.</p>
+                </div>
+                <div class="gidt-hero-img">
+                    <img src="images/logo_gidt.png" alt="Logo Grupo GIDT" onerror="this.src='../images/logo.png'">
+                </div>
+            </section>
+
+           <!-- SECCIÓN 1: LÍNEAS DE INVESTIGACIÓN (TABS DINÁMICOS) -->
+            <section class="white-section-wrapper">
+                <h2 class="section-header">Líneas de Investigación</h2>
+                <p class="instruction-text"><i class="fas fa-hand-pointer"></i> Selecciona una línea para visualizar sus detalles y el semillero vinculado</p>
+                
+                <!-- Botones de Navegación -->
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="openTab(event, 'linea1')">Línea 1</button>
+                    <button class="tab-btn" onclick="openTab(event, 'linea2')">Línea 2</button>
+                    <button class="tab-btn" onclick="openTab(event, 'linea3')">Línea 3</button>
+                    <button class="tab-btn" onclick="openTab(event, 'linea4')">Línea 4</button>
+                    <button class="tab-btn" onclick="openTab(event, 'linea5')" style="border-color: var(--accent-color);">Línea 5</button>
+                </div>
+
+                <!-- Contenido Línea 1 -->
+                <div id="linea1" class="tab-content active">
+                    <div class="line-detail-card">
+                        <div class="line-detail-title">
+                            <h3>Desarrollo Comercial y Redes Logísticas para la Productividad</h3>
+                            <div class="dependency-flow" style="margin-top: 15px;">
+                                <h4><i class="fas fa-link"></i> Semillero Vinculado</h4>
+                                <div class="dep-tag" style="display: inline-block; background: var(--color-ici); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.95em;">
+                                    <i class="fas fa-network-wired"></i> Semilleros de Investigación ICI (Investiga, Crea, Innova)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leader-info">
+                            <h4><i class="fas fa-user-tie"></i> Líder de la Línea</h4>
+                            <p>Jefferson David Martínez Negrete</p>
+                            <a href="mailto:jmartinezn@sena.edu.co"><i class="fas fa-envelope"></i> jmartinezn@sena.edu.co</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido Línea 2 -->
+                <div id="linea2" class="tab-content">
+                    <div class="line-detail-card">
+                        <div class="line-detail-title">
+                            <h3>Soluciones Organizacionales, Humanas y Turísticas para el Territorio</h3>
+                            <div class="dependency-flow" style="margin-top: 15px;">
+                                <h4><i class="fas fa-link"></i> Semillero Vinculado</h4>
+                                <div class="dep-tag" style="display: inline-block; background: var(--color-nexus); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.95em;">
+                                    <i class="fas fa-users-cog"></i> Semilleros de Investigación NEXUS (Conectando personas, procesos y organizaciones)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leader-info">
+                            <h4><i class="fas fa-user-tie"></i> Líder de la Línea</h4>
+                            <p>Sor Yanet Salazar Álzate</p>
+                            <a href="mailto:ssalazara@sena.edu.co"><i class="fas fa-envelope"></i> ssalazara@sena.edu.co</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido Línea 3 -->
+                <div id="linea3" class="tab-content">
+                    <div class="line-detail-card">
+                        <div class="line-detail-title">
+                            <h3>Transformación Digital, Innovación y Tecnologías en Gestión Contable</h3>
+                            <div class="dependency-flow" style="margin-top: 15px;">
+                                <h4><i class="fas fa-link"></i> Semillero Vinculado</h4>
+                                <div class="dep-tag" style="display: inline-block; background: var(--color-finintec); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.95em;">
+                                    <i class="fas fa-chart-line"></i> Semilleros de Investigación FININTEC
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leader-info">
+                            <h4><i class="fas fa-user-tie"></i> Líder de la Línea</h4>
+                            <p>Claudia Patricia Montiel Castaño</p>
+                            <a href="mailto:cmontiel@sena.edu.co"><i class="fas fa-envelope"></i> cmontiel@sena.edu.co</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido Línea 4 -->
+                <div id="linea4" class="tab-content">
+                    <div class="line-detail-card">
+                        <div class="line-detail-title">
+                            <h3>Transformación digital, industrias creativas y emprendimiento innovador</h3>
+                            <div class="dependency-flow" style="margin-top: 15px;">
+                                <h4><i class="fas fa-link"></i> Semillero Vinculado</h4>
+                                <div class="dep-tag" style="display: inline-block; background: var(--color-agencia); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.95em;">
+                                    <i class="fas fa-lightbulb"></i> Semilleros de Investigación AGENCIA
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leader-info">
+                            <h4><i class="fas fa-user-tie"></i> Líder de la Línea</h4>
+                            <p>Claudia Calle Bernal</p>
+                            <a href="mailto:ccalle@sena.edu.co"><i class="fas fa-envelope"></i> ccalle@sena.edu.co</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido Línea 5 -->
+                <div id="linea5" class="tab-content">
+                    <div class="line-detail-card" style="background: #f0fdf4;">
+                        <div class="line-detail-title">
+                            <h3 style="color: var(--accent-color);">Modelos de Investigación Pedagógica</h3>
+                            <div class="dependency-flow" style="margin-top: 15px;">
+                                <h4><i class="fas fa-link"></i> Vinculación</h4>
+                                <div class="dep-tag" style="display: inline-block; background: var(--accent-color); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.95em;">
+                                    <i class="fas fa-project-diagram"></i> Línea Transversal (Aplica a todos los Semilleros)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leader-info">
+                            <h4><i class="fas fa-chalkboard-teacher"></i> Eje Transversal</h4>
+                            <p>Investigación Pedagógica</p>
+                            <span style="font-size: 0.9em; color: var(--text-muted);">Eje transversal estratégico SENNOVA</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: ECOSISTEMA DE SEMILLEROS (FLUJO DINÁMICO) -->
+            <section class="white-section-wrapper">
+                <h2 class="section-header">Ecosistema de Semilleros</h2>
+                <p class="instruction-text"><i class="fas fa-project-diagram"></i> Explora la estructura y los programas vinculados a cada semillero</p>
+                
+                <div class="ecosystem-container">
+                    
+                    <!-- Botones Principales (El círculo central del diagrama) -->
+                    <div class="flow-buttons">
+                        <button class="flow-btn btn-ici active" onclick="openFlow(event, 'flow-ici')">
+                            <i class="fas fa-network-wired"></i> ICI
+                        </button>
+                        <button class="flow-btn btn-agencia" onclick="openFlow(event, 'flow-agencia')">
+                            <i class="fas fa-lightbulb"></i> AGENCIA
+                        </button>
+                        <button class="flow-btn btn-finintec" onclick="openFlow(event, 'flow-finintec')">
+                            <i class="fas fa-chart-line"></i> FININTEC
+                        </button>
+                        <button class="flow-btn btn-nexus" onclick="openFlow(event, 'flow-nexus')">
+                            <i class="fas fa-users-cog"></i> NEXUS
+                        </button>
+                    </div>
+
+                    <!-- Panel Dinámico ICI -->
+                    <div id="flow-ici" class="flow-panel active">
+                        <div class="flow-panel-header">
+                            <img src="images/logo_ici.png" alt="Logo ICI" onerror="this.style.display='none'">
+                            <h3 style="color: var(--color-ici);">Investiga, Crea, Innova</h3>
+                        </div>
+                        <div class="programs-grid">
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-truck"></i></div><p>Logística</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-store"></i></div><p>Mercados</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-bullhorn"></i></div><p>Ventas</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-globe-americas"></i></div><p>Comercio Internacional</p></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Dinámico AGENCIA -->
+                    <div id="flow-agencia" class="flow-panel">
+                        <div class="flow-panel-header">
+                            <h3 style="color: var(--color-agencia);">Semillero AGENCIA</h3>
+                        </div>
+                        <div class="programs-grid">
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-laptop-code"></i></div><p>Análisis y desarrollo de software</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-ad"></i></div><p>Desarrollo publicitario</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-rocket"></i></div><p>Emprendimiento tecnológico</p></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Dinámico FININTEC -->
+                    <div id="flow-finintec" class="flow-panel">
+                        <div class="flow-panel-header">
+                            <h3 style="color: var(--color-finintec);">Semillero FININTEC</h3>
+                        </div>
+                        <div class="programs-grid">
+                            <div class="program-card" style="max-width: 250px; margin: 0 auto;"><div class="program-icon"><i class="fas fa-file-invoice-dollar"></i></div><p>Contabilidad</p></div>
+                            <div class="program-card" style="max-width: 250px; margin: 0 auto;"><div class="program-icon"><i class="fas fa-piggy-bank"></i></div><p>Banca y Finanzas</p></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Dinámico NEXUS -->
+                    <div id="flow-nexus" class="flow-panel">
+                        <div class="flow-panel-header">
+                            <img src="images/logo_nexus.png" alt="Logo NEXUS" onerror="this.style.display='none'">
+                            <h3 style="color: var(--color-nexus);">Conectando personas, procesos y organizaciones</h3>
+                        </div>
+                        <div class="programs-grid">
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-sitemap"></i></div><p>Gestión Empresarial</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-address-book"></i></div><p>Gestión Administrativa</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-users"></i></div><p>Talento Humano</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-folder-open"></i></div><p>Gestión Documental</p></div>
+                            <div class="program-card"><div class="program-icon"><i class="fas fa-tree"></i></div><p>Turismo sostenible</p></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+        
+        <metricas-panel></metricas-panel>
+    </div>
+
+    <mi-footer id="bottom"></mi-footer>
+
+    <!-- SCRIPTS CORE -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script src="js/panelmetricas.js"></script>
+    <script src="Objects/header.js"></script>
+    <script src="Objects/container.js"></script>
+    <script src="Objects/footer.js"></script>
+    <script src="Objects/script.js"></script>
+
+    <!-- SCRIPTS PARA INTERACTIVIDAD (TABS Y FLUJO) -->
+    <script>
+        // Función para Líneas de Investigación (Tabs)
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Función para el Ecosistema de Semilleros (Flujo)
+        function openFlow(evt, flowName) {
+            var i, flowpanel, flowbtns;
+            flowpanel = document.getElementsByClassName("flow-panel");
+            for (i = 0; i < flowpanel.length; i++) {
+                flowpanel[i].style.display = "none";
+                flowpanel[i].classList.remove("active");
+            }
+            flowbtns = document.getElementsByClassName("flow-btn");
+            for (i = 0; i < flowbtns.length; i++) {
+                flowbtns[i].classList.remove("active");
+            }
+            document.getElementById(flowName).style.display = "block";
+            document.getElementById(flowName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

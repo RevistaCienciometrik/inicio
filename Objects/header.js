@@ -172,6 +172,7 @@ class MiHeader extends HTMLElement {
                         <a href="publicaciones.html">Publicaciones</a>
                         <a href="autores.html">Autores</a>
                         <a href="contactanos.html">Contáctanos</a>
+                        <a href="GIDT.html">GIDT</a>
                         <a href="login/login.html">Zona Administrativa</a>
                     </nav>
                 </div>
